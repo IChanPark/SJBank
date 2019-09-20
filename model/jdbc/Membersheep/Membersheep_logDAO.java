@@ -79,18 +79,17 @@ public class Membersheep_logDAO {
 	
 	public void insert(Membersheep_logDTO dto){
 		sql = 	"insert into Membersheep_log (" +
-				"seq, id, point, way, status, register_date) values ("+
-				" ? ,  ? ,  ?  , ? ,  '성공',	 sysdate())";
+				"id, point, way, status, register_date) values ("+
+				" ? ,  ?  , ? ,  	?,	 now())";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, dto.getSeq());
-			pstmt.setString(2, dto.getId());
-			pstmt.setInt(3, dto.getPoint());
-			pstmt.setString(4, dto.getWay());			
-			
+			pstmt.setString(1, dto.getId());
+			pstmt.setInt(2, dto.getPoint());
+			pstmt.setString(3, dto.getWay());
+			pstmt.setString(4, dto.getStatus());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
