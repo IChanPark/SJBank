@@ -161,8 +161,4 @@ public class UserDTO {
 				+ "," + status + "," + simple_pw + "," + register_date + ","
 				+ end_date;
 	}
-	
-	
-		
-		
 }

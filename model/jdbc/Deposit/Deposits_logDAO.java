@@ -77,18 +77,17 @@ public class Deposits_logDAO {
 	
 	public void insert(Deposits_logDTO dto){
 		sql = 	"insert into deposits_log (" +
-				"seq, account_number, Interest, sum, status, register_date) values ("+
-				"?,?,?,?,?,sysdate() )";
+				"account_number, Interest, sum, status, register_date) values ("+
+				"		?	   ,	?	 ,	? ,		? ,	now() )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, dto.getSeq());
-			pstmt.setString(2, dto.getAccount_number());
-			pstmt.setFloat(3, dto.getInterest());
-			pstmt.setInt(4, dto.getSum());
-			pstmt.setString(5, dto.getStatus());
+			pstmt.setString(1, dto.getAccount_number());
+			pstmt.setFloat(2, dto.getInterest());
+			pstmt.setInt(3, dto.getSum());
+			pstmt.setString(4, dto.getStatus());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

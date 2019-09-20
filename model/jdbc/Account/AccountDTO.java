@@ -18,7 +18,7 @@ public class AccountDTO {
 	private Date 	register_date,	//계좌 등록일
 					end_date;		//계좌 정지일
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:m:s");
+	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public String getAccount_number() {
 		return account_number;

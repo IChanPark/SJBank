@@ -20,8 +20,6 @@ public class Fund_LogDTO {
 	
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	
-	
 	public String getRegister_dateStr() {
 		return sdf.format(register_date);
 	}

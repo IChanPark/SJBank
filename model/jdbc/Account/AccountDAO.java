@@ -123,7 +123,7 @@ public class AccountDAO {
 		sql = 	"insert into account (" +
 				"account_number, type, sum, name, id, pw, status, register_date, end_date) "+
 				"values ("+
-				"			?  ,	?,	 0,	 ''	,  ?,  ?, '활성' ,	  sysdate(), 	 null)";
+				"			?  ,	?,	 0,	 ''	,  ?,  ?, '활성' ,	  now(), 	 null)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();

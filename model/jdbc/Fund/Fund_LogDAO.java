@@ -98,8 +98,8 @@ public class Fund_LogDAO {
 
 	public void insert(Fund_LogDTO dto){
 		sql = 	"insert into account (" +
-				"seq, account_number, fluctuation, sum, status, register_date) values "
-				+ "( ?  ,	?       ,	 ?       ,	?,    ?   , sysdate() )";
+				"account_number, fluctuation, sum, status, register_date) values ("+ 
+				"	?  	       ,	 ?      ,  ? ,    ?   , now() )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -115,8 +115,6 @@ public class Fund_LogDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
-	
-	
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}

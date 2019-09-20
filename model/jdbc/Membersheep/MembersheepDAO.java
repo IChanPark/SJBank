@@ -78,7 +78,7 @@ public class MembersheepDAO {
 	public void insert(MembersheepDTO dto){
 		sql = 	"insert into Membersheep (" +
 				"id, membersheep, status, register_date) values ("+
-				" ?  ,	 '일반',	   '활성',	 sysdate())";
+				" ?  ,	 '일반',	   '활성',	 now())";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();

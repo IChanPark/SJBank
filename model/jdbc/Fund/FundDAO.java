@@ -114,7 +114,7 @@ public class FundDAO {
 	public void insert(FundDTO dto){
 		sql = 	"insert into fund (" +
 				"account_number, id, product,fluctuation) values ("+
-				"			?  , ?,	  ?,	  ?	)";
+				"			?  , ? ,	  ? ,	  ?	)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();

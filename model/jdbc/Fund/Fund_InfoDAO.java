@@ -115,8 +115,11 @@ public class Fund_InfoDAO {
 	
 	public void insert(Fund_InfoDTO dto){
 		sql = 	"insert into fund_info (" +
-				"product,price,price_modify,type,area,property,first_fee,fee,management,sector,status,register_date, end_date) "
-		+"values (?     ,  ?   ,  ?	       ,  ? , ?  ,   ?    ,   ?	    ,?	, 	?	   ,?     ,	  ?	 ,	sysdate()  , null)";
+				"product,price,price_modify,type,area,property,first_fee,"+ 
+				"fee,management,sector,status,register_date, end_date) "+
+				"values ("+
+				"	?	,  ?  ,  ?	       ,  ? , ?  ,   ?    ,   ?	    ,"+
+				" ?	, 	?	   ,   ?  ,	  ?	 ,	now()  	   , null)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();

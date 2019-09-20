@@ -16,7 +16,7 @@ public class Deposits_logDTO {
 	
 	private Date  	register_date;		//날짜
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:m:s");
+	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public Integer getSeq() {
 		return seq;
@@ -77,7 +77,6 @@ public class Deposits_logDTO {
 			e.printStackTrace();
 		}
 	}
-
 	
 	@Override
 	public String toString() {

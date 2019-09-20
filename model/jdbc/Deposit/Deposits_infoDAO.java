@@ -100,9 +100,10 @@ public class Deposits_infoDAO {
 	
 	public void insert(Deposits_infoDTO dto){
 		sql = 	"insert into deposits_info (" +
-				"product, Min_Interest, Max_Interest, Month, type, regular, jnterest_type, tax, preferential,"
-				+ "prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date) values ("+
-				"	 	?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate(),null )";
+				"product, Min_Interest, Max_Interest, Month, type, regular, jnterest_type, tax, preferential,"+ 
+				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date) values ("+
+				"	 ?	,		?     ,		?		,	?  ,	?,	  ?	  ,	 		?	 ,	? ,			?	,"+
+				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	?  ,	now()	  ,		null)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -124,7 +125,6 @@ public class Deposits_infoDAO {
 			pstmt.setString(14, dto.getPartialization());
 			pstmt.setString(15, dto.getRetention());
 			pstmt.setString(16, dto.getStatus());
-		
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

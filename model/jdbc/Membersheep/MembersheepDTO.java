@@ -14,7 +14,7 @@ public class MembersheepDTO {
 	private Date 	register_date;
 	
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:m:s");
+	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 
 	public String getId() {
@@ -66,21 +66,10 @@ public class MembersheepDTO {
 		this.register_date = register_date;
 	}
 
-
-	public SimpleDateFormat getSdf() {
-		return sdf;
-	}
-
-
-	public void setSdf(SimpleDateFormat sdf) {
-		this.sdf = sdf;
-	}
-
-
 	@Override
 	public String toString() {
 		return  id + "," + membersheep + "," + status + "," + point
-				+ "," + register_date + "," + sdf;
+				+ "," + register_date;
 	}
 	
 	

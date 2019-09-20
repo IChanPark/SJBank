@@ -28,7 +28,7 @@ public class Deposits_infoDTO {
 	private Date    register_date,   //상품등록일
 					end_date;		 //상품삭제일
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d H:m:s");
+	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	
 	public String getType() {
