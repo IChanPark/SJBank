@@ -12,18 +12,18 @@ public class Deposits_infoDTO {
 					tax,			 //세금종류
 					preferential,	 //우대구분
 					prf_content,	 //우대조건 내용
-					prf_Interest,	 //우대이자율
+					prf_interest,	 //우대이자율
 					partialization,	 //일부해지가능여부
 					retention,		 //재예치가능여부
 					regular,		 //정기/비정기
 					status;			 //상태
 					
-	private Integer	Month,
-					min_sum,
-					max_sum;
+	private Integer	month,			//약정 개월 수
+					min_sum,		//최소 납입금
+					max_sum;		//최대 납입금
 	
-	private Float  Min_Interest,
-					Max_Interest;
+	private Float  	min_interest,	//최저 연이자
+					max_interest;	//최대 연이자
 	
 	private Date    register_date,   //상품등록일
 					end_date;		 //상품삭제일
@@ -80,11 +80,11 @@ public class Deposits_infoDTO {
 	}
 
 	public String getPrf_Interest() {
-		return prf_Interest;
+		return prf_interest;
 	}
 
-	public void setPrf_Interest(String prf_Interest) {
-		this.prf_Interest = prf_Interest;
+	public void setPrf_Interest(String prf_interest) {
+		this.prf_interest = prf_interest;
 	}
 
 	public String getPartialization() {
@@ -112,11 +112,11 @@ public class Deposits_infoDTO {
 	}
 
 	public Integer getMonth() {
-		return Month;
+		return month;
 	}
 
 	public void setMonth(Integer month) {
-		Month = month;
+		month = month;
 	}
 
 	public Integer getMin_sum() {
@@ -135,20 +135,20 @@ public class Deposits_infoDTO {
 		this.max_sum = max_sum;
 	}
 
-	public Float getMin_Interest() {
-		return Min_Interest;
+	public Float getMin_interest() {
+		return min_interest;
 	}
 
-	public void setMin_Interest(Float min_Interest) {
-		Min_Interest = min_Interest;
+	public void setMin_interest(Float min_Interest) {
+		min_interest = min_Interest;
 	}
 
-	public Float getMax_Interest() {
-		return Max_Interest;
+	public Float getMax_interest() {
+		return max_interest;
 	}
 
-	public void setMax_Interest(Float max_Interest) {
-		Max_Interest = max_Interest;
+	public void setMax_interest(Float max_Interest) {
+		max_interest = max_Interest;
 	}
 	
 	public String getRegular() {
@@ -203,18 +203,11 @@ public class Deposits_infoDTO {
 
 	@Override
 	public String toString() {
-		return  product + "," + jnterest_type + "," + tax+ "," +type+"," +regular
-				+ "," + preferential + "," + prf_content + "," + prf_Interest
-				+ "," + partialization + "," + retention + "," + status + ","
-				+ Month + "," + min_sum + "," + max_sum + "," + Min_Interest
-				+ "," + Max_Interest + "," + register_date + "," + end_date;
+		return	product + "," + min_sum + "," + max_sum + ","
+				+ month + "," + type + "," + regular + "," + jnterest_type + ","
+				+ tax + "," + preferential + "," + prf_content + ","
+				+ prf_interest + "," + min_interest + "," + max_interest
+				+ "," + partialization + "," + retention + "," + status
+				+ "," + register_date + "," + end_date;
 	}
-	
-	
-	
-					
-	
-	
-	
-					
 }

@@ -66,8 +66,7 @@ public class Membersheep_logDTO {
 
 	@Override
 	public String toString() {
-		return  id + "," + way + "," + status + "," + seq + "," + point
-				+ "," + register_date;
+		return  seq + "," + id + "," + point + "," + way + "," + status + "," + register_date;
 	}
 	
 }

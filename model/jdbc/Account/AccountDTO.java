@@ -75,11 +75,10 @@ public class AccountDTO {
 	public void setSum(Integer sum) {
 		this.sum = sum;
 	}
-
+//-------------------------------------------------
 	public Date getRegister_date() {
 		return register_date;
 	}
-//-------------------------------------------------
 	public void setRegister_date(Date register_date) {
 		this.register_date = register_date;
 	}

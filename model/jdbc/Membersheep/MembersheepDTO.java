@@ -68,16 +68,6 @@ public class MembersheepDTO {
 
 	@Override
 	public String toString() {
-		return  id + "," + membersheep + "," + status + "," + point
-				+ "," + register_date;
+		return  id + "," + membersheep + "," + point + "," + status + "," + register_date;
 	}
-	
-	
-			
-		
-	
-	
-	
-	
-
 }

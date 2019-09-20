@@ -34,8 +34,8 @@ public class Deposits_infoDAO {
 			if(rs.next()) {
 				dto = new Deposits_infoDTO();
 				dto.setProduct(rs.getString("product"));
-				dto.setMin_Interest(rs.getFloat("min_Interest"));
-				dto.setMax_Interest(rs.getFloat("max_Interest"));
+				dto.setMin_interest(rs.getFloat("min_Interest"));
+				dto.setMax_interest(rs.getFloat("max_Interest"));
 				dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
 				dto.setRegular(rs.getString("regular"));
@@ -61,8 +61,8 @@ public class Deposits_infoDAO {
 			while (rs.next()) {
 				Deposits_infoDTO dto = new Deposits_infoDTO();
 				dto.setProduct(rs.getString("product"));
-				dto.setMin_Interest(rs.getFloat("min_Interest"));
-				dto.setMax_Interest(rs.getFloat("max_Interest"));
+				dto.setMin_interest(rs.getFloat("min_Interest"));
+				dto.setMax_interest(rs.getFloat("max_Interest"));
 				dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
 				dto.setRegular(rs.getString("regular"));
@@ -110,8 +110,8 @@ public class Deposits_infoDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getProduct());
-			pstmt.setFloat(2, dto.getMin_Interest());
-			pstmt.setFloat(3, dto.getMax_Interest());
+			pstmt.setFloat(2, dto.getMax_interest());
+			pstmt.setFloat(3, dto.getMax_interest());
 			pstmt.setInt(4, dto.getMonth());
 			pstmt.setString(5, dto.getType());
 			pstmt.setString(6, dto.getRegular());

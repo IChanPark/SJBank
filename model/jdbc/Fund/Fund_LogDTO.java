@@ -33,9 +33,7 @@ public class Fund_LogDTO {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 	public Integer getSeq() {
 		return seq;
 	}
@@ -87,10 +85,7 @@ public class Fund_LogDTO {
 
 	@Override
 	public String toString() {
-		return seq + "," + sum + "," + fluctuation + ","
-				+ account_number + "," + status + "," + register_date;
+		return seq + "," + account_number + "," + fluctuation + "," + sum + "," + 
+				status + "," + register_date;
 	}
-	
-	
-	
 }	

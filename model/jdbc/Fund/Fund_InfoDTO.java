@@ -158,9 +158,10 @@ public class Fund_InfoDTO {
 
 	@Override
 	public String toString() {
-		return product + "," + type + "," + area + "," + property
-				+ "," + management + "," + sector + "," + price + ","
-				+ price_modify + "," + first_fee + "," + fee + ","  
-				+ status + "," + register_date + "," + end_date;
+		return product + "," + price + "," + price_modify + ","
+				+ type + "," + area + "," + property + "," + first_fee + "," + fee
+				+ "," + management + "," + sector + "," + status + ","
+				+ register_date + "," + end_date;
 	}
+
 }

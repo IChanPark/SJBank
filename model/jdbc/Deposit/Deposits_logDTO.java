@@ -77,11 +77,12 @@ public class Deposits_logDTO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public String toString() {
-		return  account_number + "," + status + "," + Interest+"," +seq
-				+ "," + sum + "," + register_date;
-	}			
+		return seq + "," + account_number + "," + Interest
+				+ "," + sum + "," + status + "," + register_date;
+	}
+	
 	
 }
