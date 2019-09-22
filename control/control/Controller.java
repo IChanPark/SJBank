@@ -20,6 +20,8 @@ public class Controller extends HttpServlet {
 		
 		try {
 			if(request.getParameter("type") != null) {
+				System.out.println(request.getAttribute("menu-id"));
+				request.getParameter("menu-id");
 				String service = ""; 
 				String url = request.getParameter("type");
 				for (String s : url.split("/")) 
