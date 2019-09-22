@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import inf.M_Action;
-import jdbc.Account.AccountDAO;
 
 @WebServlet("/index.jsp")
 public class Controller extends HttpServlet {
@@ -20,13 +19,9 @@ public class Controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			System.out.println("aaaaaaa "+request.getAttribute("data"));
-			request.setAttribute("data", request.getAttribute("data"));
-			request.setAttribute("mainUrl", request.getAttribute("mainUrl"));
-			System.out.println(request.getAttribute("data"));
-			if(request.getParameter("page") != null) {
+			if(request.getParameter("type") != null) {
 				String service = ""; 
-				String url = request.getParameter("page");
+				String url = request.getParameter("type");
 				for (String s : url.split("/")) 
 					service+=s+".";
 				
@@ -42,12 +37,10 @@ public class Controller extends HttpServlet {
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
-				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp"); //여기로 보내
-				dispatcher.forward(request, response);
 			}
-				RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
-				dispatcher.forward(request, response);
-				System.out.println("ddddd");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
+			System.out.println("디스페쳐 간다");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {e.printStackTrace();} 
 		
 	}

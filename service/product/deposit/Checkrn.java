@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import inf.M_Action;
 import jdbc.Account.AccountDAO;
 
-public class checkrn implements M_Action{
+public class Checkrn implements M_Action{
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("data", AccountDAO.getInstance().selectID("elliottjo"));
