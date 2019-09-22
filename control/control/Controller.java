@@ -25,7 +25,7 @@ public class Controller extends HttpServlet {
 				for (String s : url.split("/")) 
 					service+=s+".";
 				
-				url = "layout/"+url;
+				url = "layout/"+url.toLowerCase();
 				service = service.substring(0, service.length()-1);
 
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅

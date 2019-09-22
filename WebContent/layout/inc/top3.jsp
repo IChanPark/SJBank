@@ -8,8 +8,9 @@
 <link rel="stylesheet" type="text/css" href="css/bank_top.css" />
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="js/Script.js"></script>
+
 <div id="menu0"><div>SJBank</div></div>
-<form method="get" name="paging" action="index.jsp"/>
+<form action="index.jsp" method="get"/>
 <div class="TitleMenu">
 	<ul class="MainUl">
 	<% for(MenuDTO dto : MenuDAO.getInstance().selectPrnts("",0)) { %> 
@@ -20,9 +21,9 @@
 					<div class="LowMenu">
 						<li><a href="#"><%=d1.getKor_name() %></a></li>
 						<% for(MenuDTO d2 : MenuDAO.getInstance().selectPrnts(dto.getName(),d1.getName(),2)) { %>			
-							<li>
-							<input type="submit" name="type" value="<%=dto.getName()+"/"+d1.getName()+"/"+(d2.getName().substring(0,1).toUpperCase()+d2.getName().substring(1))%>"/>
-							<a href="javascript:goPage();"><%=d2.getKor_name() %></a>
+							<li> <input type="submit" name="type" value=" 
+							<%=dto.getName()+"/"+d1.getName()+"/"+d2.getName().substring(0,1).toUpperCase()+d2.getName().substring(1)%>" />
+							<a href="" value=""></a>
 							</li>
 						<% } %>
 					</div>
@@ -37,14 +38,3 @@
 	<%} %>
 	</ul>
 </div>
-<script>
-$(document).ready(function(){
-	console.log( "ready!" );
-    function goPage() {
-		console.log( "goPage" );
-		var f = document.paging;
-      	console.log(f.type.value);
-      	/* f.submit(); */
-    };
-});    
-</script>
