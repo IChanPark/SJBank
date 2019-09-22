@@ -7,22 +7,29 @@
 	
 <link rel="stylesheet" type="text/css" href="css/bank_top.css" />
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="js/Script.js"></script>
+<script type="text/javascript" src="js/Menu_Fixed.js"></script>
+
 <div id="menu0"><div>SJBank</div></div>
-<form method="get" name="paging" action="index.jsp"/>
+<form name="paging" action="index.jsp"/>
+<input type="hidden" name="type" />
 <div class="TitleMenu">
 	<ul class="MainUl">
-	<% for(MenuDTO dto : MenuDAO.getInstance().selectPrnts("",0)) { %> 
-		<li><a href="Reg?page=<%=dto.getName()%>"><%=dto.getKor_name() %></a>
+	<% for(MenuDTO d0 : MenuDAO.getInstance().selectPrnts("",0)) { %> 
+		<li>
+		<a href="#" data-menu-name="<%=d0.getName().substring(0,1).toUpperCase()+d0.getName().substring(1)%>">
+		<%=d0.getKor_name() %></a>
 			<div class="SubMenu">
 				<ul class="SubUl">
-				<% for(MenuDTO d1 : MenuDAO.getInstance().selectPrnts(dto.getName(),1)) { %>		
+				<% for(MenuDTO d1 : MenuDAO.getInstance().selectPrnts(d0.getName(),1)) { %>		
 					<div class="LowMenu">
-						<li><a href="#"><%=d1.getKor_name() %></a></li>
-						<% for(MenuDTO d2 : MenuDAO.getInstance().selectPrnts(dto.getName(),d1.getName(),2)) { %>			
+						<li>
+						<a href="#" data-menu-name="<%=d0.getName()+"/"+(d1.getName().substring(0,1).toUpperCase()+d1.getName().substring(1))%>">
+						<%=d1.getKor_name() %></a>
+						</li>
+						<% for(MenuDTO d2 : MenuDAO.getInstance().selectPrnts(d0.getName(),d1.getName(),2)) { %>			
 							<li>
-							<input type="submit" name="type" value="<%=dto.getName()+"/"+d1.getName()+"/"+(d2.getName().substring(0,1).toUpperCase()+d2.getName().substring(1))%>"/>
-							<a href="javascript:goPage();"><%=d2.getKor_name() %></a>
+							<a href="#" data-menu-name="<%=d0.getName()+"/"+d1.getName()+"/"+(d2.getName().substring(0,1).toUpperCase()+d2.getName().substring(1))%>">
+							<%=d2.getKor_name() %></a>
 							</li>
 						<% } %>
 					</div>
@@ -38,13 +45,15 @@
 	</ul>
 </div>
 <script>
-$(document).ready(function(){
-	console.log( "ready!" );
-    function goPage() {
-		console.log( "goPage" );
-		var f = document.paging;
-      	console.log(f.type.value);
-      	/* f.submit(); */
-    };
-});    
+$(document).ready(function() {
+	console.log( "Menu_Click.js!" );
+	$("a[data-menu-name]").on("click", function() {	//메뉴 이동용
+		var aa = $(this).data("menu-id");
+		var f=document.paging; 
+	    f.type.value = aa; 
+	    f.method="post";
+	    f.submit();
+	});
+});
 </script>
+
