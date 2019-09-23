@@ -10,11 +10,12 @@ public class UserDTO {
 					pw,				//PW
 					name,			//이름
 					gen,			//성별
-					family,			//가게형태
+					email,			//이메일
 					job_group,		//직업군
-					Income,			//연소득
-					residence, 		//거주시
-					county,			//거주구 또는 동
+					addr,			//주소 Postal code
+
+					postal_code, 	//우편번호
+					tel,			//거주구 또는 동
 					status;			//계정 상태 활성/정지/탈퇴
 	
 	private Integer simple_pw;		//간편비밀번호
@@ -56,12 +57,12 @@ public class UserDTO {
 		this.gen = gen;
 	}
 	
-	public String getFamily() {
-		return family;
+	public String getEmail() {
+		return email;
 	}
 	
-	public void setFamily(String family) {
-		this.family = family;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public String getJob_group() {
@@ -72,28 +73,28 @@ public class UserDTO {
 		this.job_group = job_group;
 	}
 	
-	public String getIncome() {
-		return Income;
+	public String getAddr() {
+		return addr;
 	}
 	
-	public void setIncome(String income) {
-		Income = income;
+	public void setAddr(String addr) {
+		addr = addr;
 	}
 	
-	public String getResidence() {
-		return residence;
+	public String getPostal_code() {
+		return postal_code;
 	}
 	
-	public void setResidence(String residence) {
-		this.residence = residence;
+	public void setPostal_code(String postal_code) {
+		this.postal_code = postal_code;
 	}
 	
-	public String getCounty() {
-		return county;
+	public String getTel() {
+		return tel;
 	}
 	
-	public void setCounty(String county) {
-		this.county = county;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	
 	public String getStatus() {
@@ -156,8 +157,8 @@ public class UserDTO {
 	
 	@Override
 	public String toString() {
-		return id + "," + pw + "," + name + "," + gen + "," + family
-				+ "," + job_group + "," + Income + "," + residence + "," + county
+		return id + "," + pw + "," + name + "," + tel + ", " + gen
+				+ "," + email + "," + job_group + "," + addr + "," + postal_code
 				+ "," + status + "," + simple_pw + "," + register_date + ","
 				+ end_date;
 	}

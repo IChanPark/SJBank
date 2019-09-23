@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h2>입/출금 계좌</h2>
-<table border="" width="100%">
-<tr align="center">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<div class="subTitle"><h2>입/출금 계좌</h2></div>
+<table class="body">
+<tr >
 	<td>계좌명</td>
 	<td>계좌번호</td>
 	<td>신규일</td>
@@ -18,15 +20,16 @@
 			<td>${dto.account_number }</td>
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
-			<td>${dto.sum }</td>
+			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
 			<td><a href="Detail?id=${dto.id }">조회</a></td>
 		</tr>
 	</c:if>
 </c:forEach>
 </table>
-<h2>예금/적금/신탁 계좌</h2>
-<table border="" width="100%">
-	<tr align="center">
+
+<div class="subTitle"><h2>예금/적금/신탁 계좌</h2></div>
+<table class="body">
+	<tr>
 		<td>계좌명</td>
 		<td>계좌번호</td>
 		<td>신규일</td>
@@ -41,12 +44,11 @@
 			<td>${dto.account_number }</td>
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
-			<td>${dto.sum }</td>
+			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
 			<td><a href="Detail?id=${dto.id }">조회</a></td>
 		</tr>
 	</c:if>
 </c:forEach>
-
 </table>
 
 <!-- <tr align="right">

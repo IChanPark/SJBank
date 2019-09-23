@@ -1,0 +1,7 @@
+@charset "UTF-8";
+* {margin: 0;padding: 0; color: white; font-size: 11pt;}
+li {list-style: none;}
+#mid{width:100%;margin :0 auto; height: 1200px;}
+#mid>div{width:1000px;margin :0 auto;}
+#bot {height: 80px;width: 100%;margin: 0 auto; background: #00B992;}
+#bot>div{width: 1000px;margin: 0 auto;padding-top: 20px; font-size: 13pt; background: #00B992;}

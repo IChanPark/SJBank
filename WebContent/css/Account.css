@@ -1,0 +1,4 @@
+@charset "UTF-8";
+.body {margin-top:20px; border:1px solid white; width:100%}/* 보더 상하 좌우 */ 
+.body tr {align:center;}
+.subTitle {margin-top:30px; border-bottom:1px solid white;}

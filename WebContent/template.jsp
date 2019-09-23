@@ -5,18 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<style>
-#con{width:1000px;margin :0 auto; height: 1200px; border-left: 1px solid white; border-right: 1px solid white;}
-#bot{height:40px; background: #404040;}
-</style>   
-<% if(request.getAttribute("mainUrl") == null){
-	request.setAttribute("mainUrl","mid");
-}%>
+<link rel="stylesheet" type="text/css" href="css/Basic.css" />		<!-- 기본 스타일 설정 -->
+<link rel="stylesheet" type="text/css" href="css/Top.css" />		<!-- top 스타일 -->
+<link rel="stylesheet" type="text/css" href="css/Account.css" />	<!-- 계좌 테이블 스타일 -->
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>	
+<script type="text/javascript" src="js/Menu_Script.js"></script>	<!-- menu 관련 -->
 
 </head>
 <body>
-	<div><jsp:include page="layout/inc/top.jsp" /></div>
-	<div id = con><jsp:include page="${mainUrl }.jsp" /></div>
-	<div id=bot><jsp:include page="layout/inc/bottom.jsp" /></div>
+	<jsp:include page="layout/inc/top.jsp" />
+	<div id="mid"><div><jsp:include page="${mainUrl }.jsp" /></div></div>
+	<div id="bot"><div><jsp:include page="layout/inc/bottom.jsp" /></div></div>
 </body>
 </html>

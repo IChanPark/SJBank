@@ -20,8 +20,6 @@ public class Controller extends HttpServlet {
 		
 		try {
 			if(request.getParameter("type") != null) {
-				System.out.println(request.getAttribute("menu-id"));
-				request.getParameter("menu-id");
 				String service = ""; 
 				String url = request.getParameter("type");
 				for (String s : url.split("/")) 
@@ -39,9 +37,10 @@ public class Controller extends HttpServlet {
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
-			}
+			} else
+				request.setAttribute("mainUrl", "main");
+	
 			RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
-			System.out.println("디스페쳐 간다");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {e.printStackTrace();} 
 		

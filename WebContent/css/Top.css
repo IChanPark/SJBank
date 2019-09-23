@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.jbFixed {position: fixed; top: 0px; width: 100%;}
+.TitleMenu a {color: #ffffff; text-decoration: none;}
+/**/
+#top {background: #00B992;height: 50px;width: 100%;margin: 0 auto;}
+#top>div{background: #00B992;width: 1000px;margin: 0 auto;padding-top: 10px; font-size: 18pt;}
+body {background: #242424}/*눈 피로로 인해 추가함 */
+/**/
+.tt {width: 100%; position: relative;}
+.TitleMenu {background: #00B992;height: 50px;}
+.TitleMenu .MainUl {width: 1000px;margin: 0 auto;position: relative;/* overflow: hidden; */}
+/**/
+.TitleMenu .MainUl>li {float: left;width: 16.66%;height: 100%;line-height: 50px;text-align: center;background: #00B992;}
+/**/
+.TitleMenu .SubMenu {position: absolute;top: 50px;left: 0;width: 100%;display: none;}
+.TitleMenu .SubUl {float: left;width: 100%; background: #009577;}
+.TitleMenu .SubUl li {float: left;width: 25%;}
+/* 하위메뉴 1~8번 */
+.TitleMenu ul li a {display: block;}
+.TitleMenu .MainUl>li a {display: block;;}
+.TitleMenu .MainUl>li:hover .SubMenu {display: block;}
+.TitleMenu .MainUl>li:hover .SubUl {display: block;}
+/* */
+.TitleMenu .SubUl .LowMenu {width: 25%; float: left;}
+.TitleMenu .SubUl .LowMenu li {width: 100%; float: none;}
+.TitleMenu .SubUl .LowMenu li:nth-child(1) {padding-top: 10px; border-bottom: 3px solid #00B992; font-size: 15pt;}
+/**/
+.TitleMenu .MainUl .SubUl li {background: #009577;}
+.TitleMenu .MainUl .SubUl li a:hover {text-decoration:underline; color:#ded914; }
+.TitleMenu .MainUl>li a:hover {background: #009577;color: #fff;}
+.TitleMenu ul li a:hover {background: #009577;color: #fff;}/* aaaaaaaa */

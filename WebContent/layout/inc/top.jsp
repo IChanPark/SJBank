@@ -3,15 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- 스플릿 사용도 -->
-	
-<link rel="stylesheet" type="text/css" href="css/bank_top.css" />
-<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="js/Menu_Fixed.js"></script>
 
-<div id="menu0"><div>SJBank</div></div>
 <form name="paging" action="index.jsp"/>
 <input type="hidden" name="type" />
+<!-- post데이터 전송용 form과 input -->
+
+<div id="top"><div>SJBank</div></div>
 <div class="TitleMenu">
 	<ul class="MainUl">
 	<% for(MenuDTO d0 : MenuDAO.getInstance().selectPrnts("",0)) { %> 
@@ -36,7 +33,7 @@
 					<% if(d1.getSort() == 3){%>
 				</ul>
 				<ul class="SubUl">
-						<% }%>
+					<% }%>
 				<% } %>
 				</ul>
 			</div>
@@ -44,16 +41,3 @@
 	<%} %>
 	</ul>
 </div>
-<script>
-$(document).ready(function() {
-	console.log( "Menu_Click.js!" );
-	$("a[data-menu-name]").on("click", function() {	//메뉴 이동용
-		var aa = $(this).data("menu-id");
-		var f=document.paging; 
-	    f.type.value = aa; 
-	    f.method="post";
-	    f.submit();
-	});
-});
-</script>
-
