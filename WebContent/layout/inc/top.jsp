@@ -8,7 +8,11 @@
 <input type="hidden" name="type" />
 <!-- post데이터 전송용 form과 input -->
 
-<div id="top"><div>SJBank</div></div>
+<div id="top">
+	<div id="info">SJBank
+	<a href="" id="login">로그인</a>
+	</div>
+</div>
 <div class="TitleMenu">
 	<ul class="MainUl">
 	<% for(MenuDTO d0 : MenuDAO.getInstance().selectPrnts("",0)) { %> 
@@ -39,5 +43,8 @@
 			</div>
 		</li>
 	<%} %>
+		<li id ="srch">
+		<a href="#" data-menu-name="search">검색</a>
+		</li>
 	</ul>
 </div>

@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<div class="subTitle"><h2>입/출금 계좌</h2></div>
-<table class="body">
+<div class="subTitle">입/출금 계좌</div>
+<table class="AccInfo">
 <tr >
 	<td>계좌명</td>
 	<td>계좌번호</td>
@@ -27,8 +27,8 @@
 </c:forEach>
 </table>
 
-<div class="subTitle"><h2>예금/적금/신탁 계좌</h2></div>
-<table class="body">
+<div class="subTitle">예금/적금/신탁 계좌</div>
+<table class="AccInfo">
 	<tr>
 		<td>계좌명</td>
 		<td>계좌번호</td>

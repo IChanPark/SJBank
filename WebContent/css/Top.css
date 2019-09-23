@@ -3,14 +3,17 @@
 .TitleMenu a {color: #ffffff; text-decoration: none;}
 /**/
 #top {background: #00B992;height: 50px;width: 100%;margin: 0 auto;}
-#top>div{background: #00B992;width: 1000px;margin: 0 auto;padding-top: 10px; font-size: 18pt;}
+#top>#info{background: #00B992;width: 1000px;margin: 0 auto;padding-top: 10px; font-size: 18pt;}
+#login {float: right; padding-top: 15px; padding-right: 10px; text-decoration: none}
 body {background: #242424}/*눈 피로로 인해 추가함 */
 /**/
 .tt {width: 100%; position: relative;}
 .TitleMenu {background: #00B992;height: 50px;}
 .TitleMenu .MainUl {width: 1000px;margin: 0 auto;position: relative;/* overflow: hidden; */}
 /**/
-.TitleMenu .MainUl>li {float: left;width: 16.66%;height: 100%;line-height: 50px;text-align: center;background: #00B992;}
+.TitleMenu .MainUl>li {float: left;width: 18%;height: 100%;line-height: 50px;text-align: center;background: #00B992;}
+.TitleMenu .MainUl>#srch {width: 10%;}
+
 /**/
 .TitleMenu .SubMenu {position: absolute;top: 50px;left: 0;width: 100%;display: none;}
 .TitleMenu .SubUl {float: left;width: 100%; background: #009577;}
