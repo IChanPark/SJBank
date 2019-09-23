@@ -15,7 +15,7 @@ public class UserDTO {
 					addr,			//주소 Postal code
 
 					postal_code, 	//우편번호
-					tel,			//거주구 또는 동
+					tel,			//전화번호
 					status;			//계정 상태 활성/정지/탈퇴
 	
 	private Integer simple_pw;		//간편비밀번호
@@ -157,9 +157,9 @@ public class UserDTO {
 	
 	@Override
 	public String toString() {
-		return id + "," + pw + "," + name + "," + tel + ", " + gen
-				+ "," + email + "," + job_group + "," + addr + "," + postal_code
-				+ "," + status + "," + simple_pw + "," + register_date + ","
-				+ end_date;
+		return id + "," + pw + "," + simple_pw + "," + name + ", " + tel
+				+ "," + gen + "," + email + "," + job_group + "," + addr
+				+ "," + postal_code + "," + status + "," + register_date
+				+ "," + end_date;
 	}
 }
