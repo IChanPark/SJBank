@@ -44,7 +44,7 @@
 		</li>
 	<%} %>
 		<li id ="srch">
-		<a href="#" data-menu-name="search"><img alt="" src="img/search_1.png" height="30px" display="block">검색</a>
+		<a href="#" data-menu-name="search">검색<img alt="" src="img/search_1.png" height="20px" display="block" margin="0px auto"/></a>
 		</li>
 	</ul>
 </div>

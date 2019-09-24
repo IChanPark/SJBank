@@ -1,5 +1,6 @@
 @charset "UTF-8";
 * {margin: 0;padding: 0; color: white; font-size: 11pt;}
+body {background: #363636}/*눈 피로로 인해 추가함 */
 li {list-style: none;}
 #mid{width:100%;margin :0 auto; height: 1200px;}
 #mid>div{width:1000px;margin :0 auto;}
