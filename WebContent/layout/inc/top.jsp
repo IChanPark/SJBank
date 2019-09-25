@@ -9,8 +9,8 @@
 <!-- post데이터 전송용 form과 input -->
 
 <div id="top">
-	<div id="info">SJBank
-	<a href="" id="login">로그인</a>
+	<div id="info"><img alt="" src="img/logo.png" height="40px" display="block" margin="0px auto"/>
+	<a href="#" data-menu-name="login" id="login">로그인</a>
 	</div>
 </div>
 <div class="TitleMenu">
