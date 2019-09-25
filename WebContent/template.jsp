@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>SJBank</title>
+<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css">	
 <link rel="stylesheet" type="text/css" href="css/Basic.css" />		<!-- 기본 스타일 설정 -->
 <link rel="stylesheet" type="text/css" href="css/Top.css" />		<!-- top 스타일 -->
 <link rel="stylesheet" type="text/css" href="css/Account.css" />	<!-- 계좌 테이블 스타일 -->

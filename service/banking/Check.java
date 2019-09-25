@@ -1,4 +1,4 @@
-package product.deposit;
+package banking;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
