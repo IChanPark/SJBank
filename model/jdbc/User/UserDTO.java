@@ -78,7 +78,7 @@ public class UserDTO {
 	}
 	
 	public void setAddr(String addr) {
-		addr = addr;
+		this.addr = addr;
 	}
 	
 	public String getPostal_code() {

@@ -46,7 +46,7 @@ public class UserDAO {
 				dto.setPostal_code(rs.getString("postal_code"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
-				dto.setRegister_date(rs.getDate("end_date"));
+				dto.setEnd_date(rs.getDate("end_date"));
 			} 
 		} catch (Exception e) {}
 		return dto;
@@ -68,7 +68,7 @@ public class UserDAO {
 				dto.setPostal_code(rs.getString("postal_code"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
-				dto.setRegister_date(rs.getDate("end_date"));
+				dto.setEnd_date(rs.getDate("end_date"));
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
@@ -115,7 +115,7 @@ public class UserDAO {
 				"addr, postal_code, status,register_date,end_date) "+
 				"values "+
 			    "(? ,? ,	?	 ,	?	, ? ,	 ?,	  ?	 , 	?	,"+
-			    "  ? ,    ?  	  ,   ?  ,  	now()   ,null )";
+			    "  ? ,    ?  	  ,   '활성'  ,  	now()   ,null )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -131,7 +131,6 @@ public class UserDAO {
 			pstmt.setString(8, dto.getJob_group());
 			pstmt.setString(9, dto.getAddr());
 			pstmt.setString(10, dto.getPostal_code());
-			pstmt.setString(11, dto.getStatus());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

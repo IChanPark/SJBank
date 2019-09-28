@@ -4,6 +4,7 @@ body {background: #363636}/*눈 피로로 인해 추가함 */
 li {list-style: none;}
 input{color: black;}
 select{color: black;}
+option{background: #363636;}
 #mid{width:100%;margin :0 auto; height: 1200px;}
 #mid>div{width:1000px;margin :0 auto;}
 #bot {height: 80px;width: 100%;margin: 0 auto; background: #00B992;}
