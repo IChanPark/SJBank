@@ -15,7 +15,6 @@ public class Deposits_infoDTO {
 					prf_interest,	 //우대이자율
 					partialization,	 //일부해지가능여부
 					retention,		 //재예치가능여부
-					regular,		 //정기/비정기
 					status;			 //상태
 					
 	private Integer	month,			//약정 개월 수
@@ -79,11 +78,11 @@ public class Deposits_infoDTO {
 		this.prf_content = prf_content;
 	}
 
-	public String getPrf_Interest() {
+	public String getPrf_interest() {
 		return prf_interest;
 	}
 
-	public void setPrf_Interest(String prf_interest) {
+	public void setPrf_interest(String prf_interest) {
 		this.prf_interest = prf_interest;
 	}
 
@@ -116,7 +115,7 @@ public class Deposits_infoDTO {
 	}
 
 	public void setMonth(Integer month) {
-		month = month;
+		this.month = month;
 	}
 
 	public Integer getMin_sum() {
@@ -140,7 +139,7 @@ public class Deposits_infoDTO {
 	}
 
 	public void setMin_interest(Float min_Interest) {
-		min_interest = min_Interest;
+		this.min_interest = min_Interest;
 	}
 
 	public Float getMax_interest() {
@@ -148,17 +147,9 @@ public class Deposits_infoDTO {
 	}
 
 	public void setMax_interest(Float max_Interest) {
-		max_interest = max_Interest;
+		this.max_interest = max_Interest;
 	}
 	
-	public String getRegular() {
-		return regular;
-	}
-
-	public void setRegular(String regular) {
-		this.regular = regular;
-	}
-
 	//-------------------------------------------------------------
 	public Date getRegister_date() {
 		return register_date;
@@ -203,10 +194,10 @@ public class Deposits_infoDTO {
 
 	@Override
 	public String toString() {
-		return	product + "," + min_sum + "," + max_sum + ","
-				+ month + "," + type + "," + regular + "," + jnterest_type + ","
+		return	product + "," + min_interest + "," + max_interest + ","
+				+ month + "," + type + "," + jnterest_type + ","
 				+ tax + "," + preferential + "," + prf_content + ","
-				+ prf_interest + "," + min_interest + "," + max_interest
+				+ prf_interest + "," + min_sum + "," + max_sum
 				+ "," + partialization + "," + retention + "," + status
 				+ "," + register_date + "," + end_date;
 	}
