@@ -10,6 +10,7 @@ import jdbc.User.UserDTO;
 public class joinReg  implements M_Action{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		UserDTO dto = new UserDTO();
 
 		dto.setId(request.getParameter("id"));
@@ -23,9 +24,10 @@ public class joinReg  implements M_Action{
 		dto.setAddr(request.getParameter("addr"));		
 		dto.setPostal_code(request.getParameter("zipcode"));
 
+		//계좌번호 넣어주세요
 		
-
-
+		//넣어주세요
+		
 		UserDAO.getInstance().insert(dto); 
 		request.setAttribute("mainUrl", "main");
 
