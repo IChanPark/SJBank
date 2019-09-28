@@ -24,14 +24,14 @@
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
-			<td><a href="#" data-menu-name="banking/Detail" accountNumber="${dto.account_number }">asd</a></td>
+			<td><a href="#" data-menu-name="banking/Detail" accountNumber="${dto.account_number }">상세</a></td>
 		</tr>
 	</c:if>
 </c:forEach>
 </table>
 
 <div class="subTitle">예금/적금/신탁 계좌</div>
-<table class="AccInfo">
+	<table class="AccInfo">
 	<tr>
 		<td>계좌명</td>
 		<td>계좌번호</td>
@@ -41,14 +41,14 @@
 		<td>업무</td>
 	</tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<c:if test="${dto.type=='펀드' }">
+	<c:if test="${dto.type=='fund' }">
 		<tr>
 			<td>${dto.type }</td>
 			<td>${dto.account_number }</td>
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
-			<td><a href="#" data-menu-name="Detail">asfasf</a></td>
+			<td><a href="#" data-menu-name="banking/Detail" accountNumber="${dto.account_number }" > 상세</a></td>
 		</tr>
 	</c:if>
 </c:forEach>

@@ -29,7 +29,20 @@ public class Controller extends HttpServlet {
 				
 				for (String s : url.split("/")) 
 					service+=s+".";
-
+				if(url.split("/").length>2)
+				{
+					System.out.println("메뉴 테스트 :  "+url.split("/").length);
+					if(session.getAttribute("userID")==null)
+					{
+						String msg="로그인 해주세요~~.";
+						System.out.println("유저아이디 테스트 :  "+ session.getAttribute("userID"));
+						request.setAttribute("msg", msg);
+						request.setAttribute("goUrl", "index.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); //여기로 보내
+						dispatcher.forward(request, response);
+						return;
+					}
+				}
 				url = "layout/"+url.toLowerCase();
 				service = service.substring(0, service.length()-1);
 
