@@ -77,7 +77,7 @@ public class UserDAO {
 	public ArrayList<UserDTO> list(){
 		ArrayList<UserDTO> res = new ArrayList<UserDTO>();
 		
-		sql = "select * from UserDTO";
+		sql = "select * from user";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -92,7 +92,7 @@ public class UserDAO {
 	public UserDTO selectId(String id){
 		UserDTO dto = null;
 		
-		sql = 	"select * from menu where id = ?";
+		sql = 	"select * from user where id = ?";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -110,7 +110,7 @@ public class UserDAO {
 
 	
 	public void insert(UserDTO dto){
-		sql = 	"insert into User (" +
+		sql = 	"insert into user (" +
 				"id, pw, simple_pw, name, tel, gen, email, job_group,"+ 
 				"addr, postal_code, status,register_date,end_date) "+
 				"values "+

@@ -3,12 +3,13 @@ package util;
 import java.util.ArrayList;
 
 public class Exception_Group {
-	private ArrayList<String> nonClass = null;
-	
+	private ArrayList<String> nonClass;
+	private String [] group = {
+			"service.LoginMain", "service.Join" };	//여짝에 추가해주세용
 	private Exception_Group() {
 		nonClass = new ArrayList<String>();
-		nonClass.add("service.LoginMain");
-		nonClass.add("service.Join");
+		for (String e : group) 
+			nonClass.add(e);
 	}
 	
 	private static class Holder {
