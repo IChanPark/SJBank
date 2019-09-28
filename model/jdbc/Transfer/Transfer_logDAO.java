@@ -66,6 +66,7 @@ public class Transfer_logDAO {
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
 				dto.setStatus(rs.getString("status"));
+				res.add(dto);
 			} 
 		} catch (Exception e) {}
 	}
@@ -96,7 +97,7 @@ public class Transfer_logDAO {
 			
 			pstmt.setString(1, account_number);
 			
-			rs = pstmt.executeQuery(sql);
+			rs = pstmt.executeQuery();
 			
 			Transfer_log(rs, res);	
 		} catch (Exception e) { e.printStackTrace(); 

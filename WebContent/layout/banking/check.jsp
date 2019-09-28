@@ -1,7 +1,10 @@
+<%@page import="jdbc.Account.AccountDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 
 <div class="subTitle">입/출금 계좌</div>
 <table class="AccInfo">
@@ -21,7 +24,7 @@
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
-			<td><a href="Detail?id=${dto.id }">조회</a></td>
+			<td><a href="#" data-menu-name="banking/Detail" accountNumber="${dto.account_number }">asd</a></td>
 		</tr>
 	</c:if>
 </c:forEach>
@@ -45,7 +48,7 @@
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
-			<td><a href="Detail?id=${dto.id }">조회</a></td>
+			<td><a href="#" data-menu-name="Detail">asfasf</a></td>
 		</tr>
 	</c:if>
 </c:forEach>
