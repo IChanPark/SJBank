@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import inf.M_Action;
+import jdbc.Account.AccountDAO;
+import util.Exception_Group;
 
 @WebServlet("/index.jsp")
 public class Controller extends HttpServlet {
@@ -30,10 +32,9 @@ public class Controller extends HttpServlet {
 
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
 
-				ArrayList<String> nonCla = new ArrayList<String>(); //M_Action 실행안할 리트스
 				System.out.println("url : "+url);
 				System.out.println("service : "+service);
-				if(!nonCla.contains(service)) { // 속하지 않는다면 실행
+				if(Exception_Group.getInstance().check(service)) { // 속하지 않는다면 실행
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}

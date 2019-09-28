@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/model"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/inf"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/control"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/util"/>
         <property name="java-output-path" value="/SJBank/build/classes"/>
         <property name="context-root" value="SJBank"/>
     </wb-module>

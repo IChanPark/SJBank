@@ -10,7 +10,7 @@
 
 <div id="top">
 	<div id="info"><img src="img/logo.png" height="40px" display="block" margin="0px auto"/>
-	<a href="#" data-menu-name="Login" id="login">로그인</a>
+	<a href="#" data-menu-name="service/LoginMain" id="login">로그인</a>
 	</div>
 </div>
 <div class="TitleMenu">
@@ -44,7 +44,7 @@
 		</li>
 	<%} %>
 		<li id ="srch">
-		<a href="#" data-menu-name="search">검색<img alt="" src="img/search_1.png" height="20px" display="block" margin="0px auto"/></a>
+		<a href="#" data-menu-name="service/search">검색<img alt="" src="img/search_1.png" height="20px" display="block" margin="0px auto"/></a>
 		</li>
 	</ul>
 </div>

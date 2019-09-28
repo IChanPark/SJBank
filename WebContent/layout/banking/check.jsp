@@ -14,7 +14,7 @@
 	<td>업무</td>
 </tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<c:if test="${dto.type=='저축예금' }">
+	<c:if test="${dto.type=='deposit' }">
 		<tr>
 			<td>${dto.type }</td>
 			<td>${dto.account_number }</td>
