@@ -45,7 +45,6 @@ public class Controller extends HttpServlet {
          } else
             request.setAttribute("mainUrl", "main");
    
-         System.out.println("메유"+ request.getAttribute("mainUrl"));
          RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
          dispatcher.forward(request, response);
       } catch (Exception e) {e.printStackTrace();} 
