@@ -27,6 +27,8 @@ public class Controller extends HttpServlet {
 				String service = ""; 
 				String url = request.getParameter("type");
 				
+				System.out.println("컨트롤러    "+request.getParameter("accountNumber"));
+				session.setAttribute("accountNumber", request.getParameter("accountNumber"));
 				for (String s : url.split("/")) 
 					service+=s+".";
 				if(url.split("/").length>2)

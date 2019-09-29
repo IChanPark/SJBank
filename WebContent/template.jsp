@@ -13,10 +13,13 @@
 <script type="text/javascript" src="js/Menu_Script.js"></script>   <!-- menu 관련 -->
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>   <!-- menu 관련 -->
 
+<%System.out.println("템플레이트"+request.getParameter("accountNumber")); %>
+
 </head>
 
 <form name="paging" action="index.jsp"/>
 <input type="hidden" name="type" />
+<input type="hidden" name="accountNumber" />
 <!-- post데이터 전송용 form과 input -->
 
 <body>

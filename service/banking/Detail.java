@@ -2,6 +2,7 @@ package banking;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import inf.M_Action;
 import inf.Transfer.Transfer;
@@ -12,8 +13,9 @@ import jdbc.Transfer.Transfer_logDTO;
 public class Detail implements M_Action{
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("data", AccountDAO.getInstance().selectAccount("101-1112-112-1232"));
-		request.setAttribute("log", Transfer_logDAO.getInstance().selectAN("101-1112-112-1232"));
+		  HttpSession session = request.getSession();
+		request.setAttribute("data", AccountDAO.getInstance().selectAccount( (String)session.getAttribute("accountNumber")  )  );
+		request.setAttribute("log", Transfer_logDAO.getInstance().selectAN((String)session.getAttribute("accountNumber")  ));
 		
 		
 	
