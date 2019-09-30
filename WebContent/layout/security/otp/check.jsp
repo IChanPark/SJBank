@@ -16,4 +16,7 @@
 	</tr>
 	</c:if>
 </c:forEach>
+<tr>
+	<td><button>OTP정지하기</button></td>
+</tr>
 </table>
