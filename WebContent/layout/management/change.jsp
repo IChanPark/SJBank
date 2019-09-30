@@ -59,7 +59,7 @@
 		<tr>
 		
 			<td colspan="2" align="right">			
-				<a href="#" data-menu-name="management.Change/Update">변경</a>
+				<a href="#" data-menu-name="management.Changed/Update">변경</a>
 				<input type="button" value="취소"/>				
 			</td>
 		</tr>
