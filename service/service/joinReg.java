@@ -21,9 +21,9 @@ public class joinReg  implements M_Action{
 		dto.setGen(request.getParameter("gen"));
 		dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));		
 		dto.setJob_group(request.getParameter("position"));
-		dto.setAddr(request.getParameter("addr"));		
-		dto.setPostal_code(request.getParameter("zipcode"));
-
+		dto.setAddr(request.getParameter("addr")+"/"+request.getParameter("datail"));		
+		dto.setPostal_code(Integer.parseInt(request.getParameter("zipcode")));
+		
 		//계좌번호 넣어주세요
 		
 		//넣어주세요

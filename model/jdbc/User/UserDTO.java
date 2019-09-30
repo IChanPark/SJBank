@@ -12,13 +12,12 @@ public class UserDTO {
 					gen,			//성별
 					email,			//이메일
 					job_group,		//직업군
-					addr,			//주소 Postal code
-
-					postal_code, 	//우편번호
+					addr,			//주소
 					tel,			//전화번호
 					status;			//계정 상태 활성/정지/탈퇴
 	
-	private Integer simple_pw;		//간편비밀번호
+	private Integer simple_pw,		//간편비밀번호
+					postal_code; 	//우편번호
 
 	private	Date	register_date,	//가입일
 					end_date;		//탈퇴일
@@ -81,11 +80,11 @@ public class UserDTO {
 		this.addr = addr;
 	}
 	
-	public String getPostal_code() {
+	public Integer getPostal_code() {
 		return postal_code;
 	}
 	
-	public void setPostal_code(String postal_code) {
+	public void setPostal_code(Integer postal_code) {
 		this.postal_code = postal_code;
 	}
 	

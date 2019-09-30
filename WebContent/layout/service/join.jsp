@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <h2>회원가입</h2> 
 	<table border="">
 		<tr>
@@ -55,15 +56,19 @@
 					</select>
 			</td>
 		</tr>		
-		<tr>	
-			<td>주소</td>
-			<td><input type="text" name="addr" /></td>
-		</tr>		
-		<tr>	
-			<td>우편번호</td>
-			<td><input type="text" name="zipcode" /></td>
-		</tr>	
 		<tr>
+		<tr>
+			<td>우편번호</td>
+			<td><input type="text" id="sample4_postcode" name="zipcode" placeholder="우편번호" readonly="readonly">
+			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td>
+		</tr>
+		<tr>
+		    <td>주소</td>
+			<td><input type="text" id="sample4_roadAddress" name="addr" placeholder="도로명주소" readonly="readonly">
+			<input type="text" id="sample4_detailAddress" name="datail" placeholder="상세주소"> </td>
+		</tr>
+		<tr>	
+	
 		
 			<td colspan="2" align="right">			
 				<a href="#" data-menu-name="service/joinReg">가입</a>

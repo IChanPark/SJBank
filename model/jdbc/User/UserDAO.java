@@ -43,7 +43,7 @@ public class UserDAO {
 				dto.setEmail(rs.getString("email"));
 				dto.setJob_group(rs.getString("job_group"));
 				dto.setAddr(rs.getString("addr"));
-				dto.setPostal_code(rs.getString("postal_code"));
+				dto.setPostal_code(rs.getInt("postal_code"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
@@ -65,7 +65,7 @@ public class UserDAO {
 				dto.setEmail(rs.getString("email"));
 				dto.setJob_group(rs.getString("job_group"));
 				dto.setAddr(rs.getString("addr"));
-				dto.setPostal_code(rs.getString("postal_code"));
+				dto.setPostal_code(rs.getInt("postal_code"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
@@ -130,7 +130,7 @@ public class UserDAO {
 			pstmt.setString(7, dto.getEmail());
 			pstmt.setString(8, dto.getJob_group());
 			pstmt.setString(9, dto.getAddr());
-			pstmt.setString(10, dto.getPostal_code());
+			pstmt.setInt(10, dto.getPostal_code());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
@@ -139,8 +139,8 @@ public class UserDAO {
 	
 	public void updateUser(UserDTO dto){
 		sql = 	"update user set " +
-				"pw = ? , simple_pw= ?, tel = ?, gen = ?,"+ 
-				" email = ?, job_group = ? , addr = ?, postal_code = ? " +
+				"pw = ? , simple_pw= ?, name = ?, gen = ?, email = ? ,"+ 
+				"job_group = ? , addr = ? postal_code = ? " +
 				"where id	 = ?";
 		System.out.println(sql);
 		try {
@@ -149,12 +149,12 @@ public class UserDAO {
 			
 			pstmt.setString(1, dto.getPw());
 			pstmt.setInt(2, dto.getSimple_pw());
-			pstmt.setString(3, dto.getTel());
+			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getGen());
 			pstmt.setString(5, dto.getEmail());
 			pstmt.setString(6, dto.getJob_group());
 			pstmt.setString(7, dto.getAddr());
-			pstmt.setString(8, dto.getPostal_code());
+			pstmt.setInt(8, dto.getPostal_code());
 			pstmt.setString(9, dto.getId());
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

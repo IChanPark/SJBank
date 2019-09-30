@@ -12,7 +12,7 @@
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>   
 <script type="text/javascript" src="js/Menu_Script.js"></script>   <!-- menu 관련 -->
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>   <!-- menu 관련 -->
-
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <%System.out.println("템플레이트"+request.getParameter("accountNumber")); %>
 
 </head>
