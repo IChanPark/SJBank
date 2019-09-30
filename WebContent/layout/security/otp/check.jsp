@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+ 
+
+
 <div class=subTitle>OTP 관리</div>
 <table>
 	<c:forEach var="dto" items="${data }" varStatus="no">
@@ -17,6 +20,6 @@
 	</c:if>
 </c:forEach>
 <tr>
-	<td><button>OTP정지하기</button></td>
+	<td><button data-menu-name = "security/otp/Inactive">OTP정지하기</button></td>
 </tr>
 </table>
