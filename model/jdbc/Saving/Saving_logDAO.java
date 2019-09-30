@@ -1,4 +1,4 @@
-package jdbc.Deposit;
+package jdbc.Saving;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,29 +10,29 @@ import javax.sql.DataSource;
 
 import control.Data_Source;
 
-public class Deposits_logDAO {
+public class Saving_logDAO {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	private DataSource ds;
 	private String sql;
 	
-	private Deposits_logDAO() {
+	private Saving_logDAO() {
 		ds = Data_Source.getInstance().getDs();
 	}
 	
 	private static class Holder {
-        public static final Deposits_logDAO DAO = new Deposits_logDAO();
+        public static final Saving_logDAO DAO = new Saving_logDAO();
     }
 	
-	public static Deposits_logDAO getInstance() {
+	public static Saving_logDAO getInstance() {
         return Holder.DAO;
     }
 
-	private Deposits_logDTO Deposits_log(ResultSet rs, Deposits_logDTO dto) {
+	private Saving_logDTO Saving_log(ResultSet rs, Saving_logDTO dto) {
 		try {
 			if(rs.next()) {
-				dto = new Deposits_logDTO();
+				dto = new Saving_logDTO();
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setInterest(rs.getFloat("interest"));
@@ -45,38 +45,40 @@ public class Deposits_logDAO {
 		return dto;
 	}
 	
-	private void Deposits_log(ResultSet rs, ArrayList<Deposits_logDTO> res) {
+	private void Saving_log(ResultSet rs, ArrayList<Saving_logDTO> res) {
 		try {
 			while (rs.next()) {
-				Deposits_logDTO dto = new Deposits_logDTO();
+				Saving_logDTO dto = new Saving_logDTO();
+
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setSum(rs.getInt("sum"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
+				
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
 	}
 	
-	public ArrayList<Deposits_logDTO> list(){
-		ArrayList<Deposits_logDTO> res = new ArrayList<Deposits_logDTO>();
+	public ArrayList<Saving_logDTO> list(){
+		ArrayList<Saving_logDTO> res = new ArrayList<Saving_logDTO>();
 		
-		sql = "select * from deposits_log";
+		sql = "select * from saving_log";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			Deposits_log(rs, res);			
+			Saving_log(rs, res);			
 		} catch (Exception e) { e.printStackTrace(); }
 		finally { close(); }
 		return res;
 	}
 	
-	public void insert(Deposits_logDTO dto){
-		sql = 	"insert into deposits_log (" +
+	public void insert(Saving_logDTO dto){
+		sql = 	"insert into saving_log (" +
 				"account_number, Interest, sum, status, register_date) values ("+
 				"		?	   ,	?	 ,	? ,		? ,	now() )";
 		System.out.println(sql);
