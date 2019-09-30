@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import inf.M_Action;
 import util.Exception_Group;
+import util.Exception_Menu;
 
 @WebServlet("/index.jsp")
 public class Controller extends HttpServlet {
@@ -31,31 +32,27 @@ public class Controller extends HttpServlet {
 				session.setAttribute("accountNumber", request.getParameter("accountNumber"));
 				for (String s : url.split("/")) 
 					service+=s+".";
-				if(url.split("/").length>2)
-				{
-					System.out.println("메뉴 테스트 :  "+url.split("/").length);
-					if(session.getAttribute("userID")==null)
-					{
-						String msg="로그인 해주세요~~.";
-						System.out.println("유저아이디 테스트 :  "+ session.getAttribute("userID"));
-						request.setAttribute("msg", msg);
-						request.setAttribute("goUrl", "index.jsp");
-						RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); //여기로 보내
-						dispatcher.forward(request, response);
-						return;
-					}
-				}
+
 				url = "layout/"+url.toLowerCase();
 				service = service.substring(0, service.length()-1);
 
-				session.setAttribute("Previous_page", session.getAttribute("Previous_page"));   //이전페이지
-				session.setAttribute("current_Page", service);      //현재페이지
+				session.setAttribute("Previous_page", session.getAttribute("Current_Page"));   //이전페이지
+				session.setAttribute("Current_Page", service);      //현재페이지
 
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
-
+				
 				System.out.println("url : "+url);
 				System.out.println("service : "+service);
-				if(Exception_Group.getInstance().check(service)) { // 속하지 않는다면 실행
+				
+				if(session.getAttribute("userID")==null && Exception_Menu.getInstance().check(url)) {
+					request.setAttribute("msg", "로그인이 필요한 서비스 입니다.");
+					request.setAttribute("goUrl", "index.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); 
+					dispatcher.forward(request, response);
+					return;
+				}
+				
+				if(Exception_Group.getInstance().check(service)) { // 클래스 예외처리 여부
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
