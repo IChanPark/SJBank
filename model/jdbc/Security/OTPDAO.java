@@ -117,6 +117,20 @@ public class OTPDAO {
 	}
 	
 	
+	public void UpdateToInactive(String id){
+		sql = 	"update otp set status = '비활성' ";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	
+	
 	//////////////////////////////////// 09.30 h 추가
 	
 	public boolean chkSerial(String serial){

@@ -24,6 +24,10 @@ public class Reg implements M_Action{
 		HttpSession session = request.getSession();
 		System.out.println("보안의  REG 서비스들어온다");
 		//리스트 정보를 키는 "data"로 어트리뷰트로 넘긴다
+		String id = (String)session.getAttribute("userID");
+		
+		OTPDAO.getInstance().UpdateToInactive(id);
+		
 		String serial;
 		OTPDTO dto= new OTPDTO();
 		do {
@@ -32,8 +36,7 @@ public class Reg implements M_Action{
 		while( OTPDAO.getInstance().chkSerial(serial));
 		
 		dto.setSerial(serial);
-		dto.setId( (String)session.getAttribute("userID"));
-		System.out.println( (String)session.getAttribute("userID") + "아이디");
+		dto.setId(id );
 		
 		OTPDAO.getInstance().insert(dto);
 	}
