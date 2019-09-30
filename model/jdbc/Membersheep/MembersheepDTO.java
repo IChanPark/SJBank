@@ -1,5 +1,6 @@
 package jdbc.Membersheep;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -66,6 +67,19 @@ public class MembersheepDTO {
 		this.register_date = register_date;
 	}
 
+	public String getRegister_dateStr() {
+		return sdf.format(register_date);
+	}
+	
+	public void setRegister_dateStr(String register_date) {
+		try {
+			this.register_date = sdf.parse(register_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	@Override
 	public String toString() {
 		return  id + "," + membersheep + "," + point + "," + status + "," + register_date;
