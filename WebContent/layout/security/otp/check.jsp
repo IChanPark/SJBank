@@ -4,6 +4,7 @@
 <div class=subTitle>OTP 관리</div>
 <table>
 	<c:forEach var="dto" items="${data }" varStatus="no">
+	<c:if test="${dto.status=='활성' }">
 	<tr>
 		<td>등록OTP</td>	<td>${dto.type }</td>
 	</tr>
@@ -13,5 +14,6 @@
 	<tr>
 		<td>일련번호</td>	<td>${dto.serial }</td>
 	</tr>
+	</c:if>
 </c:forEach>
 </table>
