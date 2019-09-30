@@ -6,9 +6,9 @@ public class Exception_Group {
 	private ArrayList<String> nonClass;
 	private String [] group = {
 			"service.LoginMain", "service.Join","banking.Confirm",
-			"security/Otp","security.otp.Register","security.Accaign",
+			"security.Otp","security.otp.Register","security.Accaign",
 			"security.Delaytrs","security.Blockalarm","management.user.check",
-			"management.User"
+			"management.User","security.otp.Apply"
 			
 	};	//여짝에 추가해주세용
 	private Exception_Group() {

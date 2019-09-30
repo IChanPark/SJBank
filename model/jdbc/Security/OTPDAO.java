@@ -100,9 +100,9 @@ public class OTPDAO {
 	
 	
 	public void insert(OTPDTO dto){
-		sql = 	"insert into security (" +
+		sql = 	"insert into otp (" +
 				"id, serial, type, status, register_date, end_date) values ("+
-				" ?,   ?   ,	?,  '활성',	 now()		,	null  )";
+				" ?,   ?   ,'인터넷OTP',  '활성',	 now()		,	 adddate(NOW(),INTERVAL 1 year)  )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -110,12 +110,41 @@ public class OTPDAO {
 			
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getSerial());
-			pstmt.setString(3, dto.getType());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
+	
+	
+	//////////////////////////////////// 09.30 h 추가
+	
+	public boolean chkSerial(String serial){
+		boolean res = false;
+		
+		sql = "select serial from otp where serial = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, serial);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				res=true;
+			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
+	
+	
+	
+	
+	
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
