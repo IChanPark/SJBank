@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Loan.LoanDTO;
 
 public class OTPDAO {
 
@@ -74,6 +75,29 @@ public class OTPDAO {
 		finally { close(); }
 		return res;
 	}
+	
+	
+	public ArrayList<OTPDTO> selectID(String id){
+		ArrayList<OTPDTO> res = new ArrayList<OTPDTO>();
+		
+		sql = "select * from otp where id = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			OTP(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
+	
+	
 	
 	public void insert(OTPDTO dto){
 		sql = 	"insert into security (" +
