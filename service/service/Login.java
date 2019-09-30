@@ -15,7 +15,6 @@ public class Login  implements M_Action{
       HttpSession session = request.getSession();
       String url = "layout/service/loginmain";
       
-      
       if(dto != null && dto.getPw().equals(request.getParameter("pw"))) {
          url = "main";
          session.setAttribute("userID", dto.getId());

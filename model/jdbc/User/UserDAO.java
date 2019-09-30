@@ -139,8 +139,8 @@ public class UserDAO {
 	
 	public void updateUser(UserDTO dto){
 		sql = 	"update user set " +
-				"pw = ? , simple_pw= ?, name = ?, gen = ?, email = ? ,"+ 
-				"job_group = ? , addr = ? postal_code = ? " +
+				"pw = ? , simple_pw= ?, tel = ?, gen = ?,"+ 
+				" email = ?, job_group = ? , addr = ?, postal_code = ? " +
 				"where id	 = ?";
 		System.out.println(sql);
 		try {
@@ -149,7 +149,7 @@ public class UserDAO {
 			
 			pstmt.setString(1, dto.getPw());
 			pstmt.setInt(2, dto.getSimple_pw());
-			pstmt.setString(3, dto.getName());
+			pstmt.setString(3, dto.getTel());
 			pstmt.setString(4, dto.getGen());
 			pstmt.setString(5, dto.getEmail());
 			pstmt.setString(6, dto.getJob_group());
