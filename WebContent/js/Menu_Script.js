@@ -24,4 +24,17 @@ $(document).ready(function() {
 		    f.submit();
 		});
 	});
+	
+	
+	$(document).ready(function() {
+		console.log( "Menu_Click.js!" );
+		$("button[data-menu-name]").on("click", function() {	//메뉴 이동용
+			var f=document.paging; 
+			
+		    f.hid_t.value = $(this).data("menu-name"); 
+		    console.log(f.hid_t.value);
+		    f.method="post";
+		    f.submit();
+		});
+	});
 });

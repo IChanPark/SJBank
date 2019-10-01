@@ -23,3 +23,33 @@
 		<td></td>
 	</tr>
 </table>
+
+<br><br>
+
+<table>
+	<tr>
+		<td>대상고객</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>대상 업무</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>대상 채널</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>이체 한도</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>유의사항</td>
+		<td></td>
+	</tr>
+</table>
+
+<br><br>
+<br><br>
+
+<div><button data-menu-name=""></button></div>

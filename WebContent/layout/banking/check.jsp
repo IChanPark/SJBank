@@ -12,10 +12,9 @@ $(document).ready(function(){
 		alert(t);
 		
 		var f=document.paging; 
-		f.type.value = "banking/Detail";
-	    f.accountNumber.value = t;
-	    
-	    
+		    
+		f.hid_t.value = "banking/Detail";
+		f.accountNumber.value = t;
 	    f.method="post";
 	    f.submit();
 		
