@@ -27,8 +27,6 @@ public class Controller extends HttpServlet {
 			if(request.getParameter("type") != null) {
 				String service = ""; 
 				String url = request.getParameter("type");
-				
-				System.out.println("컨트롤러"+request.getParameter("otpKind"));
 					
 				session.setAttribute("accountNumber", request.getParameter("accountNumber"));
 				for (String s : url.split("/")) 

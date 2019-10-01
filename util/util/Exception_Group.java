@@ -8,7 +8,7 @@ public class Exception_Group {
 			"service.LoginMain", "service.Join","banking.Confirm",
 			"security.Otp","security.otp.Register","security.Accaign",
 			"security.Delaytrs","security.Blockalarm","management.user.check",
-			"management.User","security.otp.Apply"
+			"management.User","security.otp.Apply","Security","Banking"
 			
 	};	//여짝에 추가해주세용
 	private Exception_Group() {

@@ -6,7 +6,7 @@
 <script>
 $(document).ready(function(){
 	$(".accountNumber").click(function() {	//메뉴 이동용
-		alert("여기왔었음");
+		
 		var t=$(".accountNumber").val();
 		
 		alert(t);
@@ -69,7 +69,3 @@ $(document).ready(function(){
 	</c:if>
 </c:forEach>
 </table>
-
-<!-- <tr align="right">
-		<td  colspan="6"><a href="InsertForm">???</a></td>  
-	</tr> -->

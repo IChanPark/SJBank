@@ -16,7 +16,7 @@ $(document).ready(function(){
 		addBox.append(btn);
 		
 		$("#mid").append(addBox);
-	
+		$('.ToConfirm').hide();
 	});
 });
  </script>
