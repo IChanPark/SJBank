@@ -18,7 +18,7 @@ public class DepositReg  implements M_Action{
 		dto.setMin_interest(Float.parseFloat(request.getParameter("min_interest")));
 		dto.setMonth(Integer.parseInt(request.getParameter("month")));
 		dto.setType(request.getParameter("type"));
-		dto.setJnterest_type(request.getParameter("jnterest_type"));
+		dto.setInterest_type(request.getParameter("interest_type"));
 		dto.setTax(request.getParameter("tax"));
 		dto.setPreferential(request.getParameter("preferential"));
 		dto.setPrf_content(request.getParameter("prf_content"));

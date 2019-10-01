@@ -19,26 +19,9 @@ $(document).ready(function() {
 			var f=document.paging; 
 			
 		    f.type.value = $(this).data("menu-name"); 
-		    alert(f.type.value);
+		    console.log(f.type.value);
 		    f.method="post";
 		    f.submit();
 		});
-	});             
-	
-	
-	
-	
-	$(document).ready(function() {
-		console.log( "Menu_Click.js!" );
-		$("button[data-menu-name]").on("click", function() {	//메뉴 이동용
-			var f=document.paging; 
-			alert("???");
-			f.type.value = $(this).data("menu-name"); 
-			alert(f.type.value);
-			f.method="post";
-		    f.submit();
-		});
 	});
-	
-	
 });

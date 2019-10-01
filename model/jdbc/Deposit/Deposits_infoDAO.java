@@ -38,7 +38,7 @@ public class Deposits_infoDAO {
 				dto.setMax_interest(rs.getFloat("max_interest"));
 				dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
-				dto.setJnterest_type(rs.getString("jnterest_type"));
+				dto.setInterest_type(rs.getString("interest_type"));
 				dto.setTax(rs.getString("tax"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setPrf_content(rs.getString("prf_content"));
@@ -64,7 +64,7 @@ public class Deposits_infoDAO {
 				dto.setMax_interest(rs.getFloat("max_Interest"));
 				dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
-				dto.setJnterest_type(rs.getString("jnterest_type"));
+				dto.setInterest_type(rs.getString("interest_type"));
 				dto.setTax(rs.getString("tax"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setPrf_content(rs.getString("prf_content"));
@@ -98,7 +98,7 @@ public class Deposits_infoDAO {
 	
 	public void insert(Deposits_infoDTO dto){
 		sql = 	"insert into deposits_info (" +
-				"product, min_interest, max_interest, month, type, jnterest_type, tax, preferential,"+ 
+				"product, min_interest, max_interest, month, type, interest_type, tax, preferential,"+ 
 				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date) values ("+
 				"	 ?	,		?     ,		?		,	?  ,	?,	   	?	    ,	? ,			?	,"+
 				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null)";
@@ -112,7 +112,7 @@ public class Deposits_infoDAO {
 			pstmt.setFloat(3, dto.getMax_interest());
 			pstmt.setInt(4, dto.getMonth());
 			pstmt.setString(5, dto.getType());
-			pstmt.setString(6, dto.getJnterest_type());
+			pstmt.setString(6, dto.getInterest_type());
 			pstmt.setString(7, dto.getTax());
 			pstmt.setString(8, dto.getPreferential());
 			pstmt.setString(9, dto.getPrf_content());
@@ -127,7 +127,7 @@ public class Deposits_infoDAO {
 		} finally { close(); }
 	}
 	
-	void close() {
+	private void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}
 		if(con!=null) try {con.close();} catch (SQLException e) {}
