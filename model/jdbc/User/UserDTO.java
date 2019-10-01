@@ -156,9 +156,9 @@ public class UserDTO {
 	
 	@Override
 	public String toString() {
-		return id + "," + pw + "," + simple_pw + "," + name + ", " + tel
+		return "{"+id + "," + pw + "," + simple_pw + "," + name + ", " + tel
 				+ "," + gen + "," + email + "," + job_group + "," + addr
 				+ "," + postal_code + "," + status + "," + register_date
-				+ "," + end_date;
+				+ "," + end_date + "}";
 	}
 }

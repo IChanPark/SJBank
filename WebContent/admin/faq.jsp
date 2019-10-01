@@ -7,19 +7,38 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	$(".uid").on("click", function() {
-		
+	$('.uid').on("click", function() {
 		//var b = $(this).text();
 		$.ajax({
 			url:"admin/list.jsp",
 			type:'get',
-			data:{nn : $(this).text()},
-			 ////json을 안하면 문자열로 , json 처리하면 object로 묶어서 받음
+			data:{nn : $(this).data("faq-seq")},				
+			 dataType:'json', 
 			success:function(qqq){
-				console.log(qqq);
+				var row = $("<tr></tr>");
+					row.append($("<td>"+qqq.seq+"</td>"));
+					row.append($("<td>"+qqq.id+"</td>"));
+					row.append($("<td>"+qqq.title+"</td>"));
+					row.append($("<td>"+qqq.content+"</td>"));
+					row.append($("<td>"+qqq.type+"</td>"));
+					row.append($("<td>"+qqq.status+"</td>"));
+					row.append($("<td>"+qqq.register_date+"</td>"));
+					
+					console.log($(this).parent().parent().append(row));
+					
+					/* var $tr = $(this).parent(); // 클릭한 버튼이 속한 tr 요소
+					$(this).closest('tr').prevAll().length;
+					consolog($(this).closest('tr').prevAll().length);
+					$tr.next().after($tr); */
+					
+					/* $("#test").eq($(this).index(this)).append(row); */
+					//var $tr = $(this).parent().parent(); // 클릭한 버튼이 속한 tr 요소
+					//$tr.next().after($tr);
+					
+					
 			},
 			error:function(qqq){
-				$("#tot").html(qqq.responseText);
+				$("#test").html(qqq.responseText);
 			}
 			
 		});
@@ -27,34 +46,26 @@ $(document).ready(function() {
 });
 
 
+
 </script>
 
-<div class="subTitle">사용자 리스트</div>
-<table class="AccInfo">
+<div class="subTitle">FAQ</div>
+<table class="AccInfo" id="test">
 <tr >
-	<td>아이디</td>
-	<td>이름</td>
-	<td>전화번호</td>
-	<td>이메일</td>
-	<td>직업군</td>
-	<td>주소</td>
-	<td>우편번호</td>
-	<td>계정상태</td>
-	<td>가입일</td>
-	<td>탈퇴일</td>
+	<td>번호</td>
+	<td>분류</td>
+	<td>제목</td>
+	<td>작성자</td>	
 </tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<tr>
-		<td class = "uid">${dto.id }</td>
-		<td>${dto.name }</td>
-		<td>${dto.tel }</td>
-		<td>${dto.email }</td>
-		<td>${dto.job_group }</td>
-		<td>${dto.addr }</td>
-		<td>${dto.postal_code }</td>
-		<td>${dto.status }</td>
-		<td>${dto.register_date }</td>
-		<td>${dto.end_date }</td>
+	<tr class="uid" data-faq-seq="${dto.seq}" >
+		<td>${dto.seq }</td>
+		<td>${dto.type }</td>
+		<td>${dto.title }</td>
+		<td>${dto.id }</td>		
 	</tr>
 </c:forEach>
+
+
+
 </table>
