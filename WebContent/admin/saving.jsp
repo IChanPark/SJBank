@@ -36,7 +36,7 @@
 		<td>${dto.month }</td>
 		<td>${dto.type }</td>
 		<td>${dto.regular}</td>
-		<td>${dto.jnterest_type }</td>
+		<td>${dto.interest_type }</td>
 		<td>${dto.tax }</td>
 		<td>${dto.preferential }</td>
 		<td>${dto.prf_content }</td>

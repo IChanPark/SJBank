@@ -1,6 +1,4 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="jdbc.User.UserDAO"%>
-<%@page import="jdbc.User.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -15,7 +13,7 @@
 		<tr><td>만기</td><td><input type="text" name ="month"/></td></tr>
 		<tr><td>가입타입</td><td><input type="text" name ="type"/></td></tr>
 		<tr><td>정기/비정기 </td><td><input type="text" name ="regular"/></td></tr>
-		<tr><td>이자지급방식 </td><td><input type="text" name ="jnterest_type"/></td></tr>
+		<tr><td>이자지급방식 </td><td><input type="text" name ="interest_type"/></td></tr>
 		<tr><td>과세여부</td><td><input type="text" name ="tax"/></td></tr>
 		<tr><td>우대구분</td><td><input type="text" name ="preferential"/></td></tr>
 		<tr><td>우대조건 내용</td><td><input type="text" name ="prf_content"/></td></tr>
