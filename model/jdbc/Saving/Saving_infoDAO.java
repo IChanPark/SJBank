@@ -35,6 +35,7 @@ public class Saving_infoDAO {
 				dto = new Saving_infoDTO();
 				
 				dto.setProduct(rs.getString("product"));
+				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
 				dto.setMonth(rs.getInt("month"));
@@ -63,6 +64,7 @@ public class Saving_infoDAO {
 				Saving_infoDTO dto = new Saving_infoDTO();
 				
 				dto.setProduct(rs.getString("product"));
+				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
 				dto.setMonth(rs.getInt("month"));
@@ -103,9 +105,9 @@ public class Saving_infoDAO {
 	
 	public void insert(Saving_infoDTO dto){
 		sql = 	"insert into saving_info (" +
-				"product, min_interest, max_interest, month, type, regular , interest_type, tax, preferential,"+ 
+				"product, product_info, min_interest, max_interest, month, type, regular , interest_type, tax, preferential,"+ 
 				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date) values ("+
-				"	 ?	,		?     ,		?		,	?  ,	?,	  ?  	,     ?	    ,	? ,			?	,"+
+				"	 ?	,		?,   ?   ,		?		,	?  ,	?,	  ?  	,     ?	    ,	? ,			?	,"+
 				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null)";
 		System.out.println(sql);
 		try {
@@ -113,20 +115,21 @@ public class Saving_infoDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getProduct());
-			pstmt.setFloat(2, dto.getMin_interest());
-			pstmt.setFloat(3, dto.getMax_interest());
-			pstmt.setInt(4, dto.getMonth());
-			pstmt.setString(5, dto.getType());
-			pstmt.setString(6, dto.getRegular());
-			pstmt.setString(7, dto.getInterest_type());
-			pstmt.setString(8, dto.getTax());
-			pstmt.setString(9, dto.getPreferential());
-			pstmt.setString(10, dto.getPrf_content());
-			pstmt.setString(11, dto.getPrf_interest());
-			pstmt.setInt(12, dto.getMin_sum());
-			pstmt.setInt(13, dto.getMax_sum());
-			pstmt.setString(14, dto.getPartialization());
-			pstmt.setString(15, dto.getRetention());
+			pstmt.setString(2, dto.getProduct_info());
+			pstmt.setFloat(3, dto.getMin_interest());
+			pstmt.setFloat(4, dto.getMax_interest());
+			pstmt.setInt(5, dto.getMonth());
+			pstmt.setString(6, dto.getType());
+			pstmt.setString(7, dto.getRegular());
+			pstmt.setString(8, dto.getInterest_type());
+			pstmt.setString(9, dto.getTax());
+			pstmt.setString(10, dto.getPreferential());
+			pstmt.setString(11, dto.getPrf_content());
+			pstmt.setString(12, dto.getPrf_interest());
+			pstmt.setInt(13, dto.getMin_sum());
+			pstmt.setInt(14, dto.getMax_sum());
+			pstmt.setString(15, dto.getPartialization());
+			pstmt.setString(16, dto.getRetention());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

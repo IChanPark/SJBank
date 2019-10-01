@@ -15,6 +15,7 @@ public class LoanReg  implements M_Action{
 		String i = request.getParameter("prf_interest");
 	
 		dto.setProduct(request.getParameter("product"));
+		dto.setProduct_info(request.getParameter("product_info"));
 		dto.setMin_interest(Float.parseFloat(request.getParameter("min_interest")));
 		dto.setMin_interest(Float.parseFloat(request.getParameter("max_interest")));
 		dto.setMonth(Integer.parseInt(request.getParameter("month")));

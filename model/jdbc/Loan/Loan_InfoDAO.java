@@ -36,6 +36,7 @@ public class Loan_InfoDAO {
 				dto = new Loan_InfoDTO();
 
 				dto.setProduct(rs.getString("product"));
+				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMonth(rs.getInt("month"));
@@ -61,6 +62,7 @@ public class Loan_InfoDAO {
 				dto = new Loan_InfoDTO();
 
 				dto.setProduct(rs.getString("product"));
+				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMonth(rs.getInt("month"));
@@ -122,8 +124,8 @@ public class Loan_InfoDAO {
 
 	public void insert(Loan_InfoDTO dto) {
 		sql = "insert into loan_info ("
-				+ "product , min_interest , max_interest ,month , type , loanlimit , preferential,  prf_content , prf_interest , status, register_date, end_date) values ("
-				+ "	?	,  ?            ,  ?	       ,  ?   , ?    ,   ?    ,   ?	    ,       ?	         ,  	?	   ,   ?    ,	sysdate()  	   , null)";
+				+ "product ,product_info, min_interest , max_interest ,month , type , loanlimit , preferential,  prf_content , prf_interest , status, register_date, end_date) values ("
+				+ "	?	,  ? ,     ?       ,  ?	       ,  ?   , ?    ,   ?    ,   ?	    ,       ?	         ,  	?	   ,   ?    ,	sysdate()  	   , null)";
 
 		System.out.println(sql);
 		try {
@@ -132,15 +134,16 @@ public class Loan_InfoDAO {
 
 		
 			  pstmt.setString(1, dto.getProduct());
-			  pstmt.setFloat(2,dto.getMin_interest()); 
-			  pstmt.setFloat(3, dto.getMax_interest());
-			  pstmt.setInt(4, dto.getMonth()); 
-			  pstmt.setString(5, dto.getType());
-			  pstmt.setLong(6, dto.getloanlimit()); 
-			  pstmt.setString(7, dto.getPreferential());
-			  pstmt.setString(8, dto.getPrf_content()); 
-			  pstmt.setString(9,dto.getPrf_interest()); 
-			  pstmt.setString(10, dto.getStatus());
+			  pstmt.setString(2, dto.getProduct_info());
+			  pstmt.setFloat(3,dto.getMin_interest()); 
+			  pstmt.setFloat(4, dto.getMax_interest());
+			  pstmt.setInt(5, dto.getMonth()); 
+			  pstmt.setString(6, dto.getType());
+			  pstmt.setLong(7, dto.getloanlimit()); 
+			  pstmt.setString(8, dto.getPreferential());
+			  pstmt.setString(9, dto.getPrf_content()); 
+			  pstmt.setString(10,dto.getPrf_interest()); 
+			  pstmt.setString(11, dto.getStatus());
 			
 
 			pstmt.executeUpdate();

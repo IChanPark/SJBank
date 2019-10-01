@@ -7,6 +7,7 @@ import java.util.Date;
 public class Loan_InfoDTO {
 
 	private	String 	product,			//상품명
+					product_info,		//상품설명
 					type,				//대출종류
 					preferential,				//우대 구분 
 					prf_content,			//우대 조건 내용
@@ -39,6 +40,14 @@ public class Loan_InfoDTO {
 
 	public String getType() {
 		return type;
+	}
+
+	public String getProduct_info() {
+		return product_info;
+	}
+
+	public void setProduct_info(String product_info) {
+		this.product_info = product_info;
 	}
 
 	public void setType(String type) {
@@ -155,11 +164,14 @@ public class Loan_InfoDTO {
 
 	@Override
 	public String toString() {
-		return "Loan_InfoDTO [product=" + product + ", type=" + type + ", preferential=" + preferential
-				+ ", prf_content=" + prf_content + ", prf_interest=" + prf_interest + ", status=" + status
-				+ ", min_interest=" + min_interest + ", max_interest=" + max_interest + ", month=" + month + ", loanlimit="
-				+ loanlimit + ", register_date=" + register_date + ", end_date=" + end_date + "]";
+		return  product + "," + product_info + "," + type
+				+ ", " + preferential + "," + prf_content + "," + prf_interest
+				+ "," + status + "," + min_interest + "," + max_interest
+				+ "," + month + "," + loanlimit + "," + register_date + ","
+				+ end_date;
 	}
+
+	
 
 	
 

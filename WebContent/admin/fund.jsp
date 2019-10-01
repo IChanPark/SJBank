@@ -4,13 +4,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="../js/jquery-3.4.1.min.js"></script>
 
 <a href="#" data-menu-name="admin/FundAdd" id="login">등록하기</a>
 <div class="subTitle">펀드 상품</div>
 <table class="AccInfo">
 <tr >
 	<td>상품명</td>
-	<td>상품설명</td>
 	<td>초기기준가</td>
 	<td>수정기준가</td>
 	<td>유형</td>
@@ -26,9 +26,9 @@
 	<td>펀드폐지일</td>
 </tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
+	
 	<tr>
 		<td>${dto.product }</td>
-		<td>${dto.product_info }</td>
 		<td>${dto.price }</td>
 		<td>${dto.price_modify }</td>
 		<td>${dto.type }</td>

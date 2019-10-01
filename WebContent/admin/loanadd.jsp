@@ -10,6 +10,7 @@
 	
 	<tr>
 		<tr><td>상품명</td><td><input type="text" name ="product"/></td></tr>
+		<tr><td>상품설명</td><td><textarea name="product_info" cols="30" rows="10"></textarea></td>
 		<tr><td>최저 금리</td><td><input type="text" name ="min_interest"/></td></tr>
 		<tr><td>최고 금리</td><td><input type="text" name ="max_interest"/></td></tr>
 		<tr><td>만기개월</td><td><input type="text" name ="month"/></td></tr>
