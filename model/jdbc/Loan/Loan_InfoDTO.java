@@ -16,8 +16,8 @@ public class Loan_InfoDTO {
 	private	Float 	min_interest,				//최저 연이자
 					max_interest;		//최고 연이자
 				
-	private int month,		//만기개월
-				limit;		//대출한도
+	private Integer	 month;		//만기개월
+	private	Long		loanlimit;		//대출한도
 	
 	private	Date	register_date,		//상품 등록일
 					end_date;			//상품 삭제일
@@ -101,12 +101,12 @@ public class Loan_InfoDTO {
 		this.month = month;
 	}
 
-	public int getLimit() {
-		return limit;
+	public Long getloanlimit() {
+		return loanlimit;
 	}
 
-	public void setLimit(int limit) {
-		this.limit = limit;
+	public void setloanlimit(Long loanlimit) {
+		this.loanlimit = loanlimit;
 	}
 
 	public Date getRegister_date() {
@@ -151,6 +151,14 @@ public class Loan_InfoDTO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Loan_InfoDTO [product=" + product + ", type=" + type + ", preferential=" + preferential
+				+ ", prf_content=" + prf_content + ", prf_interest=" + prf_interest + ", status=" + status
+				+ ", min_interest=" + min_interest + ", max_interest=" + max_interest + ", month=" + month + ", loanlimit="
+				+ loanlimit + ", register_date=" + register_date + ", end_date=" + end_date + "]";
 	}
 
 	

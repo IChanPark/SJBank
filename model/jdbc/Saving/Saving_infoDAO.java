@@ -40,7 +40,7 @@ public class Saving_infoDAO {
 				dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
 				dto.setRegular(rs.getString("regular"));
-				dto.setInterest_type(rs.getString("interest_type"));
+				dto.setJnterest_type(rs.getString("jnterest_type"));
 				dto.setTax(rs.getString("tax"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setPrf_content(rs.getString("prf_content"));
@@ -68,7 +68,7 @@ public class Saving_infoDAO {
 				dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
 				dto.setRegular(rs.getString("regular"));
-				dto.setInterest_type(rs.getString("interest_type"));
+				dto.setJnterest_type(rs.getString("jnterest_type"));
 				dto.setTax(rs.getString("tax"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setPrf_content(rs.getString("prf_content"));
@@ -103,7 +103,7 @@ public class Saving_infoDAO {
 	
 	public void insert(Saving_infoDTO dto){
 		sql = 	"insert into saving_info (" +
-				"product, min_interest, max_interest, month, type, regular , interest_type, tax, preferential,"+ 
+				"product, min_interest, max_interest, month, type, regular , jnterest_type, tax, preferential,"+ 
 				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date) values ("+
 				"	 ?	,		?     ,		?		,	?  ,	?,	  ?  	,     ?	    ,	? ,			?	,"+
 				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null)";
@@ -118,7 +118,7 @@ public class Saving_infoDAO {
 			pstmt.setInt(4, dto.getMonth());
 			pstmt.setString(5, dto.getType());
 			pstmt.setString(6, dto.getRegular());
-			pstmt.setString(7, dto.getInterest_type());
+			pstmt.setString(7, dto.getJnterest_type());
 			pstmt.setString(8, dto.getTax());
 			pstmt.setString(9, dto.getPreferential());
 			pstmt.setString(10, dto.getPrf_content());

@@ -1,57 +1,50 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="jdbc.User.UserDAO"%>
-<%@page import="jdbc.User.UserDTO"%>
+<%@page import="jdbc.Saving.Saving_infoDTO"%>
+<%@page import="jdbc.Saving.Saving_infoDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
 
-$(document).ready(function() {
-	$(".uid").on("click", function() {
-		
-		//var b = $(this).text();
-		$.ajax({
-			url:"admin/list.jsp",
-			type:'get',
-			data:{nn : $(this).text()},
-			 ////json을 안하면 문자열로 , json 처리하면 object로 묶어서 받음
-			success:function(qqq){
-				console.log(qqq);
-			},
-			error:function(qqq){
-				$("#tot").html(qqq.responseText);
-			}
-			
-		});
-	});
-});
-
-
-</script>
-
-<div class="subTitle">사용자 리스트</div>
+<a href="#" data-menu-name="admin/SavingAdd" id="login">등록하기</a>
+<div class="subTitle">적금 상품</div>
 <table class="AccInfo">
 <tr >
-	<td>아이디</td>
-	<td>이름</td>
-	<td>전화번호</td>
-	<td>이메일</td>
-	<td>직업군</td>
-	<td>주소</td>
-	<td>우편번호</td>
-	<td>계정상태</td>
-	<td>가입일</td>
-	<td>탈퇴일</td>
+	<td>상품명</td>
+	<td>최저 연이자</td>
+	<td>최고 연이자</td>
+	<td>만기 개월</td>
+	<td>가입타입</td>
+	<td>정기/비정기</td>
+	<td>이자지급방식 </td>
+	<td>과세여부 </td>
+	<td>우대구분 </td>
+	<td>우대조건 내용</td>
+	<td>우대이자율</td>
+	<td>월납입 최소금액 </td>
+	<td>월납입 최대금액</td>
+	<td>일부해지가능여부</td>
+	<td>재예치가능여부</td>
+	<td>상태</td>
+	<td>상품등록일</td>
+	<td>상품삭제일</td>
 </tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
 	<tr>
-		<td class = "uid">${dto.id }</td>
-		<td>${dto.name }</td>
-		<td>${dto.tel }</td>
-		<td>${dto.email }</td>
-		<td>${dto.job_group }</td>
-		<td>${dto.addr }</td>
-		<td>${dto.postal_code }</td>
+		<td>${dto.product }</td>
+		<td>${dto.min_interest }</td>
+		<td>${dto.max_interest }</td>
+		<td>${dto.month }</td>
+		<td>${dto.type }</td>
+		<td>${dto.regular}</td>
+		<td>${dto.jnterest_type }</td>
+		<td>${dto.tax }</td>
+		<td>${dto.preferential }</td>
+		<td>${dto.prf_content }</td>
+		<td>${dto.prf_interest }</td>
+		<td>${dto.min_sum }</td>
+		<td>${dto.max_sum }</td>
+		<td>${dto.partialization }</td>
+		<td>${dto.retention }</td>
 		<td>${dto.status }</td>
 		<td>${dto.register_date }</td>
 		<td>${dto.end_date }</td>

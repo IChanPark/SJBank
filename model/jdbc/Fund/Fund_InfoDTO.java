@@ -7,16 +7,19 @@ import java.util.Date;
 public class Fund_InfoDTO {
 
 	private	String 	product,			//상품명
+					product_info,		//상품설명
 					type,				//유형 주식 채권 기타
 					area,				//국내 해외 
 					property,			//상품속성 ex 인터넷
 					management,			//운용사
 					sector,				//섹터
-	 				status;				//상태 ex 판매중 판매중지
+	 				status,				//상태 ex 판매중 판매중지
+					tax;				//과세여부
+					
 	
 	private	Float 	price,				//초기 기준가
 					price_modify,		//수정 기준가
-					first_fee,			// 선취 수수료
+					first_fee,			//선취 수수료
 					fee;				//년보수
 	
 	private	Date	register_date,		//펀드 등록일
@@ -24,6 +27,22 @@ public class Fund_InfoDTO {
 
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	public String getProduct_info() {
+		return product_info;
+	}
+
+	public void setProduct_info(String product_info) {
+		this.product_info = product_info;
+	}
+
+	public String getTax() {
+		return tax;
+	}
+
+	public void setTax(String tax) {
+		this.tax = tax;
+	}
+
 	public String getStatus() {
 		return status;
 	}

@@ -36,12 +36,14 @@ public class Fund_InfoDAO {
 			if(rs.next()) {
 				dto = new Fund_InfoDTO();
 				dto.setProduct(rs.getString("product"));
+				dto.setProduct_info(rs.getString("product_info"));
 				dto.setType(rs.getString("type"));
 				dto.setArea(rs.getString("area"));
 				dto.setProperty(rs.getString("property"));
 				dto.setManagement(rs.getString("management"));
 				dto.setSector(rs.getString("sector"));
 				dto.setStatus(rs.getString("status"));
+				dto.setTax(rs.getString("tax"));
 				
 				dto.setPrice(rs.getFloat("price"));
 				dto.setPrice_modify(rs.getFloat("price_modify"));
@@ -61,12 +63,14 @@ public class Fund_InfoDAO {
 				Fund_InfoDTO dto = new Fund_InfoDTO();
 				dto = new Fund_InfoDTO();
 				dto.setProduct(rs.getString("product"));
+				dto.setProduct_info(rs.getString("product_info"));
 				dto.setType(rs.getString("type"));
 				dto.setArea(rs.getString("area"));
 				dto.setProperty(rs.getString("property"));
 				dto.setManagement(rs.getString("management"));
 				dto.setSector(rs.getString("sector"));
 				dto.setStatus(rs.getString("status"));
+				dto.setTax(rs.getString("tax"));
 				
 				dto.setPrice(rs.getFloat("price"));
 				dto.setPrice_modify(rs.getFloat("price_modify"));
@@ -116,27 +120,29 @@ public class Fund_InfoDAO {
 	
 	public void insert(Fund_InfoDTO dto){
 		sql = 	"insert into fund_info (" +
-				"product,price,price_modify,type,area,property,first_fee,"+ 
-				"fee,management,sector,status,register_date, end_date) "+
+				"product,product_info,price,price_modify,type,area,property,first_fee,"+ 
+				"fee,management,sector,status,tax,register_date, end_date) "+
 				"values ("+
-				"	?	,  ?  ,  ?	       ,  ? , ?  ,   ?    ,   ?	    ,"+
-				" ?	, 	?	   ,   ?  ,	  ?	 ,	now()  	   , null)";
+				"	?	,  ? ,? ,  ?	       ,  ? , ?  ,   ?    ,   ?	    ,"+
+				" ?	, 	?	   ,   ?  ,	  ?,  ?	 ,	now()  	   , '2020-10-05')";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getProduct());
-			pstmt.setFloat(2, dto.getPrice());
-			pstmt.setFloat(3, dto.getPrice_modify());
-			pstmt.setString(4, dto.getType());
-			pstmt.setString(5, dto.getArea());
-			pstmt.setString(6, dto.getProperty());
-			pstmt.setFloat(7, dto.getFirst_fee());
-			pstmt.setFloat(8, dto.getFee());
-			pstmt.setString(9, dto.getManagement());
-			pstmt.setString(10, dto.getSector());
-			pstmt.setString(11, dto.getStatus());
+			pstmt.setString(2, dto.getProduct_info());
+			pstmt.setFloat(3, dto.getPrice());
+			pstmt.setFloat(4, dto.getPrice_modify());
+			pstmt.setString(5, dto.getType());
+			pstmt.setString(6, dto.getArea());
+			pstmt.setString(7, dto.getProperty());
+			pstmt.setFloat(8, dto.getFirst_fee());
+			pstmt.setFloat(9, dto.getFee());
+			pstmt.setString(10, dto.getManagement());
+			pstmt.setString(11, dto.getSector());
+			pstmt.setString(12, dto.getStatus());
+			pstmt.setString(13, dto.getTax());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

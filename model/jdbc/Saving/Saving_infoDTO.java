@@ -7,7 +7,7 @@ import java.util.Date;
 //예금 상품 정보
 public class Saving_infoDTO {
 	private String  product,         //상품명
-					interest_type,   //이자지급방식
+					jnterest_type,   //이자지급방식
 					type,			 //가입타입 ex 인터넷, 모바일
 					tax,			 //세금종류
 					regular,		//정기/비정기
@@ -34,12 +34,14 @@ public class Saving_infoDTO {
 	
 	
 	
-	public String getInterest_type() {
-		return interest_type;
+	
+
+	public String getJnterest_type() {
+		return jnterest_type;
 	}
 
-	public void setInterest_type(String interest_type) {
-		this.interest_type = interest_type;
+	public void setJnterest_type(String jnterest_type) {
+		this.jnterest_type = jnterest_type;
 	}
 
 	public String getRegular() {
@@ -210,7 +212,7 @@ public class Saving_infoDTO {
 	@Override
 	public String toString() {
 		return	product + "," + min_interest + "," + max_interest + ","
-				+ month + "," + type + "," + interest_type + ","
+				+ month + "," + type + "," + jnterest_type + ","
 				+ tax + "," + preferential + "," + prf_content + ","
 				+ prf_interest + "," + min_sum + "," + max_sum
 				+ "," + partialization + "," + retention + "," + status

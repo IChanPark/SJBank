@@ -33,7 +33,7 @@ public class Admin_Main extends HttpServlet {
 				service = service.substring(0, service.length()-1);
 
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
-
+			
 				System.out.println("url : "+url);
 				System.out.println("service : "+service);
 				if(admin.Exception_Group.getInstance().check(service)) { // 속하지 않는다면 실행
@@ -42,6 +42,7 @@ public class Admin_Main extends HttpServlet {
 				}
 			} else
 				request.setAttribute("mainUrl", "admin/inc/main");
+			
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("adTem.jsp"); //여기로 보내
 			dispatcher.forward(request, response);
