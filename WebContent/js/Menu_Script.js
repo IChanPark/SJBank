@@ -27,7 +27,7 @@ $(document).ready(function() {
 	
 	
 	$(document).ready(function() {
-		console.log( "Menu_Click.js!" );
+		console.log( "팀장님 살려줘요!!!!!" );
 		$("button[data-menu-name]").on("click", function() {	//메뉴 이동용
 			var f=document.paging; 
 			
