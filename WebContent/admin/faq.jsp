@@ -23,8 +23,9 @@ $(document).ready(function() {
 					row.append($("<td>"+qqq.type+"</td>"));
 					row.append($("<td>"+qqq.status+"</td>"));
 					row.append($("<td>"+qqq.register_date+"</td>"));
+					$("#test").append(row);
 					
-					console.log($(this).parent().parent().append(row));
+					/*  $(a).append(b) */
 					
 					/* var $tr = $(this).parent(); // 클릭한 버튼이 속한 tr 요소
 					$(this).closest('tr').prevAll().length;
