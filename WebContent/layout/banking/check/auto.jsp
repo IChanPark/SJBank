@@ -1,5 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script>
+
+
+$(document).ready(function(){
+
+	$('.check').click(function(){
+		
+		alert("눌림");
+		var f=document.paging; 
+		 
+	    f.method="post";
+	    f.action="layout/banking/check/test.jsp"
+	    f.submit();
+	
+		
+	});
+});
+    
+    
+</script>
 <table border="">
 	<tr>
 		<td>계좌번호</td>
@@ -7,7 +28,7 @@
 		<td>조회구분</td><td> <input type="radio" name="division" value="정상"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="해지"/>해지</td>
 	</tr>
 	<tr>
-		<td colspan="4" align="center"><input type="button" value="조회" /></td>
+		<td colspan="4" align="center"><input type="button" value="조회" class="check" /></td>
 		
 	</tr>
 </table>

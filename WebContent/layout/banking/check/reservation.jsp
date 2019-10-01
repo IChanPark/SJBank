@@ -1,20 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<script>
+$(document).ready(function(){
+
+	$('.check').click(function(){
+		
+		alert("눌림");
+		var f=document.paging; 
+		 
+	    f.method="post";
+	    f.action="layout/banking/check/test.jsp"
+	    f.submit();
+	
+		
+	});
+});
+
+
+
+</script>
 <table border="">
 	<tr>
 		<td>조회기간 선택</td>
-		<td><input type="date" />~<input type="date" /></td>
+		<td><input type="date" name="start" />~<input type="date" name="end"/></td>
 	</tr>
 	<tr>
 		<td>조회결과 순서</td>
 		<td><input type="radio" name="sort" value="최근거래순"/>최근거래순 <input type="radio"  name="sort" value="과거거래순"/>과거거래순</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><input type="button" value="조회" /></td>
-		
+		<td colspan="2" align="center"><input type="submit" value="조회" class="check" /></td>
 	</tr>
 </table>
-
 
 <br>
 <br>

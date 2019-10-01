@@ -32,6 +32,7 @@ $(document).ready(function(){
 	<td>잔액</td>
 	<td>업무</td>
 </tr>
+
 <c:forEach var="dto" items="${data }" varStatus="no">
 	<c:if test="${dto.type=='deposit' }">
 		<tr>
@@ -42,9 +43,12 @@ $(document).ready(function(){
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
 			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</a></td>
 		</tr>
+		<c:set var="dsum" value="${dsum+=dto.sum }" />
 	</c:if>
 </c:forEach>
 </table>
+<br>
+<div align="right">입/출금 계좌 총액 &nbsp&nbsp ${dsum }원</div>
 
 <div class="subTitle">예금/적금/신탁 계좌</div>
 	<table class="AccInfo">
@@ -66,6 +70,12 @@ $(document).ready(function(){
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
 			<td><a href="#" data-menu-name="banking/Detail" name="accountNumber" value="${dto.account_number }" > 상세</a></td>
 		</tr>
+		<c:set var="psum" value="${psum+=dto.sum }" />
 	</c:if>
+	
 </c:forEach>
 </table>
+
+<br>
+<div align="right">상품 계좌 총액 &nbsp&nbsp ${psum }원</div>
+
