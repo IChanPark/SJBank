@@ -18,8 +18,8 @@ $(document).ready(function() {
 		$("a[data-menu-name]").on("click", function() {	//메뉴 이동용
 			var f=document.paging; 
 			
-		    f.type.value = $(this).data("menu-name"); 
-		    console.log(f.type.value);
+		    f.hid_t.value = $(this).data("menu-name"); 
+		    console.log(f.hid_t.value);
 		    f.method="post";
 		    f.submit();
 		});
