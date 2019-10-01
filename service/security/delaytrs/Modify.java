@@ -1,4 +1,4 @@
-package security.Accaign;
+package security.delaytrs;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import inf.M_Action;
 import jdbc.Account.AccountDAO;
 
-public class Apply implements M_Action{
+public class Modify implements M_Action{
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("data", AccountDAO.getInstance().selectID("elliottjo"));

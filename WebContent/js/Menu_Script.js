@@ -19,10 +19,11 @@ $(document).ready(function() {
 			var f=document.paging; 
 			
 		    f.type.value = $(this).data("menu-name"); 
+		    alert(f.type.value);
 		    f.method="post";
 		    f.submit();
 		});
-	});
+	});             
 	
 	
 	
