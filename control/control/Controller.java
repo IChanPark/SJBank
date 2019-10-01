@@ -24,9 +24,9 @@ public class Controller extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");	//한글처리
 			HttpSession session = request.getSession();
 
-			if(request.getParameter("type") != null) {
+			if(request.getParameter("hid_t") != null) {
 				String service = ""; 
-				String url = request.getParameter("type");
+				String url = request.getParameter("hid_t");
 					
 				session.setAttribute("accountNumber", request.getParameter("accountNumber"));
 				for (String s : url.split("/")) 

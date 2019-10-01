@@ -21,7 +21,7 @@ public class Update  implements M_Action{
 		dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));		
 		dto.setJob_group(request.getParameter("position"));
 		dto.setAddr(request.getParameter("addr"));		
-		dto.setPostal_code(request.getParameter("zipcode"));
+		dto.setPostal_code(Integer.parseInt(request.getParameter("zipcode")));
 
 		//계좌번호 넣어주세요
 		

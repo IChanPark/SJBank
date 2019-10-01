@@ -96,6 +96,24 @@ public class Deposits_infoDAO {
 		return res;
 	}
 	
+	public ArrayList<Deposits_infoDTO> listin(String s1){
+		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
+		
+		sql = "select * from deposits_info where type in(?)";
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, s1);
+			
+			rs = pstmt.executeQuery();
+			
+			Deposits_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
 	public void insert(Deposits_infoDTO dto){
 		sql = 	"insert into deposits_info (" +
 				"product, min_interest, max_interest, month, type, interest_type, tax, preferential,"+ 

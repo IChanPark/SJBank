@@ -2,58 +2,35 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<style>
-
-.custom-scrollbar {
-  height: 1000px;
-  overflow-y: scroll;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
-
-input{
-	margin-left: 10px;
-	margin-right: 3px;
-}
-
-</style>
-
 <script type="text/javascript">
-
 $(document).ready(function() {
-	$(".uid").on("click", function() {
+	$(".ser").on("click", function() {
 		
-		console.log($(this).text());
 		$.ajax({
-			url:"admin/list.jsp",
+			url:"layout/product/deposit_list.jsp",
 			type:'get',
-			data:{nn : $(this).text()},
-			 ////json을 안하면 문자열로 , json 처리하면 object로 묶어서 받음
+			data:{ddd : $('.sertext').val()},
+			dataType:'json',
 			success:function(qqq){
-				console.log(qqq);
+				$("#ttt").empty();
+				$.each(qqq,function(i,e){
+					var row = $("<tr></tr>");
+					row.append($("<td>"+e.product+"</td>"));
+					row.append($("<td>"+e.min_interest+"</td>"));
+					row.append($("<td>"+e.max_interest+"</td>"));
+					row.append($("<td>"+e.month+"</td>"));
+					row.append($("<td>"+e.type+"</td>"));
+					row.append($("<td>"+e.tax+"</td>"));
+					$("#ttt").append(row);
+				});
 			},
 			error:function(qqq){
-				/* $("#AccInfo").html(qqq.responseText); */
-				console.log("gd");
+				console.log("오류오류");
+				console.log(qqq);
 			}
-			
 		});
 	});
 });
-
-
 </script>
 
 <div class="subTitle">예금·적금 신규</div>
@@ -61,12 +38,13 @@ $(document).ready(function() {
 <div>
 	<div class="child"><input type = "checkbox" name = "hobby" value="보통"/>보통예금
 	<input type = "checkbox" name = "hobby" value="정기"/>정기예금
-	<input tyep = "text" style="width: 450px"/>
-	<button>검색</button></div>
+	<input class="sertext" type = "text" style="width: 450px"/>
+	<a href="#" class="ser" >검색하기</a>
 </div>
 
-<div class="custom-scrollbar">
-<table class="AccInfo">
+<div class="scrollB"> <!-- 스크롤바 -->
+
+<table class="AccInfo" id="ttt">
 	<tr>
 		<td>상품명</td>
 		<td>최저 연</td>
@@ -87,4 +65,5 @@ $(document).ready(function() {
 	</tr>
 </c:forEach>
 </table>
+
 </div>
