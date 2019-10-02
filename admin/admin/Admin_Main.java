@@ -22,9 +22,9 @@ public class Admin_Main extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");	//한글처리
 			HttpSession session = request.getSession();
 			
-			if(request.getParameter("tt") != null) {
+			if(request.getParameter("hid_t") != null) {
 				String service = ""; 
-				String url = request.getParameter("tt");
+				String url = request.getParameter("hid_t");
 				
 				for (String s : url.split("/")) 
 					service+=s+".";
@@ -36,7 +36,7 @@ public class Admin_Main extends HttpServlet {
 			
 				System.out.println("url : "+url);
 				System.out.println("service : "+service);
-				if(admin.Exception_Group.getInstance().check(service)) { // 속하지 않는다면 실행
+				if(admin.Util.Exception_Group.getInstance().check(service)) { // 속하지 않는다면 실행
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
@@ -44,7 +44,7 @@ public class Admin_Main extends HttpServlet {
 				request.setAttribute("mainUrl", "admin/inc/main");
 			
 
-			RequestDispatcher dispatcher = request.getRequestDispatcher("adTem.jsp"); //여기로 보내
+			RequestDispatcher dispatcher = request.getRequestDispatcher("template_Admin.jsp"); //여기로 보내
 			dispatcher.forward(request, response);
 		} catch (Exception e) {e.printStackTrace();} 
 

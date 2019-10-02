@@ -28,5 +28,5 @@
 
 		
 	</tr>
-	<tr><td colspan="2"><a href="#" data-menu-name="admin/SavingReg" name="login">등록하기</a></td></tr>
+	<tr><td colspan="2"><a href="#" data-menu-name="admin/Saving/SavingReg" name="login">등록하기</a></td></tr>
 </table>

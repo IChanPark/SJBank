@@ -15,8 +15,6 @@
 <script type="text/javascript" src="js/Menu_Script.js"></script>   <!-- menu 관련 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 우편번호api -->
 <script type="text/javascript" src="js/zipCode.js"></script>   <!-- 우편번호 -->
-
-
 </head>
 
 <form name="paging" action="index.jsp"/>

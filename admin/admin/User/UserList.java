@@ -1,4 +1,4 @@
-package admin;
+package admin.User;
 
 import java.util.ArrayList;
 

@@ -20,8 +20,7 @@
    <ul class="MainUl">
    <% for(MenuDTO d0 : MenuDAO.getInstance().selectPrnts("",0)) { %> 
       <li>
-      <a href="#" data-menu-name="<%=d0.getName().substring(0,1).toUpperCase()+d0.getName().substring(1)%>">
-      <%=d0.getKor_name() %></a>
+      <a href="#"><%=d0.getKor_name() %></a>
          <div class="SubMenu">
             <ul class="SubUl">
             <% for(MenuDTO d1 : MenuDAO.getInstance().selectPrnts(d0.getName(),1)) { %>      

@@ -1,4 +1,4 @@
-package admin;
+package admin.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,9 +13,8 @@ public class Login  implements M_Action{
    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
       UserDTO dto = UserDAO.getInstance().selectId(request.getParameter("id"));
       HttpSession session = request.getSession();
-      String url = "layout/service/loginmain";
-      
-      
+      String url = "admin/service/loginmain";
+ 
       if(dto != null && dto.getPw().equals(request.getParameter("pw"))) {
          url = "main";
          session.setAttribute("userID", dto.getId());

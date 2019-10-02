@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="right"><a href="#"
-				data-menu-name="service/Login">로그인</a></td>
+				data-menu-name="admin/Service/Login">로그인</a></td>
 		</tr>
 	</table>
 </div>

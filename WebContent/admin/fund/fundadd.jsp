@@ -23,5 +23,5 @@
 
 		
 	</tr>
-	<tr><td colspan="2"><a href="#" data-menu-name="admin/FundReg" name="login">등록하기</a></td></tr>
+	<tr><td colspan="2"><a href="#" data-menu-name="admin/Fund/FundReg" name="login">등록하기</a></td></tr>
 </table>

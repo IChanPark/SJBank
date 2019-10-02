@@ -16,7 +16,7 @@
 		function ajaxGo(goUrl, getData){
 			//alert("54321");
 			$.ajax({
-				url:"admin/"+goUrl+".jsp",
+				url:"admin/block/"+goUrl+".jsp",
 				type:'get',
 				data: getData,
 				dataType:'json',  ////json을 안하면 문자열로 , json 처리하면 object로 묶어서 받음

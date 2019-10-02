@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<a href="#" data-menu-name="admin/SavingAdd" id="login">등록하기</a>
+<a href="#" data-menu-name="admin/Saving/SavingAdd" id="login">등록하기</a>
 <div class="subTitle">적금 상품</div>
 <table class="AccInfo">
 <tr >

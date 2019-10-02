@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="../js/jquery-3.4.1.min.js"></script>
 
-<a href="#" data-menu-name="admin/FundAdd" id="login">등록하기</a>
+<a href="#" data-menu-name="admin/Fund/FundAdd" id="login">등록하기</a>
 <div class="subTitle">펀드 상품</div>
 <table class="AccInfo">
 <tr >

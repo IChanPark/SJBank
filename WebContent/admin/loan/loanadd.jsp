@@ -22,5 +22,5 @@
 		<tr><td>상태</td><td><input type="text" name ="status"/></td></tr>
 	
 	</tr>
-	<tr><td colspan="2"><a href="#" data-menu-name="admin/LoanReg" name="login">등록하기</a></td></tr>
+	<tr><td colspan="2"><a href="#" data-menu-name="admin/Loan/LoanReg" name="login">등록하기</a></td></tr>
 </table>
