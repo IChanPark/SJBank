@@ -5,68 +5,59 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-
+ var screen="show";
 $(document).ready(function() {
-	$('.uid').on("click", function() {
-		//var b = $(this).text();
-		$.ajax({
-			url:"admin/list.jsp",
-			type:'get',
-			data:{nn : $(this).data("faq-seq")},				
-			 dataType:'json', 
-			success:function(qqq){
-				var row = $("<tr></tr>");
-					row.append($("<td>"+qqq.seq+"</td>"));
-					row.append($("<td>"+qqq.id+"</td>"));
-					row.append($("<td>"+qqq.title+"</td>"));
-					row.append($("<td>"+qqq.content+"</td>"));
-					row.append($("<td>"+qqq.type+"</td>"));
-					row.append($("<td>"+qqq.status+"</td>"));
-					row.append($("<td>"+qqq.register_date+"</td>"));
-					$("#test").append(row);
-					
-					/*  $(a).append(b) */
-					
-					/* var $tr = $(this).parent(); // 클릭한 버튼이 속한 tr 요소
-					$(this).closest('tr').prevAll().length;
-					consolog($(this).closest('tr').prevAll().length);
-					$tr.next().after($tr); */
-					
-					/* $("#test").eq($(this).index(this)).append(row); */
-					//var $tr = $(this).parent().parent(); // 클릭한 버튼이 속한 tr 요소
-					//$tr.next().after($tr);
-					
-					
-			},
-			error:function(qqq){
-				$("#test").html(qqq.responseText);
-			}
-			
-		});
-	});
+	$(".ltt").on("click",function() {
+	      
+		$(this).find(".ull").stop().fadeToggle(500);
+	      $(".d1").height('60');
+	    });
+	    	
 });
-
-
 
 </script>
 
+<style media="screen">
+.ltt {
+    width: 100%;
+    text-align: center;
+  }
+.ull{
+	
+    display: none;
+}
+.lii {
+	
+  	display: block;
+}
+.d1 {padding-top: 10px;  height: 30px; margin: auto; }
+.m {background-color: #3C0; float: left; height: 30px;  width: 100%;
+display: grid;justify-content: center;align-items: center;}
+
+</style>
+
+
 <div class="subTitle">FAQ</div>
-<table class="AccInfo" id="test">
-<tr >
-	<td>번호</td>
-	<td>분류</td>
-	<td>제목</td>
-	<td>작성자</td>	
-</tr>
+<div align="right"><input class="sertext" type = "text" style="width: 450px"/>
+<a href="#" class="ser" >검색하기</a></div>
+<div class="scrollB"> <!-- 스크롤바 -->
+	
+<div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<tr class="uid" data-faq-seq="${dto.seq}" >
-		<td>${dto.seq }</td>
-		<td>${dto.type }</td>
-		<td>${dto.title }</td>
-		<td>${dto.id }</td>		
-	</tr>
+<tr>
+
+	<div class="d1"  data-faq-seq="${dto.seq}">
+    <ul>
+      <li class="ltt"><div class="m">No.${dto.seq } [${dto.type }] ${dto.title } 작성자: ${dto.id }</div>
+        <ul class="ull">
+          <li class="lii">${dto.content }</li>
+        </ul>
+      </li>
+  
+    </ul> 
+  </div>
+ 
+  
 </c:forEach>
-
-
-
-</table>
+</div>
+</div>

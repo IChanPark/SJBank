@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .scrollB {
-  height: 1000px;
+  height: 800px;
   overflow-y: scroll;
 }
 

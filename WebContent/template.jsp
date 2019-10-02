@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="css/Basic.css" />      <!-- 기본 스타일 설정 -->
 <link rel="stylesheet" type="text/css" href="css/Top.css" />      <!-- top 스타일 -->
 <link rel="stylesheet" type="text/css" href="css/Account.css" />   <!-- 계좌 테이블 스타일 -->
+<link rel="stylesheet" type="text/css" href="css/Scroll_bar.css" />   <!-- 스크롤바 미니 -->
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>   
 <script type="text/javascript" src="js/Menu_Script.js"></script>   <!-- menu 관련 -->
 <!-- <script type="text/javascript" src="js/jquery-ui.min.js"></script>   menu 관련 -->

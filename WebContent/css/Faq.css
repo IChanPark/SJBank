@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.more:hover, .close:hover{
+	cursor: pointer;
+	
+}
