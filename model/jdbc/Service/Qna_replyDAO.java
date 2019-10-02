@@ -80,7 +80,7 @@ public class Qna_replyDAO {
 	public ArrayList<Qna_replyDTO> selectType(String id){
 		ArrayList<Qna_replyDTO> res = new ArrayList<Qna_replyDTO>();
 		
-		sql = "select * from qna where id = ?";
+		sql = "select * from Qna_reply where id = ?";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -90,7 +90,7 @@ public class Qna_replyDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			Qna(rs, res);	
+			Qna_reply(rs, res);	
 		} catch (Exception e) { e.printStackTrace(); 
 		} finally { close(); }
 		return res;
