@@ -107,7 +107,6 @@ public class UserDAO {
 		return dto;
 	}
 	
-
 	
 	public void insert(UserDTO dto){
 		sql = 	"insert into user (" +
@@ -161,6 +160,23 @@ public class UserDAO {
 		} finally { close(); }
 	}
 	
+	public void updatePw(UserDTO dto){
+		
+		sql = 	"update user set " +
+				"pw = ? " +
+				"where id = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getId());
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}

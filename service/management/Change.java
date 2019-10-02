@@ -11,6 +11,9 @@ public class Change  implements M_Action{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		System.out.println("들어왔어요");
+		
+		
 		UserDTO dto = UserDAO.getInstance().selectId((String)request.getSession().getAttribute("userID"));
 
 		System.out.println(dto.toString());

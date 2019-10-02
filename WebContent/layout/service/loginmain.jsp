@@ -18,5 +18,5 @@
    </table>
 </div>
 <a href="#" data-menu-name="service/Join">회원가입</a>
-<a href="#" data-menu-name="service/Join">아이디 찾기</a>
-<a href="#" data-menu-name="service/Join">비밀번호 재설정</a>
+<a href="#" data-menu-name="service/SearchID">아이디 찾기</a>
+<a href="#" data-menu-name="service/SearchPW">비밀번호 재설정</a>
