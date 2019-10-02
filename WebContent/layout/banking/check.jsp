@@ -45,6 +45,13 @@ $(document).ready(function(){
 		<c:set var="dsum" value="${dsum+=dto.sum }" />
 	</c:if>
 </c:forEach>
+<c:if test="${empty dsum }">
+<tr>
+	<td>개설된 계좌가 없습니다.</td>
+</tr>
+
+</c:if>
+
 </table>
 <br>
 <div align="right">입/출금 계좌 총액 &nbsp&nbsp ${dsum }원</div>
@@ -73,6 +80,12 @@ $(document).ready(function(){
 	</c:if>
 	
 </c:forEach>
+<c:if test="${empty psum }">
+<tr>
+	<td>개설된 계좌가 없습니다.</td>
+</tr>
+
+</c:if>
 </table>
 
 <br>
