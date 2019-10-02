@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%System.out.print(request.getParameter("otpKind")); %>
 
-<div class="subTitle"><%=request.getParameter("otpKind") %> 발급신청</div>
+<div class="subTitle">신입금 계좌 신청</div>
 
 <table>
 	<tr>
