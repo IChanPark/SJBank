@@ -8,10 +8,18 @@
  var screen="show";
 $(document).ready(function() {
 	$(".ltt").on("click",function() {
-	      
+	     
 		$(this).find(".ull").stop().fadeToggle(500);
-	      $(".d1").height('60');
-	    });
+	    if(screen=="show"){ 
+			$(".d1").height('60');
+			screen="hide"
+	    }
+	    else
+	    {
+	    	$(".d1").height('30');
+	    	screen="show";
+	    }
+	});
 	    	
 });
 

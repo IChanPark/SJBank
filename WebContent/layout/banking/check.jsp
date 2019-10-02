@@ -74,7 +74,7 @@ $(document).ready(function(){
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
-			<td><a href="#" data-menu-name="banking/Detail" name="accountNumber" value="${dto.account_number }" > 상세</a></td>
+			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</a></td>
 		</tr>
 		<c:set var="psum" value="${psum+=dto.sum }" />
 	</c:if>
