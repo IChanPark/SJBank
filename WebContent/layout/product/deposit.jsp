@@ -25,8 +25,9 @@ $(document).ready(function() {
 					var row = $("<div class='box' data-product-name='"+e.product+"' data-product-type='"+e.type+"'>");
 					row.append($("<div class='l'>최저 "+e.min_interest+"<br>최고 "+e.max_interest+"</div>"));
 					row.append($("<div class='m'>["+e.type+"] "+e.product+"</div>"));
-					row.append($("<div class='r'>가입<br>상세 버튼</div>"));
-
+					row.append($("<div class='rl'><div>가입</div></div>"));
+					row.append($("<div class='rr'><div>상세</div></div>"));
+				
 					$("#ttt").append(row);
 				});
 			},
@@ -66,11 +67,11 @@ $(document).ready(function() {
 </script>
 
 <div class="subTitle">예금·적금 신규</div>
-	<div class="child" >
+<div class="serBox" >
 	<input class="data_v" type = "radio" name = "group"  value="예금" checked="checked"/>예금
 	<input class="data_v" type = "radio" name = "group" value="적금"/>적금
-	<input class="sertext" type = "text" style="width: 450px"/>
-	<a href="#" class="ser" >검색하기</a>
+	<input class="sertext" type = "text"/>
+	<div class="ser" >검색</div>
 </div>
 
 <div class="scrollB"> <!-- 스크롤바 -->
@@ -83,8 +84,9 @@ $(document).ready(function() {
 		</div>
 	
 		<div class="m">[${dto.type }] ${dto.product }</div>
-		<div class="r">가입<br>
-		상세 버튼</div>
+		<div class="rl"><div>가입</div></div>
+		<div class="rr"><div>상세</div></div>
+		
 	</div>
 </c:forEach>
 </div>

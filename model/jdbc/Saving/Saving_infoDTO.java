@@ -9,9 +9,8 @@ public class Saving_infoDTO {
 	private String  product,         //상품명
 					product_info,	//상품설명
 					interest_type,   //이자지급방식
-					type,			 //가입타입 ex 인터넷, 모바일
+					type,			 //정기/비정기
 					tax,			 //세금종류
-					regular,		//정기/비정기
 					preferential,	 //우대구분
 					prf_content,	 //우대조건 내용
 					prf_interest,	 //우대이자율
@@ -51,14 +50,6 @@ public class Saving_infoDTO {
 
 	public void setInterest_type(String interest_type) {
 		this.interest_type = interest_type;
-	}
-
-	public String getRegular() {
-		return regular;
-	}
-
-	public void setRegular(String regular) {
-		this.regular = regular;
 	}
 
 	public String getType() {

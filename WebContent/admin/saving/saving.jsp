@@ -13,7 +13,6 @@
 	<td>최저 연이자</td>
 	<td>최고 연이자</td>
 	<td>만기 개월</td>
-	<td>가입타입</td>
 	<td>정기/비정기</td>
 	<td>이자지급방식 </td>
 	<td>과세여부 </td>
@@ -35,7 +34,6 @@
 		<td>${dto.max_interest }</td>
 		<td>${dto.month }</td>
 		<td>${dto.type }</td>
-		<td>${dto.regular}</td>
 		<td>${dto.interest_type }</td>
 		<td>${dto.tax }</td>
 		<td>${dto.preferential }</td>
