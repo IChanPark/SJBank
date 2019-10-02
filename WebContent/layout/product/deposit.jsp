@@ -4,65 +4,79 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
 $(document).ready(function() {
-	$(".data_v").on("click", function() {
-		var gogo;
-		
-		if ($(this).val() == "예금") {
-			gogo = "layout/product/deposit_list.jsp";
-		} else {
-			gogo = "layout/product/saving_list.jsp";
-		}
-		
-		$.ajax({	//라디오 버튼 
-			url:gogo,
-			type:'post',
-			data:{ddd : $(this).val(),
-				  ccc : $('.sertext').val()},
-			dataType:'json',
-			success:function(qqq){
-				$("#ttt").empty();
-				$.each(qqq,function(i,e){
-					var row = $("<div class='box' data-product-name='"+e.product+"' data-product-type='"+e.type+"'>");
-					row.append($("<div class='l'>최저 "+e.min_interest+"<br>최고 "+e.max_interest+"</div>"));
-					row.append($("<div class='m'>["+e.type+"] "+e.product+"</div>"));
-					row.append($("<div class='rl'><div>가입</div></div>"));
-					row.append($("<div class='rr'><div>상세</div></div>"));
-				
-					$("#ttt").append(row);
-				});
-			},
-			error:function(qqq){
-				console.log("오류오류");
-			}
-		});
-	});
+var radioVal; //라디오 버튼 값저장용
 	
-	$(".dp").on("click", function() {
+$("input[name='group']:radio").change(function () {
+	//라디오 버튼 값을 가져옴
+	radioVal = this.value;
+});
+	
+$(".data_v").on("click", function() {
+	var gogo;
+
+	if ($(this).val() == "예금") {
+		gogo = "layout/product/deposit_list.jsp";
+	} else {
+		gogo = "layout/product/saving_list.jsp";
+	}
+	
+$.ajax({	//라디오 버튼 
+	url:gogo,
+	type:'post',
+	data:{ddd : $(this).val()},
+	dataType:'json',
+		success:function(qqq){
+		$("#ttt").empty();
+		$.each(qqq,function(i,e){
+			var row = $("<div class='box' data-product-name='"+e.product+"' data-product-type='"+e.type+"'></div>");
+			row.append($("<div class='l'>최저 "+e.min_interest+"<br>최고 "+e.max_interest+"</div>"));
+			row.append($("<div class='m'>["+e.type+"] "+e.product+"</div>"));
+			row.append($("<div class='rl'><div>가입</div></div>"));
+			row.append($("<div class='rr'><div>상세</div></div>"));
 		
-		$.ajax({	//초기 데이터 갱신용
-			url:"layout/product/deposit_detail.jsp",
-			type:'post',
-			data:{eee : $(this).data("product-name")},
-			/* dataType:'json', */
-			success:function(qqq){
-				/* $("#ttt").empty(); */
-				/* $.each(qqq,function(i,e){
-					var row = $("<tr></tr>");
-					row.append($("<td>"+e.product+"</td>"));
-					row.append($("<td>"+e.min_interest+"</td>"));
-					row.append($("<td>"+e.max_interest+"</td>"));
-					row.append($("<td>"+e.month+"</td>"));
-					row.append($("<td>"+e.type+"</td>"));
-					row.append($("<td>"+e.tax+"</td>"));
-					$("#ttt").append(row);
-				}); */
-			},
-			error:function(qqq){
-				console.log("오류오류");
-				console.log(qqq);
-			}
-		});	
+			$("#ttt").append(row);
+		});
+		},
+		error:function(qqq){
+			$("#ttt").empty();
+			var row = $("<div class='box'></div>");
+			row.append($("<div class='m'>오류가 발생하였습니다.</div>"));
+		}
 	});
+});
+$(".ser").on("click", function() {
+	var gogo;
+		
+	if (radioVal == "예금") {
+		gogo = "layout/product/deposit_detail.jsp";
+	} else {
+		gogo = "layout/product/saving_detail.jsp";
+	}
+	
+$.ajax({	
+	url:gogo,
+	type:'post',
+	data:{eee : $('.sertext').val()},
+	dataType:'json',
+		success:function(qqq){
+			$("#ttt").empty();
+			$.each(qqq,function(i,e){
+				var row = $("<div class='box' data-product-name='"+e.product+"' data-product-type='"+e.type+"'></div>");
+				row.append($("<div class='l'>최저 "+e.min_interest+"<br>최고 "+e.max_interest+"</div>"));
+				row.append($("<div class='m'>["+e.type+"] "+e.product+"</div>"));
+				row.append($("<div class='rl'><div>가입</div></div>"));
+				row.append($("<div class='rr'><div>상세</div></div>"));
+		
+				$("#ttt").append(row);
+			});
+		},
+		error:function(qqq){
+			$("#ttt").empty();
+			var row = $("<div class='box'></div>");
+			row.append($("<div class='m'>검색결과가 존재하지 않습니다.</div>"));
+		}
+	});	
+});
 });
 </script>
 
@@ -75,19 +89,7 @@ $(document).ready(function() {
 </div>
 
 <div class="scrollB"> <!-- 스크롤바 -->
-<div id = "ttt">
-<c:forEach var="dto" items="${data_dp}">
-	<div class="box" data-product-name="${dto.product }" data-product-type="${dto.type }">
-		<div class="l">
-		최저 ${dto.min_interest }%<br>
-		최고 ${dto.max_interest }%
-		</div>
-	
-		<div class="m">[${dto.type }] ${dto.product }</div>
-		<div class="rl"><div>가입</div></div>
-		<div class="rr"><div>상세</div></div>
-		
-	</div>
-</c:forEach>
+<div id = "ttt"> 
+<div class="box"><div class="m">선택해주세요.</div></div>
 </div>
 </div>

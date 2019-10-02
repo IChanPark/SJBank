@@ -114,6 +114,21 @@ public class Deposits_infoDAO {
 		return res;
 	}
 	
+	public ArrayList<Deposits_infoDTO> selectLike(String title){
+		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
+		
+		sql = "select * from deposits_info where product like '%"+title+"%'";
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Deposits_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
 	public void insert(Deposits_infoDTO dto){
 		sql = 	"insert into deposits_info (" +
 				"product, min_interest, max_interest, month, type, interest_type, tax, preferential,"+ 

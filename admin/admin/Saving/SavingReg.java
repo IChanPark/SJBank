@@ -20,7 +20,6 @@ public class SavingReg  implements M_Action{
 		dto.setMax_interest(Float.parseFloat(request.getParameter("max_interest")));
 		dto.setMonth(Integer.parseInt(request.getParameter("month")));
 		dto.setType(request.getParameter("type"));
-		dto.setRegular(request.getParameter("regular"));
 		dto.setInterest_type(request.getParameter("interest_type"));
 		dto.setTax(request.getParameter("tax"));
 		dto.setPreferential(request.getParameter("preferential"));

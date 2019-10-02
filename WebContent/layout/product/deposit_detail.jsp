@@ -7,11 +7,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-/* Map<String,String> map = new HashMap<String,String>();
+Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
 ArrayList<Deposits_infoDTO> dto = 
-Deposits_infoDAO.getInstance().listin(request.getParameter("ddd"));
+Deposits_infoDAO.getInstance().selectLike(request.getParameter("eee"));
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("product", dto.get(i).getProduct());
@@ -26,6 +26,5 @@ for (int i = 0; i < dto.size(); i++) {
 		json +=",";
 }
 json+="]";
-out.print(json); */
-System.out.print("eee "+request.getParameter("eee"));
+out.print(json);
 %>
