@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="css/Scroll_bar.css" />   <!-- 스크롤바 미니 -->
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>   
 <script type="text/javascript" src="js/Menu_Script.js"></script>   <!-- menu 관련 -->
-<!-- <script type="text/javascript" src="js/jquery-ui.min.js"></script>   menu 관련 -->
+<link rel="stylesheet" type="text/css" href="css/Box.css" />   <!-- 상품 스타일 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 우편번호api -->
 <script type="text/javascript" src="js/zipCode.js"></script>   <!-- 우편번호 -->
 

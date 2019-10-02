@@ -11,44 +11,43 @@ import javax.sql.DataSource;
 import control.Data_Source;
 
 
-public class DepositDAO {
+public class DepositsDAO {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	private DataSource ds;
 	private String sql;
 	
-	private DepositDAO() {
+	private DepositsDAO() {
 		ds = Data_Source.getInstance().getDs();
 	}
 	
 	private static class Holder {
-        public static final DepositDAO DAO = new DepositDAO();
+        public static final DepositsDAO DAO = new DepositsDAO();
     }
 	
-	public static DepositDAO getInstance() {
+	public static DepositsDAO getInstance() {
         return Holder.DAO;
     }
 
-	private DepositDTO Deposit(ResultSet rs, DepositDTO dto) {
+	private DepositsDTO Deposit(ResultSet rs, DepositsDTO dto) {
 		try {
 			if(rs.next()) {
-				dto = new DepositDTO();
+				dto = new DepositsDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
 				dto.setPrduct(rs.getString("prduct"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
-				
 			} 
 		} catch (Exception e) {}
 		return dto;
 	}
 	
-	private void Deposit(ResultSet rs, ArrayList<DepositDTO> res) {
+	private void Deposit(ResultSet rs, ArrayList<DepositsDTO> res) {
 		try {
 			while (rs.next()) {
-				DepositDTO dto = new DepositDTO();
+				DepositsDTO dto = new DepositsDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
 				dto.setPrduct(rs.getString("prduct"));
@@ -59,10 +58,10 @@ public class DepositDAO {
 		} catch (Exception e) {}
 	}
 	
-	public ArrayList<DepositDTO> list(){
-		ArrayList<DepositDTO> res = new ArrayList<DepositDTO>();
+	public ArrayList<DepositsDTO> list(){
+		ArrayList<DepositsDTO> res = new ArrayList<DepositsDTO>();
 		
-		sql = "select * from deposit";
+		sql = "select * from deposits";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -74,8 +73,8 @@ public class DepositDAO {
 		return res;
 	}
 	
-	public void insert(DepositDTO dto){
-		sql = 	"insert into deposit (" +
+	public void insert(DepositsDTO dto){
+		sql = 	"insert into deposits (" +
 				"account_number, id, prduct, preferential, interest) values ("+
 				"	 	?  ,	  ?,	?,	       ?,  		 ? )";
 		System.out.println(sql);

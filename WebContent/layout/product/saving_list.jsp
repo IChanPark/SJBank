@@ -1,6 +1,6 @@
+<%@page import="jdbc.Saving.Saving_infoDAO"%>
+<%@page import="jdbc.Saving.Saving_infoDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="jdbc.Deposit.Deposits_infoDAO"%>
-<%@page import="jdbc.Deposit.Deposits_infoDTO"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
@@ -10,9 +10,9 @@
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
-ArrayList<Deposits_infoDTO> dto = 
+ArrayList<Saving_infoDTO> dto = 
 /* Deposits_infoDAO.getInstance().listin(request.getParameter("ddd")); */
-Deposits_infoDAO.getInstance().list();
+Saving_infoDAO.getInstance().list();
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("product", dto.get(i).getProduct());

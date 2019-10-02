@@ -1,0 +1,8 @@
+@charset "UTF-8";
+.box {padding-top: 10px;  height: 60px; margin: auto; }
+.l {background-color: #09C; float: left; height: 50px; width: 10%; 
+display: grid;justify-content: center;align-items: center;}
+.r {background-color: #09C; float: right; height: 50px; width: 25%; 
+display: grid;justify-content: center;align-items: center;}
+.m {background-color: #3C0; float: left; height: 50px;  width: 65%;
+display: grid;justify-content: center;align-items: center;}

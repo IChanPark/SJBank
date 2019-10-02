@@ -1,6 +1,6 @@
 package jdbc.Deposit;
 
-public class DepositDTO {
+public class DepositsDTO {
 	//예금가입자
 	private String  account_number,  //계좌번호
 					id,              //사용자 id
