@@ -96,7 +96,24 @@ public class OTPDAO {
 		return res;
 	}
 	
-	
+	public ArrayList<OTPDTO> selectUsable(String id){
+		ArrayList<OTPDTO> res = new ArrayList<OTPDTO>();
+		
+		sql = "select * from otp where id = ? and status= '활성'";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			OTP(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
 	
 	
 	public void insert(OTPDTO dto){
