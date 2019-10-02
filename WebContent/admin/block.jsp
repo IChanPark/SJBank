@@ -77,7 +77,7 @@
 		 	//<a href="#" class="ser" >검색하기</a>onclick='ajaxGo(\"userblock\",{id:"+e.id+"}) 
 			//var btn = $("<td  onclick='ajaxGo(\"userblock\",{id:"+e.id+"})' >상태변경</td>");
 			//row.append($("<td onclick='ajaxGo(\"userblock\",{id:"+e.id+"})'>상태변경</td>"));
-			row.append($("<td onclick='hi(this)' data-menu-name='admin/Userblock'>상태변경</td>"));
+			row.append($("<td onclick='goMenu(this)' data-menu-name='admin/Userblock'>상태변경</td>"));
 			/* <a href="#" data-menu-name="admnin/Server">서버 관리</a>
 			<a href="#" data-menu-name="admin/Userblock">상태변경</a> */
 			tot.append(row);
@@ -122,12 +122,4 @@
 </table>
 </body>
 </html>
-<script>
-function hi(qq) {	//메뉴 이동용
-	var f=document.paging; 
-	console.log("dd");
-    f.tt.value = $(qq).data("menu-name"); 
-    f.method="post";
-    f.submit();
-};
-</script>
+<script type="text/javascript" src="js/domAtion.js"></script>
