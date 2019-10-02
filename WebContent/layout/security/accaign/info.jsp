@@ -3,42 +3,27 @@
 
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
     
-    
-    <table>
-    	<tr>
-    		<td>신청채널</td>
-    		<td>미지정계좌 이체한도</td>
-    	</tr>
-    	<tr>
-    		<td>인터넷</td>
-    		<td><input type="text" name="trsLimit"/></td>
-    	</tr>
-    </table>
-    
-    <table>
-    <tr>
-    <td>선택</td>
-    <td>No</td>
-    <td>이용채널</td>
-    <td>은행명</td>
-    <td>계좌번호</td>
-    <td>입금계좌명</td>
-    <td>이체일자</td>
-    </tr>
-    <c:forEach var="dto" items="${data }" varStatus="no">
-    	<tr>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td></td>
-	    	<td>${dto.account_number }</td>
-	    	<td></td>
-	    	<td>${dto.type }</td>
-    	</tr>
-     </c:forEach>
-    
-    
-    
-    </table>
-    
-    
+<div class="suibTitle">서비스 안내</div>
+
+<div>신 입금 계좌 서비스란?</div>
+<div>보이스 피싱 파밍,스미싱 등의 피해를 방지하기 위해
+<br>사전에 등록한 입금계좌로만 이체가 되는 서비스 입니다.<br>
+등록되지 않은 계좌는 이체한도 내에서 거래가 가능 합니다.</div>    
+
+
+<table>
+	<tr>
+		<td>서비스 신청자</td>
+		<td>서비스 미신청자</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+
+
+<br><br><br><br>
+
+<button data-menu-name="security/accaign/Apply" >신청</button>
+
