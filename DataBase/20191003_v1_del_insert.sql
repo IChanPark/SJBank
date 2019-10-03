@@ -17,7 +17,6 @@ CREATE DATABASE IF NOT EXISTS `bank` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `bank`;
 
 -- 테이블 bank.account 구조 내보내기
-DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
   `type` varchar(50) NOT NULL COMMENT '타입 ex 예금, 펀드 등',
@@ -34,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   CONSTRAINT `FK_account_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='계좌 정보';
 
--- 테이블 데이터 bank.account:~4 rows (대략적) 내보내기
+-- 테이블 데이터 bank.account:~5 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`account_number`, `type`, `sum`, `alias`, `id`, `pw`, `status`, `register_date`, `end_date`) VALUES
 	('010-1111-1111-121', 'deposit', 75310, '미지정', 'day_0821', '0092', 'y', '2019-09-05 08:31:36', NULL),
@@ -45,7 +44,6 @@ INSERT INTO `account` (`account_number`, `type`, `sum`, `alias`, `id`, `pw`, `st
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 -- 테이블 bank.account_modify_log 구조 내보내기
-DROP TABLE IF EXISTS `account_modify_log`;
 CREATE TABLE IF NOT EXISTS `account_modify_log` (
   `seq` int(11) NOT NULL,
   `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
@@ -62,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `account_modify_log` (
 /*!40000 ALTER TABLE `account_modify_log` ENABLE KEYS */;
 
 -- 테이블 bank.account_pw_log 구조 내보내기
-DROP TABLE IF EXISTS `account_pw_log`;
 CREATE TABLE IF NOT EXISTS `account_pw_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `account_number` varchar(50) NOT NULL,
@@ -79,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `account_pw_log` (
 /*!40000 ALTER TABLE `account_pw_log` ENABLE KEYS */;
 
 -- 테이블 bank.account_type 구조 내보내기
-DROP TABLE IF EXISTS `account_type`;
 CREATE TABLE IF NOT EXISTS `account_type` (
   `type` varchar(50) NOT NULL COMMENT '타입',
   `name` varchar(50) NOT NULL COMMENT '타입이름',
@@ -98,7 +94,6 @@ INSERT INTO `account_type` (`type`, `name`) VALUES
 /*!40000 ALTER TABLE `account_type` ENABLE KEYS */;
 
 -- 테이블 bank.analysis 구조 내보내기
-DROP TABLE IF EXISTS `analysis`;
 CREATE TABLE IF NOT EXISTS `analysis` (
   `propensity` varchar(50) NOT NULL COMMENT '투자 성향',
   `name` varchar(50) NOT NULL COMMENT '투자 성향 이름',
@@ -119,7 +114,6 @@ INSERT INTO `analysis` (`propensity`, `name`, `scope`, `status`, `register_date`
 /*!40000 ALTER TABLE `analysis` ENABLE KEYS */;
 
 -- 테이블 bank.credit_rating 구조 내보내기
-DROP TABLE IF EXISTS `credit_rating`;
 CREATE TABLE IF NOT EXISTS `credit_rating` (
   `id` varchar(50) NOT NULL,
   `rating` int(11) NOT NULL DEFAULT 5 COMMENT '신용등급',
@@ -134,7 +128,6 @@ CREATE TABLE IF NOT EXISTS `credit_rating` (
 /*!40000 ALTER TABLE `credit_rating` ENABLE KEYS */;
 
 -- 테이블 bank.credit_rating_log 구조 내보내기
-DROP TABLE IF EXISTS `credit_rating_log`;
 CREATE TABLE IF NOT EXISTS `credit_rating_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그순서',
   `id` varchar(50) NOT NULL,
@@ -152,7 +145,6 @@ CREATE TABLE IF NOT EXISTS `credit_rating_log` (
 /*!40000 ALTER TABLE `credit_rating_log` ENABLE KEYS */;
 
 -- 테이블 bank.deposits 구조 내보내기
-DROP TABLE IF EXISTS `deposits`;
 CREATE TABLE IF NOT EXISTS `deposits` (
   `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
   `id` varchar(50) NOT NULL COMMENT '사용자 id',
@@ -174,7 +166,6 @@ CREATE TABLE IF NOT EXISTS `deposits` (
 /*!40000 ALTER TABLE `deposits` ENABLE KEYS */;
 
 -- 테이블 bank.deposits_info 구조 내보내기
-DROP TABLE IF EXISTS `deposits_info`;
 CREATE TABLE IF NOT EXISTS `deposits_info` (
   `product` varchar(50) NOT NULL COMMENT '상품명',
   `deposits_info` varchar(200) NOT NULL,
@@ -208,7 +199,6 @@ INSERT INTO `deposits_info` (`product`, `deposits_info`, `min_interest`, `max_in
 /*!40000 ALTER TABLE `deposits_info` ENABLE KEYS */;
 
 -- 테이블 bank.deposits_log 구조 내보내기
-DROP TABLE IF EXISTS `deposits_log`;
 CREATE TABLE IF NOT EXISTS `deposits_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
   `account_number` varchar(50) NOT NULL COMMENT '계좌',
@@ -227,7 +217,6 @@ CREATE TABLE IF NOT EXISTS `deposits_log` (
 /*!40000 ALTER TABLE `deposits_log` ENABLE KEYS */;
 
 -- 테이블 bank.deposits_type 구조 내보내기
-DROP TABLE IF EXISTS `deposits_type`;
 CREATE TABLE IF NOT EXISTS `deposits_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`name`)
@@ -241,7 +230,6 @@ INSERT INTO `deposits_type` (`name`) VALUES
 /*!40000 ALTER TABLE `deposits_type` ENABLE KEYS */;
 
 -- 테이블 bank.email_sand 구조 내보내기
-DROP TABLE IF EXISTS `email_sand`;
 CREATE TABLE IF NOT EXISTS `email_sand` (
   `id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='이메일 알림 테이블';
@@ -251,7 +239,6 @@ CREATE TABLE IF NOT EXISTS `email_sand` (
 /*!40000 ALTER TABLE `email_sand` ENABLE KEYS */;
 
 -- 테이블 bank.email_sand_log 구조 내보내기
-DROP TABLE IF EXISTS `email_sand_log`;
 CREATE TABLE IF NOT EXISTS `email_sand_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL COMMENT '보내는 이메일 계정',
@@ -268,7 +255,6 @@ CREATE TABLE IF NOT EXISTS `email_sand_log` (
 /*!40000 ALTER TABLE `email_sand_log` ENABLE KEYS */;
 
 -- 테이블 bank.faq 구조 내보내기
-DROP TABLE IF EXISTS `faq`;
 CREATE TABLE IF NOT EXISTS `faq` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `id` varchar(50) NOT NULL COMMENT '운영자',
@@ -290,7 +276,6 @@ INSERT INTO `faq` (`seq`, `id`, `title`, `content`, `type`, `status`, `register_
 /*!40000 ALTER TABLE `faq` ENABLE KEYS */;
 
 -- 테이블 bank.fund 구조 내보내기
-DROP TABLE IF EXISTS `fund`;
 CREATE TABLE IF NOT EXISTS `fund` (
   `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
   `id` varchar(50) NOT NULL COMMENT 'id',
@@ -309,7 +294,6 @@ CREATE TABLE IF NOT EXISTS `fund` (
 /*!40000 ALTER TABLE `fund` ENABLE KEYS */;
 
 -- 테이블 bank.fund_info 구조 내보내기
-DROP TABLE IF EXISTS `fund_info`;
 CREATE TABLE IF NOT EXISTS `fund_info` (
   `product` varchar(50) NOT NULL COMMENT '상품명',
   `product_info` varchar(200) DEFAULT NULL COMMENT '상품설명',
@@ -339,7 +323,6 @@ INSERT INTO `fund_info` (`product`, `product_info`, `price`, `price_modify`, `ty
 /*!40000 ALTER TABLE `fund_info` ENABLE KEYS */;
 
 -- 테이블 bank.fund_log 구조 내보내기
-DROP TABLE IF EXISTS `fund_log`;
 CREATE TABLE IF NOT EXISTS `fund_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
   `account_number` varchar(50) NOT NULL COMMENT '계좌',
@@ -358,20 +341,18 @@ CREATE TABLE IF NOT EXISTS `fund_log` (
 /*!40000 ALTER TABLE `fund_log` ENABLE KEYS */;
 
 -- 테이블 bank.fund_type 구조 내보내기
-DROP TABLE IF EXISTS `fund_type`;
 CREATE TABLE IF NOT EXISTS `fund_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='펀드 타입(유형) 검증용 테이블';
 
--- 테이블 데이터 bank.fund_type:~0 rows (대략적) 내보내기
+-- 테이블 데이터 bank.fund_type:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `fund_type` DISABLE KEYS */;
 INSERT INTO `fund_type` (`name`) VALUES
 	('혼합자산(재간접형)');
 /*!40000 ALTER TABLE `fund_type` ENABLE KEYS */;
 
 -- 테이블 bank.loan 구조 내보내기
-DROP TABLE IF EXISTS `loan`;
 CREATE TABLE IF NOT EXISTS `loan` (
   `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
   `id` varchar(50) NOT NULL COMMENT '사용자 id',
@@ -395,7 +376,6 @@ CREATE TABLE IF NOT EXISTS `loan` (
 /*!40000 ALTER TABLE `loan` ENABLE KEYS */;
 
 -- 테이블 bank.loan_info 구조 내보내기
-DROP TABLE IF EXISTS `loan_info`;
 CREATE TABLE IF NOT EXISTS `loan_info` (
   `product` varchar(50) NOT NULL COMMENT '상품명',
   `product_info` varchar(50) DEFAULT NULL COMMENT '상품설명',
@@ -422,7 +402,6 @@ INSERT INTO `loan_info` (`product`, `product_info`, `min_interest`, `max_interes
 /*!40000 ALTER TABLE `loan_info` ENABLE KEYS */;
 
 -- 테이블 bank.loan_log 구조 내보내기
-DROP TABLE IF EXISTS `loan_log`;
 CREATE TABLE IF NOT EXISTS `loan_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
   `account_number` varchar(50) NOT NULL COMMENT '계좌',
@@ -441,20 +420,18 @@ CREATE TABLE IF NOT EXISTS `loan_log` (
 /*!40000 ALTER TABLE `loan_log` ENABLE KEYS */;
 
 -- 테이블 bank.loan_type 구조 내보내기
-DROP TABLE IF EXISTS `loan_type`;
 CREATE TABLE IF NOT EXISTS `loan_type` (
   `name` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 테이블 데이터 bank.loan_type:~0 rows (대략적) 내보내기
+-- 테이블 데이터 bank.loan_type:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `loan_type` DISABLE KEYS */;
 INSERT INTO `loan_type` (`name`) VALUES
 	('신용대출');
 /*!40000 ALTER TABLE `loan_type` ENABLE KEYS */;
 
 -- 테이블 bank.management 구조 내보내기
-DROP TABLE IF EXISTS `management`;
 CREATE TABLE IF NOT EXISTS `management` (
   `name` varchar(50) NOT NULL COMMENT '이름',
   `id` varchar(50) NOT NULL COMMENT '아이디',
@@ -476,7 +453,6 @@ INSERT INTO `management` (`name`, `id`, `pw`, `department`, `tel`, `access_level
 /*!40000 ALTER TABLE `management` ENABLE KEYS */;
 
 -- 테이블 bank.membersheep 구조 내보내기
-DROP TABLE IF EXISTS `membersheep`;
 CREATE TABLE IF NOT EXISTS `membersheep` (
   `id` varchar(50) NOT NULL COMMENT '사용자 id',
   `membersheep` varchar(50) NOT NULL COMMENT '멤버쉽등급',
@@ -494,7 +470,6 @@ CREATE TABLE IF NOT EXISTS `membersheep` (
 /*!40000 ALTER TABLE `membersheep` ENABLE KEYS */;
 
 -- 테이블 bank.membersheep_log 구조 내보내기
-DROP TABLE IF EXISTS `membersheep_log`;
 CREATE TABLE IF NOT EXISTS `membersheep_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그 순서',
   `id` varchar(50) NOT NULL COMMENT '사용자 id',
@@ -513,7 +488,6 @@ CREATE TABLE IF NOT EXISTS `membersheep_log` (
 /*!40000 ALTER TABLE `membersheep_log` ENABLE KEYS */;
 
 -- 테이블 bank.membersheep_rating 구조 내보내기
-DROP TABLE IF EXISTS `membersheep_rating`;
 CREATE TABLE IF NOT EXISTS `membersheep_rating` (
   `name` varchar(50) NOT NULL COMMENT '멤버쉽 등급이름',
   `condition` int(11) NOT NULL COMMENT '등급 조건 포인트',
@@ -533,7 +507,6 @@ INSERT INTO `membersheep_rating` (`name`, `condition`, `status`, `register_date`
 /*!40000 ALTER TABLE `membersheep_rating` ENABLE KEYS */;
 
 -- 테이블 bank.menu 구조 내보내기
-DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
   `type` varchar(50) NOT NULL COMMENT '메뉴 분류',
   `name` varchar(50) NOT NULL COMMENT '메뉴명',
@@ -601,7 +574,6 @@ INSERT INTO `menu` (`type`, `name`, `kor_name`, `prnts_name`, `status`, `depth`,
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 
 -- 테이블 bank.nation 구조 내보내기
-DROP TABLE IF EXISTS `nation`;
 CREATE TABLE IF NOT EXISTS `nation` (
   `code` varchar(50) NOT NULL DEFAULT '',
   `name` varchar(50) NOT NULL DEFAULT '',
@@ -860,7 +832,6 @@ INSERT INTO `nation` (`code`, `name`) VALUES
 /*!40000 ALTER TABLE `nation` ENABLE KEYS */;
 
 -- 테이블 bank.notice 구조 내보내기
-DROP TABLE IF EXISTS `notice`;
 CREATE TABLE IF NOT EXISTS `notice` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `id` varchar(50) NOT NULL,
@@ -878,7 +849,6 @@ CREATE TABLE IF NOT EXISTS `notice` (
 /*!40000 ALTER TABLE `notice` ENABLE KEYS */;
 
 -- 테이블 bank.otp 구조 내보내기
-DROP TABLE IF EXISTS `otp`;
 CREATE TABLE IF NOT EXISTS `otp` (
   `serial` varchar(50) NOT NULL COMMENT '시리얼 번호',
   `id` varchar(50) NOT NULL COMMENT '사용자 id',
@@ -892,7 +862,7 @@ CREATE TABLE IF NOT EXISTS `otp` (
   CONSTRAINT `fk_security_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 보안매체 OTP';
 
--- 테이블 데이터 bank.otp:~14 rows (대략적) 내보내기
+-- 테이블 데이터 bank.otp:~16 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `otp` DISABLE KEYS */;
 INSERT INTO `otp` (`serial`, `id`, `type`, `status`, `register_date`, `end_date`) VALUES
 	('122-55-3282', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 01:30:59', '2020-10-01 01:30:59'),
@@ -904,6 +874,7 @@ INSERT INTO `otp` (`serial`, `id`, `type`, `status`, `register_date`, `end_date`
 	('337-4031-9711', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 00:45:03', '2020-10-01 00:45:03'),
 	('401-7197-8001', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 00:59:49', '2020-10-01 00:59:49'),
 	('413-1677-1439', 'aaa', '인터넷OTP', '비활성', '2019-10-01 00:50:11', '2020-10-01 00:50:11'),
+	('461-8145-3665', 'elliottjo', '인터넷OTP', '활성', '2019-10-03 16:01:28', '2020-10-03 16:01:28'),
 	('693-1209-8161', 'aaa', '인터넷OTP', '비활성', '2019-10-01 00:51:10', '2020-10-01 00:51:10'),
 	('739-7069-9812', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 00:57:57', '2020-10-01 00:57:57'),
 	('798-7007-410', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 01:02:19', '2020-10-01 01:02:19'),
@@ -913,7 +884,6 @@ INSERT INTO `otp` (`serial`, `id`, `type`, `status`, `register_date`, `end_date`
 /*!40000 ALTER TABLE `otp` ENABLE KEYS */;
 
 -- 테이블 bank.otp_log 구조 내보내기
-DROP TABLE IF EXISTS `otp_log`;
 CREATE TABLE IF NOT EXISTS `otp_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `serial` varchar(50) NOT NULL,
@@ -932,7 +902,6 @@ CREATE TABLE IF NOT EXISTS `otp_log` (
 /*!40000 ALTER TABLE `otp_log` ENABLE KEYS */;
 
 -- 테이블 bank.qna 구조 내보내기
-DROP TABLE IF EXISTS `qna`;
 CREATE TABLE IF NOT EXISTS `qna` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(50) NOT NULL COMMENT '문의 타입',
@@ -953,7 +922,6 @@ CREATE TABLE IF NOT EXISTS `qna` (
 /*!40000 ALTER TABLE `qna` ENABLE KEYS */;
 
 -- 테이블 bank.qna_reply 구조 내보내기
-DROP TABLE IF EXISTS `qna_reply`;
 CREATE TABLE IF NOT EXISTS `qna_reply` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `id` varchar(50) NOT NULL COMMENT '상담사 ID',
@@ -970,7 +938,6 @@ CREATE TABLE IF NOT EXISTS `qna_reply` (
 /*!40000 ALTER TABLE `qna_reply` ENABLE KEYS */;
 
 -- 테이블 bank.saving 구조 내보내기
-DROP TABLE IF EXISTS `saving`;
 CREATE TABLE IF NOT EXISTS `saving` (
   `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
   `id` varchar(50) NOT NULL COMMENT '사용자 id',
@@ -992,7 +959,6 @@ CREATE TABLE IF NOT EXISTS `saving` (
 /*!40000 ALTER TABLE `saving` ENABLE KEYS */;
 
 -- 테이블 bank.saving_info 구조 내보내기
-DROP TABLE IF EXISTS `saving_info`;
 CREATE TABLE IF NOT EXISTS `saving_info` (
   `product` varchar(50) NOT NULL COMMENT '상품명',
   `product_info` varchar(50) NOT NULL COMMENT '상품설명',
@@ -1017,14 +983,13 @@ CREATE TABLE IF NOT EXISTS `saving_info` (
   CONSTRAINT `FK_saving_info_saving_type` FOREIGN KEY (`type`) REFERENCES `saving_type` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='적금 상품 정보';
 
--- 테이블 데이터 bank.saving_info:~0 rows (대략적) 내보내기
+-- 테이블 데이터 bank.saving_info:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `saving_info` DISABLE KEYS */;
 INSERT INTO `saving_info` (`product`, `product_info`, `min_interest`, `max_interest`, `month`, `type`, `interest_type`, `tax`, `preferential`, `prf_content`, `prf_interest`, `min_sum`, `max_sum`, `partialization`, `retention`, `status`, `register_date`, `end_date`) VALUES
 	('SJ스마트적금', '', 2, 3, 12, '자유', '만기일시지급-단리식', '비과세종합저축가능', '프로그래머#java기술자', '프로그래머들#java가능', '0.3#0.7', 0, 1000000, '불가', '불가', '활성', '2019-10-01 12:46:38', NULL);
 /*!40000 ALTER TABLE `saving_info` ENABLE KEYS */;
 
 -- 테이블 bank.saving_log 구조 내보내기
-DROP TABLE IF EXISTS `saving_log`;
 CREATE TABLE IF NOT EXISTS `saving_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
   `account_number` varchar(50) NOT NULL COMMENT '계좌',
@@ -1043,7 +1008,6 @@ CREATE TABLE IF NOT EXISTS `saving_log` (
 /*!40000 ALTER TABLE `saving_log` ENABLE KEYS */;
 
 -- 테이블 bank.saving_type 구조 내보내기
-DROP TABLE IF EXISTS `saving_type`;
 CREATE TABLE IF NOT EXISTS `saving_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`name`)
@@ -1058,7 +1022,6 @@ INSERT INTO `saving_type` (`name`) VALUES
 /*!40000 ALTER TABLE `saving_type` ENABLE KEYS */;
 
 -- 테이블 bank.transfer_auto 구조 내보내기
-DROP TABLE IF EXISTS `transfer_auto`;
 CREATE TABLE IF NOT EXISTS `transfer_auto` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `account_number` varchar(50) NOT NULL,
@@ -1077,14 +1040,15 @@ CREATE TABLE IF NOT EXISTS `transfer_auto` (
   KEY `account_number` (`account_number`),
   KEY `status` (`status`),
   CONSTRAINT `fk_auto_transfer_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='자동이체 등록 정보';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='자동이체 등록 정보';
 
--- 테이블 데이터 bank.transfer_auto:~0 rows (대략적) 내보내기
+-- 테이블 데이터 bank.transfer_auto:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `transfer_auto` DISABLE KEYS */;
+INSERT INTO `transfer_auto` (`seq`, `account_number`, `to_account_number`, `sum`, `period`, `start_date`, `finish_date`, `last_day`, `memo`, `to_memo`, `status`, `register_date`, `end_date`) VALUES
+	(1, '010-1111-112-1212', '010-1111-112-1213', 12345, '한달', '2019-10-10', '2022-02-22', '말일이체함', '아씨 예제 만들기 너무 길어', '내돈내놔', 'y', '2011-11-11 00:00:00', '2080-02-08 00:00:00');
 /*!40000 ALTER TABLE `transfer_auto` ENABLE KEYS */;
 
 -- 테이블 bank.transfer_log 구조 내보내기
-DROP TABLE IF EXISTS `transfer_log`;
 CREATE TABLE IF NOT EXISTS `transfer_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그 번호',
   `account_number` varchar(50) NOT NULL COMMENT '보내는 계좌',
@@ -1106,14 +1070,13 @@ CREATE TABLE IF NOT EXISTS `transfer_log` (
   CONSTRAINT `fk_accountlog_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='계좌 이체 이력';
 
--- 테이블 데이터 bank.transfer_log:~0 rows (대략적) 내보내기
+-- 테이블 데이터 bank.transfer_log:~1 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `transfer_log` DISABLE KEYS */;
 INSERT INTO `transfer_log` (`seq`, `account_number`, `self`, `target`, `to_account_number`, `received`, `sum`, `fee`, `cms`, `memo`, `to_memo`, `status`, `register_date`) VALUES
 	(1, '010-1111-112-1212', 'y', '하나은행', '111-1234-5678', '갓이찬', 1234560, NULL, NULL, '팀플금액청구', NULL, NULL, NULL);
 /*!40000 ALTER TABLE `transfer_log` ENABLE KEYS */;
 
 -- 테이블 bank.transfer_reserve 구조 내보내기
-DROP TABLE IF EXISTS `transfer_reserve`;
 CREATE TABLE IF NOT EXISTS `transfer_reserve` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `account_number` varchar(50) NOT NULL COMMENT '계좌',
@@ -1139,7 +1102,6 @@ INSERT INTO `transfer_reserve` (`seq`, `account_number`, `to_account_number`, `s
 /*!40000 ALTER TABLE `transfer_reserve` ENABLE KEYS */;
 
 -- 테이블 bank.user 구조 내보내기
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` varchar(50) NOT NULL COMMENT '사용자 id',
   `pw` varchar(50) NOT NULL COMMENT '사용자 pw',
@@ -1157,12 +1119,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 정보';
 
--- 테이블 데이터 bank.user:~8 rows (대략적) 내보내기
+-- 테이블 데이터 bank.user:~9 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `pw`, `simple_pw`, `name`, `tel`, `gen`, `email`, `job_group`, `addr`, `postal_code`, `status`, `register_date`, `end_date`) VALUES
 	('aaa', '1111', 1234, '귀태씨는왜아직안만들어져있지', '010-3830-6039', '남', 'asdfghjk@naver.com', '학생', '1535135', 13531513, '활성', '2019-09-30 15:03:47', NULL),
 	('asas', '1111', 11111, '아아아', '010-2516-6038', '여', 'asdfghjk@naver.com', '주부', '1535135', 13531513, '활성', '2019-09-28 20:00:53', NULL),
-	('day_0821', '1', 0, '박이찬', '010-####-#', '남', 'asasas@naver.com', '학생', '1212', 123, '활성', '2019-09-05 08:31:36', NULL),
+	('day_0821', '1111', 0, '박이찬', '010-####-#', '남', 'asasas@naver.com', '학생', '1212', 123, '활성', '2019-09-05 08:31:36', NULL),
 	('elliottjo', '1234', 7777, '조은환', '010-####-#', '남자', 'TT@green.com', '프로그래머', '인천시', 0, '활성', '2019-09-18 00:56:13', NULL),
 	('exception', '123456', 921028, '황동규', '010-####-#', '남', '111@naver.com', '학생', '경기도 안양시', 13531513, '활성', '2019-09-10 11:11:00', NULL),
 	('fff', '123', 123, '박이찬', '123', '남', '123@naver.com', '학생', '123', 123, '활성', '2019-09-28 19:47:44', NULL),
@@ -1172,7 +1134,6 @@ INSERT INTO `user` (`id`, `pw`, `simple_pw`, `name`, `tel`, `gen`, `email`, `job
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 -- 테이블 bank.user_analysis_log 구조 내보내기
-DROP TABLE IF EXISTS `user_analysis_log`;
 CREATE TABLE IF NOT EXISTS `user_analysis_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `id` varchar(50) NOT NULL,
@@ -1193,7 +1154,6 @@ CREATE TABLE IF NOT EXISTS `user_analysis_log` (
 /*!40000 ALTER TABLE `user_analysis_log` ENABLE KEYS */;
 
 -- 테이블 bank.user_login_log 구조 내보내기
-DROP TABLE IF EXISTS `user_login_log`;
 CREATE TABLE IF NOT EXISTS `user_login_log` (
   `id` varchar(50) NOT NULL,
   `ip` varchar(50) NOT NULL COMMENT '접속IP',
@@ -1207,7 +1167,6 @@ CREATE TABLE IF NOT EXISTS `user_login_log` (
 /*!40000 ALTER TABLE `user_login_log` ENABLE KEYS */;
 
 -- 테이블 bank.user_pw_log 구조 내보내기
-DROP TABLE IF EXISTS `user_pw_log`;
 CREATE TABLE IF NOT EXISTS `user_pw_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `id` varchar(50) NOT NULL COMMENT '사용자id',
@@ -1224,7 +1183,6 @@ CREATE TABLE IF NOT EXISTS `user_pw_log` (
 /*!40000 ALTER TABLE `user_pw_log` ENABLE KEYS */;
 
 -- 테이블 bank.user_simple_pw_log 구조 내보내기
-DROP TABLE IF EXISTS `user_simple_pw_log`;
 CREATE TABLE IF NOT EXISTS `user_simple_pw_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `id` varchar(50) NOT NULL,
@@ -1240,7 +1198,6 @@ CREATE TABLE IF NOT EXISTS `user_simple_pw_log` (
 /*!40000 ALTER TABLE `user_simple_pw_log` ENABLE KEYS */;
 
 -- 테이블 bank.user_status_log 구조 내보내기
-DROP TABLE IF EXISTS `user_status_log`;
 CREATE TABLE IF NOT EXISTS `user_status_log` (
   `seq` int(11) NOT NULL AUTO_INCREMENT,
   `id` varchar(50) NOT NULL,
@@ -1257,7 +1214,6 @@ CREATE TABLE IF NOT EXISTS `user_status_log` (
 /*!40000 ALTER TABLE `user_status_log` ENABLE KEYS */;
 
 -- 테이블 bank.user_transfer_limit 구조 내보내기
-DROP TABLE IF EXISTS `user_transfer_limit`;
 CREATE TABLE IF NOT EXISTS `user_transfer_limit` (
   `id` varchar(50) NOT NULL,
   `daily_limit` int(11) NOT NULL COMMENT '일일제한',

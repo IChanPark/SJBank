@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Deposit.Deposits_infoDTO;
 
 public class Saving_infoDAO {
 	private Connection con;
@@ -101,10 +102,44 @@ public class Saving_infoDAO {
 		return res;
 	}
 	
-	public ArrayList<Saving_infoDTO> selectLike(String title){
+	public ArrayList<Saving_infoDTO> selectLikePro(Saving_infoDTO dto){
 		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
 		
-		sql = "select * from saving_info where product like '%"+title+"%'";
+		sql = "select * from saving_info where product like '%"+dto.getProduct()+"%'";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Saving_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Saving_infoDTO> selectLikeType(Saving_infoDTO dto){
+		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
+		
+		sql = "select * from saving_info where product like '%"+dto.getType()+"%'";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Saving_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Saving_infoDTO> selectLikeAnd(Saving_infoDTO dto){
+		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
+		
+		sql = 	"select * from saving_info where product like '%"+dto.getProduct()+"%'"+
+				"AND type ='"+dto.getType()+"'";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);

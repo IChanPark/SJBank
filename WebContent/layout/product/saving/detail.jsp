@@ -10,8 +10,21 @@
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
-ArrayList<Saving_infoDTO> dto = 
-Saving_infoDAO.getInstance().selectLike(request.getParameter("eee"));
+
+Saving_infoDTO setDTO = new Saving_infoDTO();
+setDTO.setProduct(request.getParameter("product"));
+setDTO.setType(request.getParameter("type"));
+
+ArrayList<Saving_infoDTO> dto = null;
+//타입 타이틀 검색
+if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
+	dto = Saving_infoDAO.getInstance().selectLikeAnd(setDTO);
+//타입만 검색
+else if(!setDTO.getType().equals(""))
+	dto = Saving_infoDAO.getInstance().selectLikeType(setDTO);
+//타이틀만 검색
+else	
+	dto = Saving_infoDAO.getInstance().selectLikePro(setDTO);
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("product", dto.get(i).getProduct());

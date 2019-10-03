@@ -96,16 +96,14 @@ public class Deposits_infoDAO {
 		return res;
 	}
 	
-	public ArrayList<Deposits_infoDTO> listin(String s1){
+	public ArrayList<Deposits_infoDTO> selectLikePro(Deposits_infoDTO dto){
 		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
 		
-		sql = "select * from deposits_info where type in(?)";
+		sql = "select * from deposits_info where product like '%"+dto.getProduct()+"%'";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, s1);
-			
 			rs = pstmt.executeQuery();
 			
 			Deposits_info(rs, res);			
@@ -114,10 +112,27 @@ public class Deposits_infoDAO {
 		return res;
 	}
 	
-	public ArrayList<Deposits_infoDTO> selectLike(String title){
+	public ArrayList<Deposits_infoDTO> selectLikeType(Deposits_infoDTO dto){
 		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
 		
-		sql = "select * from deposits_info where product like '%"+title+"%'";
+		sql = "select * from deposits_info where type like '%"+dto.getType()+"%'";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Deposits_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Deposits_infoDTO> selectLikeAnd(Deposits_infoDTO dto){
+		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
+		
+		sql = 	"select * from deposits_info where product like '%"+dto.getProduct()+"%'"+
+				"AND type ='"+dto.getType()+"'";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);

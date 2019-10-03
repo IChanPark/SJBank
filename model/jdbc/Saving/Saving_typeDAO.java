@@ -43,6 +43,7 @@ public class Saving_typeDAO {
 		ArrayList<Saving_typeDTO> res = new ArrayList<Saving_typeDTO>();
 		
 		sql = "select * from saving_type";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);

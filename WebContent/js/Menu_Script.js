@@ -13,28 +13,30 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 	
-	$(document).ready(function() {
-		console.log( "Menu_Click.js!" );
-		$("a[data-menu-name]").on("click", function() {	//메뉴 이동용
-			var f=document.paging; 
+	console.log( "Menu_Click.js!" );
+	$("a[data-menu-name]").on("click", function() {	//메뉴 이동용
+		var f=document.paging; 
 			
-		    f.hid_t.value = $(this).data("menu-name"); 
-		    console.log(f.hid_t.value);
-		    f.method="post";
-		    f.submit();
-		});
+	    f.hid_t.value = $(this).data("menu-name"); 
+	    console.log(f.hid_t.value);
+	    f.method="post";
+	    f.submit();
 	});
-	
-	
-	$(document).ready(function() {
-		console.log( "팀장님 살려줘요!!!!!" );
-		$("button[data-menu-name]").on("click", function() {	//메뉴 이동용
-			var f=document.paging; 
-			
-		    f.hid_t.value = $(this).data("menu-name"); 
-		    console.log(f.hid_t.value);
-		    f.method="post";
-		    f.submit();
-		});
+
+	console.log( "팀장님 살려줘요!!!!!" );
+	$("button[data-menu-name]").on("click", function() {	//메뉴 이동용
+		var f=document.paging; 
+		
+	    f.hid_t.value = $(this).data("menu-name"); 
+	    console.log(f.hid_t.value);
+	    f.method="post";
+	    f.submit();
 	});
 });
+
+function goMenu(qq) {	//메뉴 이동용
+	var f=document.paging; 
+    f.hid_t.value = $(qq).data("menu-name"); 
+    f.method="post";
+    f.submit();
+};

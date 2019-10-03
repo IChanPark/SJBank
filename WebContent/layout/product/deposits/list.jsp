@@ -11,7 +11,7 @@ Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
 ArrayList<Deposits_infoDTO> dto = 
-Deposits_infoDAO.getInstance().selectLike(request.getParameter("eee"));
+Deposits_infoDAO.getInstance().list();
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("product", dto.get(i).getProduct());

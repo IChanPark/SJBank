@@ -10,9 +10,21 @@
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
-ArrayList<Deposits_infoDTO> dto = 
-/* Deposits_infoDAO.getInstance().listin(request.getParameter("ddd")); */
-Deposits_infoDAO.getInstance().list();
+
+Deposits_infoDTO setDTO = new Deposits_infoDTO();
+setDTO.setProduct(request.getParameter("product"));
+setDTO.setType(request.getParameter("type"));
+
+ArrayList<Deposits_infoDTO> dto = null;
+//타입 타이틀 검색
+if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
+	dto = Deposits_infoDAO.getInstance().selectLikeAnd(setDTO);
+//타입만 검색
+else if(!setDTO.getType().equals(""))
+	dto = Deposits_infoDAO.getInstance().selectLikeType(setDTO);
+//타이틀만 검색
+else	
+	dto = Deposits_infoDAO.getInstance().selectLikePro(setDTO);
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("product", dto.get(i).getProduct());
@@ -26,7 +38,7 @@ for (int i = 0; i < dto.size(); i++) {
 	if(i < dto.size()-1)
 		json +=",";
 }
+
 json+="]";
 out.print(json);
-System.out.print(json);
 %>

@@ -43,6 +43,7 @@ public class Deposits_typeDAO {
 		ArrayList<Deposits_typeDTO> res = new ArrayList<Deposits_typeDTO>();
 		
 		sql = "select * from deposits_type";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
