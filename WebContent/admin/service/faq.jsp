@@ -8,10 +8,13 @@
  var screen="show";
 $(document).ready(function() {
 	$(".ltt").on("click",function() {
+	     var index = $(".ltt").index(this);
 	     
+	     alert(index);
 		$(this).find(".ull").stop().fadeToggle(500);
 	    if(screen=="show"){ 
-			$(".d1").height('60');
+		//	$(".d1").height('60');
+		$(".d1").(index).height('60');
 			screen="hide"
 	    }
 	    else
