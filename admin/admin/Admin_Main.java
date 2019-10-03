@@ -21,8 +21,9 @@ public class Admin_Main extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");	//한글처리
 			HttpSession session = request.getSession();
+			String param = request.getParameter("hid_t");
 			
-			if(request.getParameter("hid_t") != null) {
+			if(!(param == null || param.equals(""))) {
 				String service = ""; 
 				String url = request.getParameter("hid_t");
 				
@@ -34,8 +35,8 @@ public class Admin_Main extends HttpServlet {
 
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
 			
-				System.out.println("url : "+url);
-				System.out.println("service : "+service);
+				System.out.println("url : "+url+"\n"+"service : "+service);
+				
 				if(admin.Util.Exception_Group.getInstance().check(service)) { // 속하지 않는다면 실행
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
@@ -43,7 +44,6 @@ public class Admin_Main extends HttpServlet {
 			} else
 				request.setAttribute("mainUrl", "admin/inc/main");
 			
-
 			RequestDispatcher dispatcher = request.getRequestDispatcher("template_Admin.jsp"); //여기로 보내
 			dispatcher.forward(request, response);
 		} catch (Exception e) {e.printStackTrace();} 

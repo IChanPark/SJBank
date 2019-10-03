@@ -18,7 +18,7 @@ public class Login  implements M_Action{
       if(dto != null && dto.getPw().equals(request.getParameter("pw"))) {
          url = "main";
          session.setAttribute("userID", dto.getId());
-         session.setMaxInactiveInterval(10*60);
+         session.setMaxInactiveInterval(20*60);
          session.setAttribute("current_Page", "main");
       }
       

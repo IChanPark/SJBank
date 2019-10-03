@@ -5,7 +5,7 @@ li {list-style: none;}
 input{color: black;}
 select{color: black;}
 option{background: #363636;}
-#mid{width:100%;margin :0 auto; height: 1200px;}
+#mid{width:100%;margin :0 auto; height: 1000px;}
 #mid>div{width:1000px;margin :0 auto;}
 #bot {height: 80px;width: 100%;margin: 0 auto; background: #00B992;}
 #bot>div{width: 1000px;margin: 0 auto;padding-top: 20px; font-size: 13pt; background: #00B992;}

@@ -15,7 +15,7 @@ import util.Exception_Group;
 import util.Exception_Menu;
 
 @WebServlet("/index.jsp")
-public class Controller extends HttpServlet {
+public class User_Main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,8 +23,9 @@ public class Controller extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");	//한글처리
 			HttpSession session = request.getSession();
-
-			if(request.getParameter("hid_t") != null) {
+			String param = request.getParameter("hid_t");
+			
+			if(!(param == null || param.equals(""))) {
 				String service = ""; 
 				String url = request.getParameter("hid_t");
 					
@@ -36,12 +37,11 @@ public class Controller extends HttpServlet {
 				service = service.substring(0, service.length()-1);
 
 				session.setAttribute("Previous_page", session.getAttribute("Current_Page"));   //이전페이지
-				session.setAttribute("Current_Page", service);      //현재페이지
+				session.setAttribute("Current_Page", url);      //현재페이지
 
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
 				
-				System.out.println("url : "+url);
-				System.out.println("service : "+service);
+				System.out.println("url : "+url+"\n"+"service : "+service);
 				
 				if(session.getAttribute("userID")==null && Exception_Menu.getInstance().check(url)) {
 					request.setAttribute("msg", "로그인이 필요한 서비스 입니다.");
@@ -55,7 +55,9 @@ public class Controller extends HttpServlet {
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
-			} else
+			} else if(session.getAttribute("Previous_page") != null) 
+				request.setAttribute("mainUrl", session.getAttribute("Current_Page"));
+			  else 
 				request.setAttribute("mainUrl", "main");
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
