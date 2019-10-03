@@ -13,11 +13,9 @@ $(document).ready(function(){
 	    f.submit(); */
 		
 	    $.ajax({	//라디오 버튼 
-			url:"layout/banking/check/reservationList.jsp",
+			url:"layout/banking/check/delayList.jsp",
 			type:'post',
 			data:{
-				start : $("input[name=start]").val(),
-				  end : $("input[name=end]").val(),
 				  sort : $("input[name=sort]").val()
 			},
 			dataType:'json',
@@ -45,15 +43,10 @@ $(document).ready(function(){
 
 </script>
 
-<div class="subTitle">예약이체 </div>
-
+<div class="subTitle">지연이체</div>
 
 
 <table border="" >
-	<tr>
-		<td>조회기간 선택</td>
-		<td><input type="date" name="start" />~<input type="date" name="end"/></td>
-	</tr>
 	<tr>
 		<td>조회결과 순서</td>
 		<td><input type="radio" name="sort" value="desc"/>최근거래순 <input type="radio"  name="sort" value="asc"/>과거거래순</td>
@@ -65,9 +58,12 @@ $(document).ready(function(){
 
 <br>
 <br>
-<div class="subTitle">예약이체 조회결과</div>
+
+<div class="subTitle">지연이체 조회결과</div>
 <br>
 <br>
+
+
 
 <table border="" id="tot">
 	<tr>
@@ -79,6 +75,7 @@ $(document).ready(function(){
 		<td>이체금액(원)</td>
 		<td>수수료(원)</td>
 		<td>받는통장<br>메모</td>
+		<td>내통장<br>메모</td>
 		<td>CMS코드</td>
 	</tr>
 </table>
@@ -87,5 +84,5 @@ $(document).ready(function(){
 <br>
 <br>
 
-<div align="center"><button class="subTitle" >예약이체 취소</button>
+<div align="center"><button class="subTitle" >지연이체 취소</button>
 </div>

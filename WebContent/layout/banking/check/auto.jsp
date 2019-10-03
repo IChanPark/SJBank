@@ -32,6 +32,11 @@ $(document).ready(function(){
 	});
 }); 
 </script>
+
+
+<div class="subTitle">자동이체 </div>
+
+
 <table border="">
 	<tr>
 		<td>계좌번호</td>
@@ -46,10 +51,13 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="4" align="center"><div class="check" />조회</td>
-		
+
 	</tr>
 </table>
-<br><br><br><br>
+<br><br>
+
+<div class="subTitle">자동이체 조회결과</div>
+<br><br>
 <table border="" id="tot">
 	<tr>
 		<td>선택</td>
