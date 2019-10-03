@@ -14,7 +14,7 @@
 
 <br><br><br><br><br>
 
-<button width= "300px" data-menu-name="">신청하기</button>
+<button width= "300px" data-menu-name="security/delaytrs/apply">신청하기</button>
 <br><br><br><br><br>
 <table>
 	<tr>

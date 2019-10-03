@@ -178,6 +178,32 @@ public class UserDAO {
 		} finally { close(); }
 	}
 	
+	////////////////////////////// 1001추가 아리디에 따른 패스워드 체크 HDG
+	
+	public boolean chkPw(String id,String pw){
+		boolean res = false;
+		
+		sql = 	"select pw from user where id = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				if(rs.getString("pw").equals(pw))
+					res=true;
+			}
+				
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
+	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}
