@@ -9,17 +9,17 @@
 $(document).ready(function() {
 	$(".ltt").on("click",function() {
 	     var index = $(".ltt").index(this);
-	     
-	     alert(index);
+	     var hh = $(".d1").eq(index).height();
+	     alert(hh);
 		$(this).find(".ull").stop().fadeToggle(500);
-	    if(screen=="show"){ 
+	    if(hh ==30){ 
 		//	$(".d1").height('60');
-		$(".d1").(index).height('60');
+		$(".d1").eq(index).height('60');
 			screen="hide"
 	    }
 	    else
 	    {
-	    	$(".d1").height('30');
+	    	$(".d1").eq(index).height('30');
 	    	screen="show";
 	    }
 	});
