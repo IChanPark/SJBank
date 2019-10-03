@@ -5,14 +5,13 @@
 $(document).ready(function(){
 
 	$('.check').click(function(){
-		
+		alert("????");
 		  $.ajax({	//라디오 버튼 
 				url:"layout/banking/check/autoList.jsp",
 				type:'post',
 				data:{
-					start : $("input[name=start]").val(),
-					  end : $("input[name=end]").val(),
-					  sort : $("input[name=sort]").val()
+					division : $("input[name=division]").val(),
+					account : $("select[name=account]").val(),
 				},
 				dataType:'json',
 				success:function(qqq){
@@ -41,18 +40,17 @@ $(document).ready(function(){
 				<c:forEach var="dto" items="${data }" >
 					<option>${dto.account_number }</option>
 				</c:forEach>
-			</select>
-			
+			</select>			
 		</td>
-		<td>조회구분</td><td> <input type="radio" name="division" value="정상"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="해지"/>해지</td>
+		<td>조회구분</td><td> <input type="radio" name="division" value="y"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="n"/>해지</td>
 	</tr>
 	<tr>
-		<td colspan="4" align="center"><input type="button" value="조회" class="check" /></td>
+		<td colspan="4" align="center"><div class="check" />조회</td>
 		
 	</tr>
 </table>
 <br><br><br><br>
-<table border="">
+<table border="" id="tot">
 	<tr>
 		<td>선택</td>
 		<td>입금은행<br>입금계좌</td>

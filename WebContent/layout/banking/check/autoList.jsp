@@ -1,85 +1,50 @@
+<%@page import="jdbc.Transfer.Transfer_autoDAO"%>
+<%@page import="jdbc.Transfer.Transfer_autoDTO"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="jdbc.Transfer.Transfer_reserveDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="jdbc.Transfer.Transfer_reserveDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<script>
-$(document).ready(function(){
 
-	$('.check').click(function(){
-		alert("눌림")
-		/* alert("눌림");
-		var f=document.paging; 
-		f.method="post";
-	    f.action="layout/banking/check/test.jsp"
-	    f.submit(); */
-		
-	    $.ajax({	//라디오 버튼 
-			url:"layout/banking/check/reservationList.jsp",
-			type:'post',
-			data:{
-				start : $("input[name=start]").val(),
-				  end : $("input[name=end]").val(),
-				  sort : $("input[name=sort]").val()
-			},
-			dataType:'json',
-			success:function(qqq){
-				
-				$.each(qqq,function(i,e){
-					var row = $("<tr><td>"+e.account_number+"</td>");
-					row.append($("<td>"+e.register_date+"</td>"));
-					row.append($("<td>"+e.memo+"</td>"));
-					row.append($("<td>"+e.to_memo+"</td>"));
-					row.append($("<td>"+e.time+"</td></tr>"));
-					$("#tot").append(row);
-				});
-			},
-			error:function(qqq){
-				console.log("오류오류");
-			}
-		});
-	});
-	    
-	    
-});
+
+<%
+Map<String,String> map = new HashMap<String,String>();
+Gson gson = new Gson();
+String json ="[";
+ArrayList<Transfer_autoDTO> dto = 
+Transfer_autoDAO.getInstance().Search(
+		request.getParameter("account"), request.getParameter("division")
+		); 
+System.out.println(request.getParameter("account"));
+System.out.println(request.getParameter("division"));
 
 
 
-</script>
-<table border="" >
-	<tr>
-		<td>조회기간 선택</td>
-		<td><input type="date" name="start" />~<input type="date" name="end"/></td>
-	</tr>
-	<tr>
-		<td>조회결과 순서</td>
-		<td><input type="radio" name="sort" value="desc"/>최근거래순 <input type="radio"  name="sort" value="asc"/>과거거래순</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center"><div class="check" />조회</td>
-	</tr>
-</table>
+for (int i = 0; i < dto.size(); i++) {
+	map.put("seq", dto.get(i).getSeq()+"");
+	map.put("account_number", dto.get(i).getAccount_number());
+	map.put("to_account_number", dto.get(i).getTo_account_number());
+	map.put("sum", dto.get(i).getSum()+"");
+	map.put("period", dto.get(i).getPeriod());
+	map.put("start_date", dto.get(i).getStart_dateStr());
+	map.put("finish_date", dto.get(i).getFinish_dateStr());
+	map.put("last_date", dto.get(i).getLast_day());
+	map.put("memo", dto.get(i).getMemo());
+	map.put("to_memo", dto.get(i).getTo_memo());
+	map.put("status", dto.get(i).getStatus());
+	map.put("register_date", dto.get(i).getRegister_dateStr());
+	map.put("end_date", dto.get(i).getend_dateStr());
+	
+	
+	json += gson.toJson(map);
+	if(i < dto.size()-1)
+		json +=",";
+}
+json+="]";
+out.print(json);
+%>
 
-<br>
-<br>
-<br>
-<br>
-
-<table border="" id="tot">
-	<tr>
-		<td>선택</td>
-		<td>이체예정일시</td>
-		<td>출금계좌</td>
-		<td>입금은행<br>입금계좌</td>
-		<td>받는분</td>
-		<td>이체금액(원)</td>
-		<td>수수료(원)</td>
-		<td>받는통장<br>메모</td>
-		<td>CMS코드</td>
-	</tr>
-</table>
-
-
-<br>
-<br>
-
-<div align="center"><button class="subTitle" >예약이체 취소</button>
-</div>

@@ -24,10 +24,10 @@ public class Transfer_autoDAO {
 	}
 	
 	private static class Holder {
-        public static final Transfer_reserveDTO DAO = new Transfer_reserveDTO();
+        public static final Transfer_autoDAO DAO = new Transfer_autoDAO();
     }
 	
-	public static Transfer_reserveDTO getInstance() {
+	public static Transfer_autoDAO getInstance() {
         return Holder.DAO;
     }
 
@@ -131,7 +131,7 @@ public class Transfer_autoDAO {
 	}
 	
 	public void insert(Transfer_autoDTO dto){
-		sql = 	"insert into transfer_reserve (" +
+		sql = 	"insert into transfer_auto (" +
 				"account_number, to_account_number, sum, period, start_date, finish_date, last_day,memo,to_memo,"+
 				"status,register_date,end_date) "+
 				"values ("+
@@ -189,6 +189,42 @@ public class Transfer_autoDAO {
 		} finally { close(); }
 	}
 	
+	
+	
+//////////////오후 6:37 2019-10-03 추가 1. 조회 상태 계좌번호로 부터	
+	
+	public ArrayList<Transfer_autoDTO> Search(String acc,String status){
+		ArrayList<Transfer_autoDTO> res = new ArrayList<Transfer_autoDTO>();
+		
+		String str="";
+		if(status.equals(""))
+		{
+			
+		}
+		else
+		{
+			str= " and status = '"+status+"' ";
+		}
+		
+		sql = 	"select * from transfer_auto where "+
+				"account_number = ? "+ str+
+				"ORDER BY finish_date desc";
+//		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+		
+			pstmt.setString(1, acc);
+			rs = pstmt.executeQuery();
+			Transfer_auto(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
+	
+	
+	//////////////////////////////////////////////////////////
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}
