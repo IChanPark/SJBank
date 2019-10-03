@@ -24,10 +24,10 @@ public class Transfer_reserveDAO {
 	}
 	
 	private static class Holder {
-        public static final Transfer_reserveDTO DAO = new Transfer_reserveDTO();
+        public static final Transfer_reserveDAO DAO = new Transfer_reserveDAO();
     }
 	
-	public static Transfer_reserveDTO getInstance() {
+	public static Transfer_reserveDAO getInstance() {
         return Holder.DAO;
     }
 
@@ -177,6 +177,35 @@ public class Transfer_reserveDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
+	
+	
+	public ArrayList<Transfer_reserveDTO> SearchDate(String start,String end, String order){
+		ArrayList<Transfer_reserveDTO> res = new ArrayList<Transfer_reserveDTO>();
+		
+		sql = 	"select * from transfer_reserve where "+
+				"scheduled_date BETWEEN ? and   ? "+
+				"ORDER BY scheduled_date ";
+		sql+=order; 
+		
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+		
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+						
+			rs = pstmt.executeQuery();
+			
+			Transfer_reserve(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
+	
+	
+	
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}

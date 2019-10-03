@@ -7,7 +7,7 @@
 $(document).ready(function(){
 	$(".accountNumber").click(function() {	//메뉴 이동용
 		
-		var t=$(".accountNumber").val();
+		var t=$(this).val();
 		
 		alert(t);
 		
@@ -40,21 +40,23 @@ $(document).ready(function(){
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
-			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</a></td>
+			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</button>></td>
 		</tr>
-		<c:set var="dsum" value="${dsum+=dto.sum }" />
+		<c:set var="dsum" value="${dsum=dsum*1+dto.sum*1 }" />
 	</c:if>
 </c:forEach>
 <c:if test="${empty dsum }">
 <tr>
-	<td>개설된 계좌가 없습니다.</td>
+	<td colspan="6" align="center">개설된 계좌가 없습니다.</td>
 </tr>
 
 </c:if>
 
 </table>
 <br>
-<div align="right">입/출금 계좌 총액 &nbsp&nbsp ${dsum }원</div>
+<div align="right">
+<fmt:formatNumber value="${dsum }" pattern="입/출금 계좌 총액 #,###원"/>
+</div>
 
 <div class="subTitle">예금/적금/신탁 계좌</div>
 	<table class="AccInfo">
@@ -76,18 +78,19 @@ $(document).ready(function(){
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
 			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</a></td>
 		</tr>
-		<c:set var="psum" value="${psum+=dto.sum }" />
+		<c:set var="psum" value="${psum=psum*1+ dto.sum*1 }" />
 	</c:if>
 	
 </c:forEach>
 <c:if test="${empty psum }">
 <tr>
-	<td>개설된 계좌가 없습니다.</td>
+	<td colspan="6" align="center">개설된 계좌가 없습니다.</td>
 </tr>
 
 </c:if>
 </table>
 
 <br>
-<div align="right">상품 계좌 총액 &nbsp&nbsp ${psum }원</div>
-
+<div align="right">
+<fmt:formatNumber value="${psum }" pattern="상품 계좌 총액 #,###원"/>
+</div>
