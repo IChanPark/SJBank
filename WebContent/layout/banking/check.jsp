@@ -21,6 +21,8 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+<input type="hidden" name="accountNumber" />
 <div class="subTitle">입/출금 계좌</div>
 <table class="AccInfo">
 <tr >
@@ -40,7 +42,7 @@ $(document).ready(function(){
 			<td>${dto.register_date }</td>
 			<td>${dto.register_date }</td>
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
-			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</button>></td>
+			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</button></td>
 		</tr>
 		<c:set var="dsum" value="${dsum=dsum*1+dto.sum*1 }" />
 	</c:if>

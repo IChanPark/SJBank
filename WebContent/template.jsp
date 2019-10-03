@@ -19,7 +19,6 @@
 
 <form name="paging" action="index.jsp"/>
 <input type="hidden" name="hid_t" />
-<input type="hidden" name="accountNumber" />
 <!-- post데이터 전송용 form과 input -->
 
 <body>
