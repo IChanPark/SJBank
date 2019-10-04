@@ -20,12 +20,11 @@
 <script type="text/javascript" src="js/zipCode.js"></script>   <!-- 우편번호 -->
 <script type="text/javascript" src="js/Loader.js"></script>
 </head>
-	
+	<form name="paging" action="index.jsp" onsubmit="return false;" method="post"/>
+	<input type="hidden" name="hid_t" />
 <body>
 	<jsp:include page="layout/inc/top.jsp" />
 	<div id="mid"><div><jsp:include page="${mainUrl }.jsp" /></div></div>
 	<div id="bot"><div><jsp:include page="layout/inc/bottom.jsp" /></div></div>
-	<form name="paging" action="index.jsp" onsubmit="return false;" method="post"/>
-	<input type="hidden" name="hid_t" />
 </body>
 </html>

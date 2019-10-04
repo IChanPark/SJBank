@@ -16,10 +16,9 @@
 <script type="text/javascript" src="js/Menu_Move.js"></script>   <!-- menu 이동 -->
 <script type="text/javascript" src="js/Top_Fix.js"></script>   <!-- top 고정 -->
 </head>
-
-<body>
 	<form name="paging" action="index.jsp" onsubmit="return false;" method="post"/>
 	<input type="hidden" name="hid_t" />
+<body>
    	<jsp:include page="admin/inc/top.jsp" />
    	<div id="mid"><div><jsp:include page="${mainUrl }.jsp" /></div></div>
    	<div id="bot"><div><jsp:include page="admin/inc/bottom.jsp" /></div></div>
