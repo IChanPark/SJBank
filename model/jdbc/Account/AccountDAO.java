@@ -156,7 +156,25 @@ public class AccountDAO {
 		} finally { close(); }
 	}
 
+	///////////////////////// 계좌정보 다 넣기가 귀찮아서 일단 계좌 번호만으로 업데이트
+	
+	public void updateMoney(int money,String acc){
+		sql = 	"update account set " +
+				"sum = sum + ? " +
+				"where account_number = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
 
+			pstmt.setInt(1, money);
+			pstmt.setString(2, acc);
+
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
 
 
 	/////////////////////////////// 당행이체 계좌아이디 빼가기 10 04 
@@ -213,10 +231,29 @@ public class AccountDAO {
 
 	/////////////////////////////// 10 04  지연 이체 시 종류 업데이트
 	
-	public void updateAccType(String id){
+	public void updateAccType(String id , String time){
 		sql = 	"update account set " +
-				"type = delay " +
+				"type = 'delay' , status = '"+time +"' " +
 				"where id = ? and type = 'deposit' ";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	/////////////////////////////////////// 10 04 지연 해지
+	
+	
+	public void AccDelayCancel(String id){
+		sql = 	"update account set " +
+				"type = 'deposit' , status = '활성' " +
+				"where id = ? and type = 'delay' ";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();

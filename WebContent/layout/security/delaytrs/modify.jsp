@@ -29,5 +29,5 @@
 <div><input type="radio" name="call"/>휴대폰<input type="radio" name="call"/>직접입력</div>
 
 
-<button data-menu-name="security/otp/Reg">완료</button>
+<button data-menu-name="security/delaytrs/Delete">해지하기</button>
 

@@ -37,8 +37,7 @@ $(document).ready(function(){
 function regGo(){
 	
 	alert("??????");
-	$("#tot").html("");
-	var lastApply=$("<div>보안정보 입력</div>");
+	var lastApply=$("<br><br><br><br><div>보안정보 입력</div>");
 	
 	lastApply.append("<div><input type='text' /></div>");
 	lastApply.append("<button onclick=complete()>입력</button>")

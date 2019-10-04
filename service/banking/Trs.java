@@ -40,6 +40,13 @@ public class Trs implements M_Action{
 				dto.setRegister_date(new Date());
 				System.out.println("여기옴 TRS");
 				Transfer_logDAO.getInstance().insert(dto);
+				AccountDAO.getInstance().updateMoney( -1*Integer.parseInt(request.getParameter("money")), request.getParameter("acc") );
+				
+				if(!AccountDAO.getInstance().getNamebyAcc(request.getParameter("toAcc")).equals("외부계좌") )
+				{
+					AccountDAO.getInstance().updateMoney( Integer.parseInt(request.getParameter("money")), request.getParameter("toAcc"));
+				}
+					
 			}
 			else
 			{
