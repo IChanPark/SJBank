@@ -55,7 +55,8 @@ public class User_Main extends HttpServlet {
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
-			} else if(session.getAttribute("Previous_page") != null) 
+			} else if(session.getAttribute("Previous_page") != null &&
+					session.getAttribute("userID")!=null) 
 				request.setAttribute("mainUrl", session.getAttribute("Current_Page"));
 			  else 
 				request.setAttribute("mainUrl", "main");
