@@ -110,8 +110,8 @@ public class Transfer_logDAO {
 				"account_number,self,target,to_account_number,received,"+ 
 				"sum,fee,cms,memo,to_memo,status,register_date) "+ 
 				"values ( "+
-				"		?		, ?	,	?	,		?		,	?	  ,"+ 
-				" ? , ? , ? , ?   ,  ?	,    ?  , 	now()	  )";
+				"		?	   ,  ? ,	?  ,		?		,	?	  ,"+ 
+				" ? , ? , ? , ?  ,  ?	,    ?  , 	now()	  )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -129,7 +129,7 @@ public class Transfer_logDAO {
 			pstmt.setString(10, dto.getTo_memo());
 			pstmt.setString(11, dto.getStatus());
 			
-			pstmt.executeUpdate(sql); 
+			rs = pstmt.executeQuery();
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}

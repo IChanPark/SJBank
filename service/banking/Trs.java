@@ -27,6 +27,7 @@ public class Trs implements M_Action{
 			if(AccountDAO.getInstance().chkAccPw(request.getParameter("acc"), request.getParameter("accpw")))
 			{
 				dto.setAccount_number(request.getParameter("acc"));
+				dto.setSelf("본인");
 				dto.setTarget(request.getParameter("transfer_receive"));
 				dto.setTo_account_number(request.getParameter("toAcc"));
 				dto.setReceived( AccountDAO.getInstance().getNamebyAcc(request.getParameter("toAcc"))   );
@@ -37,6 +38,7 @@ public class Trs implements M_Action{
 				dto.setTo_memo(request.getParameter("to_memo"));
 				dto.setStatus("성공");
 				dto.setRegister_date(new Date());
+				System.out.println("여기옴 TRS");
 				Transfer_logDAO.getInstance().insert(dto);
 			}
 			else
@@ -49,7 +51,6 @@ public class Trs implements M_Action{
 				return;
 			}
 			
-			
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -57,8 +58,7 @@ public class Trs implements M_Action{
 		}
 
 		
-		request.setAttribute("data", AccountDAO.getInstance().selectID((String)session.getAttribute("userID")));
-
+		
 		System.out.println("trs서비스들어온다");
 		//리스트 정보를 키는 "data"로 어트리뷰트로 넘긴다
 	}
