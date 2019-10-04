@@ -87,13 +87,53 @@ public class Saving_infoDAO {
 		} catch (Exception e) {}
 	}
 	
+	public Saving_infoDTO selectProUse(Saving_infoDTO dto){
+		Saving_infoDTO SetDTO = null;
+		
+		sql =	"select * from saving_info where product = ? "+
+				"and status = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, SetDTO.getProduct());
+			pstmt.setString(2, "활성");
+			rs = pstmt.executeQuery();
+			
+			SetDTO = Saving_info(rs, dto);			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return SetDTO;
+	}
+	
 	public ArrayList<Saving_infoDTO> list(){
 		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
 		
 		sql = "select * from saving_info";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Saving_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Saving_infoDTO> selectType(Saving_infoDTO dto){
+		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
+		
+		sql = "select * from saving_info where tyoe = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getType());
+			
 			rs = pstmt.executeQuery();
 			
 			Saving_info(rs, res);			
@@ -105,27 +145,14 @@ public class Saving_infoDAO {
 	public ArrayList<Saving_infoDTO> selectLikePro(Saving_infoDTO dto){
 		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
 		
-		sql = "select * from saving_info where product like '%"+dto.getProduct()+"%'";
+		sql = "select * from saving_info where product like ?";
 		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 			
-			Saving_info(rs, res);			
-		} catch (Exception e) { e.printStackTrace(); }
-		finally { close(); }
-		return res;
-	}
-	
-	public ArrayList<Saving_infoDTO> selectLikeType(Saving_infoDTO dto){
-		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
-		
-		sql = "select * from saving_info where product like '%"+dto.getType()+"%'";
-		
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+dto.getProduct()+"%");
+			
 			rs = pstmt.executeQuery();
 			
 			Saving_info(rs, res);			
@@ -137,12 +164,16 @@ public class Saving_infoDAO {
 	public ArrayList<Saving_infoDTO> selectLikeAnd(Saving_infoDTO dto){
 		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
 		
-		sql = 	"select * from saving_info where product like '%"+dto.getProduct()+"%'"+
-				"AND type ='"+dto.getType()+"'";
+		sql = 	"select * from saving_info where product like ?"+
+				"AND type = ?";
 		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+dto.getProduct()+"%");
+			pstmt.setString(2, dto.getType());
+			
 			rs = pstmt.executeQuery();
 			
 			Saving_info(rs, res);			

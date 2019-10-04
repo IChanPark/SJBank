@@ -81,66 +81,97 @@ public class Deposits_infoDAO {
 		} catch (Exception e) {}
 	}
 	
+	public Deposits_infoDTO selectProUse(Deposits_infoDTO dto){
+		Deposits_infoDTO SetDTO = null;
+		
+		sql =	"select * from deposits_info where product = ? "+
+				"and status = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct());
+			pstmt.setString(2, "활성");
+			rs = pstmt.executeQuery();
+			
+			SetDTO = Deposits_info(rs, dto);			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return SetDTO;
+	}
+	
 	public ArrayList<Deposits_infoDTO> list(){
 		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
 		
 		sql = "select * from deposits_info";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			Deposits_info(rs, res);			
-		} catch (Exception e) { e.printStackTrace(); }
-		finally { close(); }
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Deposits_infoDTO> selectType(Deposits_infoDTO dto){
+		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
+		
+		sql = "select * from deposits_info where type = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getType());
+			
+			rs = pstmt.executeQuery();
+			
+			Deposits_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
 		return res;
 	}
 	
 	public ArrayList<Deposits_infoDTO> selectLikePro(Deposits_infoDTO dto){
 		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
 		
-		sql = "select * from deposits_info where product like '%"+dto.getProduct()+"%'";
+		sql = "select * from deposits_info where product like ?";
 		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+dto.getProduct()+"%");
+			
 			rs = pstmt.executeQuery();
 			
 			Deposits_info(rs, res);			
-		} catch (Exception e) { e.printStackTrace(); }
-		finally { close(); }
-		return res;
-	}
-	
-	public ArrayList<Deposits_infoDTO> selectLikeType(Deposits_infoDTO dto){
-		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
-		
-		sql = "select * from deposits_info where type like '%"+dto.getType()+"%'";
-		
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			Deposits_info(rs, res);			
-		} catch (Exception e) { e.printStackTrace(); }
-		finally { close(); }
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
 		return res;
 	}
 	
 	public ArrayList<Deposits_infoDTO> selectLikeAnd(Deposits_infoDTO dto){
 		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
 		
-		sql = 	"select * from deposits_info where product like '%"+dto.getProduct()+"%'"+
-				"AND type ='"+dto.getType()+"'";
+		sql = 	"select * from deposits_info where product like ?"+
+				"AND type = ?";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+dto.getProduct()+"%");
+			pstmt.setString(2, dto.getType());
+			
 			rs = pstmt.executeQuery();
 			
 			Deposits_info(rs, res);			
-		} catch (Exception e) { e.printStackTrace(); }
-		finally { close(); }
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
 		return res;
 	}
 	

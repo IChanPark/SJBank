@@ -21,7 +21,7 @@ if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
 	dto = Deposits_infoDAO.getInstance().selectLikeAnd(setDTO);
 //타입만 검색
 else if(!setDTO.getType().equals(""))
-	dto = Deposits_infoDAO.getInstance().selectLikeType(setDTO);
+	dto = Deposits_infoDAO.getInstance().selectType(setDTO);
 //타이틀만 검색
 else	
 	dto = Deposits_infoDAO.getInstance().selectLikePro(setDTO);

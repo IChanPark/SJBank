@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import inf.M_Action;
 import jdbc.Account.AccountDAO;
 
-public class Check implements M_Action{
+public class Join implements M_Action{
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setAttribute("data", AccountDAO.getInstance().selectID("elliottjo"));
