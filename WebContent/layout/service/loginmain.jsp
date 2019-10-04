@@ -5,8 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 1000px;
-  width: 100%;
+  height: 600px;
+  width: 1000px;
 }
 </style>
 
