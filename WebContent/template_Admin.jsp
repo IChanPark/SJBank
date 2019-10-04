@@ -12,11 +12,14 @@
 <link rel="stylesheet" type="text/css" href="css/Account.css" />   <!-- 계좌 테이블 스타일 -->
 <link rel="stylesheet" type="text/css" href="css/Scroll_bar.css" />   <!-- 스크롤바 미니 -->
 <link rel="stylesheet" type="text/css" href="css/Box.css" />   <!-- 상품 스타일 -->
+<link rel="stylesheet" type="text/css" href="css/Loader.css" />   <!-- 로딩 스타일 -->
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>   
 <script type="text/javascript" src="js/Menu_Move.js"></script>   <!-- menu 이동 -->
 <script type="text/javascript" src="js/Top_Fix.js"></script>   <!-- top 고정 -->
+<script type="text/javascript" src="js/Loader.js"></script>
+
 </head>
-	<form name="paging" action="index.jsp" onsubmit="return false;" method="post"/>
+	<form name="paging" action="admin.jsp" onsubmit="return false;" method="post"/>
 	<input type="hidden" name="hid_t" />
 <body>
    	<jsp:include page="admin/inc/top.jsp" />
