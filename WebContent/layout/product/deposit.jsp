@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript">
-var main = '';
+/* var main = '';
 main +="<div class='serBox' >";
 main +="<input class='data_v' type = 'radio' name = 'group'  value='예금' checked='checked'/>예금</input>";
 main +="<input class='data_v' type = 'radio' name = 'group' value='적금'>적금</input>";
@@ -14,7 +14,7 @@ main +="</div>";
 main +="<div class='scrollB'>"; //스크롤바
 main +="<div id = 'ttt'></div>";
 main +="</div>";
-$("#mid").append(main);
+$("#mid").append(main); */
 
 var radioVal = "예금";
 var selVal = "";
@@ -94,7 +94,7 @@ function detail(me) {
 	isRun = true;
 	
 	gogo =  "layout/"+path+"detail.jsp";
-	$('.subTitle').text('상품 상세내용');
+	$('.subTitle').text('상품 안내');
 	$.ajax({	
 		url:gogo,
 		type:'post',
@@ -140,6 +140,44 @@ function goMenu(qq) {	//메뉴 이동용
 </script>
 <div class='subTitle'>예금·적금 신규</div>
 <style>
-
-
+.topLeft {float: left; height: 100%; width: 65%; background:skyblue;
+align-items: flex-start; }
+.topLtt {text-align:left; height: 20%; font-size: 16pt; font-weight: bold; padding-top: 10px;}
+.topLinfo {text-align:left; height: 65%; font-size: 11pt;}
+.topRigth {float: right; height: 100%; width: 35%; background:blue;
+align-items: center; font-size: 14px; text-align: center; justify-content: center;}
+.topRigth img {height: 150px; width: 150px; }
+.infoBox {margin-top: 30px; width: 100%; height: 500px;}
+.infoTop {height: 200px; text-align: center; border: 1px solid white; padding-left: 20px; padding-top: 20px;}
+infoMain {float: left; height: 200px; width: 60%; background:skyblue;
+align-items: flex-start; display: flex;}
+.subinfo {margin-top:30px; margin-bottom:20px; border-bottom:1px solid white; font-size: 15pt;}
+.cenb {width: 100%; text-align: center;}
+.joinb{width: font-size: 14pt; font-weight: bold; width: 100px; height: 50ox;}
+border-radius
 </style>
+<div class= "infoBox">
+	<div class="infoTop">
+		<div class="topLeft">
+			<div class="topLtt">뭐시기 뭐시기 뭐시기</div><br>
+			<div class="topLinfo">
+				① 뭐시기 우대해서 우대해야<br>
+				② 뭐시기 뭐시기 하면 우대해야<br>
+				<br>
+				상품종류&emsp;|&emsp;대충 이러한 상품<br>
+				가입기간&emsp;|&emsp;대충 이러한 기간<br>
+				가입금액&emsp;|&emsp;대충 이러한 금액 부터 최대 이러한 금액까지
+			</div>
+		</div>
+		<div class="topRigth">
+		 	<img src="img/test1.png" alt="" /><br>
+		 	최저 연 ~ 최고 연<br>
+		 	1.4 ~ 2.8
+		</div>
+	</div>
+	<div class="cenb"><div class="joinb">가입</div></div>
+	<div class="infoMain">
+	<div class='subinfo'>상품 안내</div>
+		ㅁㄴㅁㄴㄴㅁㅁㄴ 
+	</div>
+</div>

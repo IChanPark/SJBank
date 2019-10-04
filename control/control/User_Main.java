@@ -35,14 +35,7 @@ public class User_Main extends HttpServlet {
 
 				url = "layout/"+url.toLowerCase();
 				service = service.substring(0, service.length()-1);
-
-				session.setAttribute("Previous_page", session.getAttribute("Current_Page"));   //이전페이지
-				session.setAttribute("Current_Page", url);      //현재페이지
-
-				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
-				
 				System.out.println("url : "+url+"\n"+"service : "+service);
-				
 				if(session.getAttribute("userID")==null && Exception_Menu.getInstance().check(url)) {
 					request.setAttribute("msg", "로그인이 필요한 서비스 입니다.");
 					request.setAttribute("goUrl", "index.jsp");
@@ -50,6 +43,10 @@ public class User_Main extends HttpServlet {
 					dispatcher.forward(request, response);
 					return;
 				}
+				session.setAttribute("Previous_page", session.getAttribute("Current_Page"));   //이전페이지
+				session.setAttribute("Current_Page", url);      //현재페이지
+
+				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
 				
 				if(Exception_Group.getInstance().check(service)) { // 클래스 예외처리 여부
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
