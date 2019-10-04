@@ -53,7 +53,7 @@ function complete(){
 	var f=document.paging; 
 	    
 	f.hid_t.value = "security/delaytrs/Complete";
-	f.accountNumber.value = t;
+	
 	f.method="post";
 	f.submit();
 	

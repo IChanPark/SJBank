@@ -8,23 +8,23 @@ $(document).ready(function(){
 		
 		$("#mid").html("");
 		var text =$("<div>주의사항이 들어갈겁니다 아무튼</div>");
-		text.append($("<br><br><table border=''><tr><td>출금계좌정보</td><td><input type='text' /></td></tr>"+
-		"<tr><td>계좌비밀번호</td><td><input type='text' /></td></tr></table>"));
+		text.append($("<br><br><table border=''><tr><td>출금계좌정보</td><td><input type='text' name='acc'/></td></tr>"+
+		"<tr><td>계좌비밀번호</td><td><input type='text' name='accpw'/></td></tr></table>"));
 
 			
 	
 		var inaccount=$("<div class='subTitle'>입금정보</div>");
 		
 		inaccount.append($("<table><tr><td>입금은행</td><td></td></tr>"));
-		inaccount.append($("<tr><td>입금계좌번호</td><td><input type='text' /></td></tr>"));
-		inaccount.append($("<tr><td>이체금액</td><td><input type='text' /></td></tr>"));
-		inaccount.append($("<tr><td>이체주기</td><td><input type='text' /></td></tr>"));
+		inaccount.append($("<tr><td>입금계좌번호</td><td><input type='text' name ='toAcc'/></td></tr>"));
+		inaccount.append($("<tr><td>이체금액</td><td><input type='text' name='sum' /></td></tr>"));
+		inaccount.append($("<tr><td>이체주기</td><td><input type='text' name='period'/></td></tr>"));
 		inaccount.append($("<tr><td>이체종류</td><td></td></tr>"));
-		inaccount.append($("<tr><td>이체시작일/이체종료일</td><td></td></tr>"));
+		inaccount.append($("<tr><td>이체시작일/이체종료일<input type='date' name='start' />~<input type='date' name='end' /></td><td></td></tr>"));
 		inaccount.append($("<tr><td>휴일이체구분</td><td></td></tr>"));
 		inaccount.append($("<tr><td>말일이체여부</td><td></td></tr>"));
-		inaccount.append($("<tr><td>받는통장 메모</td><td><input type='text' /></td></tr>"));
-		inaccount.append($("<tr><td>내통장 메모</td><td><input type='text' /></td></tr></table>"));
+		inaccount.append($("<tr><td>받는통장 메모</td><td><input type='text' name='to_memo'/></td></tr>"));
+		inaccount.append($("<tr><td>내통장 메모</td><td><input type='text' name='memo' /></td></tr></table>"));
 		
 		
 		$("#mid").append("<div class='subTitle'>출금정보</div>");
@@ -52,10 +52,24 @@ function fff(){
 	inputSecurityInfo.append($("<br><div>OTP 번호입력 : <input type='text' /></div>"));
 	$("#mid").append(inputSecurityInfo);
 	
-	var btn = $("<br><br><div><input type='button' value='완료' /></div>");
+	var btn = $("<br><br><div><button onclick= goReg() >완료</button></div>");
 	
 	$("#mid").append(btn);
 }
+
+function goReg(){
+	
+
+	var f=document.paging; 
+    
+	f.hid_t.value = "banking/transfer/autoReg";
+	
+    f.method="post";
+    f.submit();
+	
+	
+};
+
  </script>
 
 

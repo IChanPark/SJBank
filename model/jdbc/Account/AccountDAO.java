@@ -211,6 +211,29 @@ public class AccountDAO {
 	}
 
 
+	/////////////////////////////// 10 04  지연 이체 시 종류 업데이트
+	
+	public void updateAccType(String id){
+		sql = 	"update account set " +
+				"type = delay " +
+				"where id = ? and type = 'deposit' ";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	
+	
+	
+	
+	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}
