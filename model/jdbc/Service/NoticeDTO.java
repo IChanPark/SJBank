@@ -69,5 +69,12 @@ public class NoticeDTO {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "NoticeDTO [id=" + id + ", title=" + title + ", content=" + content + ", status=" + status + ", seq="
+				+ seq + ", register_date=" + register_date + "]";
+	}
 
+	
+	
 }

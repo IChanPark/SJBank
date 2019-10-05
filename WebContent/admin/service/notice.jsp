@@ -1,60 +1,63 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="jdbc.User.UserDAO"%>
-<%@page import="jdbc.User.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
+<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-$(document).ready(function() {
-	$(".uid").on("click", function() {
-		
-		//var b = $(this).text();
-		$.ajax({
-			url:"admin/list.jsp",
-			type:'get',
-			data:{nn : $(this).text()},
-			 ////json을 안하면 문자열로 , json 처리하면 object로 묶어서 받음
-			success:function(qqq){
-				console.log(qqq);
-			},
-			error:function(qqq){
-				$("#tot").html(qqq.responseText);
-			}
-			
-		});
-	});
-});
+<style media="screen">
+.ltt {
+    width: 100%;
+    text-align: center;
+  }
+.ull{
+	
+    display: none;
+}
+.lii {
+	
+  	display: block;
+}
+.d1 {padding-top: 10px;  height: 30px; margin: auto; }
+.m {background-color: #3C0; float: left; height: 30px;  width: 100%;
+display: grid;justify-content: center;align-items: center;}
 
+</style>
 
-</script>
-
-<div class="subTitle">사용자 리스트</div>
-<table class="AccInfo">
-<tr >
-	<td>아이디</td>
-	<td>이름</td>
-	<td>전화번호</td>
-	<td>이메일</td>
-	<td>직업군</td>
-	<td>주소</td>
-	<td>우편번호</td>
-	<td>계정상태</td>
-	<td>가입일</td>
-	<td>탈퇴일</td>
-</tr>
-<c:forEach var="dto" items="${data }" varStatus="no">
-	<tr>
-		<td class = "uid">${dto.id }</td>
-		<td>${dto.name }</td>
-		<td>${dto.tel }</td>
-		<td>${dto.email }</td>
-		<td>${dto.job_group }</td>
-		<td>${dto.addr }</td>
-		<td>${dto.postal_code }</td>
-		<td>${dto.status }</td>
-		<td>${dto.register_date }</td>
-		<td>${dto.end_date }</td>
-	</tr>
-</c:forEach>
-</table>
+            <div>
+                <h1>공지사항 관리</h1>
+            </div>
+            <div class="row">
+                  <div>
+                      <button type="button" class="btn btn-list">
+                       									   공지사항 작성
+                      </button>
+                  </div>
+              </div>
+            <div>
+                <div>공지사항 </div>
+                <div>
+                    <table class="table table-hover" border="1">
+                        <thead>
+                            <tr>
+                                <th>No.1</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>작성일</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                       
+                        <c:forEach items="${data }" var="notice">
+                            <tr>
+                                <td>${notice.seq}</td>
+                                <td>${notice.title}</td>
+                                <td>${notice.id}</td>
+                                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${notice.register_date}"/></td>
+                                <td>${notice.content}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    

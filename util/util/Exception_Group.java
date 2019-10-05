@@ -9,7 +9,7 @@ public class Exception_Group {
 			"security.Otp","security.otp.Register","security.Accaign",
 			"security.Delaytrs","security.Blockalarm","management.user.check",
 			"management.User","security.otp.Apply","Security","Banking",
-			"service.SearchID","service.SearchPW"
+			"service.SearchID","service.SearchPW","service.client.Faq"
 			
 	};	//여짝에 추가해주세용
 	private Exception_Group() {

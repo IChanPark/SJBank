@@ -10,7 +10,7 @@ $(document).ready(function() {
 	$(".ltt").on("click",function() {
 	     var index = $(".ltt").index(this);
 	     var hh = $(".d1").eq(index).height();
-	     alert(hh);
+	  
 		$(this).find(".ull").stop().fadeToggle(500);
 	    if(hh ==30){ 
 		//	$(".d1").height('60');
