@@ -12,7 +12,7 @@ Gson gson = new Gson();
 String json ="[";
 
 Saving_infoDTO setDTO = new Saving_infoDTO();
-setDTO.setProduct(request.getParameter("product"));
+setDTO.setProduct(request.getParameter("title"));
 setDTO.setType(request.getParameter("type"));
 
 ArrayList<Saving_infoDTO> dto = null;
@@ -20,11 +20,13 @@ ArrayList<Saving_infoDTO> dto = null;
 if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
 	dto = Saving_infoDAO.getInstance().selectLikeAnd(setDTO);
 //타입만 검색
-else if(!setDTO.getType().equals(""))
+else if(!setDTO.getType().equals("")){
 	dto = Saving_infoDAO.getInstance().selectType(setDTO);
 //타이틀만 검색
-else	
+}else if(!setDTO.getProduct().equals(""))
 	dto = Saving_infoDAO.getInstance().selectLikePro(setDTO);
+else 
+	dto = Saving_infoDAO.getInstance().list();
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("product", dto.get(i).getProduct());

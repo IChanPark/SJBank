@@ -6,19 +6,20 @@ import java.util.Date;
 
 //예금 상품 정보
 public class Deposits_infoDTO {
-	private String  product,         //상품명
-					interest_type,   //이자지급방식
-					type,			 //가입타입 ex 인터넷, 모바일
-					tax,			 //세금종류
-					preferential,	 //우대구분
-					prf_content,	 //우대조건 내용
-					prf_interest,	 //우대이자율
-					partialization,	 //일부해지가능여부
-					retention,		 //재예치가능여부
-					status;			 //상태
+	private String  product,        //상품명
+					deposits_info, 	//상품설명
+					interest_type,  //이자지급방식
+					type,			//가입타입 ex 인터넷, 모바일
+					tax,			//세금종류
+					preferential,	//우대구분
+					prf_content,	//우대조건 내용
+					prf_interest,	//우대이자율
+					partialization,	//일부해지가능여부
+					retention,		//재예치가능여부
+					status,			//상태
+					month;			//약정 개월 수
 					
-	private Integer	month,			//약정 개월 수
-					min_sum,		//최소 납입금
+	private Integer	min_sum,		//최소 납입금
 					max_sum;		//최대 납입금
 	
 	private Float  	min_interest,	//최저 연이자
@@ -44,6 +45,14 @@ public class Deposits_infoDTO {
 
 	public void setProduct(String product) {
 		this.product = product;
+	}
+
+	public String getDeposits_info() {
+		return deposits_info;
+	}
+
+	public void setDeposits_info(String deposits_info) {
+		this.deposits_info = deposits_info;
 	}
 
 	public String getInterest_type() {
@@ -110,11 +119,11 @@ public class Deposits_infoDTO {
 		this.status = status;
 	}
 
-	public Integer getMonth() {
+	public String getMonth() {
 		return month;
 	}
 
-	public void setMonth(Integer month) {
+	public void setMonth(String month) {
 		this.month = month;
 	}
 
@@ -194,7 +203,7 @@ public class Deposits_infoDTO {
 
 	@Override
 	public String toString() {
-		return	product + "," + min_interest + "," + max_interest + ","
+		return	product + "," + deposits_info + "," + min_interest + "," + max_interest + ","
 				+ month + "," + type + "," + interest_type + ","
 				+ tax + "," + preferential + "," + prf_content + ","
 				+ prf_interest + "," + min_sum + "," + max_sum

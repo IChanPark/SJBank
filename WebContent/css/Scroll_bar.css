@@ -3,6 +3,7 @@
 	height: 850px;
 	width : 1000px;
 	overflow-y: scroll;
+	word-break:break-all; /* 가로는 자동 줄바꿈 */
 }
 
 .scrollB::-webkit-scrollbar {

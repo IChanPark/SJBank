@@ -126,7 +126,7 @@ public class Saving_infoDAO {
 	public ArrayList<Saving_infoDTO> selectType(Saving_infoDTO dto){
 		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
 		
-		sql = "select * from saving_info where tyoe = ?";
+		sql = "select * from saving_info where type = ?";
 		
 		try {
 			con = ds.getConnection();

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {margin: 0;padding: 0; color: white; font-size: 12pt; font-weight: normal; font-family: 'Nanum Gothic';}
+body {background: #363636}/*눈 피로로 인해 추가함 */
+li {list-style: none;}
+input{color: black;}
+select{color: black;}
+option{background: #363636;}
+#mid{width:100%;margin :0 auto; height: 1000px;}
+#mid>div{width:1000px;margin :0 auto;}
+#bot {height: 80px;width: 100%;margin: 0 auto; background: #00B992;}
+#bot>div{width: 1000px;margin: 0 auto;padding-top: 20px; font-size: 13pt; background: #00B992;}
+button{color: black;}
+textarea{color: black;}
+.search_Box {padding-bottom: 20px; padding-top: 20px; 
+display: flex; justify-content: center;align-items: center; width: 100%; }
+.product_Radio {width: 20px; height: 20px; margin-left: 20px;}
+.type_Select{margin-left: 20px;}
+.search_Button {margin-left: 20px;}
+.search_Word {margin-left: 20px; width: 45%;}
+.box {border:1px solid white; height: 50px; margin: auto; margin-bottom: 15px;}
+.l {float: left; height: 50px; width: 10%; 
+display: grid;justify-content: center;align-items: center;}
+.rr {float: right; height: 50px; width: 6.5%; 
+display: grid; align-items: center; font-size: 20px; text-align: center; display: flex;}
+.rl {float: right; height: 50px; width: 8.5%; 
+display: grid; align-items: center; font-size: 20px; text-align: center;}
+.m {float: left; height: 50px; width: 75%;
+display: grid; align-items: center; font-size: 20px;} 
+/*--------------------------------------------------------------------------------------------------------------*/
+.infoBox {margin-top: 30px; width: 100%;}
+.infoTop {height: 250px; text-align: center; border: 1px solid white; padding-left: 20px; padding-top: 20px;}
+.infoTop_Left {float: left; height: 100%; width: 65%; }
+.infoTop_Title {text-align:left; height: 10%; font-size: 16pt; font-weight: bold; padding-top: 10px; width: 100%;}
+.infoTop_Info {text-align:left; font-size: 11pt; width: 100%; margin-bottom: 10px;}
+.infoTop_Type {float: left; border-right: 1px solid white; padding-right: 10px; margin-right: 10px; font-size: 11pt;}
+.infoTop_Rigth {float: right; height: 100%; width: 35%;
+align-items: center; font-size: 13px; text-align: center; justify-content: center;}
+.infoTop_Rigth>img {height: 150px; width: 150px; }
+.infoTop_Percent {font-size: 19px; text-align: center; font-weight:bold;}
+.infoMid_Guide {margin-top:30px; margin-bottom:20px; border-bottom:1px solid white; font-size: 14pt;}
+.infoMid {width: 100%; display: grid; justify-content: center; align-items: center; margin-top: 15px; margin-bottom: 15px;}
+.infoMid_Join{width: font-size: 14pt; font-weight: bold; width: 100px; text-align: center; border: 1px solid white;}
+.infoMain {height: 450px; width: 100%; border-bottom: 1px solid white; overflow-y: scroll; word-break:break-all;} /* 스크롤바 자동줄바꿈 */
+.infoMain_Info {float: left; text-align:left; font-size: 12pt; width: 100%; margin-bottom: 10px;}
+.infoMain_Type {float: left; border-right: 1px solid white; padding-right: 10px; font-size: 12pt; width: 15%;}
+.infoMain_Value {float: right; height: 100%; width: 83%} /* 2프로 여백 */
+.infoBot {width: 100%; display: grid; justify-content: center; align-items: center; margin-top: 15px; margin-bottom: 15px;}
+.infoBot_Back {width: font-size: 14pt; font-weight: bold; width: 100px; text-align: center; border: 1px solid white;}
+.infoMain::-webkit-scrollbar { width: 8px; }
+.infoMain::-webkit-scrollbar-track { box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); border-radius: 10px; }
+.infoMain::-webkit-scrollbar-thumb { border-radius: 10px; box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);}
+
+.pref {float: right; height: 100%; width: 83%}
+.infoAdmin {height: 750px; width: 100%; border-bottom: 1px solid white; overflow-y: scroll; word-break:break-all;} /* 스크롤바 자동줄바꿈 */
+.infoAdmin::-webkit-scrollbar { width: 8px; }
+.infoAdmin::-webkit-scrollbar-track { box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); border-radius: 10px; }
+.infoAdmin::-webkit-scrollbar-thumb { border-radius: 10px; box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);}
+.infoMain_Value>textarea {resize: none; width: 70%;}
+.AdminBot {text-align: center; padding-top: 20px;}
+.AdminButton {float: left; height: 100%; width: 50%; text}
+.infoAdmin input {font-family: inherit;}
+</style>
+</head>
+<body>
+<div id='mid'> 
+
+
+<div class= "infoBox">
+	<div class='infoMid_Guide'>상품 추가</div>
+	<div class="infoAdmin">
+		<div class="infoMain_Info"><div class="infoMain_Type">상품종류</div><div class="infoMain_Value">
+			<select name="" id=""><option value="정기">정기</option></select></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">상품명</div><div class="infoMain_Value">
+			<input type="text" placeholder="상품명을 입력해주세요."></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">상품내용</div><div class="infoMain_Value">
+			<textarea placeholder="상품내용을 입력해주세요. &#13;&#10;① 뭐시기뭐시기 &#13;&#10;② 뭐시기" rows="10"></textarea></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">상품기간</div><div class="infoMain_Value">
+			<input type="text" placeholder="상품기간을 입력해주세요." > 숫자만 입력부탁드리며 상품기간 다중 등록 시 "," 로 구분하여 입력해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">이자지급방식</div><div class="infoMain_Value">
+			<select name="" id=""><option value="만기일시">만기일시</option></select> 이자 지급방식을 선택해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">세금</div><div class="infoMain_Value">
+			<select name="" id=""><option value="비과세">비과세200</option></select> 과세여부를 선택해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">최소납입금액</div><div class="infoMain_Value">
+			<input type="text" placeholder="금액을 입력해주세요."> 최소 납입금액을 입력해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">최대납입금액</div><div class="infoMain_Value">
+			<input type="text" placeholder="금액을 입력해주세요."> 최대 납입금액을 입력해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">자동재예치</div><div class="infoMain_Value">
+			<select name="" id=""><option value="불가">불가</option></select> 자동재예치 가능 여부를 선택해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">일부해지</div><div class="infoMain_Value">
+			<select name="" id=""><option value="불가">불가</option></select> 일부해지 가능 여부를 선택해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">기준금리</div><div class="infoMain_Value">
+			<input type="text" placeholder=""> 기준 금리를 입력해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">최대금리</div><div class="infoMain_Value">
+			<input type="text" placeholder=""> 최대 금리를 입력해주세요.</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">우대항목</div><div class="infoMain_Value">
+			<select name="" id=""><option value="펀드">우대구분(펀드)</option></select>
+			<select name="" id=""><option value="보유시">우대조건(보유시)</option></select>
+			<select name="" id=""><option value="0.1">우대이자율(0.0%)</option></select>추가버튼
+		</div>
+		
+	</div>
+		
+	</div>
+	<div class="AdminBot"><div class="AdminButton">취소</div>
+	<div class="AdminButton">작성</div></div>
+</div>
+
+</div>
+</body>
+</html>
