@@ -202,7 +202,22 @@ public class UserDAO {
 		} finally { close(); }
 		return res;
 	}
-	
+	////상태변경
+	public void changeStatus(String status, String id){
+		sql = 	"update user set " +
+				"status = ? "  +
+				"where id	 = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, status);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}

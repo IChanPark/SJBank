@@ -24,18 +24,14 @@ $(document).ready(function(){
 				if(goUrl=="blockuserlist")
 					listGo(qqq);
 				
-				 if(goUrl=="userblock")
-					userblockGo(qqq);
-				 
 			},
 			error:function(qqq){
-				alert(" 에러인가");
-				tot.html(qqq.responseText);
+				alert(" 에러인가11");
 			}
 			
 		});
 	}
-	
+});
 /* function userblockGo(qqq){
 	alert(" 블록들어옴");
 	tot.html("");
@@ -61,13 +57,13 @@ $(document).ready(function(){
 } */
 
 function listGo(qqq){
-	 tot.html(""); 
+	$("#tot").empty();
 	
-	tot.append($("<tr><td>번호</td><td>id</td>"+
+	$("#tot").append($("<tr><td>번호</td><td>id</td>"+
 			"<td>이름</td><td>전화번호</td><td>이메일</td><td>계정상태</td><td>상태변경</td></tr>"));
 	
 	$.each(qqq,function(i,e){
-		var row = $("<tr></tr>");
+		var row = $("<tr data-product-name='"+e.id+"'></tr>");
 		row.append($("<td>"+i+"</td>"));
 		row.append($("<td id='det'>"+e.id+"</td>"));
 		row.append($("<td>"+e.name+"</td>"));
@@ -77,10 +73,10 @@ function listGo(qqq){
 	 	//<a href="#" class="ser" >검색하기</a>onclick='ajaxGo(\"userblock\",{id:"+e.id+"}) 
 		//var btn = $("<td  onclick='ajaxGo(\"userblock\",{id:"+e.id+"})' >상태변경</td>");
 		//row.append($("<td onclick='ajaxGo(\"userblock\",{id:"+e.id+"})'>상태변경</td>"));
-		row.append($("<td onclick='goMenu(this)' data-menu-name='admin/Block/Userblock'>상태변경</td>"));
+		row.append($("<td onclick='detail(this)' data-menu-name='admin/block/userblock'>상태변경</td>"));
 		/* <a href="#" data-menu-name="admnin/Server">서버 관리</a>
 		<a href="#" data-menu-name="admin/Userblock">상태변경</a> */
-		tot.append(row);
+		$("#tot").append(row);
 		//$("#tttt").append($("<td><a href=\"#\" data-menu-name=\"admin/Userblock\">상태변경</a></td>"));
 	});
 }
@@ -111,12 +107,70 @@ function listGo(qqq){
 	});
 }); */
 
-});
-function goMenu(qq) {	//메뉴 이동용
-	var f=document.paging; 
-    f.hid_t.value = $(qq).data("menu-name"); 
-    f.method="post";
-    f.submit();
+
+function detail(me) {
+	gogo =  "admin/block/userblock.jsp";
+	$.ajax({	
+		url:gogo,
+		type:'post',
+		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
+		dataType:'json',
+		success:function(sss){
+		
+			$("#tot").empty();
+			var row = "";
+			row += "<tr><td>아이디</td><td>이름</td><td>현재상태</td></tr>";
+			row += "<tr ><td id='statusid'>"+sss.id+"</td>";
+			row += "<td>"+sss.name+"</td>";
+			row += "<td>"+sss.status+"</td>";
+			row += "</tr>";
+			
+			row += "<tr><td colspan='3' align='center'>-</td></tr>";
+			
+			row += "<tr><td colspan='3' align='center'>상태변경선택</td></tr>";
+			row +="<tr>";
+			row +="<td colspan='3' align='center'><select id='selectstatus' >";
+			row +=	"<option>활성</option>";
+			row +=	"<option>비활성</option>";
+			row +=	"</select></td>"; 
+			row += "</tr>";
+			
+			
+			row += "<tr><td colspan='3' align='center'>-</td></tr>";
+			
+			row += "<tr onclick='statuschange(this)' ><td colspan='3' align='center'>등록</td></tr>";
+			
+			$("#tot").append(row);
+			
+		
+		},
+		error:function(sss){
+			alert(" 에러인가detail");
+		
+		}	
+	});
+};
+
+
+function statuschange(me) {
+	
+	gogo =  "admin/block/statuschange.jsp";
+	$.ajax({	
+		url:gogo,
+		type:'post',
+		data:{	statusid : $("#statusid").text(),
+				type : $("#selectstatus").val()},
+		dataType:'json',
+		success:function(sss){
+			
+			listGo(sss);
+		
+		},
+		error:function(sss){
+			alert(" 에러인가detail");
+		
+		}	
+	});
 };
 </script>
 </head>
