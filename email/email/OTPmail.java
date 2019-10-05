@@ -30,14 +30,14 @@ import javafx.beans.property.StringProperty;
 /**
  * Servlet implementation class myMail
  */
-@WebServlet("/myMail.jsp")
-public class myMail extends HttpServlet {
+@WebServlet("/OTPmail.jsp")
+public class OTPmail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public myMail() {
+	public OTPmail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -69,14 +69,17 @@ public class myMail extends HttpServlet {
 			msg.setFrom(from);
 
 			// 이메일 수신자
-			InternetAddress to = new InternetAddress("ehdrb1992@naver.com");
+			InternetAddress to = new InternetAddress("reck12@naver.com");
 			msg.setRecipient(Message.RecipientType.TO, to);
 
 			// 이메일 제목
-			msg.setSubject("WTF???!!!", "UTF-8");
+			msg.setSubject("이글은 자바로 부터 보내졌습니다.", "UTF-8");
 
+			int OTP = (int)(Math.random()*1000000);
+			
+			
 			// 이메일 내용
-			msg.setText("이거슨 테스트", "UTF-8");
+			msg.setText("커밋 해주세요 커밋커밋커밋", "UTF-8");
 
 			// 이메일 헤더
 			msg.setHeader("content-Type", "text/html");

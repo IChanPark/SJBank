@@ -17,9 +17,9 @@
 <br><br>
 
 <div>
-<input type="radio" name="place"/>자택
-<input type="radio" name="place"/>직장
-<input type="radio" name="place"/>직접입력
+<input type="radio" name="delayTime" value="3" />3
+<input type="radio" name="delayTime" value="4" />4
+<input type="radio" name="delayTime" value="5" />5 
 </div>
 
 
@@ -30,4 +30,5 @@
 
 
 <button data-menu-name="security/delaytrs/Delete">해지하기</button>
+<button data-menu-name="security/delaytrs/Renew">갱신하기</button>
 

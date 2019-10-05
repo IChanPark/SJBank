@@ -5,7 +5,7 @@
 $(document).ready(function(){
 	
 	$("button[name=goNext]").click(function(){
-		alert("이벤트발생?!!!");	
+		
 		$("#tot").html("");
 		
 		var title =$("<div class='subTitle'> 정보입력</div>");	
@@ -36,7 +36,6 @@ $(document).ready(function(){
 });
 function regGo(){
 	
-	alert("??????");
 	var lastApply=$("<br><br><br><br><div>보안정보 입력</div>");
 	
 	lastApply.append("<div><input type='text' /></div>");
@@ -47,7 +46,6 @@ function regGo(){
 
 function complete(){
 	
-	alert("왔다다아아아아아");
 	
 	var f=document.paging; 
 	    

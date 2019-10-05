@@ -24,6 +24,6 @@
 </tr>
 </c:if>
 <tr>
-	<td><button data-menu-name = "security/otp/Inactive">OTP정지하기</button></td>
+	<td><button data-menu-name = "security/otp/Inactive">OTP해지하기</button></td>
 </tr>
 </table>

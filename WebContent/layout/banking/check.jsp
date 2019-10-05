@@ -27,10 +27,11 @@ $(document).ready(function(){
 <table class="AccInfo">
 <tr >
 	<td>계좌명</td>
+	<td>별명</td>
 	<td>계좌번호</td>
 	<td>신규일</td>
-	<td>최근거래일</td>
 	<td>잔액</td>
+	<td>상태</td>
 	<td>업무</td>
 </tr>
 
@@ -38,10 +39,12 @@ $(document).ready(function(){
 	<c:if test="${dto.type=='deposit' }">
 		<tr>
 			<td>${dto.type }</td>
-			<td class = "ddd" value = "${dto.account_number }">${dto.account_number }</td>
+			<td>${dto.alias }</td>
+			<td>${dto.account_number }</td>
 			<td>${dto.register_date }</td>
-			<td>${dto.register_date }</td>
+			
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
+			<td>${dto.status }</td>
 			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</button></td>
 		</tr>
 		<c:set var="dsum" value="${dsum=dsum*1+dto.sum*1 }" />

@@ -14,8 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import mini.DAO;
-import mini.DTO_Keep;
 
 public class Acc_Member {
 	Socket socket;
@@ -103,11 +101,8 @@ public class Acc_Member {
 						data.name = id;
 						data.type = "사용자";
 
-						for (DTO_Keep dto : new DAO().OneReserveList(id)) {
-							String [] dsp = dto.toString().split("=");
-							found_t=dsp[8].substring(0, dsp[8].lastIndexOf(","));
-							first = true;
-						}
+						first = true;
+						
 						
 						if(first) {
 							Date endDate = new Date();
@@ -140,7 +135,7 @@ public class Acc_Member {
 			if (socket == null) {
 //				System.out.println("참이니");
 				this.id = id;
-				socket = new Socket("192.168.1.132", 7777);//192.168.1.180 // 192.168.0.18
+				socket = new Socket("192.168.219.103", 7777);//192.168.1.180 // 192.168.0.18
 				dos = new ObjectOutputStream(socket.getOutputStream());
 				rr = new TCPR(socket);
 				rr.setDaemon(true);

@@ -11,7 +11,7 @@
 <tr >
 	<td>계좌명</td><td colspan="3">${data.alias }</td>
 </tr><tr>
-	<td>고객명</td><td>${data.id }</td><td>계좌번호</td><td >${data.account_number }</td>
+	<td>고객아이디</td><td>${data.id }</td><td>계좌번호</td><td >${data.account_number }</td>
 	</tr><tr>
 	<td>신규일</td><td colspan="3" align="left" float="left">${data.register_date }</td>
 	
