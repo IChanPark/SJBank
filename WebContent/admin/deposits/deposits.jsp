@@ -96,6 +96,7 @@ function detail(me) {
 			box +=	"<div class='infoTop_Percent'>&ensp; "+qqq.min_interest+"~"+qqq.max_interest+"%</div><br>[납입방식 "+qqq.type+"기준]";
 			box +=	"</div>";
 			box +=	"</div>";
+			box +=	"<div class='infoMid'><div>　</div></div>";
 			box +=	"<div class='infoMain'>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>납입방법</div><div class='infoMain_Value'>"+qqq.type+"</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div><div class='infoMain_Value'>"+qqq.interest_type+"</div></div>";

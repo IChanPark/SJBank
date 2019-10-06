@@ -6,7 +6,8 @@ public class Exception_Group {
 	private ArrayList<String> nonClass;
 	private String [] group = {
 			"admin.Deposits.DepositsAdd","admin.Fund.FundAdd","admin.Saving.SavingAdd",
-			"admin.Loan.LoanAdd","admin.Block.Block","admin.Block.Userblock" };
+			"admin.Loan.LoanAdd","admin.Block.Block","admin.Block.Userblock",
+			"admin.Server.Server"};
 	//여짝에 추가해주세용
 	private Exception_Group() {
 		nonClass = new ArrayList<String>();

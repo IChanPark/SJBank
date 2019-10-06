@@ -66,7 +66,7 @@
       <div class="SubMenu">
           <ul class="SubUl">
               <div class="LowMenu">
-                  <li><a href="#" data-menu-name="admnin/Server/Server" >서버 관리</a></li>
+                  <li><a href="#" data-menu-name="admin/Server/Server" >서버 관리</a></li>
                </div>
            </ul>
       </div>

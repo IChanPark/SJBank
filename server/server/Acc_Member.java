@@ -4,16 +4,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
-import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 
 public class Acc_Member {
 	Socket socket;
@@ -22,15 +12,8 @@ public class Acc_Member {
 
 	TCPR rr;
 
-	String id;
-	public String type=""; 
-	@FXML
-	public ListView<String> au; 
-	
-	public TextArea ta;
+	String name;
 
-	boolean chk = false;
-	
 	class TCPR extends Thread{
 
 		public TCPR(Socket socket) {
@@ -38,112 +21,32 @@ public class Acc_Member {
 				dis = new ObjectInputStream(socket.getInputStream());
 			} catch (IOException e) { e.printStackTrace(); }
 		}
-		
+
 		@Override
 		public void run() {
 			try {
 				while(dis!=null) {
 					Acc_Member_Data data = (Acc_Member_Data)dis.readObject();
-					ArrayList<String> lu = new ArrayList<String>();
-					ArrayList<String> la = new ArrayList<String>();
-					Platform.runLater(()-> {
-						if(data.target.equals("알림")) {
-							Alert alert = new Alert(AlertType.CONFIRMATION);
-							alert.setTitle("보관 시간 알리미");
-							alert.setHeaderText(data.msg);
-							alert.show();
-						} else if(data.target.equals("list")) {
-							data.list.remove(id+"@"+data.type); //자신은 대화상대리스트에서 제외
 
-							for (String s : data.list) {
-								System.out.println(s);
-								System.out.println(s.split("@")[1]);
-								if(s.split("@")[1].equals("사용자"))
-									lu.add(s.split("@")[0]);
-								else {
-									la.add(s.split("@")[0]);
-								}
-							}
+					System.out.println("mag =" + data.msg);
+//					if(!data.target.equals(name)) {//자신은 대화상대리스트에서 제외
+						//수신 완료 메시지 받을려면 여기에 적으시오 
 
-							if(type.equals("사용자")) {
-								au.getItems().clear();  //중복삭제
-								au.getItems().addAll(la);
-							} else {
-								au.getItems().clear();  //중복삭제
-								au.getItems().addAll(lu);
-							}
-
-						}
-						else if(!data.type.equals("알림")) {
-							System.out.println(data.msg);
-							ta.appendText(data.msg+"\n");
-						} 
-						
-					});			
+//					}	
 				}
 			} catch (Exception e) {}
 		}	
 	}
 
-	class SelectDB extends Thread{
-		@Override
-		public void run() {
-			boolean first = false;
-			String found_t = null;
-			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-			while(true) {
-				try {
-					sleep(1000);
-					if(dos!=null) {
-						Acc_Member_Data data = new Acc_Member_Data();
-						data.target = "알림"; 
-						data.name = id;
-						data.type = "사용자";
-
-						first = true;
-						
-						
-						if(first) {
-							Date endDate = new Date();
-							Date beginDate = fm.parse(found_t);
-							long diff = (endDate.getTime() - beginDate.getTime()) * -1;
-							long diffMinit = diff / (60 * 1000);
-							if(diffMinit < 0)
-								break;
-							else if(diffMinit <= 60 && diffMinit >= 0) {
-								data.msg = "보관 종료시간 "+found_t+" 까지 "+diffMinit+" 분 남았습니다."; 
-								dos.writeObject(data);
-								dos.flush();
-								dos.reset();
-								break;
-							}
-						} else {
-							System.out.println("종료");
-							break;
-						}
-						
-					}
-				} catch (Exception e) {}
-			}
-		}
-	}
-	
-
-	public Acc_Member(String id) {
+	public Acc_Member(String name) {
 		try {
 			if (socket == null) {
-//				System.out.println("참이니");
-				this.id = id;
-				socket = new Socket("192.168.219.103", 7777);//192.168.1.180 // 192.168.0.18
+				this.name = name;
+				socket = new Socket(Access_IP.getInstance().getIP(), 7777);//192.168.1.180 // 192.168.0.18
 				dos = new ObjectOutputStream(socket.getOutputStream());
 				rr = new TCPR(socket);
 				rr.setDaemon(true);
 				rr.start(); //리시버 시작
-
-				SelectDB s = new SelectDB();
-				s.setDaemon(true);
-				s.start();
 
 				System.out.println("클라이언트->서버 연결 성공");
 			} else {
