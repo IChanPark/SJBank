@@ -17,6 +17,7 @@ $(document).ready(function(){
 			type:'post',
 			data:{
 				account : $("select[name=account]").val(),
+				status :  $('input[name="division"]:checked').val()
 			},
 			dataType:'json',
 			success:function(qqq){
@@ -60,7 +61,7 @@ function cancel(qqq)
 				</c:forEach>
 			</select>			
 		</td>
-		<td>조회구분</td><td> <input type="radio" name="division" value="y"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="n"/>해지</td>
+		<td>조회구분</td><td> <input type="radio" name="division" value="활성"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="비활성"/>해지</td>
 	</tr>
 	<tr>
 		<td colspan="4" align="center"><div class="check" />조회</td>

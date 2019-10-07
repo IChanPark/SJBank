@@ -110,7 +110,7 @@ public class Transfer_autoDAO implements Serializable {
 	public Transfer_autoDTO selectSeq(String seq){
 		Transfer_autoDTO dto = null;
 		
-		sql = 	"select * from Transfer_auto where seq = '"+seq+"'";
+		sql = 	"select * from transfer_auto where seq = '"+seq+"'";
 		System.out.println(sql);
 		try {
 			

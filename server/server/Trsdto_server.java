@@ -41,13 +41,13 @@ public class Trsdto_server {
 			Collections.synchronizedMap(autoList);
 
 			
-			for (Transfer_delayDTO tdd  : Transfer_delayDAO.getInstance().list() ) {
-				delayList.put(tdd.getSeq(), tdd);
-			}
-			
-			for (Transfer_reserveDTO trd  : Transfer_reserveDAO.getInstance().list() ) {
-				reserveList.put(trd.getSeq(), trd);
-			}
+//			for (Transfer_delayDTO tdd  : Transfer_delayDAO.getInstance().list() ) {
+//				delayList.put(tdd.getSeq(), tdd);
+//			}
+//			
+//			for (Transfer_reserveDTO trd  : Transfer_reserveDAO.getInstance().list() ) {
+//				reserveList.put(trd.getSeq(), trd);
+//			}
 			
 			
 			
@@ -164,7 +164,9 @@ public class Trsdto_server {
 					}
 				}
 				else if( def.msg.equals("reserve") ){
+					
 					Transfer_reserveDTO dto = (Transfer_reserveDTO)def.data;
+					
 					if(def.name.equals("추가")) {
 						System.out.println("reserve 데이터를 추가합니다.");
 						reserveList.put(dto.getSeq(), dto);
@@ -176,30 +178,38 @@ public class Trsdto_server {
 						
 					}
 				}
-				else {
-					Transfer_autoDTO dto = (Transfer_autoDTO)def.data;
-
-					if(def.msg.equals("추가")){
+				else if(def.msg.equals("auto") ){
+					
+					Transfer_autoDTO dto =(Transfer_autoDTO)def.data;
+					
+					if(def.name.equals("추가")){
+					
 						autoList.put(dto.getSeq(), dto);
-
-						int syear =  dto.getStart_date().getYear();
+						
+						int syear =  dto.getStart_date().getYear()+1900;
 						int smonth = dto.getStart_date().getMonth();
 						int sdate = dto.getStart_date().getDate();
-
+						
 						Calendar cd = Calendar.getInstance();
 
 						cd.set(syear , smonth, sdate);
-
-						int fyear = dto.getFinish_date().getYear();
+					
+						int fyear = dto.getFinish_date().getYear()+1900;
 						int fmonth = dto.getFinish_date().getMonth();
 						int fdate = dto.getFinish_date().getDate();
-
+	
 						Calendar cd2 = Calendar.getInstance();
-						ArrayList<String> ad = new ArrayList<String>();
+						
+						cd2.set(fyear , fmonth, fdate);
+						
+						ArrayList<String> ad     = new ArrayList<String>();
+					
+						
 						while(cd.before(cd2))
 						{
 							ad.add(sdf.format(cd.getTime() ) );
 							cd.add(Calendar.MONTH, 1);
+							System.out.println(ad);
 						}
 						auto.put(dto.getSeq(), ad);
 					}
@@ -218,7 +228,7 @@ public class Trsdto_server {
 //					}
 //				}
 			}catch (Exception e) {
-				System.out.println("에러에요");
+				System.out.println("에러에요"+e.getMessage());
 				
 			}
 			finally {  

@@ -11,7 +11,7 @@ $(document).ready(function(){
 				type:'post',
 				data:{
 					division : $("input[name=division]").val(),
-					account : $("select[name=account]").val(),
+					account : $("select[name=account]").val()
 				},
 				dataType:'json',
 				success:function(qqq){
@@ -44,7 +44,7 @@ $(document).ready(function(){
 				</c:forEach>
 			</select>			
 		</td>
-		<td>조회구분</td><td> <input type="radio" name="division" value="y"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="n"/>해지</td>
+		<td>조회구분</td><td> <input type="radio" name="division" value="활성"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="비활성"/>해지</td>
 	</tr>
 	<tr>
 		<td colspan="4" align="center"><div class="check" />조회</td>

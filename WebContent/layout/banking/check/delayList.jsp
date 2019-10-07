@@ -15,8 +15,7 @@ Gson gson = new Gson();
 String json ="[";
 ArrayList<Transfer_delayDTO> dto = 
 Transfer_delayDAO.getInstance().Search(
-		request.getParameter("account"), "이체전"
-		); 
+		request.getParameter("account"),request.getParameter("status")); 
 System.out.println(request.getParameter("account"));
 
 

@@ -178,21 +178,16 @@ public class Transfer_delayDAO {
 	
 //////////////오후 6:37 2019-10-03 추가 1. 조회 상태 계좌번호로 부터	
 	
-	public ArrayList<Transfer_delayDTO> Search(String acc,String status){
+	public ArrayList<Transfer_delayDTO> Search(String acc,String status ){
 		ArrayList<Transfer_delayDTO> res = new ArrayList<Transfer_delayDTO>();
-		
 		String str="";
-		if(status.equals(""))
-		{
-			
-		}
+		if(!status.equals("전체"))
+			str= " and status = '"+status+"'";
 		else
-		{
-			str= " and status = '"+status+"' ";
-		}
-		
+			str="";
+				
 		sql = 	"select * from transfer_delay where "+
-				"account_number = ? "+ str;
+				"account_number = ? "+str;
 //		System.out.println(sql);
 		try {
 			con = ds.getConnection();

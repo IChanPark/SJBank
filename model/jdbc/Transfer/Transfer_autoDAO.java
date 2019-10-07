@@ -195,7 +195,7 @@ public class Transfer_autoDAO {
 		ArrayList<Transfer_autoDTO> res = new ArrayList<Transfer_autoDTO>();
 		
 		String str="";
-		if(status.equals(""))
+		if(status.equals("전체"))
 		{
 			
 		}

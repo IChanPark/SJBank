@@ -50,7 +50,7 @@ $(document).ready(function(){
 </table>
 <br>
 <div align="right">
-<fmt:formatNumber value="${dsum }" pattern="예/적금 계좌 총액 #,###원"/>
+예/적금 계좌 총액<fmt:formatNumber value="${dsum }" pattern=" #,###원"/>
 </div>
 <div class="subTitle">예금/적금/신탁 계좌</div>
 	<table class="AccInfo">
@@ -84,6 +84,6 @@ $(document).ready(function(){
 </table>
 <br>
 <div align="right">
-<fmt:formatNumber value="${psum }" pattern="상품 계좌 총액  #,###원"/>
+상품 계좌 총액 <fmt:formatNumber value="${psum }" pattern="  #,###원"/>
 </div>
 
