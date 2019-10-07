@@ -23,6 +23,7 @@ public class Transfer_autoDTO {
 						end_date;			//삭제일
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private SimpleDateFormat yymmdd = new SimpleDateFormat("yyyy-MM-dd");
 
 	public String getend_dateStr() {
 		return sdf.format(end_date);
@@ -30,28 +31,6 @@ public class Transfer_autoDTO {
 	public void setEnd_datetr(String end_date) {
 		try {
 			this.end_date = sdf.parse(end_date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public String getFinish_dateStr() {
-		return sdf.format(finish_date);
-	}
-	public void setFinish_dateStr(String finish_date) {
-		try {
-			this.finish_date = sdf.parse(finish_date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public String getStart_dateStr() {
-		return sdf.format(start_date);
-	}
-	public void setStart_dateStr(String start_date) {
-		try {
-			this.start_date = sdf.parse(start_date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -64,6 +43,28 @@ public class Transfer_autoDTO {
 	public void setRegister_dateStr(String register_date) {
 		try {
 			this.register_date = sdf.parse(register_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String getFinish_dateStr() {
+		return yymmdd.format(finish_date);
+	}
+	public void setFinish_dateStr(String finish_date) {
+		try {
+			this.finish_date = yymmdd.parse(finish_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String getStart_dateStr() {
+		return yymmdd.format(start_date);
+	}
+	public void setStart_dateStr(String start_date) {
+		try {
+			this.start_date = yymmdd.parse(start_date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

@@ -7,7 +7,7 @@ var path = "product/deposit/";
 var gogo = "layout/"+path+"all.jsp";
 var isRun = false; 		//아작스 중복실행 확인
 var main = '';
-var sum = 0;
+var su = 0;
 main +="<div class='search_Box' >";
 main +="<input class='product_Radio' type = 'radio' name = 'group'  value='예금' checked='checked'>예금</input>";
 main +="<input class='product_Radio' type = 'radio' name = 'group' value='적금'>적금</input>";
@@ -57,9 +57,9 @@ $(".search_Button").on("click", function() {
 }; */
 
 function add(aa) {
-	sum = Number($(aa).val()) + Number(sum);
-	$('#money').val(sum);
-	$('#view_money').val(number_Pattern(sum)+"원");
+	su = Number($(aa).val()) + Number(su);
+	$('#sum').val(su);
+	$('#view_money').val(number_Pattern(su)+"원");
 	
 };
 function zero(aa){
@@ -212,48 +212,48 @@ function join(me) {
 			box +=	"<div class='joinMain'>";
 			box +=	"<div class='join_Guide'>출금정보</div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>출금계좌번호</div><div class='infoMain_Value'>";
-			box +=	"<select id=''>";
+			box +=	"<select id='account_number'>";
 			var ali = qqq.alias.split('#');
 			$.each(qqq.account_number.split('#'),function(i,e){
 				box +=	"<option value='"+e+"'>"+e+"["+ali[i]+"]</option>";	//계좌번호
 			});
 			box +=	"</select><button>잔액조회</button></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>";
-			box +=	"<input type='text' placeholder='숫자4자리'></input><button>계좌 비밀번호 오류 횟수조회</button></div></div>";
+			box +=	"<input type='text' placeholder='숫자4자리' id='pw'></input><button>계좌 비밀번호 오류 횟수조회</button></div></div>";
 			box +=	"<div class='join_Guide'>신규계좌 정보</div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>적립방식</div>";
-			box +=	"<div class='infoMain_Value'>"+qqq.type+"</div></div>";
+			box +=	"<div class='infoMain_Value' data-join-type='"+qqq.type+"'>"+qqq.type+"</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div>";
-			box +=	"<div class='infoMain_Value'>"+qqq.interest_type+"</div></div>";
+			box +=	"<div class='infoMain_Value data-join-interest_type='"+qqq.interest_type+"''>"+qqq.interest_type+"</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품기간</div>";
-			box +=	"<div class='infoMain_Value'><select id=''>"
+			box +=	"<div class='infoMain_Value'><select id='month'>"
 			$.each(qqq.month.split('#'),function(i,e){
 				box +=	"<option value='"+e+"'>"+e+" 개월</option>";
 			});
 			box	+=	"</select></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규금액</div>";
-			box +=	"<div class='infoMain_Value'><input type='text' placeholder='0' id=money></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
+			box +=	"<div class='infoMain_Value'><input type='text' placeholder='0' id=sum></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
 			box	+=	"<div class='infoMain_Value'><button onclick='add(this)' value='5000000'>500만</button><button onclick='add(this)' value='1000000'>100만</button>";
 			box +=	"<button onclick='add(this)' value='500000'>50만</button><button onclick='add(this)' value='100000'>10만</button><button onclick='add(this)' value='50000'>5만</button>";
 			box	+=	"<button onclick='add(this)' value='10000'>1만</button><button onclick='add(this)' value='1000'>1천</button><button onclick='zero(this)'>정정</button></div></div>";	
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규계좌 비밀번호</div>";
-			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='숫자4자리'></input></div></div>"
+			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='숫자4자리' id='newPW'></input></div></div>"
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>비밀번호 확인</div><div class='infoMain_Value'>";
-			box	+=	"<input type='text' placeholder='숫자4자리'></input></div></div>";
+			box	+=	"<input type='text' placeholder='숫자4자리' id='newPWchk'></input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌별명 (선택사항)</div>";
-			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='10자 이내'></input></div></div>";
+			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='10자 이내' id='alias'></input></div></div>";
 			box	+=	"<div class='join_Guide'>자동이체 정보</div><div class='infoMain_Info'>";
 			box	+=	"<div class='infoMain_Type'>자동이체 신청</div><div class='infoMain_Value'>";
-			box	+=	"<input class='product_Radio' type = 'radio' name = 'r_auto'  value='신청' checked='checked'>신청</input>";
-			box	+=	"<input class='product_Radio' type = 'radio' name = 'r_auto' value='미신청'>미신청</input></div></div>";
+			box	+=	"<input class='auto_Radio' type = 'radio' name = 'r_auto'  value='신청' checked='checked'>신청</input>";
+			box	+=	"<input class='auto_Radio' type = 'radio' name = 'r_auto' value='미신청'>미신청</input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동이체 기간</div><div class='infoMain_Value'>";
 			box	+=	"<input type = 'text' id='startDate'></input>~";
 			box	+=	"<input type = 'text' id='endDate'></input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동이체 금액</div>";
-			box	+=	"<div class='infoMain_Value'>매월 <input type='text' placeholder='0'>원</div></div>";
+			box	+=	"<div class='infoMain_Value'>매월 <input type='text' placeholder='0' id='autoTrans'>원</div></div>";
 			box	+=	"</div>";
-			box	+=	"<div class='AdminBot'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Deposit'>이전</div>";
-			box +=	"<div class='join_Button'>다음</div></div>";
+			box	+=	"<div class='AdminBot' data-product-name='"+qqq.product+"'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Deposit'>이전</div>";
+			box +=	"<div class='join_Button' onclick='joinReg(this)'>다음</div></div>";
 			$("#mm").append(box);
 			$( "#startDate" ).datepicker();
 			$( "#endDate" ).datepicker();
@@ -278,7 +278,22 @@ function joinReg(me) {
 	$.ajax({	
 		url:gogo,
 		type:'post',
-		data:{	0,
+		data:{	accType			:	selected_Product,
+				product 		:	$(me).parent('[data-product-name]').data("product-name"),
+				account_number	:	$('#account_number').val(),
+				pw				:	$('#pw').val(),
+				type			:	$('[data-join-type]').data("join-type"),
+				interest_type	:	$('[data-join-interest_type]').data("join-interest_type"),
+				month			:	$('#month').val(),
+				sum				:	$('#sum').val(),//여까지 작업 
+				newPW			:	$('#newPW').val(),
+				newPWchk		:	$('#newPWchk').val(),
+				auto			:	$('.auto_Radio').val(),
+				alias			:	$('#alias').val(),
+				startDate		:	$('#startDate').val(),	
+				finish_date		:	$('#endDate').val(),
+				autoTrans		:	$('#autoTrans').val()
+		},
 		dataType:'json',
 		success:function(qqq){
 			

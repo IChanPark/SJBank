@@ -141,9 +141,9 @@ public class AccountDAO {
 
 	public void insert(AccountDTO dto){
 		sql = 	"insert into account (" +
-				"account_number, type, sum, name, id, pw, status, register_date, end_date) "+
+				"account_number, type, sum, alias, id, pw, status, register_date, end_date) "+
 				"values ("+
-				"			?  ,	?,	 0,	 ''	,  ?,  ?, '활성' ,	  now(), 	 null)";
+				"			?  ,	?,	 ?,	 ?	,  ?,  ?, '활성' ,	  now(), 	 null)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -151,8 +151,10 @@ public class AccountDAO {
 
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getType());
-			pstmt.setString(3, dto.getId());
-			pstmt.setString(4, dto.getPw());
+			pstmt.setInt(3,  dto.getSum());
+			pstmt.setString(3, dto.getAlias());
+			pstmt.setString(4, dto.getId());
+			pstmt.setString(5, dto.getPw());
 
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
@@ -199,9 +201,9 @@ public class AccountDAO {
 
 	/////////////////////////////// 당행이체 계좌아이디 빼가기 10 04 
 
-	public String getNamebyAcc(String acc){
+	public String getAliasbyAcc(String acc){
 
-		sql = "SELECT NAME FROM user WHERE id = "
+		sql = "SELECT alias FROM user WHERE id = "
 				+ "(SELECT id FROM ACCOUNT WHERE account_number = ? )";
 		System.out.println(sql);
 		try {
@@ -213,7 +215,7 @@ public class AccountDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next())
-				return rs.getString("name");
+				return rs.getString("alias");
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 		return "외부계좌";

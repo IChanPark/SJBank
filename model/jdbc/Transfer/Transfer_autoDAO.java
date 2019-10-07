@@ -136,7 +136,7 @@ public class Transfer_autoDAO {
 				"status,register_date,end_date) "+
 				"values ("+
 				"	?          ,       	?         ,	 ? ,  ?    ,   ?       ,     ?	    ,      ?  ,  ?  ,  ?   ,"+
-				"   ?  ,  now()      ,   ?	)";
+				"   'y'  ,  now()      ,   null	)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -151,9 +151,7 @@ public class Transfer_autoDAO {
 			pstmt.setString(7, dto.getLast_day());
 			pstmt.setString(8, dto.getMemo());
 			pstmt.setString(9, dto.getTo_memo());
-			pstmt.setString(10, dto.getStatus());
-			pstmt.setString(11, dto.getend_dateStr());
-			
+
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }

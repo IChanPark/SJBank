@@ -14,7 +14,7 @@ Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 AccountDTO DataDTO = new AccountDTO();
 DataDTO.setId((String)request.getSession().getAttribute("userID"));
-DataDTO.setType("deposit");
+DataDTO.setType("예금");
 ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectID_Type(DataDTO);
 
 Deposits_infoDTO setDTO = new Deposits_infoDTO();

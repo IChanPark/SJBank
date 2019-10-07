@@ -39,6 +39,7 @@ public class DepositsDAO {
 				dto.setPrduct(rs.getString("prduct"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
+				dto.setType(rs.getString("type"));
 			} 
 		} catch (Exception e) {}
 		return dto;
@@ -53,7 +54,7 @@ public class DepositsDAO {
 				dto.setPrduct(rs.getString("prduct"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
-				res.add(dto);
+				dto.setType(rs.getString("type"));
 			} 
 		} catch (Exception e) {}
 	}
@@ -75,8 +76,8 @@ public class DepositsDAO {
 	
 	public void insert(DepositsDTO dto){
 		sql = 	"insert into deposits (" +
-				"account_number, id, prduct, preferential, interest) values ("+
-				"	 	?  ,	  ?,	?,	       ?,  		 ? )";
+				"account_number, id, product, preferential, interest, type) values ("+
+				"	 	?  ,	  ?,	?,	       ?,  		 ? 	   ,   ? )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -86,8 +87,9 @@ public class DepositsDAO {
 			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getPrduct());
 			pstmt.setString(4, dto.getPreferential());
-			pstmt.setFloat(4, dto.getInterest());
-			
+			pstmt.setFloat(5, dto.getInterest());
+			pstmt.setString(6, dto.getType());
+
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
