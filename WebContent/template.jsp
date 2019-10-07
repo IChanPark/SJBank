@@ -14,12 +14,18 @@
 <link rel="stylesheet" type="text/css" href="css/Loader.css" />   <!-- 로딩 스타일 -->
 <link rel="stylesheet" type="text/css" href="css/Product_List.css" />   <!-- 상품 스타일 -->
 <link rel="stylesheet" type="text/css" href="css/Product_Detail.css" />   <!-- 상품상세 스타일 -->
+<link rel="stylesheet" type="text/css" href="css/Product_Join.css" />   <!-- 상품가입 스타일 -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> <!-- 데이트피커 -->
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>   
 <script type="text/javascript" src="js/Menu_Move.js"></script>   <!-- menu 이동 -->
 <script type="text/javascript" src="js/Top_Fix.js"></script>   <!-- top 고정 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 우편번호api -->
 <script type="text/javascript" src="js/zipCode.js"></script>   <!-- 우편번호 -->
 <script type="text/javascript" src="js/Loader.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/Date_Picker.js"></script>	  <!-- 데이트 피커 -->
+
 </head>
 	<form name="paging" action="index.jsp" onsubmit="return false;" method="post"/>
 	<input type="hidden" name="hid_t" />

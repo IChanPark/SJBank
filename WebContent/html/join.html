@@ -64,45 +64,49 @@ align-items: center; font-size: 13px; text-align: center; justify-content: cente
 .AdminBot {text-align: center; padding-top: 20px;}
 .AdminButton {float: left; height: 100%; width: 50%; text}
 .infoAdmin input {font-family: inherit;}
+
+.joinMain{height: 750px; width: 100%; border-bottom: 1px solid white; overflow-y: scroll;}
+.join_Guide {margin-top:30px; margin-bottom:20px; border-bottom:1px solid white; font-size: 14pt;}
 </style>
 </head>
 <body>
 <div id='mid'> 
 
-
+<div class='subTitle'>ㅁㅁ (상품명)</div>
 <div class= "infoBox">
-	<div class='infoMid_Guide'>상품 추가</div>
-	<div class="infoAdmin">
-		<div class="infoMain_Info"><div class="infoMain_Type">상품종류</div><div class="infoMain_Value">
-			<select name="" id=""><option value="정기">정기</option></select></div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">상품명</div><div class="infoMain_Value">
-			<input type="text" placeholder="상품명을 입력해주세요."></div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">상품내용</div><div class="infoMain_Value">
-			<textarea placeholder="상품내용을 입력해주세요. &#13;&#10;① 뭐시기뭐시기 &#13;&#10;② 뭐시기" rows="10"></textarea></div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">상품기간</div><div class="infoMain_Value">
-			<input type="text" placeholder="상품기간을 입력해주세요." > 숫자만 입력부탁드리며 상품기간 다중 등록 시 "," 로 구분하여 입력해주세요.</div></div>
+	<div class="joinMain"">
+		<div class='join_Guide'>출금정보</div>
+		<div class="infoMain_Info"><div class="infoMain_Type">출금계좌번호</div><div class="infoMain_Value">
+			<select name="" id=""><option value="정기">계좌번호[계좌별명]</option></select> <button>잔액조회</button></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">계좌비밀번호</div><div class="infoMain_Value">
+			<input type="text" placeholder="숫자4자리"> <button>계좌 비밀번호 오류 횟수조회</button></div></div>
+		<div class='join_Guide'>신규계좌 정보</div>
+		<div class="infoMain_Info"><div class="infoMain_Type">적립방식</div><div class="infoMain_Value">
+			<input class='product_Radio' type = 'radio' name = 'r_type'  value='예금' checked='checked'/>일반</input>
+			<input class='product_Radio' type = 'radio' name = 'r_type' value='적금'>정기</input></div></div>
 		<div class="infoMain_Info"><div class="infoMain_Type">이자지급방식</div><div class="infoMain_Value">
-			<select name="" id=""><option value="만기일시">만기일시</option></select> 이자 지급방식을 선택해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">세금</div><div class="infoMain_Value">
-			<select name="" id=""><option value="비과세">비과세200</option></select> 과세여부를 선택해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">최소납입금액</div><div class="infoMain_Value">
-			<input type="text" placeholder="금액을 입력해주세요."> 최소 납입금액을 입력해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">최대납입금액</div><div class="infoMain_Value">
-			<input type="text" placeholder="금액을 입력해주세요."> 최대 납입금액을 입력해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">자동재예치</div><div class="infoMain_Value">
-			<select name="" id=""><option value="불가">불가</option></select> 자동재예치 가능 여부를 선택해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">일부해지</div><div class="infoMain_Value">
-			<select name="" id=""><option value="불가">불가</option></select> 일부해지 가능 여부를 선택해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">기준금리</div><div class="infoMain_Value">
-			<input type="text" placeholder=""> 기준 금리를 입력해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">최대금리</div><div class="infoMain_Value">
-			<input type="text" placeholder=""> 최대 금리를 입력해주세요.</div></div>
-		<div class="infoMain_Info"><div class="infoMain_Type">우대항목</div><div class="infoMain_Value">
-			<select name="" id=""><option value="펀드">우대구분(펀드)</option></select>
-			<select name="" id=""><option value="보유시">우대조건(보유시)</option></select>
-			<select name="" id=""><option value="0.1">우대이자율(0.0%)</option></select>추가버튼
-		</div>
-		
+			만기일시</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">상품기간</div><div class="infoMain_Value">
+			<select name="" id=""><option value="정기">6개월</option></select></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">신규금액</div>
+			<div class="infoMain_Value"><input type="text" placeholder="숫자4자리"></div>
+			<div class="infoMain_Value"><button>500만</button><button>100만</button><button>50만</button><button>10만</button>
+			<button>5만</button><button>1만</button><button>1천</button><button>정정</button></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">신규계좌 비밀번호</div><div class="infoMain_Value">
+			<input type="text" placeholder="숫자4자리"></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">비밀번호 확인</div><div class="infoMain_Value">
+			<input type="text" placeholder="숫자4자리"></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">계좌별명 (선택사항)</div><div class="infoMain_Value">
+			<input type="text" placeholder="10자 이내"></div></div>			
+		<div class='join_Guide'>자동이체 정보</div>
+		<div class="infoMain_Info"><div class="infoMain_Type">자동이체 신청</div><div class="infoMain_Value">
+			<input class='product_Radio' type = 'radio' name = 'r_auto'  value='신청' checked='checked'/>신청</input>
+			<input class='product_Radio' type = 'radio' name = 'r_auto' value='미신청'>미신청</input></div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">자동이체 기간</div><div class="infoMain_Value">
+			<input class='product_Radio' type = 'text' name = 'startDate'/></input>~
+			<input class='product_Radio' type = 'text' name = 'endDate'></input></div></div>		
+		<div class="infoMain_Info"><div class="infoMain_Type">자동이체 금액</div><div class="infoMain_Value">
+			매월 <input type="text" placeholder="0">원</div></div>			
 	</div>
 		
 	</div>

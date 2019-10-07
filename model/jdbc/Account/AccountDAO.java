@@ -118,6 +118,26 @@ public class AccountDAO {
 		} finally { close(); }
 		return dto;
 	}
+	
+	public ArrayList<AccountDTO> selectID_Type(AccountDTO DataDTO){
+		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
+
+		sql = "select * from account where id = ? and type = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, DataDTO.getId());
+			pstmt.setString(2, DataDTO.getType());
+			
+			rs = pstmt.executeQuery();
+
+			Account(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
 
 	public void insert(AccountDTO dto){
 		sql = 	"insert into account (" +
