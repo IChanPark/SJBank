@@ -15,14 +15,12 @@ Gson gson = new Gson();
 AccountDTO DataDTO = new AccountDTO();
 DataDTO.setId((String)request.getSession().getAttribute("userID"));
 DataDTO.setType("deposit");
-
 ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectID_Type(DataDTO);
 
 Deposits_infoDTO setDTO = new Deposits_infoDTO();
 setDTO.setProduct(request.getParameter("product"));
-
+System.out.println(request.getParameter("product"));
 Deposits_infoDTO dto = Deposits_infoDAO.getInstance().selectProUse(setDTO);
-
 map.put("product", dto.getProduct());
 map.put("deposits_info", dto.getDeposits_info());
 map.put("min_interest", dto.getMin_interest()+"");
@@ -53,7 +51,5 @@ for (int i = 0; i < accDTO.size(); i++) {
 map.put("account_number",acc);
 map.put("alias",alias);
 String json = gson.toJson(map);
-
 out.print(json);
-System.out.print(json);
 %>

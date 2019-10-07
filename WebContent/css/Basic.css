@@ -11,3 +11,7 @@ option{background: #363636;}
 #bot>div{width: 1000px;margin: 0 auto;padding-top: 20px; font-size: 13pt; background: #00B992;}
 button{color: black;}
 textarea{color: black;}
+.ui-datepicker-calendar {background: #363636}
+.ui-datepicker-current-day .ui-state-active { background: #d6bb50; }
+#startDate{width: 100px;}
+#endDate{width: 100px;}

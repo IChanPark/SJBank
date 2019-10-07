@@ -7,18 +7,23 @@ var path = "product/deposit/";
 var gogo = "layout/"+path+"all.jsp";
 var isRun = false; 		//아작스 중복실행 확인
 var main = '';
-
+var sum = 0;
 main +="<div class='search_Box' >";
-main +="<input class='product_Radio' type = 'radio' name = 'group'  value='예금' checked='checked'/>예금</input>";
+main +="<input class='product_Radio' type = 'radio' name = 'group'  value='예금' checked='checked'>예금</input>";
 main +="<input class='product_Radio' type = 'radio' name = 'group' value='적금'>적금</input>";
 main +="<select class='type_Select' size='1'><option value=''>선택해주세요</option></select>"
-main +="<input class='search_Word' type = 'text' value=''/>";
+main +="<input class='search_Word' type = 'text' value=''></input>";
 main +="<div class='search_Button' >검색</div>";
 main +="</div><div id ='mm'>";
 main +="<div class='scrollB'>"; //스크롤바
 main +="<div id = 'ttt'></div>";
 main +="</div></div>";
 $("#mid").append(main);
+
+$(document).ready(function(){
+	ajax_go();
+	option();
+});
 
 $(".product_Radio").on("click", function(){
 	selected_Product = this.value;
@@ -27,7 +32,42 @@ $(".product_Radio").on("click", function(){
 		path = "product/deposit/";	
 	else 
 		path = "product/saving/";
+
+	option();
+	$('.search_Word').val('');
+	ajax_go();
+});
+
+$('.type_Select').on("click", function(){	
+	selected_Type = this.value;
+});
 	
+$(".search_Button").on("click", function() {
+	ajax_go();
+});
+
+/* $("#money").on("propertychange change keyup paste input"), function(){	//모든 상태변경 감지
+	var currentVal = $(this).val();
+    if(currentVal == oldVal) {
+        return;
+    }
+	sum = sum + Number(sum);
+	$('#view_money').val(number_Pattern(sum)+"원");
+	oldVal == currentVal;
+}; */
+
+function add(aa) {
+	sum = Number($(aa).val()) + Number(sum);
+	$('#money').val(sum);
+	$('#view_money').val(number_Pattern(sum)+"원");
+	
+};
+function zero(aa){
+	sum = 0;
+	$('#money').val(sum);
+}
+
+function option(){
 	$.ajax({	
 		url:"layout/product/deposit_type.jsp",
 		type:'post',
@@ -46,18 +86,7 @@ $(".product_Radio").on("click", function(){
 			isRun = false;
 		}	
 	});	
-
-	$('.search_Word').val('');
-	ajax_go();
-});
-
-$('.type_Select').on("click", function(){	
-	selected_Type = this.value;
-});
-	
-$(".search_Button").on("click", function() {
-	ajax_go();
-});
+}
 
 function ajax_go() {
 	gogo = "layout/"+path+"select.jsp";
@@ -127,11 +156,11 @@ function detail(me) {
 			box +=	"<div class='infoTop_Info'><div class='infoTop_Type'>가입금액</div>"+min+" 부터 최대 "+max+" 까지</div>";
 			box +=	"</div>";
 			box +=	"<div class='infoTop_Rigth'>";
-			box +=	"<img src='img/test1.png' alt='' /><br>최저 연 &ensp;최고 연<br>";
+			box +=	"<img src='img/test1.png' alt=''></img><br>최저 연 &ensp;최고 연<br>";
 			box +=	"<div class='infoTop_Percent'>&ensp; "+qqq.min_interest+"~"+qqq.max_interest+"%</div><br>[납입방식 "+qqq.type+"기준]";
 			box +=	"</div>";
 			box +=	"</div>";
-			box +=	"<div class='infoMid'><div class='infoMid_Join' onclick='goMenu(this)' data-menu-name='"+path+"Join'>가입</div></div>";
+			box +=	"<div class='infoMid' data-product-name='"+qqq.product+"' ><div class='infoMid_Join' onclick='join(this)'>가입</div></div>";
 			box +=	"<div class='infoMain'>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>납입방법</div><div class='infoMain_Value'>"+qqq.type+"</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div><div class='infoMain_Value'>"+qqq.interest_type+"</div></div>";
@@ -166,7 +195,6 @@ function join(me) {
 	isRun = true;
 	
 	gogo =  "layout/"+path+"join.jsp";
-	
 	$.ajax({	
 		url:gogo,
 		type:'post',
@@ -174,10 +202,13 @@ function join(me) {
 		dataType:'json',
 		success:function(qqq){
 			$('.subTitle').text(qqq.product);
+			$(".infoBox").remove();
+			$(".infoMain").remove();
+			$(".infoBot").remove();
 			$(".scrollB").remove();
 			$(".search_Box").remove();
 			var box = '';
-			box +=	"<div class= 'infoBox'>";
+			box +=	"<div class='infoBox'>";
 			box +=	"<div class='joinMain'>";
 			box +=	"<div class='join_Guide'>출금정보</div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>출금계좌번호</div><div class='infoMain_Value'>";
@@ -188,7 +219,7 @@ function join(me) {
 			});
 			box +=	"</select><button>잔액조회</button></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>";
-			box +=	"<input type='text' placeholder='숫자4자리'><button>계좌 비밀번호 오류 횟수조회</button></div></div>";
+			box +=	"<input type='text' placeholder='숫자4자리'></input><button>계좌 비밀번호 오류 횟수조회</button></div></div>";
 			box +=	"<div class='join_Guide'>신규계좌 정보</div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>적립방식</div>";
 			box +=	"<div class='infoMain_Value'>"+qqq.type+"</div></div>";
@@ -201,28 +232,31 @@ function join(me) {
 			});
 			box	+=	"</select></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규금액</div>";
-			box +=	"<div class='infoMain_Value'><input type='text' placeholder='숫자4자리'></div><br>";
-			box	+=	"<div class='infoMain_Value'><button value='5000000'>500만</button><button value='1000000'>100만</button>";
-			box +=	"<button value='500000'>50만</button><button value='100000'>10만</button><button value='50000'>5만</button>";
-			box	+=	"<button value='10000'>1만</button><button value='1000'>1천</button><button>정정</button></div></div>";	
+			box +=	"<div class='infoMain_Value'><input type='text' placeholder='0' id=money></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
+			box	+=	"<div class='infoMain_Value'><button onclick='add(this)' value='5000000'>500만</button><button onclick='add(this)' value='1000000'>100만</button>";
+			box +=	"<button onclick='add(this)' value='500000'>50만</button><button onclick='add(this)' value='100000'>10만</button><button onclick='add(this)' value='50000'>5만</button>";
+			box	+=	"<button onclick='add(this)' value='10000'>1만</button><button onclick='add(this)' value='1000'>1천</button><button onclick='zero(this)'>정정</button></div></div>";	
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규계좌 비밀번호</div>";
-			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='숫자4자리'></div></div>"
+			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='숫자4자리'></input></div></div>"
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>비밀번호 확인</div><div class='infoMain_Value'>";
-			box	+=	"<input type='text' placeholder='숫자4자리'></div></div>";
+			box	+=	"<input type='text' placeholder='숫자4자리'></input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌별명 (선택사항)</div>";
-			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='10자 이내'></div></div>";
+			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='10자 이내'></input></div></div>";
 			box	+=	"<div class='join_Guide'>자동이체 정보</div><div class='infoMain_Info'>";
 			box	+=	"<div class='infoMain_Type'>자동이체 신청</div><div class='infoMain_Value'>";
-			box	+=	"<input class='product_Radio' type = 'radio' name = 'r_auto'  value='신청' checked='checked'/>신청</input>";
+			box	+=	"<input class='product_Radio' type = 'radio' name = 'r_auto'  value='신청' checked='checked'>신청</input>";
 			box	+=	"<input class='product_Radio' type = 'radio' name = 'r_auto' value='미신청'>미신청</input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동이체 기간</div><div class='infoMain_Value'>";
-			box	+=	"<input class='product_Radio' type = 'text' id='startDate'></input>~";
-			box	+=	"<input class='product_Radio' type = 'text' id='endDate'></input></div></div>";
+			box	+=	"<input type = 'text' id='startDate'></input>~";
+			box	+=	"<input type = 'text' id='endDate'></input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동이체 금액</div>";
 			box	+=	"<div class='infoMain_Value'>매월 <input type='text' placeholder='0'>원</div></div>";
-			box	+=	"</div></div>"
-			box	+=	"<div class='AdminBot'><div class='AdminButton'>취소</div><div class='AdminButton'>작성</div></div>"
+			box	+=	"</div>";
+			box	+=	"<div class='AdminBot'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Deposit'>이전</div>";
+			box +=	"<div class='join_Button'>다음</div></div>";
 			$("#mm").append(box);
+			$( "#startDate" ).datepicker();
+			$( "#endDate" ).datepicker();
 			isRun = false;
 		},
 		error:function(qqq){
@@ -235,21 +269,53 @@ function join(me) {
 	});
 };
 
+function joinReg(me) {
+	if(isRun == true)
+		return;
+	isRun = true;
+	
+	gogo =  "layout/"+path+"joinReg.jsp";
+	$.ajax({	
+		url:gogo,
+		type:'post',
+		data:{	0,
+		dataType:'json',
+		success:function(qqq){
+			
+			isRun = false;
+		},
+		error:function(qqq){
+			
+			isRun = false;
+		}	
+	});
+};
+
 function number_Pattern(num) {	//3자리마다 ,찍기 
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
 
 function goMenu(qq) {	//메뉴 이동용
 	var menu = $(qq).data("menu-name"); 
     var name = $(qq).parent('[data-product-name]').data("product-name");
 	
 	var go ='<form name="pag" action="index.jsp" onsubmit="return false;" method="post">';
-	go +="<input type='hidden' name='hid_t' value='"+menu+"'><input>";
-	go +="<input type='hidden' name='dt' value='"+name+"'><input>";
+	go +="<input type='hidden' name='hid_t' value='"+menu+"'></input>";
+	go +="<input type='hidden' name='dt' value='"+name+"'></input>";
 	go +="</form>";
 	$("#mid").append(go);
-	
 	document.pag.submit(); 
 };
+
+$('#startDate').datepicker().on("Close",function( selectedDate ) {
+	$('#endDate').datepicker( "option", "minDate", selectedDate );
+});
+$('#endDate').datepicker().on("Close",function( selectedDate ) {
+	$('#startDate').datepicker( "option", "maxDate", selectedDate );
+});
+$('#endDate').datepicker({ maxDate: "+1M" });
+
+$('input[name=startDate]').datepicker('disable').removeAttr('disabled');
+$('input[name=endDate]').datepicker('disable').removeAttr('disabled');
 </script>
 <div class='subTitle'>예금·적금 신규</div>

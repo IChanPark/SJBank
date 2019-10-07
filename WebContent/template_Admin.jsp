@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/Product_List.css" />   <!-- 상품 스타일 -->
 <link rel="stylesheet" type="text/css" href="css/Product_Detail.css" />   <!-- 상품상세 스타일 -->
 <link rel="stylesheet" type="text/css" href="css/Loader.css" />   <!-- 로딩 스타일 -->
-<script type="text/javascript" src="js/jquery-3.4.1.js"></script>   
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>   
 <script type="text/javascript" src="js/Menu_Move.js"></script>   <!-- menu 이동 -->
 <script type="text/javascript" src="js/Top_Fix.js"></script>   <!-- top 고정 -->
 <script type="text/javascript" src="js/Loader.js"></script>

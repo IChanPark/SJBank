@@ -11,8 +11,6 @@ request.setCharacterEncoding("UTF-8");	//한글처리
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 
-System.out.println(request.getParameter("product"));
-
 Deposits_infoDTO setDTO = new Deposits_infoDTO();
 setDTO.setProduct(request.getParameter("product"));
 
