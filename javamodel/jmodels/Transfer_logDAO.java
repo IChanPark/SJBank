@@ -56,7 +56,7 @@ public class Transfer_logDAO {
 				dto.setTarget(rs.getString("target"));
 				dto.setTo_account_number("to_account_number");
 				dto.setReceived(rs.getString("received"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setFee(rs.getInt("fee"));
 				dto.setCms(rs.getString("cms"));
 				dto.setMemo(rs.getString("memo"));
@@ -76,7 +76,7 @@ public class Transfer_logDAO {
 				dto.setTarget(rs.getString("target"));
 				dto.setTo_account_number("to_account_number");
 				dto.setReceived(rs.getString("received"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setFee(rs.getInt("fee"));
 				dto.setCms(rs.getString("cms"));
 				dto.setMemo(rs.getString("memo"));
