@@ -24,6 +24,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import javafx.beans.property.StringProperty;
+import jdbc.Account.AccountDAO;
+import jdbc.Account.AccountDTO;
+import jdbc.User.UserDAO;
+import jdbc.User.UserDTO;
 
 
 
@@ -68,8 +72,12 @@ public class OTPmail extends HttpServlet {
 			// 이메일 발신자
 			msg.setFrom(from);
 
+			HttpSession hsession = request.getSession();
+			String toWho=(String)hsession.getAttribute("userID");
+			UserDTO dto = UserDAO.getInstance().selectId(toWho);
+			
 			// 이메일 수신자
-			InternetAddress to = new InternetAddress("reck12@naver.com");
+			InternetAddress to = new InternetAddress(dto.getEmail());
 			msg.setRecipient(Message.RecipientType.TO, to);
 
 			// 이메일 제목

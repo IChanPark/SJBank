@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri ="http://java.sun.com/jsp/jstl/core" %>
 
 <script>
 $(document).ready(function(){
@@ -16,7 +17,7 @@ $(document).ready(function(){
 			url:"layout/banking/check/delayList.jsp",
 			type:'post',
 			data:{
-				  sort : $("input[name=sort]").val()
+				account : $("select[name=account]").val(),
 			},
 			dataType:'json',
 			success:function(qqq){
@@ -26,7 +27,7 @@ $(document).ready(function(){
 					row.append($("<td>"+e.register_date+"</td>"));
 					row.append($("<td>"+e.memo+"</td>"));
 					row.append($("<td>"+e.to_memo+"</td>"));
-					row.append($("<td>"+e.time+"</td></tr>"));
+					row.append($("<td>"+e.trs_time+"</td></tr>"));
 					$("#tot").append(row);
 				});
 			},
@@ -46,16 +47,23 @@ $(document).ready(function(){
 <div class="subTitle">지연이체</div>
 
 
-<table border="" >
+<table border="">
 	<tr>
-		<td>조회결과 순서</td>
-		<td><input type="radio" name="sort" value="desc"/>최근거래순 <input type="radio"  name="sort" value="asc"/>과거거래순</td>
+		<td>계좌번호</td>
+		<td>
+			<select name="account">
+				<c:forEach var="dto" items="${data }" >
+					<option>${dto.account_number }</option>
+				</c:forEach>
+			</select>			
+		</td>
+		<td>조회구분</td><td> <input type="radio" name="division" value="y"/>정상 <input type="radio" name="division" value="전체"/>전체 <input type="radio" name="division" value="n"/>해지</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><div class="check" />조회</td>
+		<td colspan="4" align="center"><div class="check" />조회</td>
+
 	</tr>
 </table>
-
 <br>
 <br>
 

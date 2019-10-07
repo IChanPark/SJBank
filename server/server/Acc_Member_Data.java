@@ -7,5 +7,8 @@ public class Acc_Member_Data implements Serializable{
 	   public String	name,		//이름
 	   					target,		//대사ㅣㅇ
 	   					msg;		//전송메시지
+	   
+	   public Object data;
+	   
 	   ArrayList<String>list;
 }

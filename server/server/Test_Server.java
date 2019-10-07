@@ -8,7 +8,10 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap; 
+import java.util.HashMap;
+
+import jdbc.Transfer.Transfer_delayDTO;
+import jmodels.Transfer_delayDAO; 
 
 public class Test_Server {
 	private HashMap<String, ObjectOutputStream>list  = null;
@@ -22,6 +25,9 @@ public class Test_Server {
 			SelectDB s = new SelectDB();
 			s.setDaemon(true);
 			s.start();
+			
+			Transfer_delayDTO dto = Transfer_delayDAO.getInstance().selectSeq("1");
+			
 			
 			while(true) {
 				Socket client = server.accept();

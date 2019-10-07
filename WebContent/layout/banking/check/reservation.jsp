@@ -28,7 +28,10 @@ $(document).ready(function(){
 					row.append($("<td>"+e.register_date+"</td>"));
 					row.append($("<td>"+e.memo+"</td>"));
 					row.append($("<td>"+e.to_memo+"</td>"));
-					row.append($("<td>"+e.time+"</td></tr>"));
+					row.append($("<td>"+e.time+"</td>"));
+					row.append($("<td onclick=cancel("+e.seq+")> "+"여기"+"</td>"));
+					row.append($("<td>"+e.seq+"</td></tr>"));
+					
 					$("#tot").append(row);
 				});
 			},
@@ -40,7 +43,10 @@ $(document).ready(function(){
 	    
 	    
 });
-
+function cancel(qqq)
+{
+	alert(qqq);
+}
 
 
 </script>
@@ -49,7 +55,7 @@ $(document).ready(function(){
 
 
 
-<table border="" >
+<table border="">
 	<tr>
 		<td>조회기간 선택</td>
 		<td><input type="date" name="start" />~<input type="date" name="end"/></td>
@@ -70,7 +76,6 @@ $(document).ready(function(){
 <br>
 
 <table border="" id="tot">
-	<tr>
 		<td>선택</td>
 		<td>이체예정일시</td>
 		<td>출금계좌</td>

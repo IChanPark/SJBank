@@ -52,7 +52,7 @@ function goReg(){
 <table border="">
 	<tr>
 		<td>입금은행</td>
-		<td><input type="text" name="" /></td>
+		<td><input type="text" name="bank" /></td>
 	</tr>
 	<tr>
 		<td>입금계좌번호</td>

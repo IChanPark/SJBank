@@ -10,6 +10,7 @@ import jdbc.Service.ServiceDAO;
 import jdbc.Service.ServiceDTO;
 import jdbc.User.UserDAO;
 import jdbc.User.UserDTO;
+import server.send;
 
 public class Complete implements M_Action{
 	
@@ -30,9 +31,7 @@ public class Complete implements M_Action{
 		dto.setStatus("활성"); 
 		dto.setOption(request.getParameter("delayTime"));
 	
-		ServiceDAO.getInstance().insert(dto);
 		
-				
 		System.out.println("Delay 등록 완료 서비스들어온다");
 		//리스트 정보를 키는 "data"로 어트리뷰트로 넘긴다
 	}

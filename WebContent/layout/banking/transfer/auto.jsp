@@ -23,6 +23,7 @@ $(document).ready(function(){
 		inaccount.append($("<tr><td>이체시작일/이체종료일<input type='date' name='start' />~<input type='date' name='end' /></td><td></td></tr>"));
 		inaccount.append($("<tr><td>휴일이체구분</td><td></td></tr>"));
 		inaccount.append($("<tr><td>말일이체여부</td><td></td></tr>"));
+		inaccount.append($("<tr><td>Cms</td><td><input type='text' name='cms'/></td></tr>"));
 		inaccount.append($("<tr><td>받는통장 메모</td><td><input type='text' name='to_memo'/></td></tr>"));
 		inaccount.append($("<tr><td>내통장 메모</td><td><input type='text' name='memo' /></td></tr></table>"));
 		
