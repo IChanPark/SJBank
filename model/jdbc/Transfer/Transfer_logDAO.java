@@ -36,7 +36,7 @@ public class Transfer_logDAO {
 				dto = new Transfer_logDTO();
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
-				dto.setSelf(rs.getString("self"));
+				dto.setFeetype(rs.getString("feetype"));
 				dto.setTarget(rs.getString("target"));
 				dto.setTo_account_number("to_account_number");
 				dto.setReceived(rs.getString("received"));
@@ -56,7 +56,7 @@ public class Transfer_logDAO {
 				Transfer_logDTO dto = new Transfer_logDTO();
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
-				dto.setSelf(rs.getString("self"));
+				dto.setFeetype(rs.getString("feetype"));
 				dto.setTarget(rs.getString("target"));
 				dto.setTo_account_number("to_account_number");
 				dto.setReceived(rs.getString("received"));
@@ -107,7 +107,7 @@ public class Transfer_logDAO {
 	
 	public void insert(Transfer_logDTO dto){
 		sql = 	"insert into transfer_log (" +
-				"account_number,self,target,to_account_number,received,"+ 
+				"account_number,feetype,target,to_account_number,received,"+ 
 				"sum,fee,cms,memo,to_memo,status,register_date) "+ 
 				"values ( "+
 				"		?	   ,  ? ,	?  ,		?		,	?	  ,"+ 
@@ -118,7 +118,7 @@ public class Transfer_logDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getAccount_number());
-			pstmt.setString(2, dto.getSelf());
+			pstmt.setString(2, dto.getFeetype());
 			pstmt.setString(3, dto.getTarget());
 			pstmt.setString(4, dto.getTo_account_number());
 			pstmt.setString(5, dto.getReceived());

@@ -27,11 +27,11 @@ public class Trs implements M_Action{
 			if(AccountDAO.getInstance().chkAccPw(request.getParameter("acc"), request.getParameter("accpw")))
 			{
 				dto.setAccount_number(request.getParameter("acc"));
-				dto.setSelf("본인");
 				dto.setTarget(request.getParameter("transfer_receive"));
 				dto.setTo_account_number(request.getParameter("toAcc"));
+				dto.setFeetype("이체");
 				dto.setReceived( AccountDAO.getInstance().getAliasbyAcc(request.getParameter("toAcc"))   );
-				dto.setSum( Integer.parseInt(request.getParameter("money") ) );
+				dto.setSum( (long)Integer.parseInt(request.getParameter("money") ) );
 				dto.setFee(0);
 				dto.setCms(request.getParameter("cms"));
 				dto.setMemo(request.getParameter("memo"));

@@ -203,7 +203,7 @@ public class AccountDAO {
 
 	public String getAliasbyAcc(String acc){
 
-		sql = "SELECT alias FROM user WHERE id = "
+		sql = "SELECT alias FROM account WHERE id = "
 				+ "(SELECT id FROM ACCOUNT WHERE account_number = ? )";
 		System.out.println(sql);
 		try {

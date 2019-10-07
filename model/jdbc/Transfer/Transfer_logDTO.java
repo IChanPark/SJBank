@@ -6,7 +6,7 @@ import java.util.Date;
 public class Transfer_logDTO {
 
 	private	String		account_number,		//보내는 계좌 - key
-						self,				//본인계좌여부
+						feetype,				//본인계좌여부
 						target,				//은행/증권사명
 						to_account_number,	//받는 계좌
 						received,			//받는이
@@ -14,6 +14,14 @@ public class Transfer_logDTO {
 						memo,				//내 통장메모
 						to_memo,			//받는 통장메모
 						status;				//성공/실패
+
+	public String getFeetype() {
+		return feetype;
+	}
+
+	public void setFeetype(String feetype) {
+		this.feetype = feetype;
+	}
 
 	private	Integer 	seq,				//로그 번호
 						fee;				//수수료
@@ -32,14 +40,7 @@ public class Transfer_logDTO {
 		this.account_number = account_number;
 	}
 
-	public String getSelf() {
-		return self;
-	}
-
-	public void setSelf(String self) {
-		this.self = self;
-	}
-
+	
 	public String getTarget() {
 		return target;
 	}
@@ -138,7 +139,7 @@ public class Transfer_logDTO {
 
 	@Override
 	public String toString() {
-		return seq + "," + account_number + "," + self + ","
+		return seq + "," + account_number + "," + ","
 				+ target + "," + to_account_number + "," + received + "," + sum
 				+ "," + fee + "," + cms + "," + memo + "," + to_memo + "," + status
 				+ "," + register_date;
