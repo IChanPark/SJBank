@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Deposit.Deposits_infoDTO;
 
 public class FaqDAO {
 
@@ -100,6 +101,25 @@ public class FaqDAO {
 		return res;
 	}
 	
+	public ArrayList<FaqDTO> selectType(FaqDTO dto){
+		ArrayList<FaqDTO> res = new ArrayList<FaqDTO>();
+		
+		sql = "select * from faq where type = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getType());
+			
+			rs = pstmt.executeQuery();
+			
+			Faq(rs, res);			
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return res;
+	}
+	
 	public FaqDTO selectTitle(String title){
 		FaqDTO dto = null;
 		
@@ -117,6 +137,45 @@ public class FaqDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 		return dto;
+	}
+	
+	public ArrayList<FaqDTO> selectLikePro(FaqDTO dto){
+		ArrayList<FaqDTO> res = new ArrayList<FaqDTO>();
+		
+		sql = "select * from faq where title like ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+dto.getTitle()+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			Faq(rs, res);			
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<FaqDTO> selectLikeAnd(FaqDTO dto){
+		ArrayList<FaqDTO> res = new ArrayList<FaqDTO>();
+		
+		sql = 	"select * from faq where title like ?"+
+				"AND type = ?";
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+dto.getTitle()+"%");
+			pstmt.setString(2, dto.getType());
+			
+			rs = pstmt.executeQuery();
+			
+			Faq(rs, res);			
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return res;
 	}
 	
 	public void insert(FaqDTO dto){
