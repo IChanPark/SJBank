@@ -117,8 +117,8 @@ public class NoticeDAO {
 		return dto;
 	}
 	
-	public void insert(FaqDTO dto){
-		sql = 	"insert into faq (" +
+	public void insert(NoticeDTO dto){
+		sql = 	"insert into notice (" +
 				"id, title, content, status, register_date) "+
 				"values ("+
 				"? ,    ? ,	   ?   ,   ?   , 	  now() )";
@@ -137,8 +137,8 @@ public class NoticeDAO {
 		} finally { close(); }
 	}
 	
-	public void update(FaqDTO dto){
-		sql = 	"update faq set " +
+	public void update(NoticeDTO dto){
+		sql = 	"update notice set " +
 				"id = ? , title = ? , content = ? , status = ? register_date = now() " +
 				"where seq = ? ";
 		System.out.println(sql);
