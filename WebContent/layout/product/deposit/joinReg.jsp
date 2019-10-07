@@ -1,3 +1,7 @@
+<%@page import="jdbc.User.UserDAO"%>
+<%@page import="jdbc.User.UserDTO"%>
+<%@page import="jdbc.Transfer.Transfer_logDTO"%>
+<%@page import="jdbc.Transfer.Transfer_logDAO"%>
 <%@page import="jdbc.Deposit.DepositsDAO"%>
 <%@page import="jdbc.Deposit.DepositsDTO"%>
 <%@page import="jdbc.Transfer.Transfer_autoDTO"%>
@@ -22,11 +26,35 @@ DepositsDTO depDTO = new DepositsDTO();
 Transfer_autoDTO autoDTO = new Transfer_autoDTO();
 
 String	userid = (String)request.getSession().getAttribute("userID"),
-		newAcc = "010-1111-1111-122",
+		newAcc = "010-1111-1111-161",
 		myAcc = request.getParameter("account_number"),
 		product=request.getParameter("product");
 
 int sum = Integer.parseInt(request.getParameter("sum"));
+AccountDTO myAccDTO = AccountDAO.getInstance().selectAccount(myAcc);
+UserDTO userDTO = UserDAO.getInstance().selectId(userid);
+
+
+int mysum = myAccDTO.getSum();
+
+myAccDTO.setSum(mysum-sum);
+
+AccountDAO.getInstance().updateMoney(myAccDTO);
+
+Transfer_logDTO transDTO = new Transfer_logDTO();
+transDTO.setAccount_number(myAcc);
+transDTO.setSelf("본인");
+transDTO.setTarget("SJ은행");
+transDTO.setTo_account_number(newAcc);
+transDTO.setReceived(userDTO.getName());
+transDTO.setSum((long)sum);
+transDTO.setFee(500);
+transDTO.setCms("");
+transDTO.setMemo("예금");
+transDTO.setTo_memo("");
+transDTO.setStatus("성공");
+
+Transfer_logDAO.getInstance().insert(transDTO);
 
 accDTO.setAccount_number(newAcc);
 accDTO.setType(request.getParameter("accType"));//종류
@@ -42,6 +70,8 @@ depDTO.setPreferential("임시");
 depDTO.setInterest(2.2F);
 depDTO.setType(request.getParameter("type"));
 
+System.out.println("dddd "+request.getParameter("auto"));
+
 if(((String)request.getParameter("auto")).equals("신청")){
 autoDTO.setAccount_number(myAcc);
 autoDTO.setTo_account_number(newAcc);
@@ -50,8 +80,9 @@ autoDTO.setPeriod("한달");
 autoDTO.setStart_dateStr(request.getParameter("startDate"));
 autoDTO.setFinish_dateStr(request.getParameter("finish_date"));
 autoDTO.setLast_day("말일이체안함");
-autoDTO.setMemo("");
+autoDTO.setMemo("예금");
 autoDTO.setTo_memo("");
+Transfer_autoDAO.getInstance().insert(autoDTO);
 }
 
 System.out.println("acc \t"+accDTO);
@@ -60,7 +91,7 @@ System.out.println("auto \t"+autoDTO);
 
 AccountDAO.getInstance().insert(accDTO);
 DepositsDAO.getInstance().insert(depDTO);
-Transfer_autoDAO.getInstance().insert(autoDTO);
+
 
 
 /* Deposits_infoDTO setDTO = new Deposits_infoDTO();

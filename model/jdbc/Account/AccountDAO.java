@@ -151,10 +151,10 @@ public class AccountDAO {
 
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getType());
-			pstmt.setInt(3,  dto.getSum());
-			pstmt.setString(3, dto.getAlias());
-			pstmt.setString(4, dto.getId());
-			pstmt.setString(5, dto.getPw());
+			pstmt.setLong(3,  dto.getSum());
+			pstmt.setString(4, dto.getAlias());
+			pstmt.setString(5, dto.getId());
+			pstmt.setString(6, dto.getPw());
 
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
@@ -163,7 +163,7 @@ public class AccountDAO {
 
 	public void updateMoney(AccountDTO dto){
 		sql = 	"update account set " +
-				"money = ? " +
+				"sum = ? " +
 				"where account_number = ?";
 		System.out.println(sql);
 		try {

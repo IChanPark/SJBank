@@ -16,8 +16,9 @@ public class Transfer_logDTO {
 						status;				//성공/실패
 
 	private	Integer 	seq,				//로그 번호
-						sum,				//총액
 						fee;				//수수료
+	
+	private Long 		sum;				//총액
 
 	private	Date		register_date;		//가입일
 
@@ -111,11 +112,11 @@ public class Transfer_logDTO {
 		this.seq = seq;
 	}
 
-	public Integer getSum() {
+	public Long getSum() {
 		return sum;
 	}
 
-	public void setSum(Integer sum) {
+	public void setSum(Long sum) {
 		this.sum = sum;
 	}
 

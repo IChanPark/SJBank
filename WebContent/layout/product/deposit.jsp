@@ -288,7 +288,7 @@ function joinReg(me) {
 				sum				:	$('#sum').val(),//여까지 작업 
 				newPW			:	$('#newPW').val(),
 				newPWchk		:	$('#newPWchk').val(),
-				auto			:	$('.auto_Radio').val(),
+				auto			:	$('.auto_Radio:checked').val(),
 				alias			:	$('#alias').val(),
 				startDate		:	$('#startDate').val(),	
 				finish_date		:	$('#endDate').val(),

@@ -21,7 +21,7 @@ public class Trs implements M_Action{
 		System.out.println(request.getParameter("acc"));
 		System.out.println(request.getParameter("accpw"));
 		try {
-			System.out.println(AccountDAO.getInstance().getNamebyAcc(request.getParameter("toAcc")));
+			System.out.println(AccountDAO.getInstance().getAliasbyAcc(request.getParameter("toAcc")));
 			System.out.println(AccountDAO.getInstance().chkAccPw(request.getParameter("acc"), request.getParameter("accpw")));
 
 			if(AccountDAO.getInstance().chkAccPw(request.getParameter("acc"), request.getParameter("accpw")))
@@ -30,7 +30,7 @@ public class Trs implements M_Action{
 				dto.setSelf("본인");
 				dto.setTarget(request.getParameter("transfer_receive"));
 				dto.setTo_account_number(request.getParameter("toAcc"));
-				dto.setReceived( AccountDAO.getInstance().getNamebyAcc(request.getParameter("toAcc"))   );
+				dto.setReceived( AccountDAO.getInstance().getAliasbyAcc(request.getParameter("toAcc"))   );
 				dto.setSum( Integer.parseInt(request.getParameter("money") ) );
 				dto.setFee(0);
 				dto.setCms(request.getParameter("cms"));
@@ -42,7 +42,7 @@ public class Trs implements M_Action{
 				Transfer_logDAO.getInstance().insert(dto);
 				AccountDAO.getInstance().updateMoney( -1*Integer.parseInt(request.getParameter("money")), request.getParameter("acc") );
 				
-				if(!AccountDAO.getInstance().getNamebyAcc(request.getParameter("toAcc")).equals("외부계좌") )
+				if(!AccountDAO.getInstance().getAliasbyAcc(request.getParameter("toAcc")).equals("외부계좌") )
 				{
 					AccountDAO.getInstance().updateMoney( Integer.parseInt(request.getParameter("money")), request.getParameter("toAcc"));
 				}
