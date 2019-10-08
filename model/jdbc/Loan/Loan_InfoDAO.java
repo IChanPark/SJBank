@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Fund.Fund_InfoDTO;
 
 public class Loan_InfoDAO {
 
@@ -80,6 +81,25 @@ public class Loan_InfoDAO {
 			}
 		} catch (Exception e) {
 		}
+	}
+	public Loan_InfoDTO selectProUse( Loan_InfoDTO dto){
+		Loan_InfoDTO SetDTO = null;
+		
+		sql =	"select * from  loan_info where product = ? "+
+				"and status = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct());
+			pstmt.setString(2, "활성");
+			rs = pstmt.executeQuery();
+			
+			SetDTO =  Loan_Info(rs, dto);			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return SetDTO;
 	}
 
 	public ArrayList<Loan_InfoDTO> list() {

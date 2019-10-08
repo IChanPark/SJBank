@@ -1,3 +1,5 @@
+<%@page import="jdbc.Loan.Loan_InfoDAO"%>
+<%@page import="jdbc.Loan.Loan_InfoDTO"%>
 <%@page import="jdbc.Fund.Fund_InfoDAO"%>
 <%@page import="jdbc.Fund.Fund_InfoDTO"%>
 <%@page import="jdbc.Deposit.Deposits_infoDAO"%>
@@ -19,23 +21,21 @@ DataDTO.setId((String)request.getSession().getAttribute("userID"));
 DataDTO.setType("예금");
 ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectID_Type(DataDTO);
 
-Fund_InfoDTO setDTO = new Fund_InfoDTO();
+Loan_InfoDTO setDTO = new Loan_InfoDTO();
 setDTO.setProduct(request.getParameter("product"));
 System.out.println(request.getParameter("product"));
-Fund_InfoDTO dto = Fund_InfoDAO.getInstance().selectProUse(setDTO);
-map.put("product", dto.getProduct());
+Loan_InfoDTO dto = Loan_InfoDAO.getInstance().selectProUse(setDTO);
 map.put("product", dto.getProduct());
 map.put("product_info", dto.getProduct_info());
-map.put("price", dto.getPrice()+"");
-map.put("price_modify", dto.getPrice_modify()+"");
-map.put("area", dto.getArea());
+map.put("min_interest", dto.getMin_interest()+"");
+map.put("max_interest", dto.getMax_interest()+"");
+map.put("month", dto.getMonth()+"");
 map.put("type", dto.getType());
-map.put("property",dto.getProperty());
-map.put("tax", dto.getTax());
-map.put("first_fee",dto.getFirst_fee()+"");
-map.put("fee",dto.getFee()+"");
-map.put("management",dto.getManagement());
-map.put("sector",dto.getSector());
+map.put("loanlimit",dto.getloanlimit()+"");
+map.put("preferential",dto.getPreferential());
+map.put("prf_content",dto.getPrf_content());
+map.put("prf_interest",dto.getPrf_interest());
+
 map.put("register_date",dto.getRegister_dateStr());
 
 String acc = "";
