@@ -18,7 +18,7 @@ public class QnaReg implements M_Action {
 		dto.setId(request.getParameter("id"));
 		dto.setTitle(request.getParameter("title"));		
 		dto.setContent(request.getParameter("content"));
-
+		
 		//계좌번호 넣어주세요
 		
 		//넣어주세요
