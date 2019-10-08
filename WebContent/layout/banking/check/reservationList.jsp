@@ -7,14 +7,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-
 <%
+System.out.println(request.getParameter("acc")+"acc");
 	Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
-	ArrayList<Transfer_reserveDTO> dto = Transfer_reserveDAO.getInstance().SearchDate(
-			request.getParameter("start"), request.getParameter("end"), request.getParameter("sort"));
+	ArrayList<Transfer_reserveDTO> dto = Transfer_reserveDAO.getInstance().AccSearchResTrs(
+			request.getParameter("acc"),request.getParameter("start"), 
+			request.getParameter("end"), request.getParameter("sort"));
 
 	for (int i = 0; i < dto.size(); i++) {
 		map.put("seq", dto.get(i).getSeq() + "");

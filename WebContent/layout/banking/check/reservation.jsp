@@ -17,13 +17,15 @@ $(document).ready(function(){
 			data:{
 				start : $("input[name=start]").val(),
 				  end : $("input[name=end]").val(),
+				  acc : $("select[name=acc]").val(),
 				  sort : $('input[name="sort"]:checked').val()
 			},
 			dataType:'json',
 			success:function(qqq){
 				
 				$.each(qqq,function(i,e){
-					var row = $("<tr><td>"+e.account_number+"</td>");
+					var row = $("<tr><td>"+i+"</td>")
+					row.append($("<td>"+e.account_number+"</td>"));
 					row.append($("<td>"+e.register_date+"</td>"));
 					row.append($("<td>"+e.memo+"</td>"));
 					row.append($("<td>"+e.to_memo+"</td>"));
@@ -57,13 +59,13 @@ function cancel(qqq)
 	</tr>
 	<tr>
 		<td>조회결과 순서</td>
-		<td><input type="radio" name="sort" value="desc"/>최근거래순 <input type="radio"  name="sort" value="asc"/>과거거래순</td>
+		<td><input type="radio" name="sort" value="asc"/>최근거래순 <input type="radio"  name="sort" value="desc"/>과거거래순</td>
 	</tr>
 	<tr>
 		<td>계좌 선택</td>
 		<td><select name="acc" id="acc">
 		<c:forEach items="${data }" var = "dto">
-		<option value="numbers">${dto.account_number }</option>
+		<option>${dto.account_number }</option>
 		</c:forEach>
 		</select>
 		</td>
@@ -76,7 +78,8 @@ function cancel(qqq)
 <div class="subTitle">예약이체 조회결과</div>
 <br><br>
 <table border="" id="tot">
-		<td>선택</td>
+		<td>No</td>
+		<td>선택계좌</td>
 		<td>이체예정일시</td>
 		<td>출금계좌</td>
 		<td>입금은행<br>입금계좌</td>

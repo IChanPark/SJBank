@@ -260,9 +260,43 @@ public class Transfer_reserveDAO {
 	}
 	
 	
+	/////////////////////////////////////////////
+	
+	public ArrayList<Transfer_reserveDTO> AccSearchResTrs(String acc,String start,String end, String order){
+		ArrayList<Transfer_reserveDTO> res = new ArrayList<Transfer_reserveDTO>();
+		
+		sql = 	"select * from transfer_reserve where "+
+				"(time BETWEEN ? and   ? ) and account_number = '"+acc+
+				"' ORDER BY time ";
+		sql+=order; 
+		
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+		
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+						
+			rs = pstmt.executeQuery();
+			
+			Transfer_reserve(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////////////////////////////////
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}
