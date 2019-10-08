@@ -41,13 +41,13 @@ public class Trsdto_server {
 			Collections.synchronizedMap(autoList);
 
 			
-//			for (Transfer_delayDTO tdd  : Transfer_delayDAO.getInstance().list() ) {
-//				delayList.put(tdd.getSeq(), tdd);
-//			}
-//			
-//			for (Transfer_reserveDTO trd  : Transfer_reserveDAO.getInstance().list() ) {
-//				reserveList.put(trd.getSeq(), trd);
-//			}
+			for (Transfer_delayDTO tdd  : Transfer_delayDAO.getInstance().list() ) {
+				delayList.put(tdd.getSeq(), tdd);
+			}
+			
+			for (Transfer_reserveDTO trd  : Transfer_reserveDAO.getInstance().list() ) {
+				reserveList.put(trd.getSeq(), trd);
+			}
 			
 			
 			

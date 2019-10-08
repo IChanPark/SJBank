@@ -239,7 +239,7 @@ public class Transfer_reserveDAO {
 		ArrayList<Transfer_reserveDTO> res = new ArrayList<Transfer_reserveDTO>();
 		
 		sql = 	"select * from transfer_reserve where "+
-				"scheduled_date BETWEEN ? and   ? "+
+				"time BETWEEN ? and   ? "+
 				"ORDER BY scheduled_date ";
 		sql+=order; 
 		

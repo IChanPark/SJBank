@@ -3,14 +3,13 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(document).ready(function(){
-
 	$('.check').click(function(){
 		alert("????");
 		  $.ajax({	//라디오 버튼 
 				url:"layout/banking/check/autoList.jsp",
 				type:'post',
 				data:{
-					division : $("input[name=division]").val(),
+					division : $('input[name="division"]:checked').val(),
 					account : $("select[name=account]").val()
 				},
 				dataType:'json',
@@ -31,8 +30,15 @@ $(document).ready(function(){
 			});
 	});
 }); 
+function cancel(qqq)
+{
+	document.paging.hid_t.value = "banking/check/Cancel";
+	document.paging.seq.value=qqq;
+	document.paging.submit();
+}
 </script>
-
+<input type="hidden" name ="seq" />
+<input type="hidden" name ="type" value="auto" />
 <div class="subTitle">자동이체 </div>
 <table border="">
 	<tr>
@@ -52,7 +58,6 @@ $(document).ready(function(){
 	</tr>
 </table>
 <br><br>
-
 <div class="subTitle">자동이체 조회결과</div>
 <br><br>
 <table border="" id="tot">

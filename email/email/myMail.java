@@ -89,7 +89,6 @@ public class myMail extends HttpServlet {
 		}catch (MessagingException msg_e) {
 			msg_e.printStackTrace();
 		}
-		System.out.println("??!@#!");
 		
 
         response.setContentType("application/json");

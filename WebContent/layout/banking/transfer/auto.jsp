@@ -59,23 +59,14 @@ function fff(){
 }
 
 function goReg(){
-	
-
 	var f=document.paging; 
-    
 	f.hid_t.value = "banking/transfer/autoReg";
-	
     f.method="post";
     f.submit();
-	
-	
 };
 
  </script>
-
-
 <div class="subTitle">자동이체 등록</div>
-
 <table>
 <div>계좌간/타행자동이체 약관 중 계좌간 자동이체(자동이체 방법,지급자금부족 때의 처리 등),
 타행 자동이체(약관의 적용,신청 변경 밎 해지 등), 출금우선순위 등 약관에 동의하셔야 합니다.
