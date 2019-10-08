@@ -13,16 +13,16 @@ public class Update  implements M_Action{
 		
 		UserDTO dto = new UserDTO();
 		
-		dto.setId((String)request.getSession().getAttribute("userID"));
-		dto.setPw(request.getParameter("pw"));
-		dto.setSimple_pw(Integer.parseInt(request.getParameter("simple_pw")));
-		dto.setTel(request.getParameter("tel"));
-		dto.setGen(request.getParameter("gen"));
-		dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));		
-		dto.setJob_group(request.getParameter("position"));
-		dto.setAddr(request.getParameter("addr"));		
-		dto.setPostal_code(Integer.parseInt(request.getParameter("zipcode")));
-
+		dto.setId((String)request.getSession().getAttribute("userID"));//1
+		dto.setPw(request.getParameter("pw"));//2
+		dto.setSimple_pw(Integer.parseInt(request.getParameter("simple_pw")));//3
+		dto.setTel(request.getParameter("tel"));//4
+		dto.setGen(request.getParameter("gen"));//5
+		dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));//6		
+		dto.setJob_group(request.getParameter("position"));//7
+		dto.setAddr(request.getParameter("addr")+"/"+request.getParameter("datail"));//8		
+		dto.setPostal_code(Integer.parseInt(request.getParameter("zipcode")));//9
+		
 		//계좌번호 넣어주세요
 		
 		//넣어주세요

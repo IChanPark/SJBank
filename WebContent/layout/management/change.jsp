@@ -7,7 +7,7 @@
 			<td>비밀번호</td>
 			<td><input type="text" name="pw" value="${data.pw }"/></td>			
 		</tr>
-		<tr>	
+		<tr>
 			<td>간편 비밀 번호</td>
 			<td><input type="text" name="simple_pw" value="${data.simple_pw }"/></td>
 		</tr>
@@ -47,15 +47,18 @@
 					<option>백수</option>
 					</select>
 			</td>
-		</tr>		
-		<tr>	
-			<td>주소</td>
-			<td><input type="text" name="addr" /></td>
-		</tr>		
-		<tr>	
+		</tr>
+		<tr>
 			<td>우편번호</td>
-			<td><input type="text" name="zipcode" /></td>
-		</tr>	
+			<td><input type="text" id="sample4_postcode" name="zipcode" placeholder="우편번호" readonly="readonly">
+			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td>
+		</tr>
+		<tr>
+		    <td>주소</td>
+			<td><input type="text" id="sample4_roadAddress" name="addr" placeholder="도로명주소" readonly="readonly">
+			<input type="text" id="sample4_detailAddress" name="datail" placeholder="상세주소"> </td>
+		</tr>
+
 		<tr>
 		
 			<td colspan="2" align="right">
