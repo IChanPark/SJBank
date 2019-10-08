@@ -90,7 +90,7 @@ function ajax_go() {
 		
 		$.each(qqq,function(i,e){
 			row +="<div class='box' data-product-name='"+e.product+"' data-product-type='"+e.type+"'>";
-			row +="<div class='l'>최저 "+e.min_interest+"<br>최고 "+e.max_interest+"</div>";
+			row +="<div class='l'>"+"수정기준가 "+"<br>"+e.price_modify+"</div>";
 			row +="<div class='m'>["+e.type+"] "+e.product+"</div>";
 			row +="<div class='rl' onclick='detail(this)'><div>상세보기</div></div>";
 			row +="<div class='rr' onclick='join(this)'><div>가입하기</div></div>";
@@ -129,36 +129,39 @@ function detail(me) {
 			box +=	"<div class='infoTop'>";
 			box +=	"<div class='infoTop_Left'>";
 			box +=	"<div class='infoTop_Title'>"+qqq.product+"</div><br>"; // 상품명
-			box +=	"<div class='infoTop_Info'>"+qqq.deposits_info+"</div>"; // ① 뭐시기뭐시기 (상품내용)
+			box +=	"<div class='infoTop_Info'>"+qqq.product_info+"</div>"; // ① 뭐시기뭐시기 (상품내용)
 			box +=	"<br><div class='infoTop_Info'><div class='infoTop_Type'>상품종류</div>"+qqq.type+"</div>";
-			box +=	"<div class='infoTop_Info'><div class='infoTop_Type'>가입기간</div>";
-			var month = '';
+			//box +=	"<div class='infoTop_Info'><div class='infoTop_Type'>가입기간</div>";
+		/* 	var month = '';
 			$.each(qqq.month.split('#'),function(i,e){
 				month +=	e+"개월, "; 
 			});
 			month = month.substring(0, month.lastIndexOf(","));
 			box += 	month+"</div>";
 			var min = number_Pattern(qqq.min_sum)+"원";
-			var max = number_Pattern(qqq.max_sum)+"원";
-			box +=	"<div class='infoTop_Info'><div class='infoTop_Type'>가입금액</div>"+min+" 부터 최대 "+max+" 까지</div>";
+			var max = number_Pattern(qqq.max_sum)+"원"; */
+			box +=	"<div class='infoTop_Info'><div class='infoTop_Type'>초기기준가</div>"+qqq.price+"</div>";
+			box +=	"<div class='infoTop_Info'><div class='infoTop_Type'>수정기준가</div>"+qqq.price_modify+"</div>";
 			box +=	"</div>";
 			box +=	"<div class='infoTop_Rigth'>";
-			box +=	"<img src='img/test1.png' alt=''></img><br>최저 연 &ensp;최고 연<br>";
-			box +=	"<div class='infoTop_Percent'>&ensp; "+qqq.min_interest+"~"+qqq.max_interest+"%</div><br>[납입방식 "+qqq.type+"기준]";
+			box +=	"<img src='img/test1.png' alt=''></img><br><br>";
 			box +=	"</div>";
 			box +=	"</div>";
 			box +=	"<div class='infoMid' data-product-name='"+qqq.product+"' ><div class='infoMid_Join' onclick='join(this)'>가입</div></div>";
 			box +=	"<div class='infoMain'>";
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>납입방법</div><div class='infoMain_Value'>"+qqq.type+"</div></div>";
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div><div class='infoMain_Value'>"+qqq.interest_type+"</div></div>";
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'></div>유형<div class='infoMain_Value'>"+qqq.type+"</div></div>";
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>운용사</div><div class='infoMain_Value'>"+qqq.management+"</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>세금</div><div class='infoMain_Value'>["+qqq.tax+"]</div></div>";	
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동재예치</div><div class='infoMain_Value'>["+qqq.retention+"]</div></div>";
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>일부해지</div><div class='infoMain_Value'>["+qqq.partialization+"]</div></div>";
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>우대이자율</div><div class='infoMain_Value'>";
-			var pi = qqq.prf_interest.split('#');
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>지역</div><div class='infoMain_Value'>["+qqq.area+"]</div></div>";
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품속성</div><div class='infoMain_Value'>["+qqq.property+"]</div></div>";
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>선취수수료</div><div class='infoMain_Value'>["+qqq.first_fee+"]</div></div>";
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>년보수</div><div class='infoMain_Value'>["+qqq.fee+"]</div></div>";
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>위험등급</div><div class='infoMain_Value'>["+qqq.sector+"]</div></div>";
+			//box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>등록일</div><div class='infoMain_Value'>["+qqq.register_date+"]</div></div>";
+			/* var pi = qqq.prf_interest.split('#');
 			$.each(qqq.prf_content.split('#'),function(i,e){
 				box +=	i+1+". "+e+" 연"+pi[i]+"% 우대<br>";	 
-			});
+			}); */
 			box +=	"</div></div>";
 			box +=	"</div>";
 			box +=	"<div class='infoBot'><div class='infoBot_Back' onclick='goMenu(this)' data-menu-name='product/Deposit'>목록으로</div></div>";
@@ -207,29 +210,29 @@ function join(me) {
 			box +=	"</select><button>잔액조회</button></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>";
 			box +=	"<input type='text' placeholder='숫자4자리' id='pw'></input><button>계좌 비밀번호 오류 횟수조회</button></div></div>";
-			box +=	"<div class='join_Guide'>신규계좌 정보</div>";
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>적립방식</div>";
-			box +=	"<div class='infoMain_Value' data-join-type='"+qqq.type+"'>"+qqq.type+"</div></div>";
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div>";
-			box +=	"<div class='infoMain_Value data-join-interest_type='"+qqq.interest_type+"''>"+qqq.interest_type+"</div></div>";
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품기간</div>";
+			box +=	"<div class='join_Guide'>신규가입정보</div>";
+			/* box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>적립방식</div>";
+			box +=	"<div class='infoMain_Value' data-join-type='"+qqq.type+"'>"+qqq.type+"</div></div>"; */
+			//box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div>";
+			//box +=	"<div class='infoMain_Value data-join-interest_type='"+qqq.interest_type+"''>"+qqq.interest_type+"</div></div>";
+			/* box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품기간</div>";
 			box +=	"<div class='infoMain_Value'><select id='month'>"
 			$.each(qqq.month.split('#'),function(i,e){
 				box +=	"<option value='"+e+"'>"+e+" 개월</option>";
 			});
-			box	+=	"</select></div></div>";
+			box	+=	"</select></div></div>"; */
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규금액</div>";
 			box +=	"<div class='infoMain_Value'><input type='text' placeholder='0' id=sum></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
 			box	+=	"<div class='infoMain_Value'><button onclick='add(this)' value='5000000'>500만</button><button onclick='add(this)' value='1000000'>100만</button>";
 			box +=	"<button onclick='add(this)' value='500000'>50만</button><button onclick='add(this)' value='100000'>10만</button><button onclick='add(this)' value='50000'>5만</button>";
 			box	+=	"<button onclick='add(this)' value='10000'>1만</button><button onclick='add(this)' value='1000'>1천</button><button onclick='zero(this)'>정정</button></div></div>";	
-			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규계좌 비밀번호</div>";
+			 box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규계좌 비밀번호</div>";
 			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='숫자4자리' id='newPW'></input></div></div>"
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>비밀번호 확인</div><div class='infoMain_Value'>";
-			box	+=	"<input type='text' placeholder='숫자4자리' id='newPWchk'></input></div></div>";
+			box	+=	"<input type='text' placeholder='숫자4자리' id='newPWchk'></input></div></div>"; 
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌별명 (선택사항)</div>";
 			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='10자 이내' id='alias'></input></div></div>";
-			box	+=	"<div class='join_Guide'>자동이체 정보</div><div class='infoMain_Info'>";
+			/* box	+=	"<div class='join_Guide'>자동이체 정보</div><div class='infoMain_Info'>";
 			box	+=	"<div class='infoMain_Type'>자동이체 신청</div><div class='infoMain_Value'>";
 			box	+=	"<input class='auto_Radio' type = 'radio' name = 'r_auto'  value='신청' checked='checked'>신청</input>";
 			box	+=	"<input class='auto_Radio' type = 'radio' name = 'r_auto' value='미신청'>미신청</input></div></div>";
@@ -237,7 +240,7 @@ function join(me) {
 			box	+=	"<input type = 'text' id='startDate'></input>~";
 			box	+=	"<input type = 'text' id='endDate'></input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동이체 금액</div>";
-			box	+=	"<div class='infoMain_Value'>매월 <input type='text' placeholder='0' id='autoTrans'>원</div></div>";
+			box	+=	"<div class='infoMain_Value'>매월 <input type='text' placeholder='0' id='autoTrans'>원</div></div>"; */
 			box	+=	"</div>";
 			box	+=	"<div class='AdminBot' data-product-name='"+qqq.product+"'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Deposit'>이전</div>";
 			box +=	"<div class='join_Button' onclick='joinReg(this)'>다음</div></div>";
@@ -269,17 +272,17 @@ function joinReg(me) {
 				product 		:	$(me).parent('[data-product-name]').data("product-name"),
 				account_number	:	$('#account_number').val(),
 				pw				:	$('#pw').val(),
-				type			:	$('[data-join-type]').data("join-type"),
-				interest_type	:	$('[data-join-interest_type]').data("join-interest_type"),
-				month			:	$('#month').val(),
+				//type			:	$('[data-join-type]').data("join-type"),
+				//interest_type	:	$('[data-join-interest_type]').data("join-interest_type"),
+				//month			:	$('#month').val(),
 				sum				:	$('#sum').val(),//여까지 작업 
 				newPW			:	$('#newPW').val(),
 				newPWchk		:	$('#newPWchk').val(),
-				auto			:	$('.auto_Radio:checked').val(),
+				//auto			:	$('.auto_Radio:checked').val(),
 				alias			:	$('#alias').val(),
-				startDate		:	$('#startDate').val(),	
-				finish_date		:	$('#endDate').val(),
-				autoTrans		:	$('#autoTrans').val()
+				//startDate		:	$('#startDate').val(),	
+				//finish_date		:	$('#endDate').val(),
+				//autoTrans		:	$('#autoTrans').val()
 		},
 		dataType:'json',
 		success:function(qqq){
@@ -320,4 +323,4 @@ $('#endDate').datepicker({ maxDate: "+1M" });
 $('input[name=startDate]').datepicker('disable').removeAttr('disabled');
 $('input[name=endDate]').datepicker('disable').removeAttr('disabled');
 </script>
-<div class='subTitle'>예금·적금 신규</div>
+<div class='subTitle'>펀드 신규</div>

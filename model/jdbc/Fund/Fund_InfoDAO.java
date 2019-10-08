@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Deposit.Deposits_infoDTO;
 import jdbc.Fund.Fund_InfoDTO;
 
 public class Fund_InfoDAO {
@@ -51,6 +52,7 @@ public class Fund_InfoDAO {
 				dto.setFee(rs.getFloat("fee"));
 			
 				dto.setRegister_date(rs.getDate("register_date"));
+				dto.setModify_date(rs.getDate("modify_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
 			} 
 		} catch (Exception e) {}
@@ -78,12 +80,31 @@ public class Fund_InfoDAO {
 				dto.setFee(rs.getFloat("fee"));
 
 				dto.setRegister_date(rs.getDate("register_date"));
+				dto.setModify_date(rs.getDate("modify_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
 	}
-	
+	public Fund_InfoDTO selectProUse( Fund_InfoDTO dto){
+		 Fund_InfoDTO SetDTO = null;
+		
+		sql =	"select * from  fund_info where product = ? "+
+				"and status = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct());
+			pstmt.setString(2, "활성");
+			rs = pstmt.executeQuery();
+			
+			SetDTO =  Fund_Info(rs, dto);			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return SetDTO;
+	}
 	public ArrayList<Fund_InfoDTO> list(){
 		ArrayList<Fund_InfoDTO> res = new ArrayList<Fund_InfoDTO>();
 		

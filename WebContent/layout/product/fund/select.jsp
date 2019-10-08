@@ -1,3 +1,5 @@
+<%@page import="jdbc.Fund.Fund_InfoDAO"%>
+<%@page import="jdbc.Fund.Fund_InfoDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="jdbc.Deposit.Deposits_infoDAO"%>
 <%@page import="jdbc.Deposit.Deposits_infoDTO"%>
@@ -12,28 +14,28 @@ Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
 
-Deposits_infoDTO setDTO = new Deposits_infoDTO();
+Fund_InfoDTO setDTO = new Fund_InfoDTO();
 setDTO.setProduct(request.getParameter("title"));
 setDTO.setType(request.getParameter("type"));
 
-ArrayList<Deposits_infoDTO> dto = null;
+ArrayList<Fund_InfoDTO> dto = null;
 //타입 타이틀 검색
 if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
-	dto = Deposits_infoDAO.getInstance().selectLikeAnd(setDTO);
+	dto = Fund_InfoDAO.getInstance().list();
 //타입만 검색
 else if(!setDTO.getType().equals(""))
-	dto = Deposits_infoDAO.getInstance().selectType(setDTO);
+	dto = Fund_InfoDAO.getInstance().list();
 //타이틀만 검색
 else if(!setDTO.getProduct().equals(""))
-	dto = Deposits_infoDAO.getInstance().selectLikePro(setDTO);
+	dto = Fund_InfoDAO.getInstance().list();
 else 
-	dto = Deposits_infoDAO.getInstance().list();
+	dto = Fund_InfoDAO.getInstance().list();
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("product", dto.get(i).getProduct());
-	map.put("min_interest", dto.get(i).getMin_interest()+"");
-	map.put("max_interest", dto.get(i).getMax_interest()+"");
-	map.put("month", dto.get(i).getMonth());
+	map.put("price", dto.get(i).getPrice()+"");
+	map.put("price_modify", dto.get(i).getPrice_modify()+"");
+	map.put("fee", dto.get(i).getFee()+"");
 	map.put("type", dto.get(i).getType());
 	map.put("tax", dto.get(i).getTax());
 	

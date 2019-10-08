@@ -23,10 +23,19 @@ public class Fund_InfoDTO {
 					fee;				//년보수
 	
 	private	Date	register_date,		//펀드 등록일
+					modify_date,		//펀드 수정일
 					end_date;			//펀드 폐지일
 
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	public Date getModify_date() {
+		return modify_date;
+	}
+
+	public void setModify_date(Date modify_date) {
+		this.modify_date = modify_date;
+	}
+
 	public String getProduct_info() {
 		return product_info;
 	}
