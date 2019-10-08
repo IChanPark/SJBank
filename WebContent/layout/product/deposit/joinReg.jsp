@@ -43,7 +43,6 @@ AccountDAO.getInstance().updateMoney(myAccDTO);
 
 Transfer_logDTO transDTO = new Transfer_logDTO();
 transDTO.setAccount_number(myAcc);
-transDTO.setSelf("본인");
 transDTO.setTarget("SJ은행");
 transDTO.setTo_account_number(newAcc);
 transDTO.setReceived(userDTO.getName());
