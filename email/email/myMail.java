@@ -53,6 +53,8 @@ public class myMail extends HttpServlet {
 		p.put("mail.smtp.host", "smtp.gmail.com");      // smtp 서버 주소
 		p.put("mail.smtp.auth","true");                 // gmail은 무조건 true 고정
 		p.put("mail.smtp.port", "587");                 // gmail 포트
+		
+		
 
 		Authenticator auth = new MyAuthentication();
 

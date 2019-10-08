@@ -47,20 +47,23 @@ display: grid;justify-content: center;align-items: center;}
 </style>
 
 
-<div class="subTitle">문의사항</div>
+<div class="subTitle">공지사항</div>
+<div align="right">
 
+
+	
 <div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">
 <tr>
 
 	<div class="d1"  data-faq-seq="${dto.seq}">
     <ul>
-      <li class="ltt"><div class="m">No.${dto.seq } ${dto.title } 작성자: ${dto.email } 등록일: ${dto.register_date } </div>
+      <li class="ltt"><div class="m">No.${dto.seq } ${dto.title } 작성자: ${dto.id }</div>
         <ul class="ull">
           <li class="lii">${dto.content }</li>
-          <li><a href="#" data-menu-name="admin/service/mailform" id=qna>답변</a></li> 
         </ul>
-      </li>  
+      </li>
+  
     </ul> 
   </div>
  

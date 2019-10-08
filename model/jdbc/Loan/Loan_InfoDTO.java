@@ -17,7 +17,7 @@ public class Loan_InfoDTO {
 	private	Float 	min_interest,				//최저 연이자
 					max_interest;		//최고 연이자
 				
-	private Integer	 month;		//만기개월
+	private Integer	 	month;			//만기개월
 	private	Long		loanlimit;		//대출한도
 	
 	private	Date	register_date,		//상품 등록일
