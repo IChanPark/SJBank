@@ -67,4 +67,3 @@ display: grid;justify-content: center;align-items: center;}
   
 </c:forEach>
 </div>
-</div>

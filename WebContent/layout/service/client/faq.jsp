@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
- var screen="show";
+var screen="show";
  /*
 $(document).ready(function() {
 	 $(".ltt").on("click",function() {
@@ -29,13 +29,16 @@ $(document).ready(function() {
 */
 
 $(document).ready(function(){
+	ajax_go();
+	
 	$(".ser").on("click", function() {
 		ajax_go();
 	});
+
 });
 
 function ajax_go() {
-	gogo = "admin/service/faq_select.jsp";
+	gogo = "layout/service/faq_select.jsp";
 	$.ajax({	
 	url:gogo,
 	type:'post',
@@ -112,7 +115,7 @@ display: grid;justify-content: center;align-items: center;}
 <div class="scrollB"> <!-- 스크롤바 -->
 
 <div id = "ttt">
-<c:forEach var="dto" items="${data }" varStatus="no">
+<%-- <c:forEach var="dto" items="${data }" varStatus="no">
 <tr>
 
 	<div class="d1"  data-faq-seq="${dto.seq}">
@@ -127,6 +130,6 @@ display: grid;justify-content: center;align-items: center;}
   </div>
  
   
-</c:forEach>
+</c:forEach> --%>
 </div>
 </div>

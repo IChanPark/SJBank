@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 	<div>	
 			<table>
-			<tr><th colspan="2">메일 보내기</th></tr>
+			<tr><th colspan="2">답변하기</th></tr>
 			<!-- <tr><td>from</td><td><input type="text" name="from" /></td></tr> -->
 			<tr><td>to</td><td><input type="text" name="id" /></td></tr>
  			<tr><td>subject</td><td><input type="text" name="title" /></td></tr>

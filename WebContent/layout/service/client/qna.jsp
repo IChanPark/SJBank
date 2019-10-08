@@ -6,6 +6,7 @@
 <script type="text/javascript">
  var screen="show";
 $(document).ready(function() {
+	ajax_go();
 	$(".ltt").on("click",function() {
 	     var index = $(".ltt").index(this);
 	     var hh = $(".d1").eq(index).height();
@@ -24,6 +25,57 @@ $(document).ready(function() {
 	});
 	    	
 });
+
+function ajax_go() {
+	gogo = "layout/service/qna_select.jsp";
+	$.ajax({	
+	url:gogo,
+	type:'post',
+	dataType:'json',
+	success:function(qqq){
+		$("#ttt").empty();
+		var row = '';
+		
+		$.each(qqq,function(i,e){
+		row	+=	"<div class='d1'><ul>";
+		row	+=	"<li class='ltt' onclick = 'lttClk(this)'><div class='m'>No."+Number(i+1)+" ["+e.type+"] "+e.title+"</div>";
+	    row	+=	"<ul class='ull'> <li class='lii'>"+e.content+"</li>";
+	    row	+=	"</ul>";
+	    row	+=	"</li>";
+	    row	+=	"</ul></div>";
+	    row +=	"</div>";
+		});
+	$("#ttt").append(row);
+	isRun = false
+	},error:function(qqq){
+		$("#ttt").empty();
+		var row = $("<div class='box'></div>");
+		row.append($("<div class='m'>검색결과가 존재하지 않습니다.</div>"));
+		isRun = false;
+	}	
+		
+	});	
+};
+
+
+function lttClk(me){
+	var index = $(".ltt").index(me);
+	
+	//alert(index);
+	$(me).find(".ull").stop().fadeToggle(500);
+	
+	var hh = $(".d1").eq(index).height();
+    if(hh ==30){ 
+	//	$(".d1").height('60');
+	$(".d1").eq(index).height('60');
+		screen="hide"
+    }
+    else
+    {
+    	$(".d1").eq(index).height('30');
+    	screen="show";
+    }
+}
 
 </script>
 
@@ -48,23 +100,7 @@ display: grid;justify-content: center;align-items: center;}
 
 
 <div class="subTitle">문의사항</div>
-
-<div id = "ttt">
-<c:forEach var="dto" items="${data }" varStatus="no">
-<tr>
-
-	<div class="d1"  data-faq-seq="${dto.seq}">
-    <ul>
-      <li class="ltt"><div class="m">No.${dto.seq } ${dto.title } 작성자: ${dto.email } 등록일: ${dto.register_date } </div>
-        <ul class="ull">
-          <li class="lii">${dto.content }</li>
-          <li><a href="#" data-menu-name="admin/service/mailform" id=qna>답변</a></li> 
-        </ul>
-      </li>  
-    </ul> 
-  </div>
- 
-  
-</c:forEach>
-</div>
-</div>
+<div align="right">
+<a href="#" data-menu-name="layout/service/qna_insert" id="notice">글쓰기</a></div>
+<div class="scrollB"> <!-- 스크롤바 -->
+<div id = "ttt"></div>

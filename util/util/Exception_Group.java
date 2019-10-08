@@ -10,7 +10,8 @@ public class Exception_Group {
 			"security.Delaytrs","security.Blockalarm","management.user.check",
 			"management.User","security.otp.Apply","Security","Banking",
 			"service.SearchID","service.SearchPW","service.client.Faq","management.intbank.Edit",
-			"product.Deposit","product.Fund","product.Loan"," admin.Service.LoginMain"
+			"product.Deposit","product.Fund","product.Loan"," admin.Service.LoginMain","service.client.Qna",
+			"layout.service.qna_insert"
 			
 	};	//여짝에 추가해주세용
 	private Exception_Group() {

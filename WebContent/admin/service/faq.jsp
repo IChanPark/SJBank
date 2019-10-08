@@ -29,11 +29,11 @@ $(document).ready(function() {
 */
 
 $(document).ready(function(){
-	$(".ser").on("click", function() {
-		ajax_go();
-	});
+	ajax_go();
 });
-
+$(".ser").on("click", function() {
+	ajax_go();
+});
 function ajax_go() {
 	gogo = "admin/service/faq_select.jsp";
 	$.ajax({	
@@ -107,8 +107,9 @@ display: grid;justify-content: center;align-items: center;}
 
 
 <div class="subTitle">FAQ</div>
+
 <div align="right"><input class="sertext" type = "text" style="width: 450px"/>
-<div class="ser" >검색하기</div></div>
+<a href="#" data-menu-name="admin/service/faq_insert" id="notice">작성하기</a><div class="ser" >검색하기</div></div>
 <div class="scrollB"> <!-- 스크롤바 -->
 
 <div id = "ttt">
@@ -119,7 +120,7 @@ display: grid;justify-content: center;align-items: center;}
 	<ul>
       <li class="ltt" onclick = "lttClk(this)"><div class="m">No.${dto.seq } [${dto.type }] ${dto.title } 작성자: ${dto.id }</div>
         <ul class="ull">
-          <li class="lii">${dto.content }</li>
+          <li class="lii">${dto.content }</linoticeinsert.jsp>
         </ul>
       </li>
   
