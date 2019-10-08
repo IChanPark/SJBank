@@ -1,60 +1,70 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="jdbc.User.UserDAO"%>
-<%@page import="jdbc.User.UserDTO"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-
+ var screen="show";
 $(document).ready(function() {
-	$(".uid").on("click", function() {
-		
-		//var b = $(this).text();
-		$.ajax({
-			url:"admin/list.jsp",
-			type:'get',
-			data:{nn : $(this).text()},
-			 ////json을 안하면 문자열로 , json 처리하면 object로 묶어서 받음
-			success:function(qqq){
-				console.log(qqq);
-			},
-			error:function(qqq){
-				$("#tot").html(qqq.responseText);
-			}
-			
-		});
+	$(".ltt").on("click",function() {
+	     var index = $(".ltt").index(this);
+	     var hh = $(".d1").eq(index).height();
+	  
+		$(this).find(".ull").stop().fadeToggle(500);
+	    if(hh ==30){ 
+		//	$(".d1").height('60');
+		$(".d1").eq(index).height('60');
+			screen="hide"
+	    }
+	    else
+	    {
+	    	$(".d1").eq(index).height('30');
+	    	screen="show";
+	    }
 	});
+	    	
 });
-
 
 </script>
 
-<div class="subTitle">사용자 리스트</div>
-<table class="AccInfo">
-<tr >
-	<td>아이디</td>
-	<td>이름</td>
-	<td>전화번호</td>
-	<td>이메일</td>
-	<td>직업군</td>
-	<td>주소</td>
-	<td>우편번호</td>
-	<td>계정상태</td>
-	<td>가입일</td>
-	<td>탈퇴일</td>
-</tr>
+<style media="screen">
+.ltt {
+    width: 100%;
+    text-align: center;
+  }
+.ull{
+	
+    display: none;
+}
+.lii {
+	
+  	display: block;
+}
+.d1 {padding-top: 10px;  height: 30px; margin: auto; }
+.m {background-color: #3C0; float: left; height: 30px;  width: 100%;
+display: grid;justify-content: center;align-items: center;}
+
+</style>
+
+
+<div class="subTitle">문의사항</div>
+
+<div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<tr>
-		<td class = "uid">${dto.id }</td>
-		<td>${dto.name }</td>
-		<td>${dto.tel }</td>
-		<td>${dto.email }</td>
-		<td>${dto.job_group }</td>
-		<td>${dto.addr }</td>
-		<td>${dto.postal_code }</td>
-		<td>${dto.status }</td>
-		<td>${dto.register_date }</td>
-		<td>${dto.end_date }</td>
-	</tr>
+<tr>
+
+	<div class="d1"  data-faq-seq="${dto.seq}">
+    <ul>
+      <li class="ltt"><div class="m">No.${dto.seq } ${dto.title } 작성자: ${dto.email } 등록일: ${dto.register_date } </div>
+        <ul class="ull">
+          <li class="lii">${dto.content }</li>
+          <li><a href="#" data-menu-name="admin/service/mailform" id=qna>답변</a></li> 
+        </ul>
+      </li>  
+    </ul> 
+  </div>
+ 
+  
 </c:forEach>
-</table>
+</div>
+</div>

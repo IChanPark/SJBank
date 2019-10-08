@@ -117,7 +117,7 @@ public class Qna_replyDAO {
 	
 	public void insert(Qna_replyDTO dto){
 		sql = 	"insert into qna_reply (" +
-				"id, title, content,  ,  register_date) "+
+				"id, title, content,   register_date) "+
 				"values ("+
 				"? ,  ?   , 	?     ,   now() )";
 		System.out.println(sql);
