@@ -6,7 +6,8 @@ import java.util.Date;
 
 public class AccountDTO {
 	
-	private String 	account_number,	//계좌 번호
+	private String 
+					account_number,	//계좌 번호
 					type,			//계좌 타입 ex 예금, 적금, 펀드 등
 					alias,			//계좌 별칭 (사용자가 정한 이름)
 					id,				//계좌 사용자 아이디
@@ -20,12 +21,14 @@ public class AccountDTO {
 	
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+
+
 	public String getAccount_number() {
 		return account_number;
 	}
 
-	public void setAccount_number(String account_number) {
-		this.account_number = account_number;
+	public void setAccount_number(String account_number1) {
+		this.account_number = account_number1;
 	}
 
 	public String getType() {

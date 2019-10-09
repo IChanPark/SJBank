@@ -249,6 +249,45 @@ public class AccountDAO {
 		} finally { close(); }
 		return false;
 	}
+	
+	public void updatePw(AccountDTO dto){
+		sql = 	"update account set " +
+				"pw = ?,status = ?,alias = ? "+
+				"where account_number = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getStatus());
+			pstmt.setString(3, dto.getAlias());
+			pstmt.setString(4, dto.getAccount_number());
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	public AccountDTO searchAcc(AccountDTO dto){
+
+		sql = "select * from account " +
+				"where " +
+				"account_number = ? and pw = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, dto.getAccount_number());
+			pstmt.setString(2, dto.getPw());
+
+			rs = pstmt.executeQuery();
+			dto = Account(rs, dto);
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return dto;
+		}
 
 	
 	void close() {

@@ -178,7 +178,7 @@ public class UserDAO {
 		} finally { close(); }
 	}
 	
-	////////////////////////////// 1001추가 아리디에 따른 패스워드 체크 HDG
+	////////////////////////////// 1001추가 아이디에 따른 패스워드 체크 HDG
 	
 	public boolean chkPw(String id,String pw){
 		boolean res = false;
@@ -218,6 +218,31 @@ public class UserDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
+	
+
+	//////////////////10-09 아이디 search
+	
+	public UserDTO searchId(UserDTO dto){
+		
+		sql = 	"select * from user " + 
+				"where name = ? and tel = ? and email = ?";	
+		
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1 ,dto.getName());
+			pstmt.setString(2 ,dto.getTel());
+			pstmt.setString(3 ,dto.getEmail());
+			
+			rs = pstmt.executeQuery();
+			dto = User(rs, dto);
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return dto;
+	}
+	
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
