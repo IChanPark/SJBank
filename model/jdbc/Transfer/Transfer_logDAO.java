@@ -58,7 +58,7 @@ public class Transfer_logDAO {
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setFeetype(rs.getString("feetype"));
 				dto.setTarget(rs.getString("target"));
-				dto.setTo_account_number("to_account_number");
+				dto.setTo_account_number(rs.getString("to_account_number"));
 				dto.setReceived(rs.getString("received"));
 				dto.setSum(rs.getLong("sum"));
 				dto.setFee(rs.getInt("fee"));
@@ -89,7 +89,35 @@ public class Transfer_logDAO {
 	public ArrayList<Transfer_logDTO> selectAN(String account_number){
 		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
 		
-		sql = "select * from transfer_log where account_number = ?";
+		sql = "select * from transfer_log where account_number = ?  ";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, account_number);
+			
+			rs = pstmt.executeQuery();
+			
+			Transfer_log(rs, res);	
+			System.out.println("여기안옴???");
+			for (Transfer_logDTO dd : res) {
+				System.out.println(dd);
+			}
+			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		System.out.println("리턴하자???" + res);
+		return res;
+	}
+	
+	//////////////////////// 1009 받는 경우
+	
+	
+	public ArrayList<Transfer_logDTO> selectToAN(String account_number){
+		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
+		
+		sql = "select * from transfer_log where to_account_number =  ?  ";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -105,6 +133,35 @@ public class Transfer_logDAO {
 		return res;
 	}
 	
+	/////////////////////////////////////
+	
+	
+
+	public ArrayList<Transfer_logDTO> selectIOAN(String account_number){
+		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
+		
+		sql = "select * from transfer_log where to_account_number = ? or account_number = ? ";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, account_number);
+			pstmt.setString(2, account_number);
+			
+			rs = pstmt.executeQuery();
+			
+			Transfer_log(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
+	
+	
+	
+	
+	////////////////////////
 	public void insert(Transfer_logDTO dto){
 		sql = 	"insert into transfer_log (" +
 				"account_number,feetype,target,to_account_number,received,"+ 

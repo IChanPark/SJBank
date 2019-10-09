@@ -267,7 +267,7 @@ public class Transfer_reserveDAO {
 		
 		sql = 	"select * from transfer_reserve where "+
 				"(time BETWEEN ? and   ? ) and account_number = '"+acc+
-				"' ORDER BY time ";
+				"' and status ='활성' ORDER BY time ";
 		sql+=order; 
 		
 		System.out.println(sql);

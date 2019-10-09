@@ -17,14 +17,14 @@ import jdbc.Menu.MenuDTO;
 import jdbc.Transfer.Transfer_reserveDTO;
 import server.DBAccess_IP;
 
-public class Transfer_reserveDAO implements Serializable{
+public class Transfer_reserveDAO {
 
-	private Connection con;
-	private Statement stmt;
-	private ResultSet rs;
-	private String sql;
+	public Connection con;
+	public Statement stmt;
+	public ResultSet rs;
+	public String sql;
 
-	private Transfer_reserveDAO() {
+	public Transfer_reserveDAO() {
 		try {
 			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
@@ -39,7 +39,7 @@ public class Transfer_reserveDAO implements Serializable{
 		}
 	}
 
-	private static class Holder {
+	public static class Holder {
 		public static final Transfer_reserveDAO DAO = new Transfer_reserveDAO();
 	}
 
@@ -47,7 +47,7 @@ public class Transfer_reserveDAO implements Serializable{
 		return Holder.DAO;
 	}
 
-	private Transfer_reserveDTO Transfer_reserve(ResultSet rs, Transfer_reserveDTO dto) {
+	public Transfer_reserveDTO Transfer_reserve(ResultSet rs, Transfer_reserveDTO dto) {
 		try {
 			if(rs.next()) {
 				dto = new Transfer_reserveDTO();
@@ -67,7 +67,7 @@ public class Transfer_reserveDAO implements Serializable{
 		return dto;
 	}
 
-	private void Transfer_reserve(ResultSet rs, ArrayList<Transfer_reserveDTO> res) {
+	public void Transfer_reserve(ResultSet rs, ArrayList<Transfer_reserveDTO> res) {
 		try {
 			while (rs.next()) {
 				Transfer_reserveDTO dto = new Transfer_reserveDTO();
@@ -144,13 +144,12 @@ public class Transfer_reserveDAO implements Serializable{
 				+ " time, memo, to_memo, "+ 
 				"cms,status,scheduled_date, register_date) "+
 				"values ('"+dto.getAccount_number()+"','"+dto.getTo_account_number()+
-				"',"+dto.getSum()+",'"+dto.getTime()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+
+				"',"+dto.getSum()+",'"+dto.getTimeStr()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+
 				"','"+dto.getCms()+"','"+dto.getStatus()+"','"+dto.getScheduled_date()+
 				"', now() )";
 
 		System.out.println(sql);
 		try {
-
 			stmt.executeUpdate(sql); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
@@ -166,7 +165,7 @@ public class Transfer_reserveDAO implements Serializable{
 				+ " time, memo, to_memo, "+ 
 				"cms,status,scheduled_date, register_date) "+
 				"values ('"+dto.getAccount_number()+"','"+dto.getTo_account_number()+
-				"',"+dto.getSum()+",'"+dto.getTime()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+
+				"',"+dto.getSum()+",'"+dto.getTimeStr()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+
 				"','"+dto.getCms()+"','"+dto.getStatus()+"','"+dto.getScheduled_date()+
 				"', now() )";
 
@@ -211,11 +210,12 @@ public class Transfer_reserveDAO implements Serializable{
 	//////// 1015
 	
 	
-	public void updateStatusBySeq(String seq,String status){
+	public void updateStatusBySeq(int seq,String status){
 		sql = 	"update transfer_reserve set " +
 				"status = '"+status +"' where seq = "+ seq;
 		System.out.println(sql);
-		try {stmt.executeUpdate(sql); 
+		try {
+			stmt.executeUpdate(sql); 
 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }

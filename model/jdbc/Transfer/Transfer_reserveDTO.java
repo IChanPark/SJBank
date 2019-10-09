@@ -123,7 +123,7 @@ public class Transfer_reserveDTO implements Serializable{
 	}
 	
 	public String getTimeStr() {
-		return sdf.format(register_date);
+		return sdf.format(time);
 	}
 	public void setTimeStr(String time) {
 		try {

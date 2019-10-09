@@ -38,10 +38,11 @@ public class Trs implements M_Action{
 				dto.setTo_memo(request.getParameter("to_memo"));
 				dto.setStatus("성공");
 				dto.setRegister_date(new Date());
-				System.out.println("여기옴 TRS");
-				Transfer_logDAO.getInstance().insert(dto);
-				AccountDAO.getInstance().updateMoney( -1*Integer.parseInt(request.getParameter("money")), request.getParameter("acc") );
 				
+				Transfer_logDAO.getInstance().insert(dto);
+				//잔고 빼기
+				AccountDAO.getInstance().updateMoney( -1*Integer.parseInt(request.getParameter("money")), request.getParameter("acc") );
+				//타행계좌 아닐시 상대방 금액 증가
 				if(!AccountDAO.getInstance().getAliasbyAcc(request.getParameter("toAcc")).equals("외부계좌") )
 				{
 					AccountDAO.getInstance().updateMoney( Integer.parseInt(request.getParameter("money")), request.getParameter("toAcc"));

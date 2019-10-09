@@ -5,6 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,8 +32,10 @@ public class Trsdto_server {
 	private HashMap<Integer, Transfer_autoDTO> autoList  = null;
 	private Date today = new Date();
 
+	
 	private Trsdto_server() {
 		try {
+				
 			list = new HashMap<String, ObjectOutputStream>();
 			delayList= new HashMap<Integer, Transfer_delayDTO>();
 			reserveList= new HashMap<Integer, Transfer_reserveDTO>();
@@ -41,11 +48,12 @@ public class Trsdto_server {
 			Collections.synchronizedMap(autoList);
 
 			
-			for (Transfer_delayDTO tdd  : Transfer_delayDAO.getInstance().list() ) {
-				delayList.put(tdd.getSeq(), tdd);
-			}
 			
-			for (Transfer_reserveDTO trd  : Transfer_reserveDAO.getInstance().list() ) {
+//			for (Transfer_delayDTO tdd  : Transfer_delayDAO.getInstance().list() ) {
+//				delayList.put(tdd.getSeq(), tdd);
+//			}
+			
+			for (Transfer_reserveDTO trd  : new Transfer_reserveDAO().list() ) {
 				reserveList.put(trd.getSeq(), trd);
 			}
 			
@@ -83,40 +91,41 @@ public class Trsdto_server {
 			while(true) {
 				try {
 
-					sleep(5000);
-					for (Map.Entry<Integer,Transfer_delayDTO> dd: delayList.entrySet()) {
-						if(dd.getValue().getTrs_time().before(new Date()) && dd.getValue().getStatus().equals("활성") )
-						{
-							System.out.println(dd.getValue() +"지연 이체 가즈아에요");
-							dd.getValue().setStatus("비활성");
-						}					
-					};
+					sleep(10000);
+//					for (Map.Entry<Integer,Transfer_delayDTO> dd: delayList.entrySet()) {
+//						if(dd.getValue().getTrs_time().before(new Date()) && dd.getValue().getStatus().equals("활성") )
+//						{
+//							System.out.println(dd.getValue() +"지연 이체 가즈아에요");
+//							dd.getValue().setStatus("비활성");
+//						}					
+//					};
 
 					for (Map.Entry<Integer, Transfer_reserveDTO> dd: reserveList.entrySet()) {
 						if(dd.getValue().getTime().before(new Date()) && dd.getValue().getStatus().equals("활성") )
 						{
-							System.out.println(dd.getValue() );
 							System.out.println(dd.getValue().getTimeStr() +"자 예약 이체가 실행 되었습니다.");
+							
 							dd.getValue().setStatus("이체완료");
 						}
 					};
-					if(!sdf.format(today).equals(sdf.format(new Date() ) )  ) {
-						for (Map.Entry<Integer, ArrayList<String>> dd: auto.entrySet()) {
-							if(dd.getValue().contains(sdf.format(new Date()) ) && autoList.get(dd.getKey()).getStatus().equals("활성") )
-							{
-								System.out.println("오늘자 자동이체 되었습니다."); 
-							}
-						};
-						today = new Date();
-					}
+//					if(!sdf.format(today).equals(sdf.format(new Date() ) )  ) {
+//						for (Map.Entry<Integer, ArrayList<String>> dd: auto.entrySet()) {
+//							if(dd.getValue().contains(sdf.format(new Date()) ) && autoList.get(dd.getKey()).getStatus().equals("활성") )
+//							{
+//								System.out.println("오늘자 자동이체 되었습니다."); 
+//							}
+//						};
+//						today = new Date();
+//					}
 					//DB를 여기서 돌리시오 
-					System.out.println("돌고있어요오");
+					
 //					for (Transfer_delayDTO dto  : delayList.values()) {
 //						System.out.println(dto +" delay 들입니다.");
 //					}
-					for (Transfer_reserveDTO dto  : reserveList.values()) {
-						System.out.println(dto +" reserve 들입니다.");
-					}
+//					for (Transfer_reserveDTO dto  : reserveList.values()) {
+//						if(dto.getStatus().equals("활성"))
+//						System.out.println(dto +" 진행중인 예약 입니다.");
+//					}
 				} catch (Exception e) {}
 			}
 		}
@@ -139,10 +148,8 @@ public class Trsdto_server {
 		@Override
 		public void run() { 
 			try {
-				System.out.println("오자마자");
 				Acc_Member_Data def = (Acc_Member_Data)dis.readObject();
-				System.out.println("여기못옴");
-				SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				
 				name = def.name;
@@ -161,7 +168,7 @@ public class Trsdto_server {
 					{
 						System.out.println("delay 데이터를 비활성화합니다.");
 						delayList.get(dto.getSeq()).setStatus("비활성");
-						Transfer_reserveDAO.getInstance().updateStatusBySeq(""+dto.getSeq(), "비활성");
+						//Transfer_reserveDAO.getInstance().updateStatusBySeq(dto.getSeq(), "비활성");
 					}
 				}
 				else if( def.msg.equals("reserve") ){
@@ -170,6 +177,8 @@ public class Trsdto_server {
 					
 					if(def.name.equals("추가")) {
 						System.out.println("reserve 데이터를 추가합니다.");
+						
+						new Transfer_reserveDAO().insert(dto);
 						reserveList.put(dto.getSeq(), dto);
 					}
 					else
@@ -179,46 +188,46 @@ public class Trsdto_server {
 						
 					}
 				}
-				else if(def.msg.equals("auto") ){
-					
-					Transfer_autoDTO dto =(Transfer_autoDTO)def.data;
-					
-					if(def.name.equals("추가")){
-					
-						autoList.put(dto.getSeq(), dto);
-						
-						int syear =  dto.getStart_date().getYear()+1900;
-						int smonth = dto.getStart_date().getMonth();
-						int sdate = dto.getStart_date().getDate();
-						
-						Calendar cd = Calendar.getInstance();
-
-						cd.set(syear , smonth, sdate);
-					
-						int fyear = dto.getFinish_date().getYear()+1900;
-						int fmonth = dto.getFinish_date().getMonth();
-						int fdate = dto.getFinish_date().getDate();
-	
-						Calendar cd2 = Calendar.getInstance();
-						
-						cd2.set(fyear , fmonth, fdate);
-						
-						ArrayList<String> ad     = new ArrayList<String>();
-					
-						
-						while(cd.before(cd2))
-						{
-							ad.add(sdf.format(cd.getTime() ) );
-							cd.add(Calendar.MONTH, 1);
-							System.out.println(ad);
-						}
-						auto.put(dto.getSeq(), ad);
-					}
-					else
-					{
-						autoList.get(dto.getSeq()).setStatus("비활성");;
-					}
-				}
+//				else if(def.msg.equals("auto") ){
+//					
+//					Transfer_autoDTO dto =(Transfer_autoDTO)def.data;
+//					
+//					if(def.name.equals("추가")){
+//					
+//						autoList.put(dto.getSeq(), dto);
+//						
+//						int syear =  dto.getStart_date().getYear()+1900;
+//						int smonth = dto.getStart_date().getMonth();
+//						int sdate = dto.getStart_date().getDate();
+//						
+//						Calendar cd = Calendar.getInstance();
+//
+//						cd.set(syear , smonth, sdate);
+//					
+//						int fyear = dto.getFinish_date().getYear()+1900;
+//						int fmonth = dto.getFinish_date().getMonth();
+//						int fdate = dto.getFinish_date().getDate();
+//	
+//						Calendar cd2 = Calendar.getInstance();
+//						
+//						cd2.set(fyear , fmonth, fdate);
+//						
+//						ArrayList<String> ad     = new ArrayList<String>();
+//					
+//						
+//						while(cd.before(cd2))
+//						{
+//							ad.add(sdf.format(cd.getTime() ) );
+//							cd.add(Calendar.MONTH, 1);
+//							System.out.println(ad);
+//						}
+//						auto.put(dto.getSeq(), ad);
+//					}
+//					else
+//					{
+//						autoList.get(dto.getSeq()).setStatus("비활성");;
+//					}
+//				}
 
 //				sendToOne(def);
 //
