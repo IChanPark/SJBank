@@ -296,7 +296,7 @@ function joinReg(me) {
 		},
 		dataType:'json',
 		success:function(qqq){
-			
+			goProduct();
 			isRun = false;
 		},
 		error:function(qqq){
@@ -318,6 +318,12 @@ function goMenu(qq) {	//메뉴 이동용
 	go +="<input type='hidden' name='hid_t' value='"+menu+"'></input>";
 	go +="<input type='hidden' name='dt' value='"+name+"'></input>";
 	go +="</form>";
+	$("#mid").append(go);
+	document.pag.submit(); 
+};
+
+function goProduct() {	//메뉴 이동용
+	var go ='<form name="pag" action="index.jsp" method="post"></form>';
 	$("#mid").append(go);
 	document.pag.submit(); 
 };

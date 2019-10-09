@@ -7,7 +7,7 @@
 
 <div class="subTitle">예금 상품 등록</div>
 <table class="AccInfo">
-	
+
 	<tr>
 		<tr><td>상품명</td><td><input type="text" name ="product"/></td></tr>
 		<tr><td>최저 연이자</td><td><input type="text" name ="min_interest"/></td></tr>

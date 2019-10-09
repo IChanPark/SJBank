@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import inf.M_Action;
-import jdbc.Account.AccountDAO;
-import jdbc.Transfer.Transfer_reserveDAO;
 import jdbc.Transfer.Transfer_reserveDTO;
 import server.send;
 

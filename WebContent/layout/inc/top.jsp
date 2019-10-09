@@ -45,8 +45,8 @@
          </div>
       </li>
    <%} %>
-      <li id ="srch">
+      <!-- <li id ="srch">
       <a href="#" data-menu-name="service/search">검색<img alt="" src="img/search_1.png" height="20px" display="block" margin="0px auto"/></a>
-      </li>
+      </li> -->
    </ul>
 </div>

@@ -20,7 +20,9 @@ ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectID_Type(DataDTO);
 Deposits_infoDTO setDTO = new Deposits_infoDTO();
 setDTO.setProduct(request.getParameter("product"));
 System.out.println(request.getParameter("product"));
+
 Deposits_infoDTO dto = Deposits_infoDAO.getInstance().selectProUse(setDTO);
+
 map.put("product", dto.getProduct());
 map.put("deposits_info", dto.getDeposits_info());
 map.put("min_interest", dto.getMin_interest()+"");

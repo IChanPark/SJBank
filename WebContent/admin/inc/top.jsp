@@ -86,5 +86,8 @@
            </ul>
          </div>
       </li>
+      <li id ="cal">
+      <a href="#" data-menu-name="admin/Calc/Calc">정산</a>
+      </li>
    </ul>
 </div>
