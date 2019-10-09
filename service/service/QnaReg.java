@@ -30,7 +30,7 @@ public class QnaReg implements M_Action {
 		//DB 저장
 		QnaDAO.getInstance().insert(dto); 
 		request.setAttribute("mainUrl","main");	
-		System.out.println("노티스 Reg 들어옴");
+		System.out.println("큐가 Reg 들어옴");
 		///redirect
 //		request.setAttribute("msg","작성되었습니다." );
 //		request.setAttribute("goUrl","Detail?id="+dto.getId());
