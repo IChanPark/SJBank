@@ -18,7 +18,7 @@ public class QnaDAO {
 	private DataSource ds;
 	private String sql;
 	
-	private QnaDAO() {
+	public QnaDAO() {
 		ds = Data_Source.getInstance().getDs();
 	}
 	
@@ -30,6 +30,30 @@ public class QnaDAO {
         return Holder.DAO;
     }
 
+	public int total(){
+		int res =0;
+		
+		try {
+			sql = "select count(*) from center";
+			pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			res = rs.getInt(1);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		
+		return res;
+	}
+	
 	private QnaDTO Qna(ResultSet rs, QnaDTO dto) {
 		try {
 			if(rs.next()) {
@@ -38,11 +62,9 @@ public class QnaDAO {
 				dto.setSeq(rs.getInt("seq"));
 				dto.setType(rs.getString("type"));
 				dto.setTitle(rs.getString("title"));
-				dto.setContent(rs.getString("content"));
-				dto.setEmail(rs.getString("email"));
-				dto.setStatus(rs.getString("status"));
-				dto.setReply(rs.getInt("reply"));
-				dto.setFile(rs.getString("file"));
+				dto.setId(rs.getString("id"));
+				dto.setContent(rs.getString("content"));				
+				dto.setStatus(rs.getString("status"));				
 				dto.setRegister_date(rs.getDate("register_date"));
 			
 			}			
@@ -58,11 +80,9 @@ public class QnaDAO {
 				dto.setSeq(rs.getInt("seq"));
 				dto.setType(rs.getString("type"));
 				dto.setTitle(rs.getString("title"));
-				dto.setContent(rs.getString("content"));
-				dto.setEmail(rs.getString("email"));
-				dto.setStatus(rs.getString("status"));
-				dto.setReply(rs.getInt("reply"));
-				dto.setFile(rs.getString("file"));
+				dto.setId(rs.getString("id"));
+				dto.setContent(rs.getString("content"));				
+				dto.setStatus(rs.getString("status"));				
 				dto.setRegister_date(rs.getDate("register_date"));
 				
 				res.add(dto);
@@ -125,9 +145,9 @@ public class QnaDAO {
 	
 	public void insert(QnaDTO dto){
 		sql = 	"insert into qna (" +
-				"type, title, content, email, status, reply, file,  register_date) "+
+				"type, title, id, content,  status, register_date) "+
 				"values ("+
-				"?   ,    ? ,	   ? ,  ?  ,   ?   , 	?  , ?  ,  now() )";
+				"?   ,    ? ,  ?,   ?  ,   ?    ,   now() )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -135,11 +155,10 @@ public class QnaDAO {
 			
 			pstmt.setString(1, dto.getType());
 			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3, dto.getContent());
-			pstmt.setString(4, dto.getEmail());
-			pstmt.setString(5, dto.getStatus());
-			pstmt.setInt(6, dto.getReply());
-			pstmt.setString(7, dto.getFile());			
+			pstmt.setString(3, dto.getId());
+			pstmt.setString(4, dto.getContent());
+			pstmt.setString(5, dto.getStatus());			
+			
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
@@ -148,7 +167,7 @@ public class QnaDAO {
 	
 	public void update(QnaDTO dto){
 		sql = 	"update qna set " +
-				"type = ? , title = ? , content = ? , email = ? , status = ? , reply = ? , file = ? , register_date = now() " +
+				"type = ? , title = ? , id = ? , content = ? , status = ? , register_date = now() " +
 				"where seq = ? ";
 		System.out.println(sql);
 		try {
@@ -157,11 +176,10 @@ public class QnaDAO {
 			
 			pstmt.setString(1, dto.getType());
 			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3, dto.getContent());
-			pstmt.setString(4, dto.getEmail());
-			pstmt.setString(5, dto.getStatus());
-			pstmt.setInt(6, dto.getReply());
-			pstmt.setString(7, dto.getFile());
+			pstmt.setString(3, dto.getId());
+			pstmt.setString(4, dto.getContent());			
+			pstmt.setString(5, dto.getStatus());			
+			
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

@@ -8,13 +8,13 @@ public class QnaDTO {
 	
 	private String 	type,			//문의 종류
 					title,			//제목
-					content,		//문의내용
-					email,			//문의 받을 이메일
-					status,			//답변 여부
-					file;			//
+					id,				//작성자
+					content,       //문의내용								
+					status;			//답변 여부
+					
 	
-	private Integer seq,			//
-					reply;			//답변의  seq
+	private Integer seq;			//
+								
 	
 	private Date 	register_date;	//등록일
 						
@@ -27,7 +27,7 @@ public class QnaDTO {
 	
 	
 	
-	
+
 	public String getType() {
 		return type;
 	}
@@ -40,42 +40,34 @@ public class QnaDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+		
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+		
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getFile() {
-		return file;
-	}
-	public void setFile(String file) {
-		this.file = file;
-	}
+	
 	public Integer getSeq() {
 		return seq;
 	}
 	public void setSeq(Integer seq) {
 		this.seq = seq;
 	}
-	public Integer getReply() {
-		return reply;
-	}
-	public void setReply(Integer reply) {
-		this.reply = reply;
-	}
+
 	//-------------------------------------------------
 	public Date getRegister_date() {
 		return register_date;

@@ -14,20 +14,22 @@ public class QnaReg implements M_Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 				
 		QnaDTO dto = new QnaDTO();
-
-		dto.setTitle(request.getParameter("title"));
+	
+		
 		dto.setType(request.getParameter("type"));
+		dto.setTitle(request.getParameter("title"));
+		dto.setId(request.getParameter("id"));
 		dto.setContent(request.getParameter("content"));
 		dto.setStatus("활성");
-		
-		
+		System.out.println(request.getParameter("Register_dateStr"));
+		//dto.setRegister_dateStr(request.getParameter("Register_dateStr"));
 		//계좌번호 넣어주세요
 		
 		//넣어주세요
 
 		//DB 저장
 		QnaDAO.getInstance().insert(dto); 
-		request.setAttribute("mainUrl","admin/inc/main");	
+		request.setAttribute("mainUrl","main");	
 		System.out.println("노티스 Reg 들어옴");
 		///redirect
 //		request.setAttribute("msg","작성되었습니다." );
