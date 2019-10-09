@@ -41,13 +41,13 @@ $('input[name=endDate]').datepicker('disable').removeAttr('disabled');
 .infoMain_Value select[id=sel_type]{ margin-right: 10px; }
 .table15_1 table { width:100%; margin:15px 0; border:0; margin-top: 20px;}
 .table15_1 th { font-weight:bold; background-color:#c6c6c6; color:#202020 }
-.table15_1,.table15_1 th,.table15_1 td { font-size:0.95em; text-align:center; padding:4px; border-collapse:collapse;}
+.table15_1,.table15_1 th,.table15_1 td { font-size:14px; text-align:center; padding:4px; border-collapse:collapse; width: 16.6%;}
 .table15_1 th { border: 1px solid #c6c6c6; border-width:1px }
 .table15_1 td { border: 1px solid #c6c6c6; border-width:1px }
 .table15_1 tr { border: 1px solid #ffffff; }
 .table15_1 tr:nth-child(odd){ background-color:#f7f7f7; }
 .table15_1 tr:nth-child(even){ background-color:#ffffff; }
-.table15_1 
+tbody {width: 100%;}
 </style>
 <div class='subTitle'>정산</div>
 <div class= "infoBox">
@@ -65,26 +65,15 @@ $('input[name=endDate]').datepicker('disable').removeAttr('disabled');
 			</div></div>	
 		
 		<table class=table15_1>
+		<tbody>
 		<tr>
-			<th>gd</th><th>gd</th><th>gd</th><th>gd</th>
-			<th>gd</th><th>gd</th><th>gd</th><th>gd</th>
+			<th>날짜</th><th>건수</th><th>상품종류</th><th>타입</th><th>수익</th>
 		</tr>
 		<tr>
 			<td>1</td><td>2</td><td>3</td><td>3</td>
-			<td>3</td><td>3</td><td>3</td><td>3</td>
+			<td>3</td>
 		</tr>
-		<tr>
-			<td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td>
-			<td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td>
-		</tr>
-		<tr>
-			<td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td>
-			<td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td>
-		</tr>
-		<tr>
-			<td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td>
-			<td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td><td>SAMPLE</td>
-		</tr>
+		</tbody>
 		</table>
 			
 			

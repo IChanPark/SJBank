@@ -27,7 +27,10 @@ public class New_Account {
 	}
 	
 	private void newAccount(String acc) {
-		acc ="010-"+((int)(Math.random()*9999)+1)+"-"+(int)((Math.random()*9999)+1)+"-"+(int)((Math.random()*9999)+1);
+
+		acc ="010-"+((int)(Math.random()*9999)+1)+"-"+
+			String.format("%04d", (int)((Math.random()*9999)+1))+"-"+
+			String.format("%04d", (int)((Math.random()*9999)+1));
 		
 		dto = AccountDAO.getInstance().selectAccount(acc);
 		
