@@ -21,20 +21,20 @@ public class New_Account {
 	
 	
 	public String getAccount() {
-		newAccount(acc);
-		
+		newAccount();
+		System.out.println("유틸 acc :  "+acc);
 		return acc;
 	}
 	
-	private void newAccount(String acc) {
-
-		acc ="010-"+((int)(Math.random()*9999)+1)+"-"+
+	private void newAccount() {
+	
+		acc = "010-"+((int)(Math.random()*9999)+1)+"-"+
 			String.format("%04d", (int)((Math.random()*9999)+1))+"-"+
 			String.format("%04d", (int)((Math.random()*9999)+1));
 		
 		dto = AccountDAO.getInstance().selectAccount(acc);
 		
 		if(dto!=null)
-			newAccount(acc);
+			newAccount();
 	}
 }

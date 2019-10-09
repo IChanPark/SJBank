@@ -1,3 +1,4 @@
+<%@page import="util.New_Account"%>
 <%@page import="jdbc.Fund.FundDAO"%>
 <%@page import="jdbc.Fund.FundDTO"%>
 <%@page import="jdbc.User.UserDAO"%>
@@ -28,7 +29,7 @@ FundDTO depDTO = new FundDTO();
 Transfer_autoDTO autoDTO = new Transfer_autoDTO();
 
 String	userid = (String)request.getSession().getAttribute("userID"),
-		newAcc = "010-1111-1111-162",
+		newAcc = New_Account.getInstance().getAccount(),
 		myAcc = request.getParameter("account_number"),
 		product=request.getParameter("product");
 
