@@ -6,7 +6,15 @@ public class FundDTO {
 					id,				//ID
 					product;		//상품명
 	
-	private	Float	fluctuation;	//등락률
+	private	Float	fluctuation,	//등락률
+					amount,			//가입금액
+					nowmoney,		//현재금액
+					rest,			//나머지돈
+					exchange;		//환산금액
+	
+	
+	private	int		buynum;			//구매량
+									
 	
 	
 	public String getAccount_number() {
@@ -14,6 +22,37 @@ public class FundDTO {
 	}
 	public void setAccount_number(String account_number) {
 		this.account_number = account_number;
+	}
+	
+	public Float getRest() {
+		return rest;
+	}
+	public void setRest(Float rest) {
+		this.rest = rest;
+	}
+	public Integer getBuynum() {
+		return buynum;
+	}
+	public void setBuynum(Integer buynum) {
+		this.buynum = buynum;
+	}
+	public Float getAmount() {
+		return amount;
+	}
+	public void setAmount(Float amount) {
+		this.amount = amount;
+	}
+	public Float getNowmoney() {
+		return nowmoney;
+	}
+	public void setNowmoney(Float nowmoney) {
+		this.nowmoney = nowmoney;
+	}
+	public Float getExchange() {
+		return exchange;
+	}
+	public void setExchange(Float exchange) {
+		this.exchange = exchange;
 	}
 	public String getId() {
 		return id;

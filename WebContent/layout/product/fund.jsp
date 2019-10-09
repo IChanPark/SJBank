@@ -198,6 +198,7 @@ function join(me) {
 			$(".scrollB").remove();
 			$(".search_Box").remove();
 			var box = '';
+			box +=	"<div id='price_modify' data-product-name='"+qqq.price_modify+"'></div>";
 			box +=	"<div class='infoBox'>";
 			box +=	"<div class='joinMain'>";
 			box +=	"<div class='join_Guide'>출금정보</div>";
@@ -282,11 +283,12 @@ function joinReg(me) {
 				alias			:	$('#alias').val(),
 				//startDate		:	$('#startDate').val(),	
 				//finish_date		:	$('#endDate').val(),
+				price_modify 	:	$('#price_modify[data-product-name]').data("product-name")
 				//autoTrans		:	$('#autoTrans').val()
 		},
 		dataType:'json',
 		success:function(qqq){
-			
+			gomyfund();
 			isRun = false;
 		},
 		error:function(qqq){
@@ -308,6 +310,12 @@ function goMenu(qq) {	//메뉴 이동용
 	go +="<input type='hidden' name='hid_t' value='"+menu+"'></input>";
 	go +="<input type='hidden' name='dt' value='"+name+"'></input>";
 	go +="</form>";
+	$("#mid").append(go);
+	document.pag.submit(); 
+};
+
+function gomyfund() {	//메뉴 이동용
+	var go ='<form name="pag" action="index.jsp" method="post"></form>';
 	$("#mid").append(go);
 	document.pag.submit(); 
 };
