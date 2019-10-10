@@ -227,7 +227,7 @@ public class UserDAO {
 	}
 	
 	public void updatePw(UserDTO dto){
-		sql = 	"update account set " +
+		sql = 	"update user set " +
 				"pw = ? "+
 				"where id = ? and name = ? and tel = ? and email = ?";
 		System.out.println(sql);
@@ -236,9 +236,10 @@ public class UserDAO {
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, dto.getPw());
-			pstmt.setString(2, dto.getName());
-			pstmt.setString(3, dto.getTel());
-			pstmt.setString(4, dto.getEmail());
+			pstmt.setString(2, dto.getId());
+			pstmt.setString(3, dto.getName());
+			pstmt.setString(4, dto.getTel());
+			pstmt.setString(5, dto.getEmail());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

@@ -30,15 +30,16 @@ dto.setName(request.getParameter("name"));
 dto.setTel(request.getParameter("tel"));
 dto.setEmail(request.getParameter("email"));
 dto.setPw(request.getParameter("pw"));
-dto=UserDAO.getInstance().updatePw(dto);
 
-if(request.getParameter("id") == adto.getId()){
-	
+
+
+ if(dto.getId().equals(adto.getId())){
+ 	UserDAO.getInstance().updatePw(dto);
 }
+
+// 	map.put("pw", dto.getPw());
+// // 	map.put("pw", request.getParameter("id"));
+// 	json += gson.toJson(map);
 	
-	map.put("pw", dto.getPw());
-	
-	json += gson.toJson(map);
-	
-out.print(json);
+// out.print(json);
 %>
