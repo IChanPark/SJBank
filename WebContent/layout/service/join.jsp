@@ -16,6 +16,10 @@
 			<td>간편 비밀 번호</td>
 			<td><input type="text" name="simple_pw" /></td>
 		</tr>
+		<tr>	
+			<td>계좌비밀번호</td>
+			<td><input type="text" name="acc_pw" /></td>			
+		</tr>	
 		<tr>
 		<td>이름(한글만가능)</td>							
 			<td><input type="text" name="name" maxlength="50"/>		

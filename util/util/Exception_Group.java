@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Exception_Group {
 	private ArrayList<String> nonClass;
 	private String [] group = {
-			"service.LoginMain", "service.Join","banking.Confirm","banking.Transfer",
+			"service.LoginMain", "service.Join","banking.Confirm",
 			"security.Otp","security.otp.Register","security.Accaign",
 			"security.Delaytrs","security.Blockalarm","management.user.check",
 			"management.User","security.otp.Apply","Security","Banking",

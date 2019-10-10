@@ -4,8 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import inf.M_Action;
+import jdbc.Account.AccountDAO;
+import jdbc.Account.AccountDTO;
 import jdbc.User.UserDAO;
 import jdbc.User.UserDTO;
+import util.New_Account;
 
 public class joinReg  implements M_Action{
 
@@ -25,6 +28,16 @@ public class joinReg  implements M_Action{
 		dto.setPostal_code(request.getParameter("zipcode"));
 		
 		//계좌번호 넣어주세요
+		
+		AccountDTO dt = new AccountDTO();
+		dt.setAccount_number(New_Account.getInstance().getAccount());
+		dt.setType("예금");
+		dt.setSum(0);
+		dt.setAlias("");
+		dt.setId(dto.getId());
+		dt.setPw(request.getParameter("acc_pw"));
+		
+		AccountDAO.getInstance().insert(dt);
 		
 		//넣어주세요
 		

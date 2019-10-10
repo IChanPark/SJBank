@@ -55,8 +55,13 @@ function goReg(){
 <div clsss="subTitle">출금정보</div>
 <table border="" class="indata">
 	<tr>
-		<td>출금계좌번호</td>
-		<td><input type="text" name="acc" id="acc" class="indata"/></td>
+	<td>출금계좌정보</td>
+		<td><select name="acc" id="acc" class="indata">
+			<c:forEach var="dto" items="${data }" varStatus="no">
+				<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
+			</c:forEach>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>

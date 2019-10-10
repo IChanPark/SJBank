@@ -66,7 +66,12 @@ function ajax_go() {
 <table border="2">
 	<tr>
 		<td>출금계좌정보</td>
-		<td><input type="text" name="acc" /></td>
+		<td><select name="acc">
+			<c:forEach var="dto" items="${data }" varStatus="no">
+				<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
+			</c:forEach>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>
