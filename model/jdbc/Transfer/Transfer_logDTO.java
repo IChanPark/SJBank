@@ -1,5 +1,6 @@
 package jdbc.Transfer;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,13 +16,7 @@ public class Transfer_logDTO {
 						to_memo,			//받는 통장메모
 						status;				//성공/실패
 
-	public String getFeetype() {
-		return feetype;
-	}
-
-	public void setFeetype(String feetype) {
-		this.feetype = feetype;
-	}
+	
 
 	private	Integer 	seq,				//로그 번호
 						fee;				//수수료
@@ -32,6 +27,14 @@ public class Transfer_logDTO {
 
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+	
+	public String getFeetype() {
+		return feetype;
+	}
+
+	public void setFeetype(String feetype) {
+		this.feetype = feetype;
+	}
 	public String getAccount_number() {
 		return account_number;
 	}
@@ -129,14 +132,18 @@ public class Transfer_logDTO {
 		this.register_date = register_date;
 	}
 
-	public SimpleDateFormat getSdf() {
-		return sdf;
+	public String getRegister_dateStr() {
+		return sdf.format(register_date);
 	}
-
-	public void setSdf(SimpleDateFormat sdf) {
-		this.sdf = sdf;
+	public void setRegister_dateStr(String register_date) {
+		try {
+			this.register_date = sdf.parse(register_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
-
+	
+	
 	@Override
 	public String toString() {
 		return seq + "," + account_number + "," + ","

@@ -18,10 +18,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import jdbc.Account.AccountDTO;
 import jdbc.Transfer.Transfer_autoDTO;
 import jdbc.Transfer.Transfer_delayDTO;
+import jdbc.Transfer.Transfer_logDTO;
 import jdbc.Transfer.Transfer_reserveDTO;
+import jmodels.AccountDAO;
 import jmodels.Transfer_delayDAO;
+import jmodels.Transfer_logDAO;
 import jmodels.Transfer_reserveDAO; 
 
 public class Trsdto_server {
@@ -103,9 +107,72 @@ public class Trsdto_server {
 					for (Map.Entry<Integer, Transfer_reserveDTO> dd: reserveList.entrySet()) {
 						if(dd.getValue().getTime().before(new Date()) && dd.getValue().getStatus().equals("활성") )
 						{
+							
 							System.out.println(dd.getValue().getTimeStr() +"자 예약 이체가 실행 되었습니다.");
 							
+							String  toName = (new AccountDAO().chkOurBank(dd.getValue().getTo_account_number()));
+							
+							
+							Transfer_logDTO dto = new Transfer_logDTO();
+							dto.setAccount_number(dd.getValue().getAccount_number());
+							dto.setTo_account_number(dd.getValue().getTo_account_number());
+							dto.setFeetype("예약이체");
+							dto.setSum((long)Integer.parseInt(dd.getValue().getSum()) );
+							dto.setCms(dd.getValue().getCms());
+							dto.setMemo(dd.getValue().getMemo());
+							dto.setTo_memo(dd.getValue().getTo_memo());
+							if(!toName.equals("외부계좌"))
+								dto.setFee(0);
+							else
+								dto.setFee(500);
+							dto.setTarget(new AccountDAO().chkOurBank(dd.getValue().getTo_account_number()));
+							dto.setReceived( new AccountDAO().chkOurBank(dd.getValue().getTo_account_number()) );
+							
+							
+							AccountDTO adto = new AccountDAO().selectAccount(dd.getValue().getAccount_number());
+							
+							if(adto.getSum()>dto.getSum()+dto.getFee()) {
+								dto.setStatus("성공");
+								new AccountDAO().updateMoney(-1 * Integer.parseInt( dd.getValue().getSum())-1*dto.getFee() , dd.getValue().getAccount_number());
+								//계좌 잔액 변경
+								new Transfer_reserveDAO().updateStatusBySeq(dd.getValue().getSeq(), "예약이체완료");
+							}
+							else {
+								dto.setStatus("실패");
+								new Transfer_reserveDAO().updateStatusBySeq(dd.getValue().getSeq(), "예약이체실패");
+							}
+							new Transfer_logDAO().insert(dto);
+							
+							
+							
+							///자행 이체 상대방 로그 넣기
+							
+							if( ( !toName.equals("외부계좌") ) && ( adto.getSum()>dto.getSum()+dto.getFee()  )  )
+							{
+								Transfer_logDTO ddto = new Transfer_logDTO();
+								ddto.setAccount_number(dd.getValue().getTo_account_number());
+								ddto.setTo_account_number(dd.getValue().getAccount_number());
+								ddto.setFeetype("예약입금");
+								ddto.setSum((long)Integer.parseInt(dd.getValue().getSum()) );
+								ddto.setCms("");
+								ddto.setMemo(dd.getValue().getTo_memo());
+								ddto.setTo_memo(dd.getValue().getMemo());
+								ddto.setFee(0);
+								ddto.setTarget("SJBank");
+								ddto.setReceived( new AccountDAO().chkOurBank(dd.getValue().getAccount_number()) );
+								ddto.setStatus("성공");
+								
+								new Transfer_logDAO().insert(ddto);
+								
+								new AccountDAO().updateMoney( Integer.parseInt( dd.getValue().getSum()) , dd.getValue().getTo_account_number());
+								
+								
+								
+							}
+								
+							
 							dd.getValue().setStatus("이체완료");
+							
 						}
 					};
 //					if(!sdf.format(today).equals(sdf.format(new Date() ) )  ) {
@@ -178,7 +245,7 @@ public class Trsdto_server {
 					if(def.name.equals("추가")) {
 						System.out.println("reserve 데이터를 추가합니다.");
 						
-						new Transfer_reserveDAO().insert(dto);
+						dto.setSeq(new Transfer_reserveDAO().reSeqInsert(dto));
 						reserveList.put(dto.getSeq(), dto);
 					}
 					else

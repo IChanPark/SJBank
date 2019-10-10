@@ -50,9 +50,9 @@ $(document).ready(function(){
 </table>
 <br>
 <div align="right">
-예/적금 계좌 총액<fmt:formatNumber value="${dsum }" pattern=" #,###원"/>
+입/출금계좌 총액<fmt:formatNumber value="${dsum }" pattern=" #,###원"/>
 </div>
-<div class="subTitle">예금/적금/신탁 계좌</div>
+<div class="subTitle">상품 계좌</div>
 	<table class="AccInfo">
 	<tr>
 		<td>계좌명</td>
@@ -63,7 +63,7 @@ $(document).ready(function(){
 		<td>업무</td>
 	</tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<c:if test="${dto.type=='펀드' }">
+	<c:if test="${dto.type!='예금' }">
 		<tr>
 			<td>${dto.type }</td>
 			<td class="ddd">${dto.account_number }</td>

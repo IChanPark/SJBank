@@ -17,18 +17,18 @@ public class Transfer_logDAO {
 	private ResultSet rs;
 	private DataSource ds;
 	private String sql;
-	
+
 	private Transfer_logDAO() {
 		ds = Data_Source.getInstance().getDs();
 	}
-	
+
 	private static class Holder {
-        public static final Transfer_logDAO DAO = new Transfer_logDAO();
-    }
-	
+		public static final Transfer_logDAO DAO = new Transfer_logDAO();
+	}
+
 	public static Transfer_logDAO getInstance() {
-        return Holder.DAO;
-    }
+		return Holder.DAO;
+	}
 
 	private void Transfer_log(ResultSet rs, Transfer_logDTO dto) {
 		try {
@@ -46,10 +46,11 @@ public class Transfer_logDAO {
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
 				dto.setStatus(rs.getString("status"));
+				dto.setRegister_date(rs.getDate("register_date"));
 			} 
 		} catch (Exception e) {}
 	}
-	
+
 	private void Transfer_log(ResultSet rs, ArrayList<Transfer_logDTO> res) {
 		try {
 			while (rs.next()) {
@@ -66,101 +67,130 @@ public class Transfer_logDAO {
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
 				dto.setStatus(rs.getString("status"));
+				dto.setRegister_date(rs.getDate("register_date"));
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
 	}
-	
+
 	public ArrayList<Transfer_logDTO> list(){
 		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
-		
+
 		sql = "select * from transfer_log";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			Transfer_log(rs, res);			
 		} catch (Exception e) { e.printStackTrace(); }
 		finally { close(); }
 		return res;
 	}
-	
+
 	public ArrayList<Transfer_logDTO> selectAN(String account_number){
 		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
-		
+
 		sql = "select * from transfer_log where account_number = ?  ";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, account_number);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			Transfer_log(rs, res);	
-			System.out.println("여기안옴???");
-			for (Transfer_logDTO dd : res) {
-				System.out.println(dd);
-			}
-			
+
+
 		} catch (Exception e) { e.printStackTrace(); 
 		} finally { close(); }
 		System.out.println("리턴하자???" + res);
 		return res;
 	}
-	
+
 	//////////////////////// 1009 받는 경우
-	
-	
+
+
 	public ArrayList<Transfer_logDTO> selectToAN(String account_number){
 		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
-		
+
 		sql = "select * from transfer_log where to_account_number =  ?  ";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, account_number);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			Transfer_log(rs, res);	
 		} catch (Exception e) { e.printStackTrace(); 
 		} finally { close(); }
 		return res;
 	}
-	
+
 	/////////////////////////////////////
-	
-	
+
+	////////////////////////1009 받는 경우
+
+
+	public ArrayList<Transfer_logDTO> selectANbyDay(String account_number,String startday,String endday){
+		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
+
+		sql = "select * from transfer_log where (to_account_number =  ? or account_number = ? )and ('"+startday+"' < register_date and register_date < '"+endday+"')" ;
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, account_number);
+			pstmt.setString(2, account_number);
+
+			rs = pstmt.executeQuery();
+
+			Transfer_log(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+
+	/////////////////////////////////////
+
+
+
+
+
+
+
+
 
 	public ArrayList<Transfer_logDTO> selectIOAN(String account_number){
 		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
-		
+
 		sql = "select * from transfer_log where to_account_number = ? or account_number = ? ";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, account_number);
 			pstmt.setString(2, account_number);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			Transfer_log(rs, res);	
 		} catch (Exception e) { e.printStackTrace(); 
 		} finally { close(); }
 		return res;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	////////////////////////
 	public void insert(Transfer_logDTO dto){
 		sql = 	"insert into transfer_log (" +
@@ -173,7 +203,7 @@ public class Transfer_logDAO {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getFeetype());
 			pstmt.setString(3, dto.getTarget());
@@ -185,13 +215,13 @@ public class Transfer_logDAO {
 			pstmt.setString(9, dto.getMemo());
 			pstmt.setString(10, dto.getTo_memo());
 			pstmt.setString(11, dto.getStatus());
-			
+
 			rs = pstmt.executeQuery();
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
-	
-	
+
+
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}

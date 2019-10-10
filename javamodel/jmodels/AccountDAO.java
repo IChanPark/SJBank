@@ -1,25 +1,34 @@
-package jdbc.Account;
+package jmodels;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.sql.DataSource;
-
-import control.Data_Source;
+import jdbc.Account.AccountDTO;
+import server.DBAccess_IP;
 
 public class AccountDAO {
 
 	private Connection con;
-	private PreparedStatement pstmt;
+	private Statement stmt;
 	private ResultSet rs;
-	private DataSource ds;
 	private String sql;
 
-	private AccountDAO() {
-		ds = Data_Source.getInstance().getDs();
+	public AccountDAO() {
+		try {
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
+			String id = "bank";
+			String pw = "1234";
+			
+			Class.forName("org.mariadb.jdbc.Driver");
+		
+			con = DriverManager.getConnection(url,id,pw);
+			stmt = con.createStatement();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	private static class Holder {
@@ -71,9 +80,7 @@ public class AccountDAO {
 
 		sql = "select * from account";
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			rs = stmt.executeQuery(sql);
 
 			Account(rs, res);			
 		} catch (Exception e) { e.printStackTrace();
@@ -81,47 +88,13 @@ public class AccountDAO {
 		return res;
 	}
 
-	
-	///////////////////////////////
-	
-	
-	public ArrayList<AccountDTO> listDay(String start, String end){
-		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
-
-		sql = "select * from accountb where register_date > '" +start+ "' and register_date < '" + end+"'";
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			Account(rs, res);			
-		} catch (Exception e) { e.printStackTrace();
-		} finally { close(); }
-		return res;
-	}
-
-	
-	
-	
-	
-	
-	//////////////////////////////////
-	
-	
-	
 	public ArrayList<AccountDTO> selectID(String id){
 		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
 
-		sql = "select * from account where id = ?";
+		sql = "select * from account where id = '"+id+"'";
 		System.out.println(sql);
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setString(1, id);
-
-			rs = pstmt.executeQuery();
-
+			rs = stmt.executeQuery(sql);
 			Account(rs, res);	
 		} catch (Exception e) { e.printStackTrace(); 
 		} finally { close(); }
@@ -131,15 +104,10 @@ public class AccountDAO {
 	public AccountDTO selectAccount(String acc){
 		AccountDTO dto = null;
 
-		sql = "select * from account where account_number = ?";
+		sql = "select * from account where account_number = '"+acc+"'";
 		System.out.println(sql);
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setString(1, acc);
-
-			rs = pstmt.executeQuery();
+			rs = stmt.executeQuery(sql);
 
 			dto = Account(rs, dto);
 		} catch (Exception e) { e.printStackTrace();
@@ -150,16 +118,10 @@ public class AccountDAO {
 	public ArrayList<AccountDTO> selectID_Type(AccountDTO DataDTO){
 		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
 
-		sql = "select * from account where id = ? and type = ?";
+		sql = "select * from account where id = '"+ DataDTO.getId()+"' and type = '" +DataDTO.getType()+"'";
 		System.out.println(sql);
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setString(1, DataDTO.getId());
-			pstmt.setString(2, DataDTO.getType());
-			
-			rs = pstmt.executeQuery();
+		try {			
+			rs = stmt.executeQuery(sql);
 
 			Account(rs, res);	
 		} catch (Exception e) { e.printStackTrace(); 
@@ -170,38 +132,24 @@ public class AccountDAO {
 	public void insert(AccountDTO dto){
 		sql = 	"insert into account (" +
 				"account_number, type, sum, alias, id, pw, status, register_date, end_date) "+
-				"values ("+
-				"			?  ,	?,	 ?,	 ?	,  ?,  ?, '활성' ,	  now(), 	 null)";
+				"values ('"+dto.getAccount_number()+"','"+dto.getType()+
+				"',"+dto.getSum()+",'"+dto.getAlias()+"','"+dto.getId()+
+				"','"+dto.getPw()+"','활성',now(),null)";
+
 		System.out.println(sql);
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setString(1, dto.getAccount_number());
-			pstmt.setString(2, dto.getType());
-			pstmt.setLong(3,  dto.getSum());
-			pstmt.setString(4, dto.getAlias());
-			pstmt.setString(5, dto.getId());
-			pstmt.setString(6, dto.getPw());
-
-			pstmt.executeUpdate(); 
+			stmt.executeUpdate(sql); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
 
 	public void updateMoney(AccountDTO dto){
 		sql = 	"update account set " +
-				"sum = ? " +
-				"where account_number = ?";
+				"sum = "+dto.getSum() +
+				"  where account_number = '"+dto.getAccount_number()+"'";
 		System.out.println(sql);
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setInt(1, dto.getSum());
-			pstmt.setString(2, dto.getAccount_number());
-
-			pstmt.executeUpdate(); 
+			stmt.executeUpdate(sql); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
@@ -210,17 +158,11 @@ public class AccountDAO {
 	
 	public void updateMoney(int money,String acc){
 		sql = 	"update account set " +
-				"sum = sum + ? " +
-				"where account_number = ?";
+				"sum = sum + " +money+
+				" where account_number = '" +acc+"'";
 		System.out.println(sql);
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setInt(1, money);
-			pstmt.setString(2, acc);
-
-			pstmt.executeUpdate(); 
+			stmt.executeUpdate(sql); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
@@ -232,13 +174,11 @@ public class AccountDAO {
 	public String getAliasbyAcc(String acc){
 
 		sql = "SELECT alias FROM account WHERE id = "
-				+ "(SELECT id FROM ACCOUNT WHERE account_number = ? )";
+				+ "(SELECT id FROM ACCOUNT WHERE account_number = '"+acc+"' )";
 		System.out.println(sql);
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, acc);
-			rs = pstmt.executeQuery();
+			 rs = stmt.executeQuery(sql);
+
 			if(rs.next())
 				return rs.getString("alias");
 		} catch (Exception e) { e.printStackTrace();
@@ -246,21 +186,42 @@ public class AccountDAO {
 		return "외부계좌";
 	}
 
+	
+	///////////////////////
+	
+	public String chkOurBank(String acc){
+
+		sql = "SELECT name FROM user WHERE id = (select id from account where account_number = '"+acc+"' )";
+		System.out.println(sql);
+		try {
+			 rs = stmt.executeQuery(sql);
+
+			if(rs.next())
+				return rs.getString("name");
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return "외부계좌";
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////////////////////
 
 
 	////////////////////////////////////// 계좌 비밀번호 맞는지 확인 10/4 05 : 45
 
 	public boolean chkAccPw(String acc, String pw){
 
-		sql = "SELECT pw FROM account WHERE account_number = ? ";
+		sql = "SELECT pw FROM account WHERE account_number = '"+acc+"'";
 		System.out.println(sql);
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-
-			pstmt.setString(1, acc);
-
-			rs = pstmt.executeQuery();
+			rs = stmt.executeQuery(sql);
 
 			if(rs.next())
 			{
@@ -278,7 +239,7 @@ public class AccountDAO {
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
-		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}
+		if(stmt!=null) try {stmt.close();} catch (SQLException e) {}
 		if(con!=null) try {con.close();} catch (SQLException e) {}
 		sql = null;
 	}

@@ -18,13 +18,10 @@ public class Detail implements M_Action{
 		request.setAttribute("log", Transfer_logDAO.getInstance().selectAN((String)session.getAttribute("accountNumber")  ));
 //		request.setAttribute("inputLog", Transfer_logDAO.getInstance().selectToAN((String)session.getAttribute("accountNumber")  ));
 //		request.setAttribute("AllLog", Transfer_logDAO.getInstance().selectIOAN((String)session.getAttribute("accountNumber")  ));
-//		
+		
 		System.out.println("계좌번호  " + (String)session.getAttribute("accountNumber") );
 		
-		for (Transfer_logDTO dd : Transfer_logDAO.getInstance().list())
-		{
-			System.out.println(dd);
-		}
+		
 		System.out.println("디테일 서비스들어온다");
 		//리스트 정보를 키는 "data"로 어트리뷰트로 넘긴다
 	}

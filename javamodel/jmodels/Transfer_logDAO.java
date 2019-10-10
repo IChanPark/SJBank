@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import control.Data_Source;
 import jdbc.Transfer.Transfer_logDTO;
+import server.DBAccess_IP;
 
 public class Transfer_logDAO implements Serializable{
 
@@ -21,10 +22,10 @@ public class Transfer_logDAO implements Serializable{
 	private ResultSet rs;
 	private String sql;
 	
-	private Transfer_logDAO() {
+	public Transfer_logDAO() {
 
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 			
@@ -53,7 +54,7 @@ public class Transfer_logDAO implements Serializable{
 				dto = new Transfer_logDTO();
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
-				dto.setSelf(rs.getString("self"));
+				dto.setFeetype(rs.getString("feetype"));
 				dto.setTarget(rs.getString("target"));
 				dto.setTo_account_number("to_account_number");
 				dto.setReceived(rs.getString("received"));
@@ -73,7 +74,7 @@ public class Transfer_logDAO implements Serializable{
 				Transfer_logDTO dto = new Transfer_logDTO();
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
-				dto.setSelf(rs.getString("self"));
+				dto.setFeetype(rs.getString("feetype"));
 				dto.setTarget(rs.getString("target"));
 				dto.setTo_account_number("to_account_number");
 				dto.setReceived(rs.getString("received"));
@@ -119,10 +120,10 @@ public class Transfer_logDAO implements Serializable{
 	
 	public void insert(Transfer_logDTO dto){
 		sql = 	"insert into transfer_log (" +
-				"account_number,self,target,to_account_number,received,"+ 
+				"account_number,feetype,target,to_account_number,received,"+ 
 				"sum,fee,cms,memo,to_memo,status,register_date) "+ 
-				"values ('"+dto.getAccount_number()+"','"+dto.getSelf()+"','"+dto.getTarget()+"','"+dto.getTo_account_number()+"','"+dto.getReceived()
-				+"',"+dto.getSum()+","+dto.getFee()+",'"+dto.getCms()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+"','"+dto.getStatus()+", now() )";
+				"values ('"+dto.getAccount_number()+"','"+dto.getFeetype()+"','"+dto.getTarget()+"','"+dto.getTo_account_number()+"','"+dto.getReceived()
+				+"',"+dto.getSum()+","+dto.getFee()+",'"+dto.getCms()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+"','"+dto.getStatus()+"', now() )";
 		System.out.println(sql);
 		try {
 			
