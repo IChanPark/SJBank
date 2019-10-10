@@ -71,7 +71,8 @@ public class JungDAO {
 				"FROM transfer_log tl "+
 				"INNER JOIN ACCOUNT ac "+
 				"ON tl.account_number = ac.account_number "+
-				"GROUP BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date)), CONCAT(ac.type,':',tl.feetype)"+
+				//"GROUP BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date)), CONCAT(ac.type,':',tl.feetype)"+
+				"GROUP BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date)), CONCAT(ac.type)"+
 				"ORDER BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date))";
 
 		try {
