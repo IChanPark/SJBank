@@ -6,12 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%
 
-System.out.println("qwcqcq");
-
-%>
-    
 <%
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();

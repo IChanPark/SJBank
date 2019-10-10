@@ -41,7 +41,7 @@ function aaa(){
 					alert("성공");
 					var row = $("<tr><td>"+qqq.pw+"</td></tr>");
 
-					$("#tot").append(row);
+// 					$("#tot").append(row);
 
 			},
 			error:function(qqq){
@@ -96,4 +96,4 @@ function aaa(){
 	변경
 </div>
 
-<div id="tot"></div>
+<!-- <div id="tot"></div> -->

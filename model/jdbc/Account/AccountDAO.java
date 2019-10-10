@@ -81,34 +81,6 @@ public class AccountDAO {
 		return res;
 	}
 
-	
-	///////////////////////////////
-	
-	
-	public ArrayList<AccountDTO> listDay(String start, String end){
-		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
-
-		sql = "select * from accountb where register_date > '" +start+ "' and register_date < '" + end+"'";
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			Account(rs, res);			
-		} catch (Exception e) { e.printStackTrace();
-		} finally { close(); }
-		return res;
-	}
-
-	
-	
-	
-	
-	
-	//////////////////////////////////
-	
-	
-	
 	public ArrayList<AccountDTO> selectID(String id){
 		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
 
@@ -237,8 +209,11 @@ public class AccountDAO {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
+
 			pstmt.setString(1, acc);
+
 			rs = pstmt.executeQuery();
+
 			if(rs.next())
 				return rs.getString("alias");
 		} catch (Exception e) { e.printStackTrace();
@@ -274,38 +249,47 @@ public class AccountDAO {
 		} finally { close(); }
 		return false;
 	}
-
-	///////////////////////////////////////////////
 	
-	///////////////////////자행계좌 확인
+	public void updatePw(AccountDTO dto){
+		sql = 	"update account set " +
+				"pw = ?,status = ?,alias = ? "+
+				"where account_number = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getStatus());
+			pstmt.setString(3, dto.getAlias());
+			pstmt.setString(4, dto.getAccount_number());
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	public AccountDTO searchAcc(AccountDTO dto){
 
-	public String chkOurBank(String acc){
-
-		sql = "SELECT name FROM user WHERE id = (select id from account where account_number = ? )";
+		sql = "select * from account " +
+				"where " +
+				"account_number = ? and pw = ?";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, acc);
+			pstmt.setString(1, dto.getAccount_number());
+			pstmt.setString(2, dto.getPw());
 
 			rs = pstmt.executeQuery();
-		
-			if(rs.next())
-				return rs.getString("name");
-		} catch (Exception e) { e.printStackTrace();
+			dto = Account(rs, dto);
+		} catch (Exception e) { e.printStackTrace(); 
 		} finally { close(); }
-		return "외부계좌";
-	}
-
-
-
-
+		return dto;
+		}
 
 	
-	
-	
-	///////////////////////////////////////////
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}

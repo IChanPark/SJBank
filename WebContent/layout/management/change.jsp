@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h2>회원정보 변경</h2> <!-- updateUser -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<br>
+<h1>고객정보 변경</h1> <!-- updateUser -->
 	<table border="">
 
 		<tr>	
@@ -26,37 +30,38 @@
 		<tr>	
 			<td>이메일</td>
 			<td>
-				<input type="text" name="email1" maxlength="50"/>@
+				<input type="text" name="email1" maxlength="50"  value="${fn:split(data.email,'@')[0]}"/>@
 				<select name="email2">
 					<option>naver.com</option>
 					<option>daum.net</option>
 					<option>gmail.com</option>
 					<option>nate.com</option>
 					<option>yahoo.com</option>
-			</select>
+				</select>
 			</td>	
 		</tr>		
 		<tr>	
 			<td>직업</td>
-			<td>	<select name="position" >
+			<td>	
+				<select name="position" >
 					<option>학생</option>
 					<option>군인</option>
 					<option>회사원</option>
 					<option>주부</option>
 					<option>교수</option>
 					<option>백수</option>
-					</select>
+				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>우편번호</td>
-			<td><input type="text" id="sample4_postcode" name="zipcode" placeholder="우편번호" readonly="readonly">
-			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td>
+			<td><input type="text" id="sample4_postcode" name="zipcode" placeholder="우편번호" readonly="readonly" value="${data.postal_code }">
+			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td> 
 		</tr>
 		<tr>
 		    <td>주소</td>
-			<td><input type="text" id="sample4_roadAddress" name="addr" placeholder="도로명주소" readonly="readonly">
-			<input type="text" id="sample4_detailAddress" name="datail" placeholder="상세주소"> </td>
+			<td><input type="text" id="sample4_roadAddress" name="addr" placeholder="도로명주소" readonly="readonly" value="${fn:split(data.addr,'/')[0]}">
+			<input type="text" id="sample4_detailAddress" name="datail" placeholder="상세주소" value="${fn:split(data.addr,'/')[1]}"> </td>
 		</tr>
 
 		<tr>

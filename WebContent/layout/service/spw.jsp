@@ -37,9 +37,9 @@ dto.setPw(request.getParameter("pw"));
  	UserDAO.getInstance().updatePw(dto);
 }
 
-// 	map.put("pw", dto.getPw());
-// // 	map.put("pw", request.getParameter("id"));
-// 	json += gson.toJson(map);
+	map.put("pw", dto.getPw());
+// 	map.put("pw", request.getParameter("id"));
+	json += gson.toJson(map);
 	
-// out.print(json);
+out.print(json);
 %>
