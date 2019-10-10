@@ -70,9 +70,9 @@ public class Product_Server {
 					sleep(10000);
 					if(!sdf.format(today).equals(sdf.format(new Date() ) )  ) {
 						
-						FundDAO.getInstance().updatetoday((float) 0.5,new_nowmoney,new_exchange,changde_price_modify,"010-4794-6870-6563");
-						Fund_InfoDAO.getInstance().updateprice_modify("changde_price_modify","MCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-Es");
-						Fund_InfoDAO.getInstance().list();
+						new FundDAO().updatetoday((float) 0.5,new_nowmoney,new_exchange,changde_price_modify,"010-4794-6870-6563");
+						new FundDAO().updateprice_modify("changde_price_modify","MCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-Es");
+						new FundDAO().list();
 					}
 					
 					

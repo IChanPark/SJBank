@@ -36,14 +36,6 @@ public class FundDAO {
 			// TODO: handle exception
 		}
 	}
-	
-	private static class Holder {
-        public static final FundDAO DAO = new FundDAO();
-    }
-	
-	public static FundDAO getInstance() {
-        return Holder.DAO;
-    }
 
 	private FundDTO Fund(ResultSet rs, FundDTO dto) {
 		try {

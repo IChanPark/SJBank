@@ -20,7 +20,7 @@ public class Fund_LogDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	private Fund_LogDAO() {
+	public Fund_LogDAO() {
 		try {
 			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
 			String id = "bank";
@@ -34,14 +34,6 @@ public class Fund_LogDAO {
 			// TODO: handle exception
 		}
 	}
-	
-	private static class Holder {
-        public static final Fund_LogDAO DAO = new Fund_LogDAO();
-    }
-	
-	public static Fund_LogDAO getInstance() {
-        return Holder.DAO;
-    }
 
 	private Fund_LogDTO Fund_Log(ResultSet rs, Fund_LogDTO dto) {
 		try {
