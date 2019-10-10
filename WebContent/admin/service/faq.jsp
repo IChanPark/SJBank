@@ -30,10 +30,12 @@ $(document).ready(function() {
 
 $(document).ready(function(){
 	ajax_go();
+	
+	$(".ser").on("click", function() {
+		ajax_go();
+	});
 });
-$(".ser").on("click", function() {
-	ajax_go();
-});
+
 function ajax_go() {
 	gogo = "admin/service/faq_select.jsp";
 	$.ajax({	
@@ -109,7 +111,8 @@ display: grid;justify-content: center;align-items: center;}
 <div class="subTitle">FAQ</div>
 
 <div align="right"><input class="sertext" type = "text" style="width: 450px"/>
-<a href="#" data-menu-name="admin/service/faq_insert" id="notice">작성하기</a><div class="ser" >검색하기</div></div>
+<a href="#" data-menu-name="admin/service/faq_insert" id="notice">작성하기</a>
+<div class="ser" >검색하기</div></div>
 <div class="scrollB"> <!-- 스크롤바 -->
 
 <div id = "ttt">

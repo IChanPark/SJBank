@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import inf.M_Action;
-import jdbc.Service.Qna_replyDAO;
-import jdbc.Service.Qna_replyDTO;
+import jdbc.Service.QnaDAO;
+import jdbc.Service.QnaDTO;
 
 
 public class QnaReg implements M_Action {
@@ -13,18 +13,23 @@ public class QnaReg implements M_Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 				
-		Qna_replyDTO dto = new Qna_replyDTO();
+		QnaDTO dto = new QnaDTO();
 
-		dto.setId(request.getParameter("id"));
-		dto.setTitle(request.getParameter("title"));		
-		dto.setContent(request.getParameter("content"));
+		String d = "[답변]";
 		
+		dto.setType(request.getParameter("type"));
+		dto.setTitle(d+request.getParameter("title"));
+		dto.setId(request.getParameter("id"));
+		dto.setContent(request.getParameter("content"));
+		dto.setStatus("활성");
+		System.out.println(request.getParameter("Register_dateStr"));
+		//dto.setRegister_dateStr(request.getParameter("Register_dateStr"));
 		//계좌번호 넣어주세요
 		
 		//넣어주세요
 
 		//DB 저장
-		Qna_replyDAO.getInstance().insert(dto); 
+		QnaDAO.getInstance().insert(dto); 
 		request.setAttribute("mainUrl","admin/inc/main");	
 		System.out.println("노티스 Reg 들어옴");
 		///redirect

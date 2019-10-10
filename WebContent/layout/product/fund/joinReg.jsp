@@ -5,8 +5,6 @@
 <%@page import="jdbc.User.UserDTO"%>
 <%@page import="jdbc.Transfer.Transfer_logDTO"%>
 <%@page import="jdbc.Transfer.Transfer_logDAO"%>
-<%@page import="jdbc.Deposit.DepositsDAO"%>
-<%@page import="jdbc.Deposit.DepositsDTO"%>
 <%@page import="jdbc.Transfer.Transfer_autoDTO"%>
 <%@page import="jdbc.Transfer.Transfer_autoDAO"%>
 <%@page import="jdbc.Deposit.Deposits_infoDAO"%>
@@ -34,6 +32,15 @@ String	userid = (String)request.getSession().getAttribute("userID"),
 		product=request.getParameter("product");
 
 int sum = Integer.parseInt(request.getParameter("sum"));
+
+System.out.println(request.getParameter("price_modify"));
+
+float price_modify =Float.parseFloat(request.getParameter("price_modify"));
+int buynum = (int)(sum/price_modify); //구매량
+
+float exchange=	buynum*price_modify; //구매한량 * 현재가격(평가금액)
+float rest = sum-exchange; //나머지돈
+float nowmoney = exchange+rest; //출금가능돈(평가금액)
 AccountDTO myAccDTO = AccountDAO.getInstance().selectAccount(myAcc);
 UserDTO userDTO = UserDAO.getInstance().selectId(userid);
 
@@ -70,6 +77,12 @@ depDTO.setAccount_number(newAcc);
 depDTO.setId(userid);
 depDTO.setProduct(product);
 depDTO.setFluctuation((float)0.5);
+depDTO.setAmount((float)sum);
+depDTO.setExchange(exchange);
+depDTO.setNowmoney(nowmoney);
+depDTO.setBuynum(buynum);
+depDTO.setRest(rest);
+depDTO.setPrice_modify(price_modify);
 
 System.out.println("dddd "+request.getParameter("auto"));
 
@@ -109,7 +122,7 @@ map.put("interest_type",dto.getInterest_type());
 map.put("tax", dto.getTax());
 map.put("preferential",dto.getPreferential());
 map.put("prf_content",dto.getPrf_content());
-map.put("prf_interest",dto.getPrf_interest());
+map.put("prf_interest",dto.getㄴPrf_interest());
 map.put("partialization",dto.getPartialization());
 map.put("retention",dto.getRetention());
 map.put("min_sum",dto.getMin_sum()+"");
@@ -120,7 +133,7 @@ String myAcc = "";
 String alias ="";
 for (int i = 0; i < accDTO.size(); i++) {
 	myAcc+= accDTO.get(i).getAccount_number();
-	alias += accDTO.get(i).getAlias();
+	alias += accDTO.get(i).getAlias();ㄴ
 	if(i < accDTO.size()-1){
 		myAcc +="#";
 		alias +="#";	

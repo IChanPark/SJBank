@@ -110,8 +110,7 @@ display: grid;justify-content: center;align-items: center;}
 
 
 <div class="subTitle">FAQ</div>
-<div align="right"><input class="sertext" type = "text" style="width: 450px"/>
-<div class="ser" >검색하기</div></div>
+<div align="right"><input class="sertext" type = "text" style="width: 450px"/><div class="ser" >검색하기</div></div>
 <div class="scrollB"> <!-- 스크롤바 -->
 
 <div id = "ttt">

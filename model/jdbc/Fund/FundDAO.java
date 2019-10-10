@@ -38,6 +38,12 @@ public class FundDAO {
 				dto.setId(rs.getString("id"));
 				dto.setProduct(rs.getString("product"));
 				dto.setFluctuation(rs.getFloat("fluctuation"));
+				dto.setAmount(rs.getFloat("amount"));
+				dto.setNowmoney(rs.getFloat("nowmoney"));
+				dto.setExchange(rs.getFloat("exchange"));
+				dto.setBuynum(rs.getInt("buynum"));
+				dto.setRest(rs.getFloat("rest"));
+				dto.setPrice_modify(rs.getFloat("price_modify"));
 			
 			} 
 		} catch (Exception e) {}
@@ -53,6 +59,12 @@ public class FundDAO {
 				dto.setId(rs.getString("id"));
 				dto.setProduct(rs.getString("product"));
 				dto.setFluctuation(rs.getFloat("fluctuation"));
+				dto.setAmount(rs.getFloat("amount"));
+				dto.setNowmoney(rs.getFloat("nowmoney"));
+				dto.setExchange(rs.getFloat("exchange"));
+				dto.setBuynum(rs.getInt("buynum"));
+				dto.setRest(rs.getFloat("rest"));
+				dto.setPrice_modify(rs.getFloat("price_modify"));
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
@@ -113,8 +125,8 @@ public class FundDAO {
 	
 	public void insert(FundDTO dto){
 		sql = 	"insert into fund (" +
-				"account_number, id, product,fluctuation) values ("+
-				"			?  , ? ,	  ? ,	  ?	)";
+				"account_number, id, product,fluctuation,amount,nowmoney,exchange,buynum,rest,price_modify) values ("+
+				"			?  , ? ,	  ? ,	  ?,		?,		?,		?,		?,	  ?, ?	)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -124,7 +136,12 @@ public class FundDAO {
 			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getProduct());
 			pstmt.setFloat(4, dto.getFluctuation());
-			
+			pstmt.setFloat(5, dto.getAmount());
+			pstmt.setFloat(6, dto.getNowmoney());
+			pstmt.setFloat(7, dto.getExchange());
+			pstmt.setInt(8, dto.getBuynum());
+			pstmt.setFloat(9, dto.getRest());
+			pstmt.setFloat(10, dto.getPrice_modify());
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }

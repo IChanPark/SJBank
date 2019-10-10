@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Fund_InfoDTO {
-
+	private Integer 	seq;				//로그번호
+	
 	private	String 	product,			//상품명
 					product_info,		//상품설명
 					type,				//유형 주식 채권 기타
@@ -38,6 +39,14 @@ public class Fund_InfoDTO {
 
 	public String getProduct_info() {
 		return product_info;
+	}
+	
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
 	}
 
 	public void setProduct_info(String product_info) {

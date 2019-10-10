@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Fund.FundDTO;
 import jdbc.Fund.Fund_InfoDTO;
+import server.DBAccess_IP;
 
 public class Fund_InfoDAO {
 
@@ -21,9 +23,9 @@ public class Fund_InfoDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	private Fund_InfoDAO() {
+	public Fund_InfoDAO() {
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 			
@@ -140,6 +142,18 @@ public class Fund_InfoDAO {
 		System.out.println(sql);
 		try {
 			
+			
+			stmt.executeUpdate(sql); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	public void updateprice_modify(String Price_modify,String Product ){
+		sql = 	"update fund_info set " +
+				"price_modify = "+Price_modify+
+				" where product = '"+Product+"'";
+		System.out.println(sql);
+		try {
 			
 			stmt.executeUpdate(sql); 
 		} catch (Exception e) { e.printStackTrace();
