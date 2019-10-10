@@ -160,23 +160,6 @@ public class UserDAO {
 		} finally { close(); }
 	}
 	
-	public void updatePw(UserDTO dto){
-		
-		sql = 	"update user set " +
-				"pw = ? " +
-				"where id = ?";
-		System.out.println(sql);
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, dto.getPw());
-			pstmt.setString(2, dto.getId());
-			
-			pstmt.executeUpdate(); 
-		} catch (Exception e) { e.printStackTrace();
-		} finally { close(); }
-	}
 	
 	////////////////////////////// 1001추가 아이디에 따른 패스워드 체크 HDG
 	
@@ -243,6 +226,24 @@ public class UserDAO {
 		return dto;
 	}
 	
+	public void updatePw(UserDTO dto){
+		sql = 	"update account set " +
+				"pw = ? "+
+				"where id = ? and name = ? and tel = ? and email = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getName());
+			pstmt.setString(3, dto.getTel());
+			pstmt.setString(4, dto.getEmail());
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}

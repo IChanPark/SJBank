@@ -24,7 +24,7 @@
 <script>
 $(document).ready(function(){
 	$("#search").click(function(){
-		alert("????");
+		alert("실행중");
 		aaa();
 	});
 });
@@ -47,7 +47,7 @@ function aaa(){
 			
 		},
 		error:function(qqq){
-			console.log("오류오류");
+			console.log("오류");
 		}
 	});
 };
