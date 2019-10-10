@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 
 import control.Data_Source;
 import jdbc.Fund.FundDTO;
+import jdbc.Fund.Fund_InfoDTO;
+import server.DBAccess_IP;
 
 public class FundDAO {
 
@@ -20,9 +22,9 @@ public class FundDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	private FundDAO() {
+	public FundDAO() {
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 			
@@ -51,6 +53,11 @@ public class FundDAO {
 				dto.setId(rs.getString("id"));
 				dto.setProduct(rs.getString("product"));
 				dto.setFluctuation(rs.getFloat("fluctuation"));
+				dto.setAmount(rs.getFloat("amount"));
+				dto.setNowmoney(rs.getFloat("nowmoney"));
+				dto.setExchange(rs.getFloat("exchange"));
+				dto.setBuynum(rs.getInt("buynum"));
+				dto.setRest(rs.getFloat("rest"));
 			
 			} 
 		} catch (Exception e) {}
@@ -66,6 +73,11 @@ public class FundDAO {
 				dto.setId(rs.getString("id"));
 				dto.setProduct(rs.getString("product"));
 				dto.setFluctuation(rs.getFloat("fluctuation"));
+				dto.setAmount(rs.getFloat("amount"));
+				dto.setNowmoney(rs.getFloat("nowmoney"));
+				dto.setExchange(rs.getFloat("exchange"));
+				dto.setBuynum(rs.getInt("buynum"));
+				dto.setRest(rs.getFloat("rest"));
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
@@ -126,10 +138,24 @@ public class FundDAO {
 		} finally { close(); }
 	}
 	
-	public void updateFluctuation(FundDTO dto){
+	public void updatetoday(Float fluctuation,Float nowmoney,Float exchange,Float price_modify,String account_number){
 		sql = 	"update fund set " +
-				"fluctuation = "+dto.getFluctuation()+
-				" where account_number = '"+dto.getAccount_number()+"'";
+				"fluctuation = "+fluctuation+
+				"nowmoney = "+nowmoney+
+				"exchange = "+exchange+
+				"price_modify = "+price_modify+
+				" where account_number = '"+account_number+"'";
+		System.out.println(sql);
+		try {
+			
+			stmt.executeUpdate(sql); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	public void updateprice_modify(String price_modify, String product){
+		sql = 	"update fund set " +
+				"price_modify = "+price_modify+
+				" where product = '"+product+"'";
 		System.out.println(sql);
 		try {
 			

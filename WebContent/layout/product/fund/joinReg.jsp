@@ -82,6 +82,7 @@ depDTO.setExchange(exchange);
 depDTO.setNowmoney(nowmoney);
 depDTO.setBuynum(buynum);
 depDTO.setRest(rest);
+depDTO.setPrice_modify(price_modify);
 
 System.out.println("dddd "+request.getParameter("auto"));
 

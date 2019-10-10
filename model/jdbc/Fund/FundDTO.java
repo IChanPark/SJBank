@@ -10,7 +10,8 @@ public class FundDTO {
 					amount,			//가입금액
 					nowmoney,		//현재금액
 					rest,			//나머지돈
-					exchange;		//환산금액
+					exchange,		//환산금액
+					price_modify;	//수정가
 	
 	
 	private	int		buynum;			//구매량
@@ -24,6 +25,13 @@ public class FundDTO {
 		this.account_number = account_number;
 	}
 	
+	public Float getPrice_modify() {
+		return price_modify;
+	}
+	public void setPrice_modify(Float price_modify) {
+		this.price_modify = price_modify;
+	}
+
 	public Float getRest() {
 		return rest;
 	}
