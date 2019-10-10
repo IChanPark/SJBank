@@ -289,6 +289,34 @@ public class AccountDAO {
 		return dto;
 		}
 
+	/////////////////////////////누구야 내 파일 맨날 날리는 사람
+	
+	public String chkOurBank(String acc){
+
+		sql = "SELECT name FROM user WHERE id = (select id from account where account_number = ?)";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, acc);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getString("name");
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return "외부계좌";
+	}
+	
+	
+	
+	
+	
+	//////////////////////////////////////
+	
+	
+	
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
