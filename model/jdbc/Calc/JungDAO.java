@@ -47,7 +47,6 @@ public class JungDAO {
 	private void Jung(ResultSet rs, ArrayList<JungDTO> res) {
 		try {
 			while (rs.next()) {
-				System.out.println("도냐");
 				JungDTO dto = new JungDTO();
 				dto.setDateStr(rs.getString("date"));
 				dto.setCount(rs.getLong("count"));
@@ -59,9 +58,9 @@ public class JungDAO {
 		} catch (Exception e) {}
 	}
 
-	public ArrayList<JungDTO> month(){
+	public ArrayList<JungDTO> month(String start, String end){
 		ArrayList<JungDTO> res = new ArrayList<JungDTO>();
-
+		
 		sql = 	"SELECT "+
 				"CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date)) AS date, "+
 				"COUNT(tl.seq) AS count, "+
@@ -71,13 +70,83 @@ public class JungDAO {
 				"FROM transfer_log tl "+
 				"INNER JOIN ACCOUNT ac "+
 				"ON tl.account_number = ac.account_number "+
-				//"GROUP BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date)), CONCAT(ac.type,':',tl.feetype)"+
-				"GROUP BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date)), CONCAT(ac.type)"+
+				"WHERE DATE_FORMAT(tl.register_date, '%Y-%m-%d') >= STR_TO_DATE(?, '%Y-%m-01')"+
+				"AND DATE_FORMAT(tl.register_date, '%Y-%m-%d') <= last_day(STR_TO_DATE(?,'%Y-%m'))"+
+				"GROUP BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date))"+
+				//"GROUP BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date))"+
 				"ORDER BY CONCAT(YEAR(tl.register_date),'-',MONTH(tl.register_date))";
 
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+			
+			rs = pstmt.executeQuery();
+
+			Jung(rs, res);
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<JungDTO> year(String start, String end){
+		ArrayList<JungDTO> res = new ArrayList<JungDTO>();
+
+		sql = 	"SELECT "+
+				"DATE_FORMAT(tl.register_date, '%Y') AS date, "+ 
+				"COUNT(tl.seq) AS count, "+
+				"ac.type AS product, "+
+				"tl.feetype AS type, "+
+				"SUM(tl.fee) AS sum " +
+				"FROM transfer_log tl "+
+				"INNER JOIN ACCOUNT ac " +
+				"ON tl.account_number = ac.account_number "+ 
+				"WHERE  YEAR(tl.register_date) >= YEAR(STR_TO_DATE(?, '%Y')) "+		
+				"AND YEAR(tl.register_date) <= YEAR(STR_TO_DATE(?, '%Y')) "+
+				"GROUP BY DATE_FORMAT(tl.register_date, '%Y') "+
+				"ORDER BY DATE_FORMAT(tl.register_date, '%Y')";
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+			
+			rs = pstmt.executeQuery();
+
+			Jung(rs, res);
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<JungDTO> day(String start, String end){
+		ArrayList<JungDTO> res = new ArrayList<JungDTO>();
+		
+		sql	=	"SELECT "+
+				"DATE_FORMAT(tl.register_date, '%Y-%m-%d') AS date, "+ 
+				"COUNT(tl.seq) AS count, " +
+				"ac.type AS product, "+
+				"tl.feetype AS type, "+
+				"SUM(tl.fee) AS sum "+
+				"FROM transfer_log tl "+
+				"INNER JOIN ACCOUNT ac "+
+				"ON tl.account_number = ac.account_number  "+
+				"WHERE tl.register_date >= STR_TO_DATE(?, '%Y-%m-%d')"+
+				"AND tl.register_date <= STR_TO_DATE(?,'%Y-%m-%d')"+
+				"GROUP BY DATE_FORMAT(tl.register_date, '%Y-%m-%d')"+
+				"ORDER BY DATE_FORMAT(tl.register_date, '%Y-%m-%d')";
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+			
 			rs = pstmt.executeQuery();
 
 			Jung(rs, res);
