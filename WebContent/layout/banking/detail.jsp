@@ -101,6 +101,7 @@ $(document).ready(function(){
 	
 	<c:forEach var="lo" items="${log }" varStatus="no" begin="1" step="1">
 		<tr >
+			<td>${no.count }</td>
 			<td>${lo.target }</td>
 			<td>${lo.to_account_number }</td>
 			<td>${lo.received }</td>
