@@ -275,7 +275,37 @@ public class AccountDAO {
 		return false;
 	}
 
+	///////////////////////////////////////////////
 	
+	///////////////////////자행계좌 확인
+
+	public String chkOurBank(String acc){
+
+		sql = "SELECT name FROM user WHERE id = (select id from account where account_number = ? )";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, acc);
+
+			rs = pstmt.executeQuery();
+		
+			if(rs.next())
+				return rs.getString("name");
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return "외부계좌";
+	}
+
+
+
+
+
+	
+	
+	
+	///////////////////////////////////////////
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}
