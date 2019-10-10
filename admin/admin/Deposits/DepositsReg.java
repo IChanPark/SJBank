@@ -15,6 +15,7 @@ public class DepositsReg  implements M_Action{
 		String i = request.getParameter("prf_interest");
 		
 		dto.setProduct(request.getParameter("product"));
+		dto.setDeposits_info("");
 		dto.setMin_interest(Float.parseFloat(request.getParameter("min_interest")));
 		dto.setMonth(request.getParameter("month"));
 		dto.setType(request.getParameter("type"));

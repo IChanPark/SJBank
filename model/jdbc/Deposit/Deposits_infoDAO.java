@@ -180,9 +180,9 @@ public class Deposits_infoDAO {
 	public void insert(Deposits_infoDTO dto){
 		sql = 	"insert into deposits_info (" +
 				"product, deposits_info, min_interest, max_interest, month, type, interest_type, tax, preferential,"+ 
-				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date) values ("+
+				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date, id) values ("+
 				"	 ?	,		?	   ,	  ?      ,		?		,	?  ,	?,	   	?	    ,	? ,			?	,"+
-				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null)";
+				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null, '')";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();

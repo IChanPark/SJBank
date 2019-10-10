@@ -1,8 +1,6 @@
-<%@page import="jdbc.Saving.Saving_infoDAO"%>
 <%@page import="jdbc.Saving.Saving_infoDTO"%>
+<%@page import="jdbc.Saving.Saving_infoDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="jdbc.Deposit.Deposits_infoDAO"%>
-<%@page import="jdbc.Deposit.Deposits_infoDTO"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
@@ -23,10 +21,10 @@ ArrayList<Saving_infoDTO> dto = null;
 if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
 	dto = Saving_infoDAO.getInstance().selectLikeAnd(setDTO);
 //타입만 검색
-else if(!setDTO.getType().equals(""))
+else if(!setDTO.getType().equals("")){
 	dto = Saving_infoDAO.getInstance().selectType(setDTO);
 //타이틀만 검색
-else if(!setDTO.getProduct().equals(""))
+}else if(!setDTO.getProduct().equals(""))
 	dto = Saving_infoDAO.getInstance().selectLikePro(setDTO);
 else 
 	dto = Saving_infoDAO.getInstance().list();

@@ -5,7 +5,7 @@ var selected_Product = "예금";
 var selected_Type = "";
 var path = "product/deposit/";
 var gogo = "layout/"+path+"all.jsp";
-var isRun = false; 		//아작스 중복실행 확인
+var isRun = false; 		//중복실행 방지
 var main = '';
 var su = 0;
 main +="<div class='search_Box' >";

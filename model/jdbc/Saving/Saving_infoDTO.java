@@ -16,9 +16,10 @@ public class Saving_infoDTO {
 					prf_interest,	 //우대이자율
 					partialization,	 //일부해지가능여부
 					retention,		 //재예치가능여부
-					status;			 //상태
+					status,
+					month;			 //상태
 					
-	private Integer	month,			//약정 개월 수
+	private Integer				//약정 개월 수
 					min_sum,		//최소 납입금
 					max_sum;		//최대 납입금
 	
@@ -127,11 +128,11 @@ public class Saving_infoDTO {
 		this.status = status;
 	}
 
-	public Integer getMonth() {
+	public String getMonth() {
 		return month;
 	}
 
-	public void setMonth(Integer month) {
+	public void setMonth(String month) {
 		this.month = month;
 	}
 
@@ -155,16 +156,16 @@ public class Saving_infoDTO {
 		return min_interest;
 	}
 
-	public void setMin_interest(Float min_Interest) {
-		this.min_interest = min_Interest;
+	public void setMin_interest(Float min_interest) {
+		this.min_interest = min_interest;
 	}
 
 	public Float getMax_interest() {
 		return max_interest;
 	}
 
-	public void setMax_interest(Float max_Interest) {
-		this.max_interest = max_Interest;
+	public void setMax_interest(Float max_interest) {
+		this.max_interest = max_interest;
 	}
 	
 	//-------------------------------------------------------------

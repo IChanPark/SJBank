@@ -1,3 +1,5 @@
+<%@page import="jdbc.Saving.Saving_infoDAO"%>
+<%@page import="jdbc.Saving.Saving_infoDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="jdbc.Deposit.Deposits_infoDAO"%>
 <%@page import="jdbc.Deposit.Deposits_infoDTO"%>
@@ -11,13 +13,13 @@ request.setCharacterEncoding("UTF-8");	//한글처리
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 
-Deposits_infoDTO setDTO = new Deposits_infoDTO();
+Saving_infoDTO setDTO = new Saving_infoDTO();
 setDTO.setProduct(request.getParameter("product"));
 
-Deposits_infoDTO dto = Deposits_infoDAO.getInstance().selectProUse(setDTO);
+Saving_infoDTO dto = Saving_infoDAO.getInstance().selectProUse(setDTO);
 
 map.put("product", dto.getProduct());
-map.put("deposits_info", dto.getDeposits_info());
+map.put("deposits_info", dto.getProduct_info());
 map.put("min_interest", dto.getMin_interest()+"");
 map.put("max_interest", dto.getMax_interest()+"");
 map.put("month", dto.getMonth()+"");

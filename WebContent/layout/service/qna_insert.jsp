@@ -15,7 +15,7 @@
 		</tr><tr>
 			<td colspan="2" align="center">
 				<a href="#" data-menu-name="service/QnaReg" >작성</a>
-				<a href="#" data-menu-name="service/client/qna" >목록으로</a>
+				<a href="#" data-menu-name="service/client/Qna" >목록으로</a>
 			</td>
 		</tr>
 	</table>

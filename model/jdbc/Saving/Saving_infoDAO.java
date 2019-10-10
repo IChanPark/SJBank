@@ -39,7 +39,7 @@ public class Saving_infoDAO {
 				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
-				dto.setMonth(rs.getInt("month"));
+				dto.setMonth(rs.getString("month"));
 				dto.setType(rs.getString("type"));
 				dto.setInterest_type(rs.getString("interest_type"));
 				dto.setTax(rs.getString("tax"));
@@ -67,7 +67,7 @@ public class Saving_infoDAO {
 				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
-				dto.setMonth(rs.getInt("month"));
+				dto.setMonth(rs.getString("month"));
 				dto.setType(rs.getString("type"));
 				dto.setInterest_type(rs.getString("interest_type"));
 				dto.setTax(rs.getString("tax"));
@@ -197,7 +197,7 @@ public class Saving_infoDAO {
 			pstmt.setString(2, dto.getProduct_info());
 			pstmt.setFloat(3, dto.getMin_interest());
 			pstmt.setFloat(4, dto.getMax_interest());
-			pstmt.setInt(5, dto.getMonth());
+			pstmt.setString(5, dto.getMonth());
 			pstmt.setString(6, dto.getType());
 			pstmt.setString(7, dto.getInterest_type());
 			pstmt.setString(8, dto.getTax());
