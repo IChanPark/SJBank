@@ -14,31 +14,46 @@ var month_data = {
 	},
 	beforeShow: function() {}
 };
+layout =	"<div class= 'infoBox'>";
+layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>검색날짜 선택</div><div class='infoMain_Value'>";
+layout +=	"일 별<input type='radio' name= 'date_radio' value='d'/>월 별<input type='radio' name= 'date_radio' value='m' checked='checked'/>";
+layout +=	"년도 별<input type='radio' name= 'date_radio' value='y'/> </div></div>";
+layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품 선택</div><div class='infoMain_Value'>";
+layout +=	"모두<input type='radio' name= 'prod_radio' value='모두' checked='checked'/>예금<input type='radio' name= 'prod_radio' value='예금'/>";
+layout +=	"적금<input type='radio' name= 'prod_radio' value='적금'/>펀드<input type='radio' name= 'prod_radio' value='펀드'/></div></div>";
+layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>검색</div><div class='infoMain_Value'>";
+layout +=	"<button id='search_Button'>검색</button><button id='clean_Button'>초기화</button></div></div>";
+layout += 	"</div><div class='infoAdmin'><table id='info_table'><tbody id='info_tbody'>";
+layout += 	"<tr><th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th></tr></tbody></table></div>";
 
-$(document).ready(function(){
-	$("#clean_Button").on("click", function(){//초기화
-		$("input:radio[name='date_radio']:radio[value='d']").prop("checked", true);
-		$("input:radio[name='prod_radio']:radio[value='all']").prop("checked", true);
-		$('#days').remove();
-	});
-	$("input:radio[name='date_radio']:radio[value='d']").on("click",function() {
-		$('#days').remove();//검색날짜선택 년도별
-		setDay();
-	});
-	$("input:radio[name='date_radio']:radio[value='m']").on("click",function() {
-		$('#days').remove();//검색날짜선택 월별
-		setMonth();
-		ajax_go();
-	});
-	$("input:radio[name='date_radio']:radio[value='y']").on("click",function() {
-		$('#days').remove();//검색날짜선택 년도별
-		setYear();
-	});
-	$("[name='prod_radio']").on("click",function() {
-		$("#types").remove();
-		option();
-	});
-	
+$('#mid').append(layout);
+	//<input type='text' placeholder='검색어를 입력해주세요 .' id='search_Word'>
+
+$("#clean_Button").on("click", function(){//초기화
+	$("input:radio[name='date_radio']:radio[value='d']").prop("checked", true);
+	$("input:radio[name='prod_radio']:radio[value='all']").prop("checked", true);
+	$('#days').remove();
+	$("#info_tbody").empty();
+});
+$("input:radio[name='date_radio']:radio[value='d']").on("click",function() {
+	$('#days').remove();//검색날짜선택 년도별
+	setDay();
+});
+$("input:radio[name='date_radio']:radio[value='m']").on("click",function() {
+	$('#days').remove();//검색날짜선택 월별
+	setMonth();
+});
+$("input:radio[name='date_radio']:radio[value='y']").on("click",function() {
+	$('#days').remove();//검색날짜선택 년도별
+	setYear();
+});
+$("input:radio[name='prod_radio']").on("click",function() {
+	$("#types").remove();
+	option();  
+});
+$("#search_Button").on("click", function(){
+	$("#info_tbody").empty();
+	ajax_go();
 });
 function setYear(){
     var dt = new Date();
@@ -50,7 +65,7 @@ function setYear(){
     	ee+="<option value='"+ y +"-12-31'>"+ y + " 년" +"</option>";
     }
     layout += ss;
-    layout += "</select> 끝나는년도 <select id='start_year'>"+ee;
+    layout += "</select> 끝나는년도 <select id='end_year'>"+ee;
     layout += "</select></div>";
     $("input:radio[name='date_radio']").parent().append(layout);
 };
@@ -60,6 +75,8 @@ function setMonth(){
 	$("input:radio[name='date_radio']").parent().append(layout);
 	$("#start_month").datepicker(month_data);
 	$("#end_month").datepicker(month_data);
+	$('#start_month').attr("readonly",true);
+	$('#end_month').attr("readonly",true);
 };
 function setDay(){
 	layout = "<div id='days'>시작일 <input type='text' id='start_day'/>";
@@ -74,20 +91,22 @@ function option(){
 	if(isRun == true)
 		return;
 	isRun = true;
-
+	
 	$.ajax({	
 		url:"admin/calc/product_type.jsp",
 		type:'post',
 		data:{	product	: $("input:radio[name='prod_radio']:checked").val() },
 		dataType:'json',
 		success:function(qqq){
+
+			console.log('dd');
 			if($("input:radio[name='prod_radio']:checked").val() != "all"){
 				layout = "<div id='types'><select id='type_Select'><option value='모두'>모두</option>";
 				$.each( qqq ,function(i,e){
 					layout += "<option value='"+e.name+"'>"+e.name+"</option>";
 				});
 				layout += "</select><div>";
-				$("input:radio[name='prod_radio']").parent().append(layout);
+				$("[name='prod_radio']").parent().append(layout);
 			}
 			isRun = false;
 		},
@@ -108,25 +127,34 @@ function ajax_go() {
 	$.ajax({	
 	url:gogo,
 	type:'post',
-	/* data:{	type	: selected_Type,
-			title 	: $('.search_Word').val()}, */
+	data:{	start_year	: $("#start_year").val(),
+			end_year	: $("#end_year").val(),
+			start_month	: $("#start_month").val(),
+			end_month 	: $('#end_month').val(),
+			start_day	: $("#start_day").val(),
+			end_day 	: $('#end_day').val()
+	},
 	dataType:'json',
 	success:function(qqq){
-		$("#info_tbody").empty();
-		
-		var row = "<tr><th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th></tr>";
+		var ttt = $("input:radio[name='prod_radio']:checked").val();
+		var row ='<tr><th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th></tr>';
+		var total = 0;
 		$.each(qqq,function(i,e){
 			
+			if(e.product == ttt || ttt == '모두'
+				){
+				
 			row +="<tr>";
-			
 			row +="<td class='"+e.date+"'>"+e.date+"</td>";
 			row +="<td class='"+e.count+"'>"+e.count+"</td>";
-			row +="<td class='"+e.product+"'>"+e.product+"</td>";
+			row +="<td class='"+e.product+"'>"+ttt+"</td>";
 			row +="<td class='"+e.type+"'>"+e.type+"</td>";
 			row +="<td class='"+e.sum+"'>"+e.sum+"</td>";
-			
-			row +="</tr>"; 
+			row +="</tr>";
+			total += Number(e.sum);
+			}
 		});
+		row += "<tr><td colspan='5'>총금액 : "+total+"</td></tr>";
 		$("#info_tbody").append(row);
 		isRun = false;
 	},
@@ -144,36 +172,14 @@ function number_Pattern(num) {	//3자리마다 ,찍기
 <style>
 .infoMain_Value input[type=radio]{ margin-left: 5px; margin-right: 10px; }
 .infoMain_Value select[id=sel_type]{ margin-right: 10px; margin-right: 5px; }
-.info_table table { width:100%; margin:15px 0; border:0; margin-top: 20px;}
-.info_table th { font-weight:bold; background-color:#c6c6c6; color:#202020 }
-.info_table,.info_table th,.info_table td { font-size:14px; text-align:center; padding:4px; border-collapse:collapse; color: black;}
-.info_table th { border: 1px solid #c6c6c6; border-width:1px }
-.info_table td { border: 1px solid #c6c6c6; border-width:1px }
-.info_table tr { border: 1px solid #ffffff; }
-.info_table tr:nth-child(odd){ background-color:#f7f7f7; }
-.info_table tr:nth-child(even){ background-color:#ffffff; }
+#info_table table { width:100%; margin:15px 0; border:0; margin-top: 20px; }
+#info_table th { font-weight:bold; background-color:#c6c6c6; color:#202020; }
+#info_table,.info_table th,.info_table td { font-size:14px; text-align:center; padding:4px; border-collapse:collapse; color: black;}
+#info_table th { border: 1px solid #c6c6c6; border-width:1px; }
+#info_table td { border: 1px solid #c6c6c6; border-width:1px; color: black;}
+#info_table tr { border: 1px solid #ffffff; }
+#info_table tr:nth-child(odd){ background-color:#f7f7f7; }
+#info_table tr:nth-child(even){ background-color:#ffffff; }
 button{margin-left: 10px}
 </style>
 <div class='subTitle'>정산</div>
-<div class= "infoBox">
-	<div class="infoMain_Info"><div class="infoMain_Type">검색날짜 선택</div><div class="infoMain_Value">
-		일 별<input type='radio' name= 'date_radio' value='d'/>월 별<input type='radio' name= 'date_radio' value='m' checked='checked'/>
-		년도 별<input type='radio' name= 'date_radio' value='y'/> </div></div>
-	<div class="infoMain_Info"><div class="infoMain_Type">상품 선택</div><div class="infoMain_Value">
-		모두<input type='radio' name= 'prod_radio' value='all' checked='checked'/>예금<input type='radio' name= 'prod_radio' value='deposit'/>
-		적금<input type='radio' name= 'prod_radio' value='save'/>펀드<input type='radio' name= 'prod_radio' value='fund'/>
-		</div></div>
-	<div class="infoMain_Info"><div class="infoMain_Type">검색</div><div class="infoMain_Value">
-		<!-- <input type="text" placeholder="검색어를 입력해주세요." id="search_Word"> -->
-		<button id="search_Button">검색</button><button id="clean_Button">초기화</button></div></div>
-	<div class="infoAdmin">			
-		<table class=info_table>
-		<tbody id=info_tbody>
-		<tr>
-			<th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th>
-		</tr>
-		</tbody>
-		</table>
-	</div>
-</div>
-</div>
