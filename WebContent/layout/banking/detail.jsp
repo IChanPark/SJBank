@@ -114,10 +114,10 @@ $(document).ready(function(){
 			<td>${lo.status }</td>
 			<c:set var="count" value="${count=count+1 }" />
 		</tr>
-	</c:forEach>
+	                                                                                                                                                                                                                  </c:forEach>
 	<c:if test="${empty count }">
 		<tr>
-			<td colspan="7" align="center">거래내역이 없습니다.</td>
+			<td colspan="11" align="center">거래내역이 없습니다.</td>
 		</tr>
 	</c:if>
 </table>

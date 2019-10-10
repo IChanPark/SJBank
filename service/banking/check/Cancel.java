@@ -18,7 +18,6 @@ public class Cancel implements M_Action{
 		Transfer_reserveDTO dto = new Transfer_reserveDTO();
 		dto.setSeq(Integer.parseInt(request.getParameter("seq") ) );
 			new send("취소", "reserve", dto);
-		
 		}
 		
 		if(type.equals("delay")) {

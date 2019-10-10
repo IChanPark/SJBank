@@ -244,7 +244,6 @@ public class Trsdto_server {
 					
 					if(def.name.equals("추가")) {
 						System.out.println("reserve 데이터를 추가합니다.");
-						
 						dto.setSeq(new Transfer_reserveDAO().reSeqInsert(dto));
 						reserveList.put(dto.getSeq(), dto);
 					}
@@ -252,7 +251,7 @@ public class Trsdto_server {
 					{
 						System.out.println("reserve 데이터를 비활성화합니다.");
 						reserveList.get(dto.getSeq()).setStatus("비활성");
-						
+						new Transfer_reserveDAO().updateStatusBySeq(dto.getSeq(), "비활성");
 					}
 				}
 //				else if(def.msg.equals("auto") ){
