@@ -1,28 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%request.setCharacterEncoding("UTF-8"); %>
 <script>
 	$(document).ready(function() {
 		$('#ToConfirm').click(function() {
+			alert("????!!");
+			
 				$(".indata").attr("readOnly",true);
 			
 				var text = $("<div class='subTitle'>이체정보"
 				+ "<table border=''><tr><td>이체예정일시</td><td>출금계좌</td>"
 				+ "<td>입금은행<br>입금계좌</td><td>받는분</td><td>이체금액(원)</td>"
 				+ "<td>수수료(원)</td><td>받는통장<br>메모</td>	<td>CMS코드</td></tr>"
-				+ "<tr><td>"+$('#time').val()+"<br>"+$('input[name="scheduled_date"]:checked').val()+"</td><td>"+$('#acc').val()+"</td><td>"+$('#toAcc').val()+"</td><td></td><td></td><td>"
-				+ "</td><td></td><td></td></tr></table></div>");
-				var addBox = $("<div> 주의사항 비슷한 무언가<br><div class='subTitle'>보안매체 정보입력</div><br>"
-					+ "OTP 입력창 <input type='text' /></div>");
+				+ "<tr><td>"+$('#time').val()+"<br>"+$('input[name="scheduled_date"]:checked').val()+"</td><td>"+$('#acc').val()+"</td><td>"+$('#toAcc').val()+"</td><td>"+$('#bank').val()+"</td><td>"+$('#sum').val()+"</td><td>"
+				+ "</td><td>"+$('#to_memo').val()+"</td><td>"+$('#cms').val()+"</td></tr></table></div>");
+				
+				
+				var addBox = $("<div> 주의사항 비슷한 무언가<br></div>");
 				var btn = $("<div><button onclick=goReg()>완료</button></div>");
+				
+				addBox.append($("<div class='subTitle'>보안매체 정보입력</div><br><div>OTP 입력창 <input type='text' />"));
+				addBox.append( $("<textarea name='a' id='a' cols='8' rows='1' readOnly>"+getRandomInt(100000,200000)+"</textarea></div>"));
 				addBox.append(btn);
 				text.append(addBox);
 				$("#mid").append(text);
 				$(this).hide();
-	});
+			
+			
+		});
 });
 
+	function getRandomInt(min, max) {
+		  min = Math.ceil(min);
+		  max = Math.floor(max);
+		  return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
+		}
+	
+	
 function goReg(){
 
 	var f=document.paging; 
@@ -31,13 +46,12 @@ function goReg(){
 	
     f.method="post";
     f.submit();
-	
+
 };
 	
 </script>
 
 <div class="subTitle">예약이체 등록</div>
-
 <div clsss="subTitle">출금정보</div>
 <table border="" class="indata">
 	<tr>
@@ -84,15 +98,15 @@ function goReg(){
 	</tr>
 	<tr>
 		<td>받는통장 메모</td>
-		<td><input type="text" name="to_memo"  class="indata"/></td>
+		<td><input type="text" name="to_memo" id="to_memo" class="indata"/></td>
 	</tr>
 	<tr>
 		<td>내통장 메모</td>
-		<td><input type="text" name="memo" class="indata"/></td>
+		<td><input type="text" name="memo" id = "memo" class="indata"/></td>
 	</tr>
 	<tr>
 		<td>CMS코드</td>
-		<td><input type="text" name="cms"  class="indata"/></td>
+		<td><input type="text" name="cms" id ="cms" class="indata"/></td>
 	</tr>
 </table>
 <br><br>
