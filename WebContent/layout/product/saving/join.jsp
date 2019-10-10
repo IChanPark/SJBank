@@ -16,7 +16,7 @@ Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 AccountDTO DataDTO = new AccountDTO();
 DataDTO.setId((String)request.getSession().getAttribute("userID"));
-DataDTO.setType("적금");
+DataDTO.setType("예금");
 ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectID_Type(DataDTO);
 
 Saving_infoDTO setDTO = new Saving_infoDTO();
@@ -26,10 +26,10 @@ System.out.println(request.getParameter("product"));
 Saving_infoDTO dto = Saving_infoDAO.getInstance().selectProUse(setDTO);
 
 map.put("product", dto.getProduct());
-map.put("deposits_info", dto.getProduct_info());
+map.put("product_info", dto.getProduct_info());
 map.put("min_interest", dto.getMin_interest()+"");
 map.put("max_interest", dto.getMax_interest()+"");
-map.put("month", dto.getMonth());
+map.put("month", dto.getMonth()+"");
 map.put("type", dto.getType());
 map.put("interest_type",dto.getInterest_type());
 map.put("tax", dto.getTax());
@@ -40,6 +40,8 @@ map.put("partialization",dto.getPartialization());
 map.put("retention",dto.getRetention());
 map.put("min_sum",dto.getMin_sum()+"");
 map.put("max_sum",dto.getMax_sum()+"");
+map.put("partialization",dto.getPartialization());
+map.put("retention",dto.getRetention());
 map.put("register_date",dto.getRegister_dateStr());
 
 String acc = "";

@@ -1,6 +1,8 @@
 package jdbc.Fund;
 
-public class FundDTO {
+import java.io.Serializable;
+
+public class FundDTO implements Serializable{
 	
 	private	String 	account_number, //계좌번호
 					id,				//ID

@@ -37,7 +37,7 @@ public class SavingDAO {
 				
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("prduct"));
+				dto.setProduct(rs.getString("Product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));
@@ -57,7 +57,7 @@ public class SavingDAO {
 				
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("prduct"));
+				dto.setProduct(rs.getString("Product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));
@@ -85,9 +85,9 @@ public class SavingDAO {
 	
 	public void insert(SavingDTO dto){
 		sql = 	"insert into saving " +
-				"(account_number, id, prduct, preferential, interest , type, end_date) "
+				"(account_number, id, Product, preferential, interest , type) "
 				+ "values "+
-				"(	 	?       ,  ?,	?   ,      ?      ,		 ?   ,   ? ,  ?  )";
+				"(	 	?       ,  ?,	?   ,      ?      ,		 ?   ,   ?   )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -95,11 +95,11 @@ public class SavingDAO {
 			
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getId());
-			pstmt.setString(3, dto.getPrduct());
+			pstmt.setString(3, dto.getProduct());
 			pstmt.setString(4, dto.getPreferential());
 			pstmt.setFloat(5, dto.getInterest());
 			pstmt.setString(6, dto.getType());
-			pstmt.setString(7, dto.getEnd_dateStr());
+			//pstmt.setString(7, dto.getEnd_dateStr());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

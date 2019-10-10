@@ -96,8 +96,8 @@ public class Saving_infoDAO {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, SetDTO.getProduct());
+		
+			pstmt.setString(1, dto.getProduct());
 			pstmt.setString(2, "활성");
 			rs = pstmt.executeQuery();
 			

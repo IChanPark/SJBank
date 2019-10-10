@@ -9,7 +9,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-request.setCharacterEncoding("UTF-8");	//한글처리
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 
@@ -19,7 +18,7 @@ setDTO.setProduct(request.getParameter("product"));
 Saving_infoDTO dto = Saving_infoDAO.getInstance().selectProUse(setDTO);
 
 map.put("product", dto.getProduct());
-map.put("deposits_info", dto.getProduct_info());
+map.put("product_info", dto.getProduct_info());
 map.put("min_interest", dto.getMin_interest()+"");
 map.put("max_interest", dto.getMax_interest()+"");
 map.put("month", dto.getMonth()+"");
@@ -33,6 +32,8 @@ map.put("partialization",dto.getPartialization());
 map.put("retention",dto.getRetention());
 map.put("min_sum",dto.getMin_sum()+"");
 map.put("max_sum",dto.getMax_sum()+"");
+map.put("partialization",dto.getPartialization());
+map.put("retention",dto.getRetention());
 map.put("register_date",dto.getRegister_dateStr());
 
 String json = gson.toJson(map);

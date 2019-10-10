@@ -36,6 +36,14 @@ public class FundDAO {
 			// TODO: handle exception
 		}
 	}
+	
+	private static class Holder {
+        public static final FundDAO DAO = new FundDAO();
+    }
+	
+	public static FundDAO getInstance() {
+        return Holder.DAO;
+    }
 
 	private FundDTO Fund(ResultSet rs, FundDTO dto) {
 		try {
@@ -50,7 +58,7 @@ public class FundDAO {
 				dto.setExchange(rs.getFloat("exchange"));
 				dto.setBuynum(rs.getInt("buynum"));
 				dto.setRest(rs.getFloat("rest"));
-			
+				System.out.println(dto);
 			} 
 		} catch (Exception e) {}
 		return dto;
@@ -130,12 +138,12 @@ public class FundDAO {
 		} finally { close(); }
 	}
 	
-	public void updatetoday(Float fluctuation,Float nowmoney,Float exchange,Float price_modify,String account_number){
+	public void updatetoday(Float fluctuation,Float nowmoney,Float exchange,String price_modify,String account_number){
 		sql = 	"update fund set " +
 				"fluctuation = "+fluctuation+
-				"nowmoney = "+nowmoney+
-				"exchange = "+exchange+
-				"price_modify = "+price_modify+
+				", nowmoney = "+nowmoney+
+				", exchange = "+exchange+
+				", price_modify = "+price_modify+
 				" where account_number = '"+account_number+"'";
 		System.out.println(sql);
 		try {
