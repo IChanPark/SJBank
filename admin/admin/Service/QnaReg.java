@@ -1,5 +1,7 @@
 package admin.Service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,7 +32,11 @@ public class QnaReg implements M_Action {
 
 		//DB 저장
 		QnaDAO.getInstance().insert(dto); 
-		request.setAttribute("mainUrl","admin/inc/main");	
+		
+		ArrayList<QnaDTO> qto = QnaDAO.getInstance().list();
+		request.setAttribute("data", qto); 		
+		
+		request.setAttribute("mainUrl","admin/service/qna");	
 		System.out.println("노티스 Reg 들어옴");
 		///redirect
 //		request.setAttribute("msg","작성되었습니다." );

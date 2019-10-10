@@ -1,5 +1,7 @@
 package service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +31,10 @@ public class QnaReg implements M_Action {
 
 		//DB 저장
 		QnaDAO.getInstance().insert(dto); 
+		
+		ArrayList<QnaDTO> wto = QnaDAO.getInstance().list();
+		request.setAttribute("data", wto); 
+		
 		request.setAttribute("mainUrl","main");	
 		System.out.println("큐가 Reg 들어옴");
 		///redirect

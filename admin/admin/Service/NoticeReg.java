@@ -1,5 +1,7 @@
 package admin.Service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,7 +27,11 @@ public class NoticeReg implements M_Action {
 
 		//DB 저장
 		NoticeDAO.getInstance().insert(dto); 
-		request.setAttribute("mainUrl","admin/inc/main");	
+		
+		ArrayList<NoticeDTO> nto = NoticeDAO.getInstance().list();
+		request.setAttribute("data", nto); 
+		
+		request.setAttribute("mainUrl","admin/service/notice");	
 		System.out.println("노티스 Reg 들어옴");
 		///redirect
 //		request.setAttribute("msg","작성되었습니다." );

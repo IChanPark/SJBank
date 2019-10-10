@@ -1,9 +1,13 @@
 package admin.Service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import inf.M_Action;
+import jdbc.Customer.Customer_faqDAO;
+import jdbc.Customer.Customer_faqDTO;
 import jdbc.Service.FaqDAO;
 import jdbc.Service.FaqDTO;
 
@@ -28,7 +32,11 @@ public class FaqReg implements M_Action {
 
 		//DB 저장
 		FaqDAO.getInstance().insert(dto); 
-		request.setAttribute("mainUrl","admin/inc/main");	
+		
+		ArrayList<Customer_faqDTO> fto = Customer_faqDAO.getInstance().list();
+		request.setAttribute("data", fto); 
+		
+		request.setAttribute("mainUrl","admin/service/faq");	
 		System.out.println("노티스 Reg 들어옴");
 		///redirect
 //		request.setAttribute("msg","작성되었습니다." );
