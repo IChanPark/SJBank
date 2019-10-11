@@ -248,6 +248,8 @@ function modify(me) {
 			box +=	"<div class='infoBox'>";
 			box +=	"<div class='infoMid_Guide'>상품 수정</div>";
 			box +=	"<div class='infoAdmin'>";
+			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품상태</div><div class='infoMain_Value'>";
+			box	+=	"<select id='status'><option value='활성'>활성</option><option value='비활성'>비활성</option></select> 현재 상태 : ["+qqq.status+"] </div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품종류</div><div class='infoMain_Value'>";
 			box	+=	"<select id='sel_type' readonly='readonly'><option value='"+qqq.sel_type+"'>"+qqq.sel_type+"</option></select></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품명</div><div class='infoMain_Value'>";
@@ -301,7 +303,8 @@ function modReg(){
 	$.ajax({	
 		url:gogo,
 		type:'post',
-		data:{	product			:	$('#product').val(),
+		data:{	status			:	$('#status').val(),
+				product			:	$('#product').val(),
 				product_info	:	$('#product_info').val()
 		},
 		dataType:'json',

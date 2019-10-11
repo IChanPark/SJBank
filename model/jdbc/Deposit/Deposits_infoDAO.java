@@ -87,6 +87,24 @@ public class Deposits_infoDAO {
 		} catch (Exception e) {}
 	}
 	
+	public Deposits_infoDTO selectPro(Deposits_infoDTO dto){
+		Deposits_infoDTO SetDTO = null;
+		
+		sql =	"select * from deposits_info where product = ? ";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct());
+			rs = pstmt.executeQuery();
+			
+			SetDTO = Deposits_info(rs, dto);			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return SetDTO;
+	}
+	
 	public Deposits_infoDTO selectProUse(Deposits_infoDTO dto){
 		Deposits_infoDTO SetDTO = null;
 		
@@ -219,7 +237,8 @@ public class Deposits_infoDAO {
 		
 		sql = 	"update deposits_info set " +
 				"deposits_info = ? ,"+
-				"id = ?, modify_date = now() where product = ?";
+				"id = ?, modify_date = now(), status = ? " +
+				" where product = ?";
 		
 		System.out.println(sql);
 		try {
@@ -228,7 +247,8 @@ public class Deposits_infoDAO {
 			
 			pstmt.setString(1, dto.getDeposits_info());
 			pstmt.setString(2, dto.getId());
-			pstmt.setString(3, dto.getProduct());
+			pstmt.setString(3, dto.getStatus());
+			pstmt.setString(4, dto.getProduct());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

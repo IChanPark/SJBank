@@ -9,14 +9,16 @@
 request.setCharacterEncoding("UTF-8");	//한글처리
 
 String
-product	=	request.getParameter("product"),
+status	= request.getParameter("status"),
+product	= request.getParameter("product"),
 deposits_info = request.getParameter("product_info"),
 id = "god";
 
-System.out.println("product : "+product+" deposits_info : "+deposits_info+" id : " +id);
+System.out.println("status : "+status+" product : "+product+" deposits_info : "+deposits_info+" id : " +id);
 
 Deposits_infoDTO dto = new Deposits_infoDTO();
 
+dto.setStatus(status);
 dto.setProduct(product);
 dto.setDeposits_info(deposits_info);
 dto.setId(id);

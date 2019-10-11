@@ -13,8 +13,9 @@ Gson gson = new Gson();
 Deposits_infoDTO setDTO = new Deposits_infoDTO();
 setDTO.setProduct(request.getParameter("product"));
 
-Deposits_infoDTO dto = Deposits_infoDAO.getInstance().selectProUse(setDTO);
+Deposits_infoDTO dto = Deposits_infoDAO.getInstance().selectPro(setDTO);
 
+map.put("status", dto.getStatus());
 map.put("sel_type", dto.getType());
 map.put("product", dto.getProduct());
 map.put("product_info", dto.getDeposits_info());

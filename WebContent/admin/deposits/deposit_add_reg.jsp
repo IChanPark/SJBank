@@ -8,8 +8,7 @@
 <%
 request.setCharacterEncoding("UTF-8");	//한글처리
 
-String
-type = request.getParameter("sel_type"),
+String type = request.getParameter("sel_type"),
 product = request.getParameter("product"),
 deposits_info = request.getParameter("product_info"),
 month = request.getParameter("month"),
@@ -30,7 +29,7 @@ max_sum = Integer.parseInt(request.getParameter("max_sum"));
 
 System.out.print("sel_type : "+type+" product : "+product+" deposits_info : "+deposits_info+" month : "+month+" interest_type : "+interest_type);
 System.out.print(" tax : "+tax+" retention : "+retention+" partialization : "+partialization+" preferential : "+preferential+" prf_content : "+prf_content);
-System.out.println("prf_interest : "+prf_interest+" id : "+id);
+System.out.println(" prf_interest : "+prf_interest+" id : "+id);
 
 Deposits_infoDTO dto = new Deposits_infoDTO();
 
@@ -44,8 +43,8 @@ dto.setMin_interest(min_interest);
 dto.setMax_interest(max_interest);
 dto.setRetention(retention);
 dto.setPartialization(partialization);
-dto.setMin_interest(min_interest);
-dto.setMax_interest(max_interest);
+dto.setMin_sum(min_sum);
+dto.setMax_sum(max_sum);
 dto.setPreferential(preferential);
 dto.setPrf_content(prf_content);
 dto.setPrf_interest(prf_interest);
