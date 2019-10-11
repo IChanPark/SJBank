@@ -177,9 +177,9 @@ function number_Pattern(num) {	//3자리마다 ,찍기
 #info_table,.info_table th,.info_table td { font-size:14px; text-align:center; padding:4px; border-collapse:collapse; color: black;}
 #info_table th { border: 1px solid #c6c6c6; border-width:1px; }
 #info_table td { border: 1px solid #c6c6c6; border-width:1px; color: black;}
-#info_table tr { border: 1px solid #ffffff; }
+#info_table tr { border: 1px solid #ffffff; align:center; text-align:center; }
 #info_table tr:nth-child(odd){ background-color:#f7f7f7; }
 #info_table tr:nth-child(even){ background-color:#ffffff; }
 button{margin-left: 10px}
 </style>
-<div class='subTitle'>정산</div>
+<div class='subTitle'>정산</div><br>

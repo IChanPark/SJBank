@@ -17,7 +17,8 @@ public class Deposits_infoDTO {
 					partialization,	//일부해지가능여부
 					retention,		//재예치가능여부
 					status,			//상태
-					month;			//약정 개월 수
+					month,			//약정 개월 수
+					id;				//등록자
 					
 	private Integer	min_sum,		//최소 납입금
 					max_sum;		//최대 납입금
@@ -26,11 +27,24 @@ public class Deposits_infoDTO {
 					max_interest;	//최대 연이자
 	
 	private Date    register_date,   //상품등록일
+					modify_date,	 //상품 수정일
 					end_date;		 //상품삭제일
 	
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
+
 	public String getType() {
 		return type;
 	}
@@ -147,16 +161,16 @@ public class Deposits_infoDTO {
 		return min_interest;
 	}
 
-	public void setMin_interest(Float min_Interest) {
-		this.min_interest = min_Interest;
+	public void setMin_interest(Float min_interest) {
+		this.min_interest = min_interest;
 	}
 
 	public Float getMax_interest() {
 		return max_interest;
 	}
 
-	public void setMax_interest(Float max_Interest) {
-		this.max_interest = max_Interest;
+	public void setMax_interest(Float max_interest) {
+		this.max_interest = max_interest;
 	}
 	
 	//-------------------------------------------------------------
@@ -193,9 +207,29 @@ public class Deposits_infoDTO {
 		return sdf.format(end_date);
 	}
 	
-	public void SetEnd_dateStr(String end_date) {
+	public void setEnd_dateStr(String end_date) {
 		try {
 			this.end_date = sdf.parse(end_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Date getModify_date() {
+		return modify_date;
+	}
+
+	public void setModify_date(Date modify_date) {
+		this.modify_date = modify_date;
+	}
+	
+	public String getModify_dateStr() {
+		return sdf.format(modify_date);
+	}
+	
+	public void setModify_dateStr(String modify_date) {
+		try {
+			this.modify_date = sdf.parse(modify_date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

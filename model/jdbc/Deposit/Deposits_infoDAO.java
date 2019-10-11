@@ -49,6 +49,8 @@ public class Deposits_infoDAO {
 				dto.setStatus(rs.getString("status"));
 				dto.setMin_sum(rs.getInt("min_sum"));
 				dto.setMax_sum(rs.getInt("max_sum"));
+				dto.setId(rs.getString("id"));	//추가
+				dto.setModify_date(rs.getDate("modify_date")); //추가
 				dto.setRegister_date(rs.getDate("register_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
 			} 
@@ -76,6 +78,8 @@ public class Deposits_infoDAO {
 				dto.setStatus(rs.getString("status"));
 				dto.setMin_sum(rs.getInt("min_sum"));
 				dto.setMax_sum(rs.getInt("max_sum"));
+				dto.setId(rs.getString("id"));	//추가
+				dto.setModify_date(rs.getDate("modify_date")); //추가
 				dto.setRegister_date(rs.getDate("register_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
 				res.add(dto);
@@ -182,7 +186,7 @@ public class Deposits_infoDAO {
 				"product, deposits_info, min_interest, max_interest, month, type, interest_type, tax, preferential,"+ 
 				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date, id) values ("+
 				"	 ?	,		?	   ,	  ?      ,		?		,	?  ,	?,	   	?	    ,	? ,			?	,"+
-				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null, '')";
+				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null, ?)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -203,6 +207,28 @@ public class Deposits_infoDAO {
 			pstmt.setInt(13, dto.getMax_sum());
 			pstmt.setString(14, dto.getPartialization());
 			pstmt.setString(15, dto.getRetention());
+			pstmt.setString(16, dto.getId());
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	public void update_Deposits_info(Deposits_infoDTO dto){
+		
+		
+		sql = 	"update deposits_info set " +
+				"deposits_info = ? ,"+
+				"id = ?, modify_date = now() where product = ?";
+		
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getDeposits_info());
+			pstmt.setString(2, dto.getId());
+			pstmt.setString(3, dto.getProduct());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
