@@ -53,6 +53,8 @@ public class Saving_infoDAO {
 				dto.setMax_sum(rs.getInt("max_sum"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
+				dto.setId(rs.getString("id"));	//추가
+				dto.setModify_date(rs.getDate("modify_date")); //추가
 			} 
 		} catch (Exception e) {}
 		return dto;
@@ -81,10 +83,30 @@ public class Saving_infoDAO {
 				dto.setMax_sum(rs.getInt("max_sum"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				dto.setEnd_date(rs.getDate("end_date"));
+				dto.setId(rs.getString("id"));	//추가
+				dto.setModify_date(rs.getDate("modify_date")); //추가
 				
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
+	}
+	
+	public Saving_infoDTO selectPro(Saving_infoDTO dto){
+		Saving_infoDTO SetDTO = null;
+		
+		sql =	"select * from saving_info where product = ? ";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct());
+			rs = pstmt.executeQuery();
+			
+			SetDTO = Saving_info(rs, dto);			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return SetDTO;
 	}
 	
 	public Saving_infoDTO selectProUse(Saving_infoDTO dto){
@@ -185,9 +207,9 @@ public class Saving_infoDAO {
 	public void insert(Saving_infoDTO dto){
 		sql = 	"insert into saving_info (" +
 				"product, product_info, min_interest, max_interest, month, type, interest_type, tax, preferential,"+ 
-				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date) values ("+
+				"prf_content, prf_Interest, min_sum, max_sum, partialization, retention, status, register_date, end_date, id) values ("+
 				"	 ?	,		?,   ?   ,		?		,	?  ,	?,	  ?  	,     ? ,			?	,"+
-				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null)";
+				"		?	,		?	  ,		?  ,	?	,		?		,	 ?	   ,	'활성'  ,	now() ,	null, ?)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -208,6 +230,30 @@ public class Saving_infoDAO {
 			pstmt.setInt(13, dto.getMax_sum());
 			pstmt.setString(14, dto.getPartialization());
 			pstmt.setString(15, dto.getRetention());
+			pstmt.setString(16, dto.getId());
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+public void update_Product_info(Saving_infoDTO dto){
+		
+		
+		sql = 	"update saving_info set " +
+				"product_info = ? ,"+
+				"id = ?, modify_date = now(), status = ? " +
+				" where product = ?";
+		
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct_info());
+			pstmt.setString(2, dto.getId());
+			pstmt.setString(3, dto.getStatus());
+			pstmt.setString(4, dto.getProduct());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

@@ -16,25 +16,21 @@ public class Saving_infoDTO {
 					prf_interest,	 //우대이자율
 					partialization,	 //일부해지가능여부
 					retention,		 //재예치가능여부
-					status,
-					month;			 //상태
+					status,			//상태
+					month,
+					id;			 
 					
-	private Integer				//약정 개월 수
-					min_sum,		//최소 납입금
+	private Integer	min_sum,		//최소 납입금
 					max_sum;		//최대 납입금
 	
 	private Float  	min_interest,	//최저 연이자
 					max_interest;	//최대 연이자
 	
 	private Date    register_date,   //상품등록일
+					modify_date,
 					end_date;		 //상품삭제일
 	
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-	
-	
-	
-	
 	
 
 	public String getProduct_info() {
@@ -168,6 +164,36 @@ public class Saving_infoDTO {
 		this.max_interest = max_interest;
 	}
 	
+	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getModify_date() {
+		return modify_date;
+	}
+
+	public void setModify_date(Date modify_date) {
+		this.modify_date = modify_date;
+	}
+	
+	public String getModify_dateStr() {
+		return sdf.format(modify_date);
+	}
+	
+	public void setModify_dateStr(String modify_date) {
+		try {
+			this.modify_date = sdf.parse(modify_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
 	//-------------------------------------------------------------
 	public Date getRegister_date() {
 		return register_date;

@@ -4,6 +4,7 @@ display: flex; justify-content: center;align-items: center; width: 100%; }
 .product_Radio {width: 20px; height: 20px; margin-left: 20px;}
 .type_Select{margin-left: 20px;}
 .search_Button {margin-left: 20px;}
+.add_Button {margin-left: 20px; border: 1px solid white;}
 .search_Word {margin-left: 20px; width: 45%;}
 .box {border:1px solid white; height: 50px; margin: auto; margin-bottom: 15px;}
 .l {float: left; height: 50px; width: 10%; 

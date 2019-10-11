@@ -8,7 +8,7 @@ main +="<div class='search_Box' >";
 main +="<select class='type_Select' size='1'><option value=''>선택해주세요</option></select>"
 main +="<input class='search_Word' type = 'text' value=''/>";
 main +="<div class='search_Button' >검색</div>";
-main +="<div class='search_Button' onclick='add()'>등록하기</div>";
+main +="<div class='add_Button' onclick='add()'>등록하기</div>";
 main +="</div><div id ='mm'>";
 main +="<div class='scrollB'>"; //스크롤바
 main +="<div id = 'ttt'></div>";
@@ -279,7 +279,7 @@ function modify(me) {
 			box +=  "<select class='prf_content' readonly='readonly'>우대조건<option value='"+qqq.prf_content+"'>"+qqq.prf_content+"</option></select> ";
 			box +=  " 우대 추가금리를 입력해주세요. <input type='text' readonly='readonly' value='"+qqq.prf_interest+"' class='prf_interest'> </div></div>";
 			box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Deposits/Deposits'>수정취소</div>";
-			box +=  "<div class='AdminButton' onclick='modReg()'>수정등록</div></div></div>";
+			box +=  "<div class='AdminButton' onclick='modReg()' data-menu-name='admin/Deposits/Deposits'>수정등록</div></div></div>";
 			$("#mm").append(box);
 			isRun = false;
 		},
