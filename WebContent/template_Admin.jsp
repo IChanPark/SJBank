@@ -23,7 +23,7 @@
 <script type="text/javascript" src="js/Date_Picker.js"></script>	  <!-- 데이트 피커 -->
 
 </head>
-	<form name="paging" action="admin.jsp" onsubmit="return false;" method="post"/>
+	<form name="paging" action="SJAdmin" onsubmit="return false;" method="post"/>
 	<input type="hidden" name="hid_t" />
 <body>
    	<jsp:include page="admin/inc/top.jsp" />

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import inf.M_Action;
 
-@WebServlet("/admin.jsp")
+@WebServlet("/SJAdmin")
 public class Admin_Main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -44,7 +44,7 @@ public class Admin_Main extends HttpServlet {
 			} else
 				request.setAttribute("mainUrl", "admin/inc/main");
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("template_Admin.jsp"); //여기로 보내
+			RequestDispatcher dispatcher = request.getRequestDispatcher("template_SJAdmin"); //여기로 보내
 			dispatcher.forward(request, response);
 		} catch (Exception e) {e.printStackTrace();} 
 

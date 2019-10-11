@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 
     
-    <%response.sendRedirect("index.jsp"); %>
+    <%response.sendRedirect("SJBank"); %>
     
     

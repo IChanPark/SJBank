@@ -43,7 +43,7 @@ public class QnaReg implements M_Action {
 //		request.setAttribute("goUrl","Detail?id="+dto.getId());
 //		request.setAttribute("mainUrl", "alert");
 //		
-//		request.setAttribute("goUrl", "admin.jsp");
+//		request.setAttribute("goUrl", "SJAdmin");
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); 
 //		dispatcher.forward(request, response);
 

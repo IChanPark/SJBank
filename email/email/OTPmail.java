@@ -117,7 +117,7 @@ public class OTPmail extends HttpServlet {
            
 
 		//HttpSession se= request.getSession();
-//	RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp" ); //여기로 보내
+//	RequestDispatcher dispatcher = request.getRequestDispatcher("SJBank" ); //여기로 보내
 //	dispatcher.forward(request, response);
 	}
 	

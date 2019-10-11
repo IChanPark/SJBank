@@ -306,7 +306,7 @@ function goMenu(qq) {	//메뉴 이동용
 	var menu = $(qq).data("menu-name"); 
     var name = $(qq).parent('[data-product-name]').data("product-name");
 	
-	var go ='<form name="pag" action="index.jsp" onsubmit="return false;" method="post">';
+	var go ='<form name="pag" action="SJBank" onsubmit="return false;" method="post">';
 	go +="<input type='hidden' name='hid_t' value='"+menu+"'></input>";
 	go +="<input type='hidden' name='dt' value='"+name+"'></input>";
 	go +="</form>";
@@ -315,7 +315,7 @@ function goMenu(qq) {	//메뉴 이동용
 };
 
 function gomyfund() {	//메뉴 이동용
-	var go ='<form name="pag" action="index.jsp" method="post"></form>';
+	var go ='<form name="pag" action="SJBank" method="post"></form>';
 	$("#mid").append(go);
 	document.pag.submit(); 
 };

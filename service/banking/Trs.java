@@ -95,7 +95,7 @@ public class Trs implements M_Action{
 			{
 				request.setAttribute("msg", "비밀번호 오류로 실패했습니다.");
 				request.setAttribute("mainUrl", "main");
-				request.setAttribute("goUrl", "index.jsp");
+				request.setAttribute("goUrl", "SJBank");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); 
 				dispatcher.forward(request, response);
 				return;
