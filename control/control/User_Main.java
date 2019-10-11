@@ -14,7 +14,7 @@ import inf.M_Action;
 import util.Exception_Group;
 import util.Exception_Menu;
 
-@WebServlet("/index.jsp")
+@WebServlet("/SJBank")
 public class User_Main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,27 +27,23 @@ public class User_Main extends HttpServlet {
 			
 			if(!(param == null || param.equals(""))) {
 				String service = ""; 
-				String url = request.getParameter("hid_t");
-					
+				String url = request.getParameter("hid_t");   
 				session.setAttribute("accountNumber", request.getParameter("accountNumber"));
 				for (String s : url.split("/")) 
 					service+=s+".";
-
 				url = "layout/"+url.toLowerCase();
 				service = service.substring(0, service.length()-1);
 				System.out.println("url : "+url+"\n"+"service : "+service);
 				if(session.getAttribute("userID")==null && Exception_Menu.getInstance().check(url)) {
 					request.setAttribute("msg", "로그인이 필요한 서비스 입니다.");
-					request.setAttribute("goUrl", "index.jsp");
+					request.setAttribute("goUrl", "SJBank");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); 
 					dispatcher.forward(request, response);
 					return;
 				}
 				session.setAttribute("Previous_page", session.getAttribute("Current_Page"));   //이전페이지
 				session.setAttribute("Current_Page", url);      //현재페이지
-
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
-				
 				if(Exception_Group.getInstance().check(service)) { // 클래스 예외처리 여부
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
@@ -57,13 +53,10 @@ public class User_Main extends HttpServlet {
 				request.setAttribute("mainUrl", session.getAttribute("Current_Page"));
 			  else 
 				request.setAttribute("mainUrl", "main");
-
 			RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
 			dispatcher.forward(request, response);
 		} catch (Exception e) {e.printStackTrace();} 
-
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
