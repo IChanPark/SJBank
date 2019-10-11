@@ -18,8 +18,6 @@
 				var addBox = $("<div> 주의사항 비슷한 무언가<br></div>");
 				var btn = $("<div><button onclick=goReg()>완료</button></div>");
 				
-				addBox.append($("<div class='subTitle'>보안매체 정보입력</div><br><div>OTP 입력창 <input type='text' />"));
-				addBox.append( $("<textarea name='a' id='a' cols='8' rows='1' readOnly>"+getRandomInt(100000,200000)+"</textarea></div>"));
 				addBox.append(btn);
 				text.append(addBox);
 				$("#mid").append(text);
@@ -27,12 +25,6 @@
 		});
 });
 
-	function getRandomInt(min, max) {
-		  min = Math.ceil(min);
-		  max = Math.floor(max);
-		  return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
-		}
-	
 	
 function goReg(){
 
@@ -52,7 +44,14 @@ function goReg(){
 <table border="" class="indata">
 	<tr>
 		<td>출금계좌번호</td>
-		<td><input type="text" name="acc" id="acc" class="indata"/></td>
+		<td>
+			<select name="acc" id="acc" class="indata">
+				<c:forEach var="dto" items="${data }" varStatus="no">
+					<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
+				</c:forEach>
+			</select>
+		
+		</td>
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>

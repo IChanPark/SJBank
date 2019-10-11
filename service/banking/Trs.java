@@ -90,15 +90,10 @@ public class Trs implements M_Action{
 					dto.setStatus("잔액부족");
 					Transfer_logDAO.getInstance().insert(dto);
 				}
-				
-				
-				
-				
-					
 			}
 			else
 			{
-				request.setAttribute("msg", "실패했습니다.");
+				request.setAttribute("msg", "비밀번호 오류로 실패했습니다.");
 				request.setAttribute("mainUrl", "main");
 				request.setAttribute("goUrl", "index.jsp");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); 

@@ -8,11 +8,23 @@
 $(document).ready(function(){
 	$('#search').click(function(){
 		
-		if($('input[name="start"]').val() > $("input[name=end]").val())
+		var start = $("input[name=start]").val();
+		var end = $("input[name=end]").val() ;
+		
+		if(start > end )
 		{
-			alert("검색일이 잘못 되었습니다.");
+			alert("날짜 설정이 잘못 되었습니다");
 			return;
 		}
+		
+		if( (start==null || start=="") || (end==null || end==""))
+		{
+			alert("날짜 설정을 전부 해주세요.");
+			return;
+		}
+		
+		
+		
 		$("#list").html("");
 		var accountNum = "<c:out value="${data.account_number }"/>"
 		

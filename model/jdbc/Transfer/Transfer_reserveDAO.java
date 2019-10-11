@@ -275,8 +275,8 @@ public class Transfer_reserveDAO {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 		
-			pstmt.setString(1, start);
-			pstmt.setString(2, end);
+			pstmt.setString(1, start+" 00:00:00");
+			pstmt.setString(2, end+ " 23:59:59");
 						
 			rs = pstmt.executeQuery();
 			

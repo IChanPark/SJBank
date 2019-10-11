@@ -6,6 +6,20 @@ $(document).ready(function(){
 
 	$('.check').click(function(){
 		
+		var start = $("input[name=start]").val();
+		var end = $("input[name=end]").val() ;
+		
+		if(start > end )
+		{
+			alert("날짜 설정이 잘못 되었습니다");
+			return;
+		}
+		
+		if( (start==null || start=="") || (end==null || end==""))
+		{
+			alert("날짜 설정을 전부 해주세요.");
+			return;
+		}
 	    $.ajax({	//라디오 버튼 
 			url:"layout/banking/check/reservationList.jsp",
 			type:'post',
@@ -21,8 +35,6 @@ $(document).ready(function(){
 				var title = $("<tr><td>No</td><td>출금계좌</td><td>이체예정일시</td><td>입금은행 입금계좌</td>");
 				title.append($("<td>이체금액(원)</td><td>메모</td><td>받는통장 메모</td><td>CMS코드</td><td>기능</td></tr>"));
 				
-				
-				
 				$.each(qqq,function(i,e){
 					var row = $("<tr><td>"+(i+1)+"</td>")
 					row.append($("<td>"+e.account_number+"</td>"));
@@ -33,8 +45,7 @@ $(document).ready(function(){
 					row.append($("<td>"+e.to_memo+"</td>"));
 					row.append($("<td>"+e.cms+"</td>"));
 					row.append($("<td onclick=cancel("+e.seq+")> "+"취소하기"+"</td></tr>"));
-		
-					
+				
 					$("#tot").append(title);
 					$("#tot").append(row);
 				});
@@ -62,7 +73,7 @@ function cancel(qqq)
 	</tr>
 	<tr>
 		<td>조회결과 순서</td>
-		<td><input type="radio" name="sort" value="asc"/>최근거래순 <input type="radio"  name="sort" value="desc"/>과거거래순</td>
+		<td><input type="radio" name="sort" value="asc" checked="checked"/>최근거래순 <input type="radio"  name="sort" value="desc"/>과거거래순</td>
 	</tr>
 	<tr>
 		<td>계좌 선택</td>
