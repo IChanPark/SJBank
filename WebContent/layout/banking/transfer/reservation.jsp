@@ -15,8 +15,9 @@
 				+ "<tr><td>"+$('#time').val()+"<br>"+$('input[name="scheduled_date"]:checked').val()+"</td><td>"+$('#acc').val()+"</td><td>"+$('#toAcc').val()+"</td><td>"+$('#bank').val()+"</td><td>"+$('#sum').val()+"</td><td>"
 				+ "</td><td>"+$('#to_memo').val()+"</td><td>"+$('#cms').val()+"</td></tr></table></div>");
 				
-				var addBox = $("<div> 주의사항 비슷한 무언가<br></div>");
-				var btn = $("<div><button onclick=goReg()>완료</button></div>");
+				var addBox = $("<div><h1 class='subTitle'>알아두세요</h1><br><br><br>-예약이체 실행시 잔액부족,입금은행장애,기타 사유로 인하여 고객님께서 등록하신 예약이체건이 미처리 될 수 있습니다.<br>당일 처리 예정시간 이후 처리결과 조회를 반드시 확인하여 주시기 바랍니다.");
+				addBox.append("-예약이체시 수수료는 실제 자금이체 거래가 실행될 때 확정 됩니다. <br></div>")
+				var btn = $("<button onclick=goReg()>완료</button>");
 				
 				addBox.append(btn);
 				text.append(addBox);

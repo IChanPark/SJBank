@@ -3,12 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(document).ready(function(){
+	$("#tot").append("<tr><td colspan='9' align='center'>거래내역이 없습니다.</td></tr>");
 
 	$('.check').click(function(){
 		
 		var start = $("input[name=start]").val();
 		var end = $("input[name=end]").val() ;
-		
+		 
 		if(start > end )
 		{
 			alert("날짜 설정이 잘못 되었습니다");
@@ -34,7 +35,8 @@ $(document).ready(function(){
 				$("#tot").html("");
 				var title = $("<tr><td>No</td><td>출금계좌</td><td>이체예정일시</td><td>입금은행 입금계좌</td>");
 				title.append($("<td>이체금액(원)</td><td>메모</td><td>받는통장 메모</td><td>CMS코드</td><td>기능</td></tr>"));
-				
+				var len = 0;
+				$("#tot").append(title);
 				$.each(qqq,function(i,e){
 					var row = $("<tr><td>"+(i+1)+"</td>")
 					row.append($("<td>"+e.account_number+"</td>"));
@@ -45,10 +47,16 @@ $(document).ready(function(){
 					row.append($("<td>"+e.to_memo+"</td>"));
 					row.append($("<td>"+e.cms+"</td>"));
 					row.append($("<td onclick=cancel("+e.seq+")> "+"취소하기"+"</td></tr>"));
-				
-					$("#tot").append(title);
+					len++;
+					
 					$("#tot").append(row);
 				});
+				
+				if(len==0)
+				{
+					$("#tot").append("<tr><td colspan='9' align='center'>거래내역이 없습니다.</td></tr>");
+				}
+				
 			},
 			error:function(qqq){
 				console.log("오류오류");
@@ -104,6 +112,5 @@ function cancel(qqq)
 		<td>CMS코드</td>
 		<td>기능</td>
 	</tr>
-	
 </table>
 <br><br>

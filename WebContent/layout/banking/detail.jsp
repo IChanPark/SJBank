@@ -40,6 +40,7 @@ $(document).ready(function(){
 				success:function(qqq){
 					var title = $("<tr><td>No</td><td>거래처</td><td>거래대상계좌번호</td><td>받는이</td><td>거래액</td><td>수수료</td><td>메모</td><td>보낸메모</td><td>거래일</td><td>거래종류</td><td>거래상태</td></tr>");
 					$("#list").append(title);
+					var len=0;
 					$.each(qqq,function(i,e){
 						var row =$("<tr><td>"+(i+1)+"</td>");
 						row.append(	$("<td>"+e.target+"</td>"));
@@ -52,8 +53,16 @@ $(document).ready(function(){
 						row.append($("<td>"+e.register_date+"</td>"));
 						row.append($("<td>"+e.feetype+"</td>"));
 						row.append($("<td>"+e.status+"</td></tr>"));
+						
+						len++;
+						
 						$("#list").append(row);
 					});
+					if(len==0)
+					{
+						$("#list").append("<tr><td colspan='11' align='center'>거래내역이 없습니다.</td></tr>");
+					}
+					
 				},
 				error:function(qqq){
 					console.log("오류오류");
