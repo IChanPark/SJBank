@@ -250,6 +250,29 @@ public class AccountDAO {
 		return false;
 	}
 	
+	/////////////////////////////////  10 11
+	public void updateAccByManag(String pw, String status,String alias,String acc){
+		sql = 	"update account set " +
+				"pw = ?,status = ?,alias = ? "+
+				"where account_number = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, pw);
+			pstmt.setString(2, status);
+			pstmt.setString(3, alias);
+			pstmt.setString(4, acc);
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	
+	
+	/////////////////////////////
 	public void updatePw(AccountDTO dto){
 		sql = 	"update account set " +
 				"pw = ?,status = ?,alias = ? "+
