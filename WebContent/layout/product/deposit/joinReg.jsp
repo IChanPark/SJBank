@@ -77,7 +77,7 @@ if((mysum-sum)<0) {
 }
 
 accDTO.setAccount_number(newAcc);
-accDTO.setType(request.getParameter("accType"));//종류
+accDTO.setType("예금");//종류
 accDTO.setSum(sum);
 accDTO.setAlias(request.getParameter("alias"));
 accDTO.setId(userid);

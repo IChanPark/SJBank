@@ -37,7 +37,7 @@ public class SavingDAO {
 				
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setProduct(rs.getString("Product"));
+				dto.setProduct(rs.getString("product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));
@@ -57,7 +57,7 @@ public class SavingDAO {
 				
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setProduct(rs.getString("Product"));
+				dto.setProduct(rs.getString("product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));

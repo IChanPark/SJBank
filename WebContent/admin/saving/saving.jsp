@@ -24,14 +24,6 @@ $(".search_Button").on("click", function() {
 	ajax_go();
 });
 
-function setTax(){
-	if($('#sel_type').val()=='보통'){
-		$('#interest_type').val('월이자지급');
-	}else {
-		$('#interest_type').val('만기일시');
-	}
-};
-
 function option(){
 	$.ajax({	
 		url:"admin/saving/saving_type.jsp",
@@ -129,9 +121,10 @@ function detail(me) {
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동재예치</div><div class='infoMain_Value'>["+qqq.retention+"]</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>일부해지</div><div class='infoMain_Value'>["+qqq.partialization+"]</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>우대이자율</div><div class='infoMain_Value'>";
+			var pf = qqq.preferential.split('#');
 			var pi = qqq.prf_interest.split('#');
 			$.each(qqq.prf_content.split('#'),function(i,e){
-				box +=	i+1+". "+e+" 연"+pi[i]+"% 우대<br>";	 
+				box +=	i+1+". "+pf+" "+e+" 연"+pi[i]+"% 우대<br>";	 
 			});
 			box +=	"</div></div>";
 			box +=	"</div>";
@@ -158,7 +151,7 @@ function add(){
 	box +=	"<div class='infoMid_Guide'>상품 추가</div>";
 	box +=	"<div class='infoAdmin'>";
 	box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품종류</div><div class='infoMain_Value'>";
-	box	+=	"<select id='sel_type'><option value='보통'>보통</option><option value='정기'>정기</option></select></div></div>";
+	box	+=	"<select id='sel_type'><option value='정기'>정기</option><option value='자유'>자유</option><option value='정기/자유'>정기/자유</option></select></div></div>";
 	box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품명</div><div class='infoMain_Value'>";
 	box +=  "<input type='text' placeholder='상품명을 입력해주세요.' id='product'></div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>상품설명</div><div class='infoMain_Value'>";
@@ -166,9 +159,7 @@ function add(){
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>상품기간</div><div class='infoMain_Value'>";
 	box +=  "<input type='text' placeholder='상품기간을 입력해주세요.' id='month'> 숫자만 입력부탁드리며 상품기간 다중 등록 시 ',' 로 구분하여 입력해주세요.</div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div><div class='infoMain_Value'>";
-	
-	box +=  "<input type='text' readonly='readonly' id='interest_type' value=''>상품 종류 선택시 자동으로 입력됩니다.</div></div>";
-	
+	box +=  "<select id='interest_type'><option value='만기일시지급-단리식'>만기일시지급-단리식</option></select></div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>세금</div><div class='infoMain_Value'>";
 	box +=  "<select id='tax'><option value='과세'>과세</option><option value='비과세'>비과세</option></select> 과세여부를 선택해주세요.</div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>최소납입금액</div><div class='infoMain_Value'>";

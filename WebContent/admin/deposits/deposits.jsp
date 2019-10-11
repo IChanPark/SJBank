@@ -130,9 +130,10 @@ function detail(me) {
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동재예치</div><div class='infoMain_Value'>["+qqq.retention+"]</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>일부해지</div><div class='infoMain_Value'>["+qqq.partialization+"]</div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>우대이자율</div><div class='infoMain_Value'>";
+			var pf = qqq.preferential.split('#');
 			var pi = qqq.prf_interest.split('#');
 			$.each(qqq.prf_content.split('#'),function(i,e){
-				box +=	i+1+". "+e+" 연"+pi[i]+"% 우대<br>";	 
+				box +=	i+1+". "+pf+" "+e+" 연"+pi[i]+"% 우대<br>";	 
 			});
 			box +=	"</div></div>";
 			box +=	"</div>";

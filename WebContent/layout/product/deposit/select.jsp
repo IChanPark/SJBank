@@ -16,12 +16,14 @@ Deposits_infoDTO setDTO = new Deposits_infoDTO();
 setDTO.setProduct(request.getParameter("title"));
 setDTO.setType(request.getParameter("type"));
 
+System.out.println(setDTO.getProduct()+"  "+setDTO.getType());
+
 ArrayList<Deposits_infoDTO> dto = null;
 //타입 타이틀 검색
-if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
+if(!setDTO.getProduct().equals("") && !(setDTO.getType()==null || setDTO.getType().equals("")))
 	dto = Deposits_infoDAO.getInstance().selectLikeAnd(setDTO);
 //타입만 검색
-else if(!setDTO.getType().equals(""))
+else if(!(setDTO.getType()==null || setDTO.getType().equals("")))
 	dto = Deposits_infoDAO.getInstance().selectType(setDTO);
 //타이틀만 검색
 else if(!setDTO.getProduct().equals(""))

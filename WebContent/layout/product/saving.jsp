@@ -16,8 +16,11 @@ $("#mid").append(main);
 $(document).ready(function(){
 	ajax_go();
 	option();
-});	
+});
 $(".search_Button").on("click", function() {
+	ajax_go();
+});
+$(".type_Radio").on("click", function() {
 	ajax_go();
 });
 
@@ -45,7 +48,7 @@ function zero(aa){
 
 function option(){
 	$.ajax({	
-		url:"layout/product/deposit/deposit_type.jsp",
+		url:"layout/product/saving/saving_type.jsp",
 		type:'post',
 		dataType:'json',
 		success:function(qqq){
@@ -63,9 +66,8 @@ function option(){
 }
 
 function ajax_go() {
-	
 	$.ajax({	
-	url:"layout/product/deposit/select.jsp",
+	url:"layout/product/saving/select.jsp",
 	type:'post',
 	data:{	type	: $(".type_Radio:checked").val(),
 			title 	: $('.search_Word').val()},
@@ -73,7 +75,6 @@ function ajax_go() {
 	success:function(qqq){
 		$("#ttt").empty();
 		var row = '';
-		
 		$.each(qqq,function(i,e){
 			row +="<div class='box' data-product-name='"+e.product+"' data-product-type='"+e.type+"'>";
 			row +="<div class='l'>최저 "+e.min_interest+"<br>최고 "+e.max_interest+"</div>";
@@ -98,10 +99,10 @@ function detail(me) {
 	if(isRun == true)
 		return;
 	isRun = true;
-
-	$('.subTitle').text('예금 상품 안내');
+	
+	$('.subTitle').text('적금상품 안내');
 	$.ajax({	
-		url:"layout/product/deposit/detail.jsp",
+		url:"layout/product/saving/detail.jsp",
 		type:'post',
 		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
 		dataType:'json',
@@ -109,7 +110,6 @@ function detail(me) {
 			$(".scrollB").remove();
 			$(".search_Box").remove();
 			var box = '';
-			//<fmt:formatNumber value="${dto.sum }" pattern="#,###원"/>
 			box +=	"<div class='infoBox'>";
 			box +=	"<div class='infoTop'>";
 			box +=	"<div class='infoTop_Left'>";
@@ -147,7 +147,7 @@ function detail(me) {
 			});
 			box +=	"</div></div>";
 			box +=	"</div>";
-			box +=	"<div class='infoBot'><div class='infoBot_Back' onclick='goMenu(this)' data-menu-name='product/Deposit'>목록으로</div></div>";
+			box +=	"<div class='infoBot'><div class='infoBot_Back' onclick='goMenu(this)' data-menu-name='product/Saving'>목록으로</div></div>";
 			box +=	"</div>";
 			$("#mm").append(box);
 			isRun = false;
@@ -168,7 +168,7 @@ function join(me) {
 	isRun = true;
 	
 	$.ajax({	
-		url:"layout/product/deposit/join.jsp",
+		url:"layout/product/saving/join.jsp",
 		type:'post',
 		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
 		dataType:'json',
@@ -215,7 +215,7 @@ function join(me) {
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌별명 (선택사항)</div>";
 			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='10자 이내' id='alias'></input></div></div>";
 			box	+=	"</div>";
-			box	+=	"<div class='AdminBot' data-product-name='"+qqq.product+"'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Deposit'>이전</div>";
+			box	+=	"<div class='AdminBot' data-product-name='"+qqq.product+"'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Saving'>이전</div>";
 			box +=	"<div class='join_Button' onclick='joinReg(this)'>다음</div></div>";
 			$("#mm").append(box);
 			isRun = false;
@@ -236,9 +236,10 @@ function joinReg(me) {
 	isRun = true;
 	
 	$.ajax({	
-		url:"layout/product/deposit/joinReg.jsp",
+		url:"layout/product/saving/joinReg.jsp",
 		type:'post',
-		data:{	product 		:	$(me).parent('[data-product-name]').data("product-name"),
+		data:{	
+				product 		:	$(me).parent('[data-product-name]').data("product-name"),
 				account_number	:	$('#account_number').val(),
 				pw				:	$('#pw').val(),
 				type			:	$('[data-join-type]').data("join-type"),
@@ -283,4 +284,4 @@ function goProduct() {	//메뉴 이동용
 	document.pag.submit(); 
 };
 </script>
-<div class='subTitle'>예금 신규</div>
+<div class='subTitle'>적금 신규</div>
