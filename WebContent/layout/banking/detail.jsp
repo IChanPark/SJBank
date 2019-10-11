@@ -7,7 +7,12 @@
 <script>
 $(document).ready(function(){
 	$('#search').click(function(){
-		alert("????");
+		
+		if($('input[name="start"]').val() > $("input[name=end]").val())
+		{
+			alert("검색일이 잘못 되었습니다.");
+			return;
+		}
 		$("#list").html("");
 		var accountNum = "<c:out value="${data.account_number }"/>"
 		
@@ -24,7 +29,7 @@ $(document).ready(function(){
 					var title = $("<tr><td>No</td><td>거래처</td><td>거래대상계좌번호</td><td>받는이</td><td>거래액</td><td>수수료</td><td>메모</td><td>보낸메모</td><td>거래일</td><td>거래종류</td><td>거래상태</td></tr>");
 					$("#list").append(title);
 					$.each(qqq,function(i,e){
-						var row =$("<tr><td>"+i+"</td>");
+						var row =$("<tr><td>"+(i+1)+"</td>");
 						row.append(	$("<td>"+e.target+"</td>"));
 						row.append(	$("<td>"+e.to_account_number+"</td>"));
 						row.append($("<td>"+e.received+"</td>"));
@@ -99,7 +104,7 @@ $(document).ready(function(){
 		<td>거래상태</td>
 	</tr>
 	
-	<c:forEach var="lo" items="${log }" varStatus="no" begin="1" step="1">
+	<c:forEach var="lo" items="${IO }" varStatus="no" begin="1" step="1">
 		<tr >
 			<td>${no.count }</td>
 			<td>${lo.target }</td>

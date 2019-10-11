@@ -5,8 +5,7 @@
 <script>
 	$(document).ready(function() {
 		$('#ToConfirm').click(function() {
-			alert("????!!");
-			
+				
 				$(".indata").attr("readOnly",true);
 			
 				var text = $("<div class='subTitle'>이체정보"
@@ -15,7 +14,6 @@
 				+ "<td>수수료(원)</td><td>받는통장<br>메모</td>	<td>CMS코드</td></tr>"
 				+ "<tr><td>"+$('#time').val()+"<br>"+$('input[name="scheduled_date"]:checked').val()+"</td><td>"+$('#acc').val()+"</td><td>"+$('#toAcc').val()+"</td><td>"+$('#bank').val()+"</td><td>"+$('#sum').val()+"</td><td>"
 				+ "</td><td>"+$('#to_memo').val()+"</td><td>"+$('#cms').val()+"</td></tr></table></div>");
-				
 				
 				var addBox = $("<div> 주의사항 비슷한 무언가<br></div>");
 				var btn = $("<div><button onclick=goReg()>완료</button></div>");
@@ -26,8 +24,6 @@
 				text.append(addBox);
 				$("#mid").append(text);
 				$(this).hide();
-			
-			
 		});
 });
 
@@ -55,13 +51,8 @@ function goReg(){
 <div clsss="subTitle">출금정보</div>
 <table border="" class="indata">
 	<tr>
-	<td>출금계좌정보</td>
-		<td><select name="acc" id="acc" class="indata">
-			<c:forEach var="dto" items="${data }" varStatus="no">
-				<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
-			</c:forEach>
-			</select>
-		</td>
+		<td>출금계좌번호</td>
+		<td><input type="text" name="acc" id="acc" class="indata"/></td>
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>

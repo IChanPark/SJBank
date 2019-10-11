@@ -16,8 +16,8 @@ public class Detail implements M_Action{
 		  HttpSession session = request.getSession();
 		request.setAttribute("data", AccountDAO.getInstance().selectAccount( (String)session.getAttribute("accountNumber")  )  );
 		request.setAttribute("log", Transfer_logDAO.getInstance().selectAN((String)session.getAttribute("accountNumber")  ));
-//		request.setAttribute("inputLog", Transfer_logDAO.getInstance().selectToAN((String)session.getAttribute("accountNumber")  ));
-//		request.setAttribute("AllLog", Transfer_logDAO.getInstance().selectIOAN((String)session.getAttribute("accountNumber")  ));
+		request.setAttribute("inputLog", Transfer_logDAO.getInstance().selectToAN((String)session.getAttribute("accountNumber")  ));
+		request.setAttribute("IO", Transfer_logDAO.getInstance().selectIOAN((String)session.getAttribute("accountNumber")  ));
 		
 		System.out.println("계좌번호  " + (String)session.getAttribute("accountNumber") );
 		

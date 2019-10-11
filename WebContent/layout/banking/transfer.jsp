@@ -8,14 +8,10 @@
 $(document).ready(function(){
 
 	$('.ToConfirm').click(function(){
-		
-		var addBox = $("<div> 주의사항 비슷한 무언가<br>"+"OTP 입력창 <input type='text' /></div>");
-		
-		var btn = $("<div><button onclick=fff() >이체하기</button><div>");
-		btn.append("<br><br><div><button onclick=ttt()>발급받기</button> </div>")
-		
+		var addBox = $("<div> 주의사항 비슷한 무언가</div>");
+		var btn = $("<div><button onclick=fff() >이체하기</button></div>");
+	
 		addBox.append(btn);
-		
 		$("#mid").append(addBox);
 		$('.ToConfirm').hide(); 
 	});	
@@ -27,37 +23,10 @@ $(document).ready(function(){
 
 function fff(){
 	
-	var f=document.paging; 
-    
+	var f=document.paging;     
 	f.hid_t.value = "banking/Trs";
-	
     f.method="post";
     f.submit();
-	
-	
-};
-
-
-function ttt(){
-	ajax_go();
-}
-
-
-function ajax_go() {
-	alert("????");
-	
-	$.ajax({	
-		url:"OTPmail.jsp",
-		type:'get',
-		dataType:'json',
-		success:function(qqq){
-			isRun = false;
-		},
-		error:function(qqq){
-			alert("!!!!!!!!!!!!!!!!!!");
-			isRun = false;
-		}	
-	});
 };
 
  </script>

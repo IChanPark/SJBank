@@ -140,7 +140,7 @@ public class Transfer_logDAO {
 	public ArrayList<Transfer_logDTO> selectANbyDay(String account_number,String startday,String endday){
 		ArrayList<Transfer_logDTO> res = new ArrayList<Transfer_logDTO>();
 
-		sql = "select * from transfer_log where (to_account_number =  ? or account_number = ? )and ('"+startday+"' < register_date and register_date < '"+endday+"')" ;
+		sql = "select * from transfer_log where (to_account_number =  ? or account_number = ? )and ('"+startday+" 00:00:00' < register_date and register_date < '"+endday+" 23:59:59')" ;
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
