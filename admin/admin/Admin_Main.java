@@ -44,7 +44,7 @@ public class Admin_Main extends HttpServlet {
 			} else
 				request.setAttribute("mainUrl", "admin/inc/main");
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("template_SJAdmin"); //여기로 보내
+			RequestDispatcher dispatcher = request.getRequestDispatcher("template_Admin.jsp"); //여기로 보내
 			dispatcher.forward(request, response);
 		} catch (Exception e) {e.printStackTrace();} 
 
