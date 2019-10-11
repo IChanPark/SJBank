@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
+	
  var screen="show";
 $(document).ready(function() {
 	ajax_go();
@@ -38,7 +39,7 @@ function ajax_go() {
 		
 		$.each(qqq,function(i,e){
 		row	+=	"<div class='d1'><ul>";
-		row	+=	"<li class='ltt' onclick = 'lttClk(this)'><div class='m'>No."+Number(i+1)+" ["+e.type+"] "+e.title+"</div>";
+		row	+=	"<li class='ltt' onclick = 'lttClk(this)'><div class='m'>No."+Number(i+1)+" ["+e.type+"] "+e.title+" "+e.id+"</div>";
 	    row	+=	"<ul class='ull'> <li class='lii'>"+e.content+"</li>";
 	    row	+=	"</ul>";
 	    row	+=	"</li>";
@@ -104,3 +105,4 @@ display: grid;justify-content: center;align-items: center;}
 <a href="#" data-menu-name="service/qna_insert" id="notice">글쓰기</a></div>
 <div class="scrollB"> <!-- 스크롤바 -->
 <div id = "ttt"></div>
+</div>

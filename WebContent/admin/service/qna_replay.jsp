@@ -2,16 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
-
-<input type="hidden" name="seq" value="${dto.seq }">
-<input type="hidden" name="page" value="${page }" />
-
+<input type="hidden" name="rseq" value="${dto.rseq }">
 
 	<table border="" width="100%">
 		<tr>
-			<td>분류</td><td><input type="text" name="type" value="${dto.type }"></td>
-		</tr><tr>
-		</tr><tr>
 			<td>제목</td><td><input type="text" name="title" value="${dto.title }"></td>
 		</tr><tr>
 			<td>작성자</td><td><input type="text" name="id" value="${dto.id }"></td>	

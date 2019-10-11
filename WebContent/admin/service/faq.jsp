@@ -114,7 +114,6 @@ display: grid;justify-content: center;align-items: center;}
 <a href="#" data-menu-name="admin/service/faq_insert" id="notice">작성하기</a>
 <div class="ser" >검색하기</div></div>
 <div class="scrollB"> <!-- 스크롤바 -->
-
 <div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">
 <tr>

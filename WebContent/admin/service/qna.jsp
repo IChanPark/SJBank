@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 <style media="screen">
 .ltt {
-    width: 100%;
+    width: 100%;r
     text-align: center;
   }
 .ull{
@@ -48,14 +48,14 @@ display: grid;justify-content: center;align-items: center;}
 
 
 <div class="subTitle">문의사항</div>
-
+<div class="scrollB"> <!-- 스크롤바 -->
 <div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">
 <tr>
 
 	<div class="d1"  data-faq-seq="${dto.seq}">
     <ul>
-      <li class="ltt"><div class="m">No.${dto.seq } ${dto.title } 작성자: ${dto.id } 등록일: ${dto.register_date } </div>
+      <li class="ltt"><div class="m">No.${dto.seq } ${dto.title }   작성자: ${dto.id } 등록일: ${dto.register_date } </div>
         <ul class="ull">
           <li class="lii">${dto.content }</li>
           <li><a href="#" data-menu-name="admin/service/qna_replay" id=qna>답변</a></li> 
@@ -66,4 +66,5 @@ display: grid;justify-content: center;align-items: center;}
  
   
 </c:forEach>
+</div>
 </div>

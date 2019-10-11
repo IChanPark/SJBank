@@ -50,7 +50,7 @@ display: grid;justify-content: center;align-items: center;}
 <div class="subTitle">공지사항</div>
 <div align="right">
 <a href="#" data-menu-name="admin/service/noticeinsert" id="notice">작성하기</a></div>
-
+<div class="scrollB"> <!-- 스크롤바 -->
 	
 <div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">

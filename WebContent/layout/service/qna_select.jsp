@@ -16,12 +16,13 @@ Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
 String json ="[";
 
-ArrayList<QnaDTO> dto = QnaDAO.getInstance().list();
+ArrayList<QnaDTO> dto = QnaDAO.getInstance().selectID((String)request.getSession().getAttribute("userID"));
 
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("title", dto.get(i).getTitle());
 	map.put("type", dto.get(i).getType());
+	map.put("id", dto.get(i).getId());
 	map.put("content", dto.get(i).getContent());
 	map.put("register_date",dto.get(i).getRegister_dateStr());
 	

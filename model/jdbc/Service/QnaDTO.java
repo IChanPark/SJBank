@@ -13,7 +13,7 @@ public class QnaDTO {
 					status;			//답변 여부
 					
 	
-	private Integer seq;			//
+	private Integer seq,rseq;			//
 								
 	
 	private Date 	register_date;	//등록일
@@ -66,8 +66,14 @@ public class QnaDTO {
 	}
 	public void setSeq(Integer seq) {
 		this.seq = seq;
-	}
+	}	
 
+	public Integer getRseq() {
+		return rseq;
+	}
+	public void setRseq(Integer rseq) {
+		this.rseq = rseq;
+	}
 	//-------------------------------------------------
 	public Date getRegister_date() {
 		return register_date;

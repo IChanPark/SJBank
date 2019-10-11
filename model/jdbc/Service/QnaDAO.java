@@ -105,6 +105,25 @@ public class QnaDAO {
 		return res;
 	}
 	
+	public ArrayList<QnaDTO> selectID(String id){
+		ArrayList<QnaDTO> res = new ArrayList<QnaDTO>();
+		
+		sql = "select * from qna where id = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			Qna(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
 	public ArrayList<QnaDTO> selectType(String type){
 		ArrayList<QnaDTO> res = new ArrayList<QnaDTO>();
 		
@@ -145,9 +164,9 @@ public class QnaDAO {
 	
 	public void insert(QnaDTO dto){
 		sql = 	"insert into qna (" +
-				"type, title, id, content,  status, register_date) "+
+				"type, title, id, content,  status, resq, register_date) "+
 				"values ("+
-				"?   ,    ? ,  ?,   ?  ,   ?    ,   now() )";
+				"?   ,    ? ,  ?,   ?  ,      ?   ,  0  ,   now() )";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
