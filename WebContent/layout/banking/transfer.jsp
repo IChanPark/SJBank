@@ -8,7 +8,11 @@
 $(document).ready(function(){
 
 	$('.ToConfirm').click(function(){
-		var addBox = $("<div> 주의사항 비슷한 무언가</div>");
+		var addBox = $("<br><br><br><div class='subTitle'>알아두세요</div><br><br>");
+		addBox.append("<div>-친구 지인 및 거래처에서 인터넷메신저 또는 휴대전화 문자메세지를 통해 송금을 요구받은 경우에는 <br>반드시 이체 전 전화로 사실관계여부를 확인해주시기 바랍니다.</div>");
+		addBox.append("<div>-받는 통장메모는 받는분의 통장에 인자하여 드리는 메세지 입니다.</div>");
+		addBox.append("<div>-CMS코드는 받는분이 출금인을 식별하기 위한 코드입니다. 일반적으로는 입력하실 필요가 없습니다.</div>");
+		
 		var btn = $("<div><button onclick=fff() >이체하기</button></div>");
 	
 		addBox.append(btn);
@@ -69,7 +73,7 @@ function fff(){
 	</tr>
 	<tr>
 		<td>이체금액 :</td>
-		<td><input type="text" name="money" /></td>
+		<td><input type="text" name="money" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/></td>
 	</tr>
 	<tr>
 		<td>받는통장 메모 :</td>

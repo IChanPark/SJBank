@@ -12,5 +12,5 @@
 
 
 <button data-menu-name ="service/client/Notice" >공지사항</button> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<button data-menu-name ="Faq">자주하는 질문</button> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<button data-menu-name ="qna">Q & A</button> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<button data-menu-name ="service/client/Faq">자주하는 질문</button> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<button data-menu-name ="service/client/qna">Q & A</button> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

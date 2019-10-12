@@ -16,17 +16,13 @@ public class Accupdate  implements M_Action{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println(request.getParameter("pw")+"업데이트 입니다?");
-		System.out.println(request.getParameter("alias")+"업데이트 입니다?");
-		System.out.println(request.getParameter("acc")+"어카운트 입니다?");
+		System.out.println(request.getParameter("acc")+"어카운트 업데이트 입니다?");
 		
 		HttpSession session = request.getSession();
 		
-		ArrayList<AccountDTO>  dto = AccountDAO.getInstance().selectID((String)session.getAttribute("userID"));
-
-		System.out.println(dto.toString());
-		request.setAttribute("dd", "abc");
-
+		AccountDTO  dto = AccountDAO.getInstance().selectAccount(request.getParameter("acc"));
+		
 		request.setAttribute("data", dto);
+		
 	}
 }

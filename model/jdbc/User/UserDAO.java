@@ -185,6 +185,35 @@ public class UserDAO {
 		} finally { close(); }
 		return res;
 	}
+	
+	//////////// 아이디에 따른 간단패스워드 입력 확인
+	
+	public boolean chkSimplePw(String id,String pw){
+		boolean res = false;
+		
+		sql = 	"select simple_pw from user where id = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				if(rs.getString("simple_pw").equals(pw))
+					res=true;
+			}
+				
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}
+	
+	
+	
+	
 	////상태변경
 	public void changeStatus(String status, String id){
 		sql = 	"update user set " +
