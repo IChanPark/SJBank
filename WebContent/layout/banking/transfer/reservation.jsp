@@ -1,11 +1,32 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%request.setCharacterEncoding("UTF-8"); %>
+<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Date dd = new Date();
+String tod = sdf.format(dd);
+
+%>
+
 <script>
-	$(document).ready(function() {
+
+$(document).ready(function() {
+		
+		alert("2345");
 		$('#ToConfirm').click(function() {
-				
+			
+			var temp = new Date();
+			var today = (temp.getYear()+1900)+"-"+(temp.getMonth()+1)+"-"+temp.getDate();
+			alert(today);
+			alert($('#time').val());
+				if($('#time').val() < today )
+				{
+					alert("오늘 보다 이전 날짜는 설정 할수 없습니다.");
+					return;
+				}
+			
 				$(".indata").attr("readOnly",true);
 			
 				var text = $("<div class='subTitle'>이체정보"
@@ -24,20 +45,30 @@
 				$("#mid").append(text);
 				$(this).hide();
 		});
+		
+	
+		
 });
 
-	
-function goReg(){
-
-	var f=document.paging; 
-    
-	f.hid_t.value = "banking/transfer/ReservationReg";
-	
-    f.method="post";
-    f.submit();
-
+function throwNum()
+{
+	if (!(e.keyCode >=37 && e.keyCode<=40)) {
+		var v = $(this).val();
+		$(this).val(v.replace(/[^a-z0-9]/gi,''));
+	}
 };
-	
+
+
+
+
+function goReg() {
+		var f = document.paging;
+		f.hid_t.value = "banking/transfer/ReservationReg";
+		f.method = "post";
+		f.submit();
+		
+};
+
 </script>
 
 <div class="subTitle">예약이체 등록</div>
@@ -66,19 +97,20 @@ function goReg(){
 <table border="" class="indata">
 	<tr>
 		<td>입금은행</td>
-		<td><input type="text" name="bank" id="bank" class="indata"/></td>
+		<td><input type="text" placeholder="숫자,영문,한글로 구성된 은행명을 적어 주세요" onkeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'')" name="bank" id="bank" class="indata"/></td>
 	</tr>
 	<tr>
 		<td>입금계좌번호</td>
-		<td><input type="text" name="toAcc" id="toAcc" class="indata"/></td>
+		<td><input type="text" placeholder="숫자 및 -로 구성된 번호를 입력해 주세요" name="toAcc" id="toAcc" class="indata"  onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" /></td>
 	</tr>
 	<tr>
 		<td>이체금액</td>
-		<td><input type="text" name="sum" id="sum" class="indata"/></td>
+		<td><input type="text" placeholder="계좌에 잔액이 없을시 취소 될 수 있습니다." onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="sum" id="sum" class="indata"/></td>
 	</tr>
 	<tr>
 		<td>이체예정일</td>
 		<td><input type="date" name="time" id= "time" class="indata"/></td>
+	
 	</tr>
 	<tr>
 		<td>이체시각설정</td>
@@ -102,7 +134,7 @@ function goReg(){
 	</tr>
 	<tr>
 		<td>CMS코드</td>
-		<td><input type="text" name="cms" id ="cms" class="indata"/></td>
+		<td><input type="text" placeholder="필수사항이 아닙니다." name="cms" id ="cms" class="indata"/></td>
 	</tr>
 </table>
 <br><br>
