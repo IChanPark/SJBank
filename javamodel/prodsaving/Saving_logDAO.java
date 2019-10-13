@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 import control.Data_Source;
 import jdbc.Saving.Saving_logDTO;
+import server.DBAccess_IP;
 
 public class Saving_logDAO {
 	
@@ -20,9 +21,9 @@ public class Saving_logDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	private Saving_logDAO() {
+	public Saving_logDAO() {
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 

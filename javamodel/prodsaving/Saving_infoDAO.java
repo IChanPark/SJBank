@@ -53,7 +53,7 @@ public class Saving_infoDAO {
 				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
-				dto.setMonth(rs.getInt("month"));
+				//dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
 				dto.setInterest_type(rs.getString("interest_type"));
 				dto.setTax(rs.getString("tax"));
@@ -81,7 +81,7 @@ public class Saving_infoDAO {
 				dto.setProduct_info(rs.getString("product_info"));
 				dto.setMin_interest(rs.getFloat("min_interest"));
 				dto.setMax_interest(rs.getFloat("max_interest"));
-				dto.setMonth(rs.getInt("month"));
+				//dto.setMonth(rs.getInt("month"));
 				dto.setType(rs.getString("type"));
 				dto.setInterest_type(rs.getString("interest_type"));
 				dto.setTax(rs.getString("tax"));

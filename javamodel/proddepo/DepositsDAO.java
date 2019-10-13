@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 
 import control.Data_Source;
 import jdbc.Deposit.DepositsDTO;
+import jdbc.Fund.FundDTO;
+import server.DBAccess_IP;
 
 
 public class DepositsDAO {
@@ -21,9 +23,9 @@ public class DepositsDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	private DepositsDAO() {
+	public DepositsDAO() {
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 			
@@ -53,6 +55,7 @@ public class DepositsDAO {
 				dto.setPrduct(rs.getString("prduct"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
+				
 			} 
 		} catch (Exception e) {}
 		return dto;
@@ -78,6 +81,28 @@ public class DepositsDAO {
 		sql = "select * from deposits";
 		try {
 			
+			rs = stmt.executeQuery(sql);
+			
+			Deposit(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<DepositsDTO> uplist(){
+		ArrayList<DepositsDTO> res = new ArrayList<DepositsDTO>();
+		
+		sql = "select da.account_number, da.type, da.sum, da.id, "+ 
+				" da.status "+
+				"FROM account da "+
+				"INNER JOIN account a ON da.account_number = a.account_number "+
+				"where a.status ='활성' "+ 
+				"and da.account_number not in "+
+				"(select account_number from deposits_log where "+
+				"date_format(now(), '%Y-%m') = date_format(register_date, '%Y-%m') and "+
+				"status = '성공') ";
+		try {
+		
 			rs = stmt.executeQuery(sql);
 			
 			Deposit(rs, res);			

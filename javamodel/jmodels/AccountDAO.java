@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import jdbc.Account.AccountDTO;
+import jdbc.Deposit.Deposits_logDTO;
+import jdbc.Saving.Saving_logDTO;
 import server.DBAccess_IP;
 
 public class AccountDAO {
@@ -143,10 +145,20 @@ public class AccountDAO {
 		} finally { close(); }
 	}
 
-	public void updateMoney(AccountDTO dto){
+	public void updateMoney(Deposits_logDTO deploginsert){
 		sql = 	"update account set " +
-				"sum = "+dto.getSum() +
-				"  where account_number = '"+dto.getAccount_number()+"'";
+				"sum = "+deploginsert.getSum() +
+				"  where account_number = '"+deploginsert.getAccount_number()+"'";
+		System.out.println(sql);
+		try {
+			stmt.executeUpdate(sql); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	public void updateMoney(Saving_logDTO savloginsert){
+		sql = 	"update account set " +
+				"sum = "+savloginsert.getSum() +
+				"  where account_number = '"+savloginsert.getAccount_number()+"'";
 		System.out.println(sql);
 		try {
 			stmt.executeUpdate(sql); 

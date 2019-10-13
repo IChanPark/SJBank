@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Fund.FundDTO;
 import jdbc.Saving.SavingDTO;
+import server.DBAccess_IP;
 
 
 public class SavingDAO {
@@ -21,9 +23,9 @@ public class SavingDAO {
 	private ResultSet rs;
 	private String sql;
 	
-	private SavingDAO() {
+	public SavingDAO() {
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 
@@ -51,7 +53,7 @@ public class SavingDAO {
 				
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("prduct"));
+				dto.setProduct(rs.getString("product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));
@@ -71,7 +73,7 @@ public class SavingDAO {
 				
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("prduct"));
+				dto.setProduct(rs.getString("product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));
@@ -96,11 +98,33 @@ public class SavingDAO {
 		return res;
 	}
 	
+	public ArrayList<SavingDTO> uplist(){
+		ArrayList<SavingDTO> res = new ArrayList<SavingDTO>();
+		
+		sql = "select s.account_number, s.id, s.product, s.interest, "+ 
+				"f.type,  a.status "+
+				"FROM saving s "+
+				"INNER JOIN account a ON s.account_number = a.account_number "+
+				"where a.status ='활성' "+ 
+				"and s.account_number not in "+
+				"(select account_number from saving_log where "+
+				"date_format(now(), '%Y-%m') = date_format(register_date, '%Y-%m') and "+
+				"status = '성공') ";
+		try {
+		
+			rs = stmt.executeQuery(sql);
+			
+			Saving(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
 	public void insert(SavingDTO dto){
 		sql = 	"insert into saving " +
 				"(account_number, id, prduct, preferential, interest , type, end_date) "
 				+ "values "+
-				"('"+dto.getAccount_number()+"','"+dto.getId()+"','"+dto.getPrduct()+"','"+
+				"('"+dto.getAccount_number()+"','"+dto.getId()+"','"+dto.getProduct()+"','"+
 				 dto.getPreferential()+"',"+dto.getInterest()+",'"+dto.getType()+"','"+dto.getEnd_dateStr()+"')";
 		System.out.println(sql);
 		try {
