@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import control.Data_Source;
 import jdbc.Fund.FundDTO;
 import jdbc.Fund.Fund_InfoDTO;
+import jdbc.Fund.Fund_LogDTO;
 import server.DBAccess_IP;
 
 public class FundDAO {
@@ -58,6 +59,7 @@ public class FundDAO {
 				dto.setExchange(rs.getFloat("exchange"));
 				dto.setBuynum(rs.getInt("buynum"));
 				dto.setRest(rs.getFloat("rest"));
+				dto.setPrice_modify(rs.getFloat("price_modify"));
 				System.out.println(dto);
 			} 
 		} catch (Exception e) {}
@@ -78,6 +80,7 @@ public class FundDAO {
 				dto.setExchange(rs.getFloat("exchange"));
 				dto.setBuynum(rs.getInt("buynum"));
 				dto.setRest(rs.getFloat("rest"));
+				dto.setPrice_modify(rs.getFloat("price_modify"));
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
@@ -138,6 +141,28 @@ public class FundDAO {
 		} finally { close(); }
 	}
 	
+	public ArrayList<FundDTO> uplist(){
+		ArrayList<FundDTO> res = new ArrayList<FundDTO>();
+		
+		sql = "select f.account_number, f.id, f.price_modify, f.product, f.fluctuation, "+ 
+				"f.amount, f.nowmoney, f.buynum, f.exchange, f.rest, a.status "+
+				"FROM fund f "+
+				"INNER JOIN account a ON f.account_number = a.account_number "+
+				"where a.status ='활성' "+ 
+				"and f.account_number not in "+
+				"(select account_number from fund_log where "+
+				"date_format(now(), '%Y-%m-%d') = date_format(register_date, '%Y-%m-%d') and "+
+				"status = '성공') ";
+		try {
+		
+			rs = stmt.executeQuery(sql);
+			
+			Fund(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
 	public void updatetoday(Float fluctuation,Float nowmoney,Float exchange,String price_modify,String account_number){
 		sql = 	"update fund set " +
 				"fluctuation = "+fluctuation+
@@ -152,6 +177,8 @@ public class FundDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
+	
+	
 	public void updateprice_modify(String price_modify, String product){
 		sql = 	"update fund set " +
 				"price_modify = "+price_modify+

@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Fund.FundDTO;
 import jdbc.Fund.Fund_LogDTO;
+import server.DBAccess_IP;
 
 public class Fund_LogDAO {
 
@@ -22,7 +24,7 @@ public class Fund_LogDAO {
 	
 	public Fund_LogDAO() {
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 			
@@ -66,6 +68,7 @@ public class Fund_LogDAO {
 		} catch (Exception e) {}
 	}
 	
+	
 	public ArrayList<Fund_LogDTO> list(){
 		ArrayList<Fund_LogDTO> res = new ArrayList<Fund_LogDTO>();
 		
@@ -96,7 +99,7 @@ public class Fund_LogDAO {
 	
 
 	public void insert(Fund_LogDTO dto){
-		sql = 	"insert into account (" +
+		sql = 	"insert into fund_log (" +
 				"account_number, fluctuation, sum, status, register_date) "
 				+ "values ('"+dto.getAccount_number()+"',"+dto.getFluctuation()+","+
 				dto.getSum() +",'"+dto.getStatus()+"', now() )";
@@ -107,6 +110,8 @@ public class Fund_LogDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
+	
+	
 	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
