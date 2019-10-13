@@ -7,14 +7,23 @@
 <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 Date dd = new Date();
 String tod = sdf.format(dd);
-
 %>
-
+<style>
+input[type=text]{
+width: 400px;
+}
+</style>
 <script>
+$(function() {
+	$('#time').datepicker({
+		  minDate: 0,
+		  maxDate: "6M"
+	}).datepicker('setDate', new Date())
+	.attr("readonly",true);
+});
 
 $(document).ready(function() {
 		
-		alert("2345");
 		$('#ToConfirm').click(function() {
 			
 			var temp = new Date();
@@ -109,8 +118,7 @@ function goReg() {
 	</tr>
 	<tr>
 		<td>이체예정일</td>
-		<td><input type="date" name="time" id= "time" class="indata"/></td>
-	
+		<td><input type="text" name="time" id= "time" class="indata"></td>
 	</tr>
 	<tr>
 		<td>이체시각설정</td>
