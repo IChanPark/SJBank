@@ -7,8 +7,6 @@ request.setCharacterEncoding("UTF-8");	//한글처리
 Gson gson = new Gson();
 String json ="";
 
-String product = request.getParameter("product");
-
 json = gson.toJson(Saving_typeDAO.getInstance().list());	
 
 out.print(json);

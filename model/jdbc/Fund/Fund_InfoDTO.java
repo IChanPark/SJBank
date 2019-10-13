@@ -15,8 +15,8 @@ public class Fund_InfoDTO {
 					management,			//운용사
 					sector,				//섹터
 	 				status,				//상태 ex 판매중 판매중지
-					tax;				//과세여부
-					
+					tax,				//과세여부
+					id;
 	
 	private	Float 	price,				//초기 기준가
 					price_modify,		//수정 기준가
@@ -191,6 +191,14 @@ public class Fund_InfoDTO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Override

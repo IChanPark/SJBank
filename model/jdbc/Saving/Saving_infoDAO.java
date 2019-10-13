@@ -237,8 +237,7 @@ public class Saving_infoDAO {
 		} finally { close(); }
 	}
 	
-public void update_Product_info(Saving_infoDTO dto){
-		
+	public void update_Product_info(Saving_infoDTO dto){
 		
 		sql = 	"update saving_info set " +
 				"product_info = ? ,"+

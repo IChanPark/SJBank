@@ -48,7 +48,7 @@ function zero(aa){
 
 function option(){
 	$.ajax({	
-		url:"layout/product/saving/saving_type.jsp",
+		url:"layout/product/saving/Saving_type",
 		type:'post',
 		dataType:'json',
 		success:function(qqq){
@@ -67,7 +67,7 @@ function option(){
 
 function ajax_go() {
 	$.ajax({	
-	url:"layout/product/saving/select.jsp",
+	url:"layout/product/saving/Select",
 	type:'post',
 	data:{	type	: $(".type_Radio:checked").val(),
 			title 	: $('.search_Word').val()},
@@ -102,7 +102,7 @@ function detail(me) {
 	
 	$('.subTitle').text('적금상품 안내');
 	$.ajax({	
-		url:"layout/product/saving/detail.jsp",
+		url:"layout/product/saving/Detail",
 		type:'post',
 		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
 		dataType:'json',
@@ -168,7 +168,7 @@ function join(me) {
 	isRun = true;
 	
 	$.ajax({	
-		url:"layout/product/saving/join.jsp",
+		url:"layout/product/saving/Join",
 		type:'post',
 		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
 		dataType:'json',
@@ -236,7 +236,7 @@ function joinReg(me) {
 	isRun = true;
 	
 	$.ajax({	
-		url:"layout/product/saving/joinReg.jsp",
+		url:"layout/product/saving/JoinReg",
 		type:'post',
 		data:{	
 				product 		:	$(me).parent('[data-product-name]').data("product-name"),

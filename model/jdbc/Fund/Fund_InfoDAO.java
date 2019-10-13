@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
-import jdbc.Deposit.Deposits_infoDTO;
-import jdbc.Fund.Fund_InfoDTO;
+import jdbc.Saving.Saving_infoDTO;
 
 public class Fund_InfoDAO {
 
@@ -45,6 +44,7 @@ public class Fund_InfoDAO {
 				dto.setSector(rs.getString("sector"));
 				dto.setStatus(rs.getString("status"));
 				dto.setTax(rs.getString("tax"));
+				dto.setId(rs.getString("id"));
 				
 				dto.setPrice(rs.getFloat("price"));
 				dto.setPrice_modify(rs.getFloat("price_modify"));
@@ -73,6 +73,7 @@ public class Fund_InfoDAO {
 				dto.setSector(rs.getString("sector"));
 				dto.setStatus(rs.getString("status"));
 				dto.setTax(rs.getString("tax"));
+				dto.setId(rs.getString("id"));
 				
 				dto.setPrice(rs.getFloat("price"));
 				dto.setPrice_modify(rs.getFloat("price_modify"));
@@ -86,6 +87,25 @@ public class Fund_InfoDAO {
 			} 
 		} catch (Exception e) {}
 	}
+	
+	public Fund_InfoDTO selectPro(Fund_InfoDTO dto){
+		Fund_InfoDTO SetDTO = null;
+		
+		sql =	"select * from fund_info where product = ? ";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct());
+			rs = pstmt.executeQuery();
+			
+			SetDTO = Fund_Info(rs, dto);			
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return SetDTO;
+	}
+	
 	public Fund_InfoDTO selectProUse( Fund_InfoDTO dto){
 		 Fund_InfoDTO SetDTO = null;
 		
@@ -139,13 +159,72 @@ public class Fund_InfoDAO {
 		return res;
 	}
 	
+	public ArrayList<Fund_InfoDTO> selectType(Fund_InfoDTO dto){
+		ArrayList<Fund_InfoDTO> res = new ArrayList<Fund_InfoDTO>();
+		
+		sql = "select * from fund_info where type = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getType());
+			
+			rs = pstmt.executeQuery();
+			
+			Fund_Info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Fund_InfoDTO> selectLikePro(Fund_InfoDTO dto){
+		ArrayList<Fund_InfoDTO> res = new ArrayList<Fund_InfoDTO>();
+		
+		sql = "select * from fund_info where product like ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+dto.getProduct()+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			Fund_Info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Fund_InfoDTO> selectLikeAnd(Fund_InfoDTO dto){
+		ArrayList<Fund_InfoDTO> res = new ArrayList<Fund_InfoDTO>();
+		
+		sql = 	"select * from fund_info where product like ?"+
+				"AND type = ?";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+dto.getProduct()+"%");
+			pstmt.setString(2, dto.getType());
+			
+			rs = pstmt.executeQuery();
+			
+			Fund_Info(rs, res);			
+		} catch (Exception e) { e.printStackTrace(); }
+		finally { close(); }
+		return res;
+	}
+	
 	public void insert(Fund_InfoDTO dto){
 		sql = 	"insert into fund_info (" +
 				"product,product_info,price,price_modify,type,area,property,first_fee,"+ 
-				"fee,management,sector,status,tax,register_date, end_date) "+
+				"fee,management,sector,status,tax,register_date, id) "+
 				"values ("+
 				"	?	,  ? ,? ,  ?	       ,  ? , ?  ,   ?    ,   ?	    ,"+
-				" ?	, 	?	   ,   ?  ,	  ?,  ?	 ,	now()  	   , '2020-10-05')";
+				" ?	, 	?	   ,   ?  ,	'활성',  ?	 ,	now()  	   , ?)";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -162,8 +241,30 @@ public class Fund_InfoDAO {
 			pstmt.setFloat(9, dto.getFee());
 			pstmt.setString(10, dto.getManagement());
 			pstmt.setString(11, dto.getSector());
-			pstmt.setString(12, dto.getStatus());
-			pstmt.setString(13, dto.getTax());
+			pstmt.setString(12, dto.getTax());
+			pstmt.setString(13, dto.getId());
+			
+			pstmt.executeUpdate(); 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	public void update_Product_info(Fund_InfoDTO dto){
+		
+		sql = 	"update fund_info set " +
+				"product_info = ? ,"+
+				"id = ?, modify_date = now(), status = ? " +
+				" where product = ?";
+		
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getProduct_info());
+			pstmt.setString(2, dto.getId());
+			pstmt.setString(3, dto.getStatus());
+			pstmt.setString(4, dto.getProduct());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

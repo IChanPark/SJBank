@@ -2,9 +2,9 @@
 <%@page import="jdbc.Saving.Saving_infoDTO"%>
 <%@page import="com.google.gson.Gson"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%
-request.setCharacterEncoding("UTF-8");	//한글처리
+request.setCharacterEncoding("UTF-8");   //한글처리
 
 String type = request.getParameter("sel_type"),
 product = request.getParameter("product"),

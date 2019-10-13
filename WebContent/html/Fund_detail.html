@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {margin: 0;padding: 0; color: white; font-size: 12pt; font-weight: normal; font-family: 'Nanum Gothic';}
+body {background: #363636}/*눈 피로로 인해 추가함 */
+li {list-style: none;}
+input{color: black;}
+select{color: black;}
+option{background: #363636;}
+#mid{width:100%;margin :0 auto; height: 1000px;}
+#mid>div{width:1000px;margin :0 auto;}
+#bot {height: 80px;width: 100%;margin: 0 auto; background: #00B992;}
+#bot>div{width: 1000px;margin: 0 auto;padding-top: 20px; font-size: 13pt; background: #00B992;}
+button{color: black;}
+textarea{color: black;}
+/*--------------------------------------------------------------------------------------------------------------*/
+.infoBox {margin-top: 30px; width: 100%;}
+.infoTop {height: 250px; text-align: center; border: 1px solid white; padding-left: 20px; padding-top: 20px;}
+.infoTop_Left {float: left; height: 100%; width: 65%; }
+.infoTop_Title {text-align:left; height: 10%; font-size: 16pt; font-weight: bold; padding-top: 10px; width: 100%;}
+.infoTop_Info {text-align:left; font-size: 11pt; width: 100%; margin-bottom: 10px;}
+.infoTop_Type {float: left; border-right: 1px solid white; padding-right: 10px; margin-right: 10px; font-size: 11pt;}
+.infoTop_Rigth {float: right; height: 100%; width: 35%;
+align-items: center; font-size: 13px; text-align: center; justify-content: center;}
+.infoTop_Rigth>img {height: 150px; width: 150px; }
+.infoTop_Percent {font-size: 19px; text-align: center; font-weight:bold;}
+.infoMid_Guide {margin-top:30px; margin-bottom:20px; border-bottom:1px solid white; font-size: 14pt;}
+.infoMid {width: 100%; display: grid; justify-content: center; align-items: center; margin-top: 15px; margin-bottom: 15px;}
+.infoMid_Join{width: font-size: 14pt; font-weight: bold; width: 100px; text-align: center; border: 1px solid white;}
+.infoMain {height: 450px; width: 100%; border-bottom: 1px solid white; overflow-y: scroll; word-break:break-all;} /* 스크롤바 자동줄바꿈 */
+.infoMain_Info {float: left; text-align:left; font-size: 12pt; width: 100%; margin-bottom: 10px;}
+.infoMain_Type {float: left; border-right: 1px solid white; padding-right: 10px; font-size: 12pt; width: 15%;}
+.infoMain_Value {float: right; height: 100%; width: 83%} /* 2프로 여백 */
+.infoBot {width: 100%; display: grid; justify-content: center; align-items: center; margin-top: 15px; margin-bottom: 15px;}
+.infoBot_Back {width: font-size: 14pt; font-weight: bold; width: 100px; text-align: center; border: 1px solid white;}
+.infoMain::-webkit-scrollbar { width: 8px; }
+.infoMain::-webkit-scrollbar-track { box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); border-radius: 10px; }
+.infoMain::-webkit-scrollbar-thumb { border-radius: 10px; box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);}
+</style>
+</head>
+<body>
+<div id='mid'> 
+
+
+<div class='subTitle'>예금 상품 안내</div>
+<div class= "infoBox">
+	<div class="infoTop">
+		<div class="infoTop_Left">
+			<div class="infoTop_Title">뭐시기 뭐시기 상품명</div><br>
+			<div class="infoTop_Info">① 뭐시기 우대해서 우대해야(우대구분)</div>
+			<div class="infoTop_Info">② 뭐시기 뭐시기 하면 우대해야</div><br>
+			<div class="infoTop_Info"><div class="infoTop_Type">상품종류</div>대충 이러한 상품</div>
+			<div class="infoTop_Info"><div class="infoTop_Type">가입기간</div>대충 이러한 기간</div>
+			<div class="infoTop_Info"><div class="infoTop_Type">가입금액</div>대충 이러한 금액 부터 최대 이러한 금액까지</div>
+		</div>
+		<div class="infoTop_Rigth">
+		 	<img src="img/test1.png" alt="" /><br>
+		 	최저 연 &ensp;최고 연<br>
+		 	<div class="infoTop_Percent">&ensp; 1.40~2.80%</div><br>
+		 	[납입방식 ㅁㅁ기준]
+		</div>
+	</div>
+	<div class="infoMid"><div class="infoMid_Join">가입</div></div>
+	<div class='infoMid_Guide'>상품 안내</div>
+	<div class="infoMain">
+		<div class="infoMain_Info"><div class="infoMain_Type">납입방법</div><div class="infoMain_Value">상품내용</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">이자지급방식</div><div class="infoMain_Value">상품내용</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">세금</div><div class="infoMain_Value">상품내용</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">납입최소금액</div><div class="infoMain_Value">상품내용</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">납입최대금액</div><div class="infoMain_Value">상품내용</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">자동재예치</div><div class="infoMain_Value">상품내용</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">일부해지</div><div class="infoMain_Value">상품내용</div></div>
+		<div class="infoMain_Info"><div class="infoMain_Type">우대이자율</div><div class="infoMain_Value">
+		① 본 상품 가입 전 펀드 상품계좌 보유시(우대조건) 연0.30% 우대(우대이자율)<br>
+		② 본 상품 가입 전 펀드 상품계좌 보유시(우대조건) 연0.30% 우대(우대이자율)
+		</div></div>
+	</div>
+	<div class="infoBot"><div class="infoBot_Back">목록으로</div></div>
+</div>
+
+</div>
+</body>
+</html>

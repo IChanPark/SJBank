@@ -5,10 +5,10 @@
 <div id="top">
    <div id="info"><img src="img/logo.png" height="40px" display="block" margin="0px auto"/>
    <c:choose>
-      <c:when test="${userID !=null }">
+      <c:when test="${adminID !=null }">
          <a href="#" data-menu-name="admin/Service/LogOut" id="login">로그아웃</a>
       </c:when>
-      <c:when test="${userID ==null }">
+      <c:when test="${adminID ==null }">
          <a href="#" data-menu-name="admin/Service/LoginMain" id="login">로그인</a>
       </c:when>
    </c:choose>   
