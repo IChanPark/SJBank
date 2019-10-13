@@ -21,7 +21,7 @@ import jdbc.User.UserDAO;
 import jdbc.User.UserDTO;
 import util.New_Account;
 
-@WebServlet("/layout/product/fund/JoinReg")
+@WebServlet("/product/fund/JoinReg")
 public class Fund_JoinReg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

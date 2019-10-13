@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 import jdbc.Fund.Fund_InfoDAO;
 import jdbc.Fund.Fund_InfoDTO;
 
-@WebServlet("/layout/product/fund/Select")
+@WebServlet("/product/fund/Select")
 public class Fund_Select extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

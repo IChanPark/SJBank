@@ -45,7 +45,7 @@ function zero(aa){
 
 function option(){
 	$.ajax({	
-		url:"layout/product/deposit/Deposit_type",
+		url:"product/deposit/Type",
 		type:'post',
 		dataType:'json',
 		success:function(qqq){
@@ -65,7 +65,7 @@ function option(){
 function ajax_go() {
 	
 	$.ajax({	
-	url:"layout/product/deposit/Select",
+	url:"product/deposit/Select",
 	type:'post',
 	data:{	type	: $(".type_Radio:checked").val(),
 			title 	: $('.search_Word').val()},
@@ -101,7 +101,7 @@ function detail(me) {
 
 	$('.subTitle').text('예금 상품 안내');
 	$.ajax({	
-		url:"layout/product/deposit/Detail",
+		url:"product/deposit/Detail",
 		type:'post',
 		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
 		dataType:'json',
@@ -168,7 +168,7 @@ function join(me) {
 	isRun = true;
 	
 	$.ajax({	
-		url:"layout/product/deposit/Join",
+		url:"product/deposit/Join",
 		type:'post',
 		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
 		dataType:'json',
@@ -236,7 +236,7 @@ function joinReg(me) {
 	isRun = true;
 	
 	$.ajax({	
-		url:"layout/product/deposit/JoinReg",
+		url:"product/deposit/JoinReg",
 		type:'post',
 		data:{	product 		:	$(me).parent('[data-product-name]').data("product-name"),
 				account_number	:	$('#account_number').val(),

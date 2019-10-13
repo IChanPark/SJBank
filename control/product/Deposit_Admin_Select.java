@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import jdbc.Saving.Saving_infoDAO;
-import jdbc.Saving.Saving_infoDTO;
+import jdbc.Deposit.Deposits_infoDAO;
+import jdbc.Deposit.Deposits_infoDTO;
 
-@WebServlet("/product/saving/Select")
-public class Saving_Select extends HttpServlet {
+@WebServlet("/product/deposit/Admin_Select")
+public class Deposit_Admin_Select extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,22 +29,22 @@ public class Saving_Select extends HttpServlet {
 		Gson gson = new Gson();
 		String json ="[";
 
-		Saving_infoDTO setDTO = new Saving_infoDTO();
+		Deposits_infoDTO setDTO = new Deposits_infoDTO();
 		setDTO.setProduct(request.getParameter("title"));
 		setDTO.setType(request.getParameter("type"));
 
-		ArrayList<Saving_infoDTO> dto = null;
+		ArrayList<Deposits_infoDTO> dto = null;
 		//타입 타이틀 검색
-		if(!setDTO.getProduct().equals("") && !(setDTO.getType()==null || setDTO.getType().equals("")))
-			dto = Saving_infoDAO.getInstance().selectLikeAnd(setDTO);
+		if(!setDTO.getProduct().equals("") && !setDTO.getType().equals(""))
+			dto = Deposits_infoDAO.getInstance().selectLikeAnd(setDTO);
 		//타입만 검색
-		else if(!(setDTO.getType()==null || setDTO.getType().equals("")))
-			dto = Saving_infoDAO.getInstance().selectType(setDTO);
+		else if(!setDTO.getType().equals(""))
+			dto = Deposits_infoDAO.getInstance().selectType(setDTO);
 		//타이틀만 검색
 		else if(!setDTO.getProduct().equals(""))
-			dto = Saving_infoDAO.getInstance().selectLikePro(setDTO);
+			dto = Deposits_infoDAO.getInstance().selectLikePro(setDTO);
 		else 
-			dto = Saving_infoDAO.getInstance().list();
+			dto = Deposits_infoDAO.getInstance().list();
 
 		for (int i = 0; i < dto.size(); i++) {
 			map.put("product", dto.get(i).getProduct());
@@ -53,12 +53,12 @@ public class Saving_Select extends HttpServlet {
 			map.put("month", dto.get(i).getMonth());
 			map.put("type", dto.get(i).getType());
 			map.put("tax", dto.get(i).getTax());
+			map.put("register_date",dto.get(i).getRegister_dateStr());
 			
 			json += gson.toJson(map);
 			if(i < dto.size()-1)
 				json +=",";
 		}
-
 		json+="]";
 		out.print(json);
 	}

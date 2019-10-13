@@ -19,7 +19,7 @@ import jdbc.Account.AccountDTO;
 import jdbc.Deposit.Deposits_infoDAO;
 import jdbc.Deposit.Deposits_infoDTO;
 
-@WebServlet("/layout/product/deposit/Join")
+@WebServlet("/product/deposit/Join")
 public class Deposit_Join extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

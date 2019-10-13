@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 import jdbc.Saving.Saving_typeDAO;
 
-@WebServlet("/layout/product/saving/Saving_type")
+@WebServlet("/product/saving/Type")
 public class Saving_Type extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

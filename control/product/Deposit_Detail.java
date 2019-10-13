@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import jdbc.Deposit.Deposits_infoDAO;
 import jdbc.Deposit.Deposits_infoDTO;
 
-@WebServlet("/layout/product/deposit/Detail")
+@WebServlet("/product/deposit/Detail")
 public class Deposit_Detail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

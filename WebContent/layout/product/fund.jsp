@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script type="text/javascript">
-var path = "product/fund/";
-var gogo = "layout/"+path+"all.jsp";
 var isRun = false; 		//아작스 중복실행 확인
 var main = '';
 var su = 0;
@@ -37,7 +35,7 @@ function zero(aa){
 
 function option(){
 	$.ajax({	
-		url:"layout/product/fund/Fund_type",
+		url:"product/fund/Type",
 		type:'post',
 		dataType:'json',
 		success:function(qqq){
@@ -57,7 +55,7 @@ function option(){
 function ajax_go() {
 	
 	$.ajax({	
-	url:"layout/product/fund/Select",
+	url:"product/fund/Select",
 	type:'post',
 	data:{	type	: $(".type_Radio:checked").val(),
 			title 	: $('.search_Word').val()},
@@ -91,7 +89,7 @@ function detail(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "layout/product/fund/Detail";
+	gogo =  "product/fund/Detail";
 	$('.subTitle').text('펀드상품 안내');
 	$.ajax({	
 		url:gogo,
@@ -148,7 +146,7 @@ function join(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "layout/product/fund/Join";
+	gogo =  "product/fund/Join";
 	$.ajax({	
 		url:gogo,
 		type:'post',
@@ -208,7 +206,7 @@ function joinReg(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "layout/product/fund/JoinReg";
+	gogo =  "product/fund/JoinReg";
 	$.ajax({	
 		url:gogo,
 		type:'post',

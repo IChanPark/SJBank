@@ -23,7 +23,7 @@ import jdbc.User.UserDAO;
 import jdbc.User.UserDTO;
 import util.New_Account;
 
-@WebServlet("/layout/product/saving/JoinReg")
+@WebServlet("/product/saving/JoinReg")
 public class Saving_JoinReg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

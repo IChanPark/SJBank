@@ -35,7 +35,7 @@ function setTax(){
 
 function option(){
 	$.ajax({	
-		url:"admin/deposits/deposit_type.jsp",
+		url:"product/deposit/Type",
 		type:'post',
 		dataType:'json',
 		success:function(qqq){
@@ -56,7 +56,7 @@ function option(){
 function ajax_go() {
 
 	$.ajax({	
-	url:"admin/deposits/select.jsp",
+	url:"product/deposit/Admin_Select",
 	type:'post',
 	data:{	type	: $('.type_Select').val(),
 			title 	: $('.search_Word').val()},
@@ -89,7 +89,7 @@ function detail(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "admin/deposits/detail.jsp";
+	gogo =  "product/deposit/Detail";
 	$('.subTitle').text('예금상품 정보');
 	$.ajax({	
 		url:gogo,
@@ -137,7 +137,7 @@ function detail(me) {
 			});
 			box +=	"</div></div>";
 			box +=	"</div>";
-			box +=	"<div class='infoBot'><div class='infoBot_Back' onclick='goMenu(this)' data-menu-name='admin/Deposits/Deposits'>목록으로</div></div>";
+			box +=	"<div class='infoBot'><div class='infoBot_Back' onclick='goMenu(this)' data-menu-name='product/deposit/Deposit'>목록으로</div></div>";
 			box +=	"</div>";
 			$("#mm").append(box);
 			isRun = false;
@@ -187,7 +187,7 @@ function add(){
 	box +=  "<select class='preferential'>우대구분<option value='예금'>예금</option><option value='적금'>적금</option><option value='펀드'>펀드</option></select> ";
 	box +=  "<select class='prf_content'>우대조건<option value='보유시'>보유시</option></select> ";
 	box +=  " 우대 추가금리를 입력해주세요. <input type='text' placeholder='0.0' class='prf_interest'> </div></div>";
-	box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Deposits/Deposits'>상품등록취소</div>";
+	box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='product/deposit/Deposit'>상품등록취소</div>";
 	box +=  "<div class='AdminButton' onclick='addReg()'>상품등록</div></div></div>";
 	$("#mm").append(box);
 };
@@ -197,7 +197,7 @@ function addReg(){
 		return;
 	isRun = true;
 	
-	gogo =  "admin/deposits/deposit_add_reg.jsp";
+	gogo =  "product/deposit/AddReg";
 	$.ajax({	
 		url:gogo,
 		type:'post',
@@ -235,7 +235,7 @@ function modify(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "admin/deposits/modify.jsp";
+	gogo =  "product/deposit/Modify";
 	$('.subTitle').text('예금상품 정보수정');
 	$.ajax({	
 		url:gogo,
@@ -279,8 +279,8 @@ function modify(me) {
 			box +=  "<select class='preferential' readonly='readonly'>우대구분<option value='"+qqq.preferential+"'>"+qqq.preferential+"</option></select> ";
 			box +=  "<select class='prf_content' readonly='readonly'>우대조건<option value='"+qqq.prf_content+"'>"+qqq.prf_content+"</option></select> ";
 			box +=  " 우대 추가금리를 입력해주세요. <input type='text' readonly='readonly' value='"+qqq.prf_interest+"' class='prf_interest'> </div></div>";
-			box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Deposits/Deposits'>수정취소</div>";
-			box +=  "<div class='AdminButton' onclick='modReg()' data-menu-name='admin/Deposits/Deposits'>수정등록</div></div></div>";
+			box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='product/deposit/Deposit'>수정취소</div>";
+			box +=  "<div class='AdminButton' onclick='modReg()' data-menu-name='product/deposit/Deposit'>수정등록</div></div></div>";
 			$("#mm").append(box);
 			isRun = false;
 		},
@@ -300,7 +300,7 @@ function modReg(){
 		return;
 	isRun = true;
 	
-	gogo =  "admin/deposits/deposit_mod_reg.jsp";
+	gogo =  "product/deposit/ModifyReg";
 	$.ajax({	
 		url:gogo,
 		type:'post',

@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 import jdbc.Fund.Fund_typeDAO;
 
-@WebServlet("/layout/product/fund/Fund_type")
+@WebServlet("/product/fund/Type")
 public class Fund_Type extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

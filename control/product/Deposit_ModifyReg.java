@@ -9,24 +9,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import jdbc.Deposit.Deposits_infoDAO;
+import jdbc.Deposit.Deposits_infoDTO;
 
-import jdbc.Deposit.Deposits_typeDAO;
-
-@WebServlet("/product/deposit/Type")
-public class Deposit_Type extends HttpServlet {
+@WebServlet("/product/deposit/ModifyReg")
+public class Deposit_ModifyReg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8"); 
 		request.setCharacterEncoding("UTF-8");	//한글처리
 		PrintWriter out = response.getWriter();
-		Gson gson = new Gson();
-		String json ="";
 
-		json = gson.toJson(Deposits_typeDAO.getInstance().list());	
-		System.out.println(json);
-		out.print(json);
+		String	status	= request.getParameter("status"),
+				product	= request.getParameter("product"),
+				deposits_info = request.getParameter("product_info"),
+				id = "god";
+
+		System.out.println("status : "+status+" product : "+product+" deposits_info : "+deposits_info+" id : " +id);
+
+		Deposits_infoDTO dto = new Deposits_infoDTO();
+
+		dto.setStatus(status);
+		dto.setProduct(product);
+		dto.setDeposits_info(deposits_info);
+		dto.setId(id);
+
+		Deposits_infoDAO.getInstance().update_Deposits_info(dto); 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

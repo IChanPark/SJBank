@@ -19,7 +19,7 @@ import jdbc.Account.AccountDTO;
 import jdbc.Fund.Fund_InfoDAO;
 import jdbc.Fund.Fund_InfoDTO;
 
-@WebServlet("/layout/product/fund/Join")
+@WebServlet("/product/fund/Join")
 public class Fund_Join extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

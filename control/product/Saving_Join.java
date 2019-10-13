@@ -19,7 +19,7 @@ import jdbc.Account.AccountDTO;
 import jdbc.Saving.Saving_infoDAO;
 import jdbc.Saving.Saving_infoDTO;
 
-@WebServlet("/layout/product/saving/Join")
+@WebServlet("/product/saving/Join")
 public class Saving_Join extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
