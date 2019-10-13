@@ -16,7 +16,7 @@ width: 300px;
 <script>
 $(function() {
 	$('#time').datepicker({
-		  minDate: 0,
+		  minDate: 1,
 		  maxDate: "6M"
 	}).datepicker('setDate', new Date())
 	.attr("readonly",true);
@@ -30,29 +30,29 @@ $(document).ready(function() {
 	
 		$('#ToConfirm').click(function() {
 		
-			var testAccpw = /[^0-9ㄱ-힣a-zA-Z]/g;
-			var testMoney = /[^0-9]/g;
-			var testToacc = /[^0-9-]/g;
-			var testBank = /[^0-9가-힣a-zA-Z]/g
-			if(testAccpw.test($("#accpw").val() ) )
+			var testAccpw = /[0-9]{4}/g;
+			var testMoney = /[0-9]/g;
+			var testToacc = /[0-9]{3,4}-[0-9]{3,4}-[0-9]{4,6}/g;
+			var testBank = /[0-9가-힣a-zA-Z]{1,6}/g
+			if(!testAccpw.test($("#accpw").val() ) )
 			{
 				alert("계좌 비밀번호 오류");
 				return;
 			}
 			
-			if(testMoney.test($("#sum").val() ) )
+			if(!testMoney.test($("#sum").val() ) )
 			{
 				alert("금액값 오류");
 				return;
 			}
 			
-			if(testToacc.test($("#toAcc").val() ) )
+			if(!testToacc.test($("#toAcc").val() ) )
 			{
 				alert("보낼 계좌 오류");
 				return;
 			}
 			
-			if(testToacc.test($("#bank").val() ) )
+			if(!testBank.test($("#bank").val() ) )
 			{
 				alert("보낼 은행 오류");
 				return;
