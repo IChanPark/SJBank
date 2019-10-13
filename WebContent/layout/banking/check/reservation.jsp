@@ -22,7 +22,7 @@ $(document).ready(function(){
 			return;
 		}
 	    $.ajax({	//라디오 버튼 
-			url:"layout/banking/check/reservationList.jsp",
+			url:"Reservation",
 			type:'post',
 			data:{
 				start : $("input[name=start]").val(),
