@@ -268,7 +268,7 @@ public class AccountDAO {
 				if(rs.getString("pw").equals(pw))
 					return true;
 				if(rs.getString("pw").equals("")|| rs.getString("pw")==null )
-					return true;
+					return false;
 			}
 			
 		} catch (Exception e) { e.printStackTrace();

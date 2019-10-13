@@ -48,14 +48,25 @@ public class User_Main extends HttpServlet {
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
+				System.out.println("정상");
 			} else if(session.getAttribute("Previous_page") != null &&
 					session.getAttribute("userID")!=null) 
-				request.setAttribute("mainUrl", session.getAttribute("Current_Page"));
-			  else 
-				request.setAttribute("mainUrl", "main");
+				{
+					request.setAttribute("mainUrl", "main");
+					System.out.println("이전");
+				}
+				else {
+					request.setAttribute("mainUrl", "main");
+					System.out.println("비정상");
+				}
+			System.out.println("최종");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
 			dispatcher.forward(request, response);
-		} catch (Exception e) {e.printStackTrace();} 
+		} catch (Exception e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); 
+			dispatcher.forward(request, response);
+		
+		} 
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

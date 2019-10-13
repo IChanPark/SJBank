@@ -10,7 +10,7 @@ String tod = sdf.format(dd);
 %>
 <style>
 input[type=text]{
-width: 400px;
+width: 300px;
 }
 </style>
 <script>
@@ -24,17 +24,39 @@ $(function() {
 
 $(document).ready(function() {
 		
+	$("#target").change(function(){
+		$("#bank").val($(this).val());
+	});
+	
 		$('#ToConfirm').click(function() {
+		
+			var testAccpw = /[^0-9ㄱ-힣a-zA-Z]/g;
+			var testMoney = /[^0-9]/g;
+			var testToacc = /[^0-9-]/g;
+			var testBank = /[^0-9가-힣a-zA-Z]/g
+			if(testAccpw.test($("#accpw").val() ) )
+			{
+				alert("계좌 비밀번호 오류");
+				return;
+			}
 			
-			var temp = new Date();
-			var today = (temp.getYear()+1900)+"-"+(temp.getMonth()+1)+"-"+temp.getDate();
-			alert(today);
-			alert($('#time').val());
-				if($('#time').val() < today )
-				{
-					alert("오늘 보다 이전 날짜는 설정 할수 없습니다.");
-					return;
-				}
+			if(testMoney.test($("#sum").val() ) )
+			{
+				alert("금액값 오류");
+				return;
+			}
+			
+			if(testToacc.test($("#toAcc").val() ) )
+			{
+				alert("보낼 계좌 오류");
+				return;
+			}
+			
+			if(testToacc.test($("#bank").val() ) )
+			{
+				alert("보낼 은행 오류");
+				return;
+			}
 			
 				$(".indata").attr("readOnly",true);
 			
@@ -54,20 +76,7 @@ $(document).ready(function() {
 				$("#mid").append(text);
 				$(this).hide();
 		});
-		
-	
-		
 });
-
-function throwNum()
-{
-	if (!(e.keyCode >=37 && e.keyCode<=40)) {
-		var v = $(this).val();
-		$(this).val(v.replace(/[^a-z0-9]/gi,''));
-	}
-};
-
-
 
 
 function goReg() {
@@ -96,7 +105,7 @@ function goReg() {
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>
-		<td><input type="text" name="accpw" id="accpw" class="indata"/></td>
+		<td><input type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="accpw" id="accpw" class="indata"/></td>
 	</tr>
 </table>
 
@@ -106,7 +115,16 @@ function goReg() {
 <table border="" class="indata">
 	<tr>
 		<td>입금은행</td>
-		<td><input type="text" placeholder="숫자,영문,한글로 구성된 은행명을 적어 주세요" onkeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'')" name="bank" id="bank" class="indata"/></td>
+		<td><input type="text" placeholder="숫자,영문,한글로 구성된 은행명을 적어 주세요" onkeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'')" name="bank" id="bank" class="indata"/>
+		 <select id="target">
+				<option>SJ은행</option>
+				<option>하나은행</option>
+				<option>신한은행</option>
+				<option>새마을금고</option>
+				<option>농협</option>
+				<option>국민은행</option>
+		</select>
+		</td>
 	</tr>
 	<tr>
 		<td>입금계좌번호</td>
@@ -122,7 +140,7 @@ function goReg() {
 	</tr>
 	<tr>
 		<td>이체시각설정</td>
-		<td><input type="radio" name="scheduled_date" value="7:00:00" id="scheduled_date" class="indata">오전7~8시
+		<td><input type="radio" name="scheduled_date" value="7:00:00" id="scheduled_date" class="indata" checked="checked">오전7~8시
 			이체 <input type="radio" name="scheduled_date" value="9:00:00" id="scheduled_date" class="indata">오전9~10시
 			이체 <input type="radio" name="scheduled_date" value="11:00:00" id="scheduled_date" class="indata">오전11~12시
 			이체 <input type="radio" name="scheduled_date" value="13:00:00" id="scheduled_date" class="indata">오후1시~2시

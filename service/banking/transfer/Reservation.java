@@ -12,5 +12,4 @@ public class Reservation implements M_Action{
 		request.setAttribute("data", AccountDAO.getInstance().selectIDfromUsable((String)request.getSession().getAttribute("userID")));
 		//리스트 정보를 키는 "data"로 어트리뷰트로 넘긴다
 	}
-
 }
