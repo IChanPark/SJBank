@@ -59,6 +59,7 @@ public class User_Main extends HttpServlet {
 					request.setAttribute("mainUrl", "main");
 					System.out.println("비정상");
 				}
+		
 			System.out.println("최종");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
 			dispatcher.forward(request, response);

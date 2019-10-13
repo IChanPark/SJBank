@@ -38,7 +38,7 @@ $(document).ready(function(){
 			return;
 		}
 		
-		if(!testToacc.test($("#transfer_receive").val() ) )
+		if(!testBank.test($("#transfer_receive").val() ) )
 		{
 			alert("보낼 은행 오류");
 			return;
