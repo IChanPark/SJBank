@@ -19,7 +19,7 @@ public class User_Main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println("시작?");
 		try {
 			request.setCharacterEncoding("UTF-8");	//한글처리
 			HttpSession session = request.getSession();

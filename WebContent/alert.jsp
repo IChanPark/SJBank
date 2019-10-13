@@ -3,5 +3,5 @@
 <%request.setAttribute("mainUrl", (String)request.getAttribute("mainUrl")); %>
 <script>
 alert('<%=request.getAttribute("msg")%>');
-location.href="<%=request.getAttribute("goUrl")%>";
+history.go(-1);
 </script>

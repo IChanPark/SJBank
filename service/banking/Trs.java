@@ -35,7 +35,8 @@ public class Trs implements M_Action{
 
 			request.setAttribute("msg", "패스워드가 일치하지 않습니다...ByServelet");
 			request.setAttribute("goUrl", "SJBank");
-			request.setAttribute("mainUrl", "main");
+			request.setAttribute("do", "banking/Transfer");
+			
 			throw new Exception("패스워드 불일치!!!");
 		}
 

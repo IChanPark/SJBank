@@ -29,6 +29,13 @@ public class Accchange  implements M_Action{
 		{
 			AccountDAO.getInstance().updateAccByManag(pw, status, alias, acc);
 		}
+		else
+		{
+			request.setAttribute("msg", "간편패스워드가 일치하지 않습니다...ByServelet");
+			request.setAttribute("goUrl", "SJBank");
+			request.setAttribute("mainUrl", "main");
+			throw new Exception("패스워드 불일치!!!");
+		}
 		
 		
 	}
