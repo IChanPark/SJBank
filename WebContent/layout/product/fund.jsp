@@ -37,7 +37,7 @@ function zero(aa){
 
 function option(){
 	$.ajax({	
-		url:"layout/product/fund/fund_type.jsp",
+		url:"layout/product/fund/Fund_type",
 		type:'post',
 		dataType:'json',
 		success:function(qqq){
@@ -57,7 +57,7 @@ function option(){
 function ajax_go() {
 	
 	$.ajax({	
-	url:"layout/product/fund/select.jsp",
+	url:"layout/product/fund/Select",
 	type:'post',
 	data:{	type	: $(".type_Radio:checked").val(),
 			title 	: $('.search_Word').val()},
@@ -91,7 +91,7 @@ function detail(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "layout/product/fund/detail.jsp";
+	gogo =  "layout/product/fund/Detail";
 	$('.subTitle').text('펀드상품 안내');
 	$.ajax({	
 		url:gogo,
@@ -148,7 +148,7 @@ function join(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "layout/product/fund/join.jsp";
+	gogo =  "layout/product/fund/Join";
 	$.ajax({	
 		url:gogo,
 		type:'post',
@@ -208,7 +208,7 @@ function joinReg(me) {
 		return;
 	isRun = true;
 	
-	gogo =  "layout/product/fund/joinReg.jsp";
+	gogo =  "layout/product/fund/JoinReg";
 	$.ajax({	
 		url:gogo,
 		type:'post',
