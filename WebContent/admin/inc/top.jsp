@@ -29,16 +29,16 @@
          <div class="SubMenu">
             <ul class="SubUl">
                <div class="LowMenu">
-                  <li><a href="#" data-menu-name="admin/Deposits/Deposits">예금</a></li>
+                  <li><a href="#" data-menu-name="admin/Product/Deposits">예금</a></li>
                </div>
                <div class="LowMenu">
-                  <li><a href="#" data-menu-name="admin/Saving/Saving">적금</a></li>
+                  <li><a href="#" data-menu-name="admin/Product/Saving">적금</a></li>
                </div>
               <!--  <div class="LowMenu">
                   <li><a href="#" data-menu-name="admin/Loan/Loan">대출</a></li>
                </div> -->
                <div class="LowMenu">
-                  <li><a href="#" data-menu-name="admin/Fund/Fund">펀드</a></li>
+                  <li><a href="#" data-menu-name="admin/Product/Fund">펀드</a></li>
                </div>
            </ul>
            <!-- <ul class="SubUl">

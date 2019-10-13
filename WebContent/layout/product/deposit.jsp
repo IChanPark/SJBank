@@ -17,6 +17,7 @@ $(document).ready(function(){
 	ajax_go();
 	option();
 });	
+
 $(".search_Button").on("click", function() {
 	ajax_go();
 });
