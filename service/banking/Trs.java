@@ -29,10 +29,20 @@ public class Trs implements M_Action{
 			
 			String acc = request.getParameter("acc");
 			String toAcc = request.getParameter("toAcc");
+			String pw = request.getParameter("accpw");
 			
 			String memo = request.getParameter("memo");
 			String to_memo = request.getParameter("to_memo");
 			
+			if(!AccountDAO.getInstance().chkAccPw(acc, pw))
+			{
+				System.out.println("예외 발생?!!!!!");
+
+				request.setAttribute("msg", "패스워드가 일치하지 않습니다...ByServelet");
+				request.setAttribute("goUrl", "SJBank");
+				request.setAttribute("mainUrl", "main");
+				throw new Exception("패스워드 불일치!!!");
+			}
 			
 			
 			if(AccountDAO.getInstance().chkAccPw(request.getParameter("acc"), request.getParameter("accpw")))
