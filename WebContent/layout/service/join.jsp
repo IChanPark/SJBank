@@ -1,27 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+  
 <h2>회원가입</h2> 
 	<table border="">
 		<tr>
 			<td>ID</td>							
-			<td><input type="text" name="id" maxlength="50"/><input type="button" value="중복확인" /></td>	
-					
+			<td><input type="text" name="id" maxlength="50"/><input type="button" value="중복확인" onclick="idChk()"></td>
+			
 		</tr>
 		<tr>	
 			<td>비밀번호</td>
-			<td><input type="text" name="pw" /></td>			
+			<td><input type="password" name="pw" /><input type="button" value="비밀번호확인" onclick="pwChk()"></td>		
 		</tr>		
 		<tr>	
 			<td>간편 비밀 번호</td>
-			<td><input type="text" name="simple_pw" /></td>
+			<td><input type="password" name="simple_pw" /><input type="button" value="중복확인" onclick="simpw()"></td>
 		</tr>
 		<tr>	
 			<td>계좌비밀번호</td>
-			<td><input type="text" name="acc_pw" /></td>			
+			<td><input type="password" name="acc_pw" /><input type="button" value="중복확인" onclick="accpw()"></td>			
 		</tr>	
 		<tr>
-		<td>이름(한글만가능)</td>							
+		<td>이름</td>							
 			<td><input type="text" name="name" maxlength="50"/>		
 		</tr>
 		<tr>	
@@ -75,8 +75,98 @@
 	
 		
 			<td colspan="2" align="right">			
-				<a href="#" data-menu-name="service/joinReg">가입</a>
-				<input type="button" value="취소"/>				
+				<div><div onclick="allChk()">가입</div><button>취소</button></div>			
 			</td>
 		</tr>
 	</table>
+
+<script>
+var idchk = false,
+	addchk = false;
+function addChk(){
+	if($('#sample4_postcode').val() == ""){
+		alert("주소미입력");
+		return addchk = false;
+	}else 
+		return addchk = true;
+}	
+
+function checkId(){
+	
+	var aaa = $('input[name=id]').val(); 
+	
+	if(aaa == "")
+    {
+        alert("ID를 입력 하시오.");
+        aaa.value="";
+        aaa.focus();
+        return seccion;
+    }	
+
+}
+
+function pwChk (){
+
+    var pw = false;
+    var message = "";   
+    var checkPoint = 0;
+
+    // 입력값이 있을경우에만 실행
+    if(pw.length) {
+
+        // 최대 입력 글자수를 제한한다.
+        if(pw.length < 4 || pw.length > 8) {
+            message = ":: 최소 8자 이상, 최대 16자 이하 ::";
+           
+        }else {
+            message = ":: 비밀번호를 입력해 주세요 ::";     
+            }
+    }
+}
+
+async function allChk() {	//메뉴 이동용
+ 
+	 idchk = true;
+	 addchk=true;
+	 await idChk();
+	
+	 await addChk();
+	
+	if(idchk!=false && addchk!=false){
+		document.paging.hid_t.value = "service/joinReg";
+		document.paging.submit();
+	}
+}; 
+
+
+	
+	
+function idChk() {
+	gogo = "layout/service/idChk.jsp";
+	$.ajax({	
+	url:gogo,
+	type:'post',
+	data:{	 id 	: $('input[name=id]').val()},
+	dataType:'json',
+	success:function(qqq){
+		
+		
+		if(qqq.id != "" || $('input[name=id]').val()==""){
+			alert("사용할 수 없는 아이디 입니다.");
+			$('input[name=id]').val("");
+			$('input[name=id]').focus();
+			return idchk = false;
+		}else if(qqq.id = "" || $('input[name=id]').val()==""){
+			alert("사용할 수 있는 아이디 입니다.");
+			$('input[name=id]').val("");
+			$('input[name=id]').focus();
+			 return idchk = true; 
+		}else return;
+	},error:function(qqq){
+		
+	}	
+		
+	});	
+};	
+	
+</script>

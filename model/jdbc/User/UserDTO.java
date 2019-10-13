@@ -7,7 +7,7 @@ import java.util.Date;
 public class UserDTO {
 
 	private	String 	id,				//ID
-					pw,				//PW
+					pw,				//PW					
 					name,			//이름
 					gen,			//성별
 					email,			//이메일
@@ -17,7 +17,8 @@ public class UserDTO {
 					status,			//계정 상태 활성/정지/탈퇴
 					postal_code; 	//우편번호
 	
-	private Integer simple_pw;		//간편비밀번호
+	private Integer simple_pw; 			//간편비밀번호
+					
 					
 
 	private	Date	register_date,	//가입일
@@ -76,7 +77,7 @@ public class UserDTO {
 	public String getAddr() {
 		return addr;
 	}
-	
+
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}

@@ -36,7 +36,7 @@ public class UserDAO {
 				dto = new UserDTO();
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
-				dto.setSimple_pw(rs.getInt("simple_pw"));
+				dto.setSimple_pw(rs.getInt("simple_pw"));			
 				dto.setName(rs.getString("name"));
 				dto.setTel(rs.getString("tel"));
 				dto.setGen(rs.getString("gen"));
@@ -58,7 +58,7 @@ public class UserDAO {
 				UserDTO dto = new UserDTO();
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
-				dto.setSimple_pw(rs.getInt("simple_pw"));
+				dto.setSimple_pw(rs.getInt("simple_pw"));				
 				dto.setName(rs.getString("name"));
 				dto.setTel(rs.getString("tel"));
 				dto.setGen(rs.getString("gen"));
@@ -113,7 +113,7 @@ public class UserDAO {
 				"id, pw, simple_pw, name, tel, gen, email, job_group,"+ 
 				"addr, postal_code, status,register_date,end_date) "+
 				"values "+
-			    "(? ,? ,	?	 ,	?	, ? ,	 ?,	  ?	 , 	?	,"+
+			    "(? ,? ,	?	 ,	  ?	, ? ,	 ?,	  ?	 , 	?	,"+
 			    "  ? ,    ?  	  ,   '활성'  ,  	now()   ,null )";
 		System.out.println(sql);
 		try {
@@ -122,7 +122,7 @@ public class UserDAO {
 			
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPw());
-			pstmt.setInt(3, dto.getSimple_pw());
+			pstmt.setInt(3, dto.getSimple_pw());			
 			pstmt.setString(4, dto.getName());
 			pstmt.setString(5, dto.getTel());
 			pstmt.setString(6, dto.getGen());
@@ -147,7 +147,7 @@ public class UserDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getPw());
-			pstmt.setInt(2, dto.getSimple_pw());
+			pstmt.setInt(2, dto.getSimple_pw());		
 			pstmt.setString(3, dto.getTel());
 			pstmt.setString(4, dto.getGen());
 			pstmt.setString(5, dto.getEmail());

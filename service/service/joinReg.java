@@ -13,12 +13,15 @@ import util.New_Account;
 public class joinReg  implements M_Action{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		System.out.println("올체크 reg드ㅜㄹ어온다");
 		UserDTO dto = new UserDTO();
 
+		
+		System.out.println(request.getParameter("id"));
+		System.out.println("pw \t"+request.getParameter("pw"));
 		dto.setId(request.getParameter("id"));
 		dto.setPw(request.getParameter("pw"));
-		dto.setSimple_pw(Integer.parseInt(request.getParameter("simple_pw")));
+		dto.setSimple_pw(Integer.parseInt(request.getParameter("simple_pw")));	
 		dto.setName(request.getParameter("name"));
 		dto.setTel(request.getParameter("tel"));
 		dto.setGen(request.getParameter("gen"));
