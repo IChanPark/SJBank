@@ -29,7 +29,7 @@ $(document).ready(function(){
 		var accountNum = "<c:out value="${data.account_number }"/>"
 		
 			 $.ajax({	//라디오 버튼 
-				url:"layout/banking/detailList.jsp",
+				url:"Detail",
 				type:'post',
 				data:{
 					acc : accountNum,

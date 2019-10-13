@@ -100,6 +100,32 @@ public class AccountDAO {
 		return res;
 	}
 
+	
+	//////////// 10 13 
+	
+	public ArrayList<AccountDTO> selectIDfromUsable(String id){
+		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
+
+		sql = "select * from account where id = ? and type = '예금' and status = '활성'";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			Account(rs, res);	
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return res;
+	}	
+	
+	
+	
+	
+	///////
 	public AccountDTO selectAccount(String acc){
 		AccountDTO dto = null;
 
