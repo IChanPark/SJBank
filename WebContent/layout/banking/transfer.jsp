@@ -5,7 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script>
+
+
+
 $(document).ready(function(){
+
 
 	$('.ToConfirm').click(function(){
 		var addBox = $("<br><br><br><div class='subTitle'>알아두세요</div><br><br>");
@@ -58,7 +62,7 @@ function fff(){
 	<tr>
 		<td>입금은행 :</td>
 		<td><input type="text" name="transfer_receive" id="transfer_receive" maxlength="50"
-			/ value="직접입력"> <select id="target">
+			/ placeholder="직접입력"> <select id="target">
 				<option>SJ은행</option>
 				<option>하나은행</option>
 				<option>신한은행</option>
