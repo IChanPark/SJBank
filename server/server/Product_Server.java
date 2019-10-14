@@ -35,8 +35,10 @@ public class Product_Server {
 	private	ArrayList<DepositsDTO>  deplog = new  DepositsDAO().uplist();
 	private Deposits_logDTO deploginsert = new Deposits_logDTO();
 	
+	
 	private	ArrayList<SavingDTO>  savlog = new  SavingDAO().uplist();
 	private Saving_logDTO savloginsert = new Saving_logDTO();
+	
 	
 	private Date today = new Date();
 
@@ -73,40 +75,46 @@ public class Product_Server {
 	class SelectDB extends Thread {
 		@Override
 		public void run() {
-
+			
 			//SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
 			while (true) {
 				try {
-					sleep(1000);
+					sleep(3000);
 					System.out.println("돈다");
 					
 					for (SavingDTO ss : savlog) {
+			
 						savloginsert.setAccount_number(ss.getAccount_number());
 						savloginsert.setStatus("성공");
 						 AccountDTO acr = new AccountDAO().selectAccount(ss.getAccount_number());
 						
-						 int  add_preferential= (int) ((acr.getSum()*ss.getInterest())/12);
+						 int  add_preferential= (int) ((acr.getSum()* ss.getInterest())/12);
 		
 						 savloginsert.setSum(acr.getSum()+add_preferential);
-						
+						 savloginsert.setInterest(ss.getInterest());
 						new  AccountDAO().updateMoney(savloginsert);
 						
 						new Saving_logDAO().insert(savloginsert);
+						savlog.remove(ss);
 					}
 					
 					for (DepositsDTO dd : deplog) {
+						System.out.println("depsit "+dd);
 						deploginsert.setAccount_number(dd.getAccount_number());
 						deploginsert.setStatus("성공");
 						 AccountDTO acr = new AccountDAO().selectAccount(dd.getAccount_number());
 						
 						 int  add_preferential= (int) ((acr.getSum()*dd.getInterest())/12);
-		
+						 	System.out.println(add_preferential);
 						deploginsert.setSum(acr.getSum()+add_preferential);
 						
 						new  AccountDAO().updateMoney(deploginsert);
 						
 						new Deposits_logDAO().insert(deploginsert);
+						
+						deplog.remove(dd);
 					}
 					
 					
@@ -136,9 +144,23 @@ public class Product_Server {
 							new Fund_LogDAO().insert(fdloginsert);
 							
 							 System.out.println("펀드 성공~~!!!");
+							 fdlog.remove(ff);
 				
 					}
-
+					if(savlog.size()<=0) {
+						savlog = new  SavingDAO().uplist();
+						System.out.println("도2323니");
+					}
+					if(savlog.size()<=0) {
+						savlog = null;
+						System.out.println("도니");
+					}
+					if(deplog.size()<=0) {
+						deplog = new  DepositsDAO().uplist();
+					}
+					if(fdlog.size()<=0) {
+						fdlog = new  FundDAO().uplist();
+					}
 				} catch (Exception e) {
 				}
 			}

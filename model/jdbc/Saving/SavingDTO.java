@@ -88,5 +88,12 @@ public class SavingDTO {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "SavingDTO [account_number=" + account_number + ", id=" + id + ", product=" + product + ", preferential="
+				+ preferential + ", type=" + type + ", Interest=" + Interest + "]";
+	}
+	
 	
 }
