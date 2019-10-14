@@ -116,11 +116,11 @@ function fff(){
 	</tr>
 	<tr>
 		<td>받는통장 메모 :</td>
-		<td><input type="text" name="to_memo" class = "indata" /></td>
+		<td><input type="text" name="to_memo" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"  /></td>
 	</tr>
 	<tr>
 		<td>내 통장 메모 :</td>
-		<td><input type="text" name="memo" class = "indata" /></td>
+		<td><input type="text" name="memo" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" /></td>
 	</tr>
 </table>
 <br>
@@ -129,7 +129,7 @@ function fff(){
 <table>
 	<tr>
 		<td>CMS코드 :</td>
-		<td><input type="text" name="cms" class = "indata"/></td>
+		<td><input type="text" name="cms" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
 	</tr>
 </table>
 

@@ -152,15 +152,15 @@ function goReg() {
 	</tr>
 	<tr>
 		<td>받는통장 메모</td>
-		<td><input type="text" name="to_memo" id="to_memo" class="indata"/></td>
+		<td><input type="text" name="to_memo" id="to_memo" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
 	</tr>
 	<tr>
 		<td>내통장 메모</td>
-		<td><input type="text" name="memo" id = "memo" class="indata"/></td>
+		<td><input type="text" name="memo" id = "memo" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
 	</tr>
 	<tr>
 		<td>CMS코드</td>
-		<td><input type="text" placeholder="필수사항이 아닙니다." name="cms" id ="cms" class="indata"/></td>
+		<td><input type="text" placeholder="필수사항이 아닙니다." name="cms" id ="cms" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
 	</tr>
 </table>
 <br><br>
