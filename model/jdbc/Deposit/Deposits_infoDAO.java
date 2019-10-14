@@ -141,6 +141,22 @@ public class Deposits_infoDAO {
 		return res;
 	}
 	
+	public ArrayList<Deposits_infoDTO> listUse(){
+		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
+		
+		sql = "select * from deposits_info where status = '활성'";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Deposits_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return res;
+	}
+	
 	public ArrayList<Deposits_infoDTO> selectType(Deposits_infoDTO dto){
 		ArrayList<Deposits_infoDTO> res = new ArrayList<Deposits_infoDTO>();
 		

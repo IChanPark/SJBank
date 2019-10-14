@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div>
+<style>
+.flexbox-centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 1000px;
+}
+</style>
+<div class="flexbox-centering">
+<div class="child">
 	<table class="Info">
 		<tr>
 			<td>아이디</td>
@@ -15,4 +25,5 @@
 				data-menu-name="admin/Service/Login">로그인</a></td>
 		</tr>
 	</table>
+</div>
 </div>

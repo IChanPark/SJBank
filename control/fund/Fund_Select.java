@@ -44,7 +44,7 @@ public class Fund_Select extends HttpServlet {
 		else if(!setDTO.getProduct().equals(""))
 			dto = Fund_InfoDAO.getInstance().selectLikePro(setDTO);
 		else 
-			dto = Fund_InfoDAO.getInstance().list();
+			dto = Fund_InfoDAO.getInstance().listUse();
 
 		for (int i = 0; i < dto.size(); i++) {
 			map.put("product", dto.get(i).getProduct());

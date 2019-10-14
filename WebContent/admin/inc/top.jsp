@@ -6,7 +6,7 @@
    <div id="info"><img src="img/logo.png" height="40px" display="block" margin="0px auto"/>
    <c:choose>
       <c:when test="${adminID !=null }">
-         <a href="#" data-menu-name="admin/Service/LogOut" id="login">로그아웃</a>
+         <a href="#" data-menu-name="admin/Service/LogOut" id="login">${adminID}[관리자] 접속중입니다 로그아웃</a>
       </c:when>
       <c:when test="${adminID ==null }">
          <a href="#" data-menu-name="admin/Service/LoginMain" id="login">로그인</a>

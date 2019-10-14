@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import control.Data_Source;
 import jdbc.Deposit.Deposits_infoDTO;
+import jdbc.Fund.Fund_InfoDTO;
 
 public class Saving_infoDAO {
 	private Connection con;
@@ -142,6 +143,22 @@ public class Saving_infoDAO {
 			Saving_info(rs, res);			
 		} catch (Exception e) { e.printStackTrace(); }
 		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Saving_infoDTO> listUse(){
+		ArrayList<Saving_infoDTO> res = new ArrayList<Saving_infoDTO>();
+		
+		sql = "select * from saving_info where status = '활성'";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Saving_info(rs, res);			
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
 		return res;
 	}
 	

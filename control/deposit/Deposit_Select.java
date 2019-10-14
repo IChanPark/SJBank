@@ -46,7 +46,7 @@ public class Deposit_Select extends HttpServlet {
 		else if(!setDTO.getProduct().equals(""))
 			dto = Deposits_infoDAO.getInstance().selectLikePro(setDTO);
 		else 
-			dto = Deposits_infoDAO.getInstance().list();
+			dto = Deposits_infoDAO.getInstance().listUse();
 
 		for (int i = 0; i < dto.size(); i++) {
 			map.put("product", dto.get(i).getProduct());

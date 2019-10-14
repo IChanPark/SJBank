@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import control.Data_Source;
+import jdbc.Deposit.Deposits_infoDTO;
 import jdbc.Saving.Saving_infoDTO;
 
 public class Fund_InfoDAO {
@@ -137,6 +138,22 @@ public class Fund_InfoDAO {
 			Fund_Info(rs, res);			
 		} catch (Exception e) { e.printStackTrace(); }
 		finally { close(); }
+		return res;
+	}
+	
+	public ArrayList<Fund_InfoDTO> listUse(){
+		ArrayList<Fund_InfoDTO> res = new ArrayList<Fund_InfoDTO>();
+		
+		sql = "select * from fund_info where status = '활성'";
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			Fund_Info(rs, res);			
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
 		return res;
 	}
 	

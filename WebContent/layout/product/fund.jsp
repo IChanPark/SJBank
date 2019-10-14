@@ -201,6 +201,9 @@ function join(me) {
 	});
 };
 
+var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;   
+
+
 function ev(){if(!check(/^[\d]{4}$/,$('#accPW'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};
 function ev2(){if(!check(/^[\d,]{0,13}$/,$('#sum'),'13자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
 function ev3(){if(!check2(/^[\d]{4}$/,$('#newPW'),$('#newPWchk'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};

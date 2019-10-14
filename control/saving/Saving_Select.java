@@ -44,7 +44,7 @@ public class Saving_Select extends HttpServlet {
 		else if(!setDTO.getProduct().equals(""))
 			dto = Saving_infoDAO.getInstance().selectLikePro(setDTO);
 		else 
-			dto = Saving_infoDAO.getInstance().list();
+			dto = Saving_infoDAO.getInstance().listUse();
 
 		for (int i = 0; i < dto.size(); i++) {
 			map.put("product", dto.get(i).getProduct());
