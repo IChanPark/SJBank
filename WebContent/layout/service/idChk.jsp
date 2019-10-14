@@ -9,7 +9,7 @@
 request.setCharacterEncoding("UTF-8");	//한글처리
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
-
+System.out.println(request.getParameter("id"));
 UserDTO dto = UserDAO.getInstance().selectId(request.getParameter("id"));
 
 if(dto!=null)
