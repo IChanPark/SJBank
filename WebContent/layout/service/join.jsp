@@ -10,7 +10,11 @@
 		</tr>
 		<tr>	
 			<td>비밀번호</td>
-			<td><input type="password" name="pw" /><input type="button" value="비밀번호확인" onclick="pwChk()"></td>		
+			<td><input type="password" name="pw" id="pw"/></td>		
+		</tr>	
+		<tr>	
+			<td>비밀번호 중복확인</td>
+			<td><input type="password" name="pw1" id="pw1"/><input type="button" value="비밀번호확인" onclick="pwChk()" id=pwChk></td>		
 		</tr>		
 		<tr>	
 			<td>간편 비밀 번호</td>
@@ -18,7 +22,7 @@
 		</tr>
 		<tr>	
 			<td>계좌비밀번호</td>
-			<td><input type="password" name="acc_pw" /><input type="button" value="중복확인" onclick="accpw()"></td>			
+			<td><input type="password" name="acc_pw" /></td>			
 		</tr>	
 		<tr>
 		<td>이름</td>							
@@ -93,7 +97,11 @@ function addChk(){
 
 function checkId(){
 	
-	var aaa = $('input[name=id]').val(); 
+	
+	var aaa = $('input[name=id]').val();
+	
+	
+	
 	
 	if(aaa == "")
     {
@@ -105,24 +113,34 @@ function checkId(){
 
 }
 
-function pwChk (){
 
-    var pw = false;
-    var message = "";   
-    var checkPoint = 0;
 
-    // 입력값이 있을경우에만 실행
-    if(pw.length) {
+$(document).ready(function(){
 
-        // 최대 입력 글자수를 제한한다.
-        if(pw.length < 4 || pw.length > 8) {
-            message = ":: 최소 8자 이상, 최대 16자 이하 ::";
-           
-        }else {
-            message = ":: 비밀번호를 입력해 주세요 ::";     
-            }
-    }
-}
+	$('#pwChk').click(function(){
+		
+
+		alert($('input[name=pw]').val());
+		alert($('input[name=pw1]').val());
+		var testPw = /^[0-9]{4}$/;
+		alert(testPw.test($('input[name=pw]').val()));
+		if(!testPw.test($('input[name=pw]').val()))
+		{
+			alert("계좌 비밀번호 오류");
+			return;
+		} 
+		
+	    if($('input[name=pw]').val()==$('input[name=pw1]').val()){
+	    	alert("	번호가 일치 합니다. ");
+	    }
+	    else{
+	    	alert("번호가 일치 하지 않습니다.");
+	    	return;
+	    }
+	    // 입력값이 있을경우에만 실행
+	});	
+});
+
 
 async function allChk() {	//메뉴 이동용
  
@@ -142,6 +160,19 @@ async function allChk() {	//메뉴 이동용
 	
 	
 function idChk() {
+	
+	var zzz = /^[a-z0-9A-Z가-힣]{3,8}$/;
+	alert("적용되나요?");
+	if(!zzz.test($('input[name=id]').val()))
+	{
+		alert("id 오류");
+		return;
+	} 
+	
+	
+	
+	
+	
 	gogo = "layout/service/idChk.jsp";
 	$.ajax({	
 	url:gogo,
@@ -153,17 +184,18 @@ function idChk() {
 		
 		if(qqq.id != "" || $('input[name=id]').val()==""){
 			alert("사용할 수 없는 아이디 입니다.");
+			alert(qqq.id);
 			$('input[name=id]').val("");
 			$('input[name=id]').focus();
 			return idchk = false;
-		}else if(qqq.id = "" || $('input[name=id]').val()==""){
+		}else if(qqq.id = "" || $('input[name=id]').val()!=""){
 			alert("사용할 수 있는 아이디 입니다.");
 			$('input[name=id]').val("");
 			$('input[name=id]').focus();
 			 return idchk = true; 
 		}else return;
 	},error:function(qqq){
-		
+		alert("에러발생");
 	}	
 		
 	});	
