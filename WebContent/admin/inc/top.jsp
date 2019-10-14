@@ -49,7 +49,7 @@
          </div>
       </li>
       
-       <li><a href="#" >사용자·멤버십 관리</a>
+       <li><a href="#" >사용자 관리</a>
        <div class="SubMenu">
             <ul class="SubUl">
                <div class="LowMenu">

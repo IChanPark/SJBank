@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Exception_Menu {
 	private ArrayList<String> nonClass;
 	private String [] group = {
-			"admin/service/loginmain", "admin.Service.Login"
+			"admin/service/loginmain", "admin/service/login", "admin/service/logout"
 			//메뉴 예외처리
 	};	
 	private Exception_Menu() {
