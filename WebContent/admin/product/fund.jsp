@@ -123,6 +123,11 @@ function detail(me) {
 		}	
 	});
 };
+var chk = false;
+function ev(){if(!check(/^[a-zA-Z0-9가-힣\W\w\s]{4,50}$/,$('#product'),'상품명은 4자 이상 50자 이내로 작성가능합니다.')){return false;}else{return true;}};
+function ev2(){if(!check(/^[a-zA-Z가-힣]{4,20}$/,$('#management'),'운용사는 4자 이상 20자 이내로 한글, 영어만 입력가능합니다.')){return false;}else{return true;}};
+function ev3(){if(!check(/^[\d.]{0,5}[\d]$/,$('#fee'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
+function ev4(){if(!check(/^[\d.]{0,5}[\d]$/,$('#first_fee'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
 
 function add(){
 	$(".scrollB").remove();
@@ -134,19 +139,19 @@ function add(){
 	box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품종류</div><div class='infoMain_Value'>";
 	box	+=	"<select id='sel_type'><option value='체권'>체권</option><option value='혼합자산(재간접형)'>혼합자산(재간접형)</option></select></div></div>";
 	box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품명</div><div class='infoMain_Value'>";
-	box +=  "<input type='text' placeholder='상품명을 입력해주세요.' id='product'></div></div>";
+	box +=  "<input onfocusout='ev()' type='text' placeholder='상품명을 입력해주세요.' id='product'></div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>상품설명</div><div class='infoMain_Value'>";
 	box +=  "<textarea placeholder='상품내용을 입력해주세요. &#13;&#10;①... &#13;&#10;②...' id='product_info'></textarea></div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>운용사</div><div class='infoMain_Value'>";
-	box +=  "<input type='text' placeholder='운용사를 입력해주세요.' id='management'>운용사를 입력해주세요.</div></div>";	
+	box +=  "<input onfocusout='ev2()' type='text' placeholder='운용사를 입력해주세요.' id='management'>운용사를 입력해주세요.</div></div>";	
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>세금</div><div class='infoMain_Value'>";
 	box +=  "<select id='tax'><option value='과세'>과세</option><option value='비과세'>비과세</option></select> 과세여부를 선택해주세요.</div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>지역</div><div class='infoMain_Value'>";
 	box +=  "<select id='area'><option value='국내'>국내</option><option value='해외'>해외</option></select>투자지역을 선택해주세요.</div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>년 보수</div><div class='infoMain_Value'>";
-	box +=  "<input type='text' placeholder='0.0' id='fee'>수수료를 입력해주세요.</div></div>";
+	box +=  "<input onfocusout='ev3()' type='text' placeholder='0.0' id='fee'>수수료를 입력해주세요.</div></div>";
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>선취 수수료</div><div class='infoMain_Value'>";
-	box +=  "<input type='text' placeholder='0.0' id='first_fee'>수수료를 입력해주세요.</div></div>";	
+	box +=  "<input onfocusout='ev4()' type='text' placeholder='0.0' id='first_fee'>수수료를 입력해주세요.</div></div>";	
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>위험구분</div><div class='infoMain_Value'>";
 	box +=  "<select id='sector'><option value='보통위험'>보통위험</option><option value='고위험'>고위험</option></select>위험구분을 선택해주세요.</div></div>";
 	box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Product/Fund'>상품등록취소</div>";
@@ -155,6 +160,12 @@ function add(){
 };
 
 function addReg(){
+	if(ev()&&ev2()&&ev3()&&ev4()&&true){
+		goReg();
+	}
+};
+
+function goReg(){
 	if(isRun == true)
 		return;
 	isRun = true;

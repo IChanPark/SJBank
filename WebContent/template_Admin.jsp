@@ -21,6 +21,7 @@
 <script type="text/javascript" src="js/Loader.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>	  <!-- 데이트 피커 -->
 <script type="text/javascript" src="js/Date_Picker.js"></script>	  <!-- 데이트 피커 -->
+<script type="text/javascript" src="js/Regular.js"></script>	  <!-- 데이트 피커 -->
 
 </head>
 	<form name="paging" action="SJAdmin" onsubmit="return false;" method="post"/>

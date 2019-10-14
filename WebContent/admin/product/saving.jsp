@@ -142,47 +142,61 @@ function detail(me) {
    });
 };
 
+function ev(){if(!check(/^[a-zA-Z0-9가-힣\W\w\s]{4,50}$/,$('#product'),'상품명은 4자 이상 50자 이내로 작성가능합니다.')){return false;}else{return true;}};
+function ev2(){if(!check(/^[\d,]{0,50}[\d]$/,$('#month'),'상품기간은 1자 이상 50자 이내로 숫자와 다중 등록시 ,로 구분하여 입력가능합니다.')){return false;}else{return true;}};
+function ev3(){if(!check(/^[\d]{4,8}[\d]$/,$('#min_sum'),'4자리 이상 8자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
+function ev4(){if(!check(/^[\d]{4,13}$/,$('#max_sum'),'4자리 이상 13자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
+function ev5(){if(!check(/^[\d.]{0,5}[\d]$/,$('#min_interest'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
+function ev6(){if(!check(/^[\d.]{0,5}[\d]$/,$('#max_interest'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
+function ev7(){if(!check(/^[\d.]{0,5}[\d]$/,$('.prf_content'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
+
 function add(){
    $(".scrollB").remove();
    $(".search_Box").remove();
    var box = '';
-   box +=   "<div class='infoBox'>";
-   box +=   "<div class='infoMid_Guide'>상품 추가</div>";
+   box +=	"<div class='infoBox'>";
+   box +=	"<div class='infoMid_Guide'>상품 추가</div>";
    box +=   "<div class='infoAdmin'>";
    box +=   "<div class='infoMain_Info'><div class='infoMain_Type'>상품종류</div><div class='infoMain_Value'>";
    box +=   "<select id='sel_type'><option value='정기'>정기</option><option value='자유'>자유</option><option value='정기/자유'>정기/자유</option></select></div></div>";
    box +=   "<div class='infoMain_Info'><div class='infoMain_Type'>상품명</div><div class='infoMain_Value'>";
-   box +=  "<input type='text' placeholder='상품명을 입력해주세요.' id='product'></div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>상품설명</div><div class='infoMain_Value'>";
-   box +=  "<textarea placeholder='상품내용을 입력해주세요. &#13;&#10;①... &#13;&#10;②...' id='product_info'></textarea></div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>상품기간</div><div class='infoMain_Value'>";
-   box +=  "<input type='text' placeholder='상품기간을 입력해주세요.' id='month'> 숫자만 입력부탁드리며 상품기간 다중 등록 시 ',' 로 구분하여 입력해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div><div class='infoMain_Value'>";
-   box +=  "<select id='interest_type'><option value='만기일시지급-단리식'>만기일시지급-단리식</option></select></div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>세금</div><div class='infoMain_Value'>";
-   box +=  "<select id='tax'><option value='과세'>과세</option><option value='비과세'>비과세</option></select> 과세여부를 선택해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>최소납입금액</div><div class='infoMain_Value'>";
-   box +=  "<input type='text' placeholder='금액을 입력해주세요.' id='min_sum'> 최소 납입금액을 입력해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>최대납입금액</div><div class='infoMain_Value'>";
-   box +=  "<input type='text' placeholder='금액을 입력해주세요.' id='max_sum'> 최대 납입금액을 입력해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>자동재예치</div><div class='infoMain_Value'>";
-   box +=  "<select id='retention'><option value='가능'>가능</option><option value='불가'>불가</option></select> 자동재예치 가능 여부를 선택해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>일부해지</div><div class='infoMain_Value'>";
-   box +=  "<select id='partialization'><option value='가능'>가능</option><option value='불가'>불가</option></select> 일부해지 가능 여부를 선택해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>기준금리</div><div class='infoMain_Value'>";
-   box +=  "<input type='text' placeholder='0.0' id='min_interest'> 기준 금리를 입력해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>최대금리</div><div class='infoMain_Value'>";
-   box +=  "<input type='text' placeholder='0.0' id='max_interest'> 최대 금리를 입력해주세요.</div></div>";
-   box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>우대항목</div><div class='infoMain_Value'>";
-   box +=  "<select class='preferential'>우대구분<option value='예금'>예금</option><option value='적금'>적금</option><option value='펀드'>펀드</option></select> ";
-   box +=  "<select class='prf_content'>우대조건<option value='보유시'>보유시</option></select> ";
-   box +=  " 우대 추가금리를 입력해주세요. <input type='text' placeholder='0.0' class='prf_interest'> </div></div>";
-   box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Product/Saving'>상품등록취소</div>";
-   box +=  "<div class='AdminButton' onclick='addReg()'>상품등록</div></div></div>";
+   box +=	"<input onfocusout='ev()' type='text' placeholder='상품명을 입력해주세요.' id='product'></div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품설명</div><div class='infoMain_Value'>";
+   box +=	"<textarea placeholder='상품내용을 입력해주세요. &#13;&#10;①... &#13;&#10;②...' id='product_info'></textarea></div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품기간</div><div class='infoMain_Value'>";
+   box +=	"<input onfocusout='ev2()' type='text' placeholder='상품기간을 입력해주세요.' id='month'> 숫자만 입력부탁드리며 상품기간 다중 등록 시 ',' 로 구분하여 입력해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>이자지급방식</div><div class='infoMain_Value'>";
+   box +=	"<select id='interest_type'><option value='만기일시지급-단리식'>만기일시지급-단리식</option></select></div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>세금</div><div class='infoMain_Value'>";
+   box +=	"<select id='tax'><option value='과세'>과세</option><option value='비과세'>비과세</option></select> 과세여부를 선택해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>최소납입금액</div><div class='infoMain_Value'>";
+   box +=	"<input onfocusout='ev3()' type='text' placeholder='금액을 입력해주세요.' id='min_sum'> 최소 납입금액을 입력해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>최대납입금액</div><div class='infoMain_Value'>";
+   box +=	"<input onfocusout='ev4()' type='text' placeholder='금액을 입력해주세요.' id='max_sum'> 최대 납입금액을 입력해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>자동재예치</div><div class='infoMain_Value'>";
+   box +=	"<select id='retention'><option value='가능'>가능</option><option value='불가'>불가</option></select> 자동재예치 가능 여부를 선택해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>일부해지</div><div class='infoMain_Value'>";
+   box +=	"<select id='partialization'><option value='가능'>가능</option><option value='불가'>불가</option></select> 일부해지 가능 여부를 선택해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>기준금리</div><div class='infoMain_Value'>";
+   box +=	"<input onfocusout='ev5()' type='text' placeholder='0.0' id='min_interest'> 기준 금리를 입력해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>최대금리</div><div class='infoMain_Value'>";
+   box +=	"<input onfocusout='ev6()' type='text' placeholder='0.0' id='max_interest'> 최대 금리를 입력해주세요.</div></div>";
+   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>우대항목</div><div class='infoMain_Value'>";
+   box +=	"<select class='preferential'>우대구분<option value='예금'>예금</option><option value='적금'>적금</option><option value='펀드'>펀드</option></select> ";
+   box +=	"<select class='prf_content'>우대조건<option value='보유시'>보유시</option></select> ";
+   box +=	" 우대 추가금리를 입력해주세요. <input onfocusout='ev7()' type='text' placeholder='0.0' class='prf_interest'> </div></div>";
+   box +=	"</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Product/Saving'>상품등록취소</div>";
+   box +=	"<div class='AdminButton' onclick='addReg()'>상품등록</div></div></div>";
    $("#mm").append(box);
 };
 
 function addReg(){
+	if(ev()&&ev2()&&ev3()&&ev4()&&ev5()&&ev6()&&ev7()&&true){
+		goReg();
+	}
+};
+
+function goReg(){
    if(isRun == true)
       return;
    isRun = true;

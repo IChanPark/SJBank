@@ -191,7 +191,7 @@ function join(me) {
 			});
 			box +=	"</select><button>잔액조회</button></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>";
-			box +=	"<input type='text' placeholder='숫자4자리' id='pw'></input></div></div>"; // <button>계좌 비밀번호 오류 횟수조회</button>
+			box +=	"<input onfocusout='ev()' type='text' placeholder='숫자4자리' id='pw'></input></div></div>"; // <button>계좌 비밀번호 오류 횟수조회</button>
 			box +=	"<div class='join_Guide'>신규계좌 정보</div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>적립방식</div>";
 			box +=	"<div class='infoMain_Value' data-join-type='"+qqq.type+"'>"+qqq.type+"</div></div>";
@@ -204,16 +204,16 @@ function join(me) {
 			});
 			box	+=	"</select></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규금액</div>";
-			box +=	"<div class='infoMain_Value'><input type='text' placeholder='0' id=sum></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
+			box +=	"<div class='infoMain_Value'><input onfocusout='ev2()' type='text' placeholder='0' id=sum></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
 			box	+=	"<div class='infoMain_Value'><button onclick='add(this)' value='5000000'>500만</button><button onclick='add(this)' value='1000000'>100만</button>";
 			box +=	"<button onclick='add(this)' value='500000'>50만</button><button onclick='add(this)' value='100000'>10만</button><button onclick='add(this)' value='50000'>5만</button>";
 			box	+=	"<button onclick='add(this)' value='10000'>1만</button><button onclick='add(this)' value='1000'>1천</button><button onclick='zero(this)'>정정</button></div></div>";	
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규계좌 비밀번호</div>";
 			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='숫자4자리' id='newPW'></input></div></div>"
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>비밀번호 확인</div><div class='infoMain_Value'>";
-			box	+=	"<input type='text' placeholder='숫자4자리' id='newPWchk'></input></div></div>";
+			box	+=	"<input onfocusout='ev3()' type='text' placeholder='숫자4자리' id='newPWchk'></input></div></div>";
 			box	+=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌별명 (선택사항)</div>";
-			box	+=	"<div class='infoMain_Value'><input type='text' placeholder='10자 이내' id='alias'></input></div></div>";
+			box	+=	"<div class='infoMain_Value'><input onfocusout='ev4()' type='text' placeholder='10자 이내' id='alias'></input></div></div>";
 			box	+=	"</div>";
 			box	+=	"<div class='AdminBot' data-product-name='"+qqq.product+"'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Saving'>이전</div>";
 			box +=	"<div class='join_Button' onclick='joinReg(this)'>다음</div></div>";
@@ -230,7 +230,18 @@ function join(me) {
 	});
 };
 
-function joinReg(me) {
+function ev(){if(!check(/^[\d]{4}$/,$('#accPW'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};
+function ev2(){if(!check(/^[\d,]{0,13}$/,$('#sum'),'13자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
+function ev3(){if(!check2(/^[\d]{4}$/,$('#newPW'),$('#newPWchk'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};
+function ev4(){if(!check(/^[a-zA-Z0-9가-힣\s]{0,10}[a-zA-Z0-9가-힣]$/,$('#alias'),'·선택사항·별명은 10자이내로 작성가능합니다.')){return false;}else{return true;}};
+
+function joinReg(me){
+	if(ev()&&ev2()&&ev3()&&ev4()&&true){
+		goReg(me);
+	}
+};
+
+function goReg(me) {
 	if(isRun == true)
 		return;
 	isRun = true;

@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 
 import jdbc.Deposit.Deposits_infoDAO;
 import jdbc.Deposit.Deposits_infoDTO;
-import jdbc.Saving.Saving_infoDTO;
 
 @WebServlet("/product/deposit/Admin_Select")
 public class Deposit_Admin_Select extends HttpServlet {

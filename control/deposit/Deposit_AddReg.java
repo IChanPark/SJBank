@@ -36,13 +36,14 @@ public class Deposit_AddReg extends HttpServlet {
 				max_interest = Float.parseFloat(request.getParameter("max_interest"));
 		int		min_sum = Integer.parseInt(request.getParameter("min_sum")),
 				max_sum = Integer.parseInt(request.getParameter("max_sum"));
+		String chk = request.getParameter("chk");
 
 		System.out.print("sel_type : "+type+" product : "+product+" deposits_info : "+deposits_info+" month : "+month+" interest_type : "+interest_type);
 		System.out.print(" tax : "+tax+" retention : "+retention+" partialization : "+partialization+" preferential : "+preferential+" prf_content : "+prf_content);
 		System.out.println(" prf_interest : "+prf_interest+" id : "+id);
 
 		Deposits_infoDTO dto = new Deposits_infoDTO();
-
+		System.out.println(chk);
 		dto.setType(type);
 		dto.setProduct(product);
 		dto.setDeposits_info(deposits_info);
