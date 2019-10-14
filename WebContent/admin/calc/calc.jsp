@@ -16,7 +16,7 @@ var month_data = {
 };
 layout =	"<div class= 'infoBox'>";
 layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>검색날짜 선택</div><div class='infoMain_Value'>";
-layout +=	"일 별<input type='radio' name= 'date_radio' value='d'/>월 별<input type='radio' name= 'date_radio' value='m' checked='checked'/>";
+layout +=	"일 별<input type='radio' name= 'date_radio' value='d' checked='checked'/>월 별<input type='radio' name= 'date_radio' value='m'/>";
 layout +=	"년도 별<input type='radio' name= 'date_radio' value='y'/> </div></div>";
 layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품 선택</div><div class='infoMain_Value'>";
 layout +=	"모두<input type='radio' name= 'prod_radio' value='모두' checked='checked'/>예금<input type='radio' name= 'prod_radio' value='예금'/>";
@@ -27,13 +27,17 @@ layout += 	"</div><div class='infoAdmin'><table id='info_table'><tbody id='info_
 layout += 	"<tr><th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th></tr></tbody></table></div>";
 
 $('#mid').append(layout);
-	//<input type='text' placeholder='검색어를 입력해주세요 .' id='search_Word'>
+//<input type='text' placeholder='검색어를 입력해주세요 .' id='search_Word'>
+$(document).ready(function() {
+	setDay();
+});
 
 $("#clean_Button").on("click", function(){//초기화
 	$("input:radio[name='date_radio']:radio[value='d']").prop("checked", true);
 	$("input:radio[name='prod_radio']:radio[value='all']").prop("checked", true);
 	$('#days').remove();
 	$("#info_tbody").empty();
+	setDay();
 });
 $("input:radio[name='date_radio']:radio[value='d']").on("click",function() {
 	$('#days').remove();//검색날짜선택 년도별
@@ -55,6 +59,7 @@ $("#search_Button").on("click", function(){
 	$("#info_tbody").empty();
 	ajax_go();
 });
+
 function setYear(){
     var dt = new Date();
     var ss = "", ee = "", get_year = dt.getFullYear();
@@ -77,6 +82,8 @@ function setMonth(){
 	$("#end_month").datepicker(month_data);
 	$('#start_month').attr("readonly",true);
 	$('#end_month').attr("readonly",true);
+	$('#start_month').datepicker('setDate', new Date());
+	$('#end_month').datepicker('setDate', new Date());
 };
 function setDay(){
 	layout = "<div id='days'>시작일 <input type='text' id='start_day'/>";
@@ -86,6 +93,8 @@ function setDay(){
 	$('#end_day').datepicker();
 	$('#start_day').attr("readonly",true);
 	$('#end_day').attr("readonly",true);
+	$('#start_day').datepicker('setDate', new Date());
+	$('#end_day').datepicker('setDate', new Date());
 };
 function option(){
 	if(isRun == true)

@@ -1,11 +1,11 @@
-package util;
+package admin.Util;
 
 import java.util.ArrayList;
 
 public class Exception_Menu {
 	private ArrayList<String> nonClass;
 	private String [] group = {
-			"layout/service","layout/product/deposit","layout/product/saving","layout/product/fund"
+			"admin/service/loginmain", "admin.Service.Login"
 			//메뉴 예외처리
 	};	
 	private Exception_Menu() {

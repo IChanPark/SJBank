@@ -19,13 +19,12 @@ public class FaqReg implements M_Action {
 				
 		FaqDTO dto = new FaqDTO();
 
-		dto.setId(request.getParameter("id"));
+		dto.setId((String)request.getSession().getAttribute("adminID"));
 		dto.setTitle(request.getParameter("title"));
 		dto.setType(request.getParameter("type"));
 		dto.setContent(request.getParameter("content"));
 		dto.setStatus("활성");
-		
-		
+
 		//계좌번호 넣어주세요
 		
 		//넣어주세요

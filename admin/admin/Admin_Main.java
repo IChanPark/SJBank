@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import inf.M_Action;
+import util.Exception_Menu;
 
 @WebServlet("/SJAdmin")
 public class Admin_Main extends HttpServlet {
@@ -33,6 +34,14 @@ public class Admin_Main extends HttpServlet {
 				url = url.toLowerCase();
 				service = service.substring(0, service.length()-1);
 
+				if(session.getAttribute("adminID")==null && admin.Util.Exception_Menu.getInstance().check(url)) {
+					request.setAttribute("msg", "접근 권한이 없습니다.");
+					request.setAttribute("goUrl", "SJAdmin");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp"); 
+					dispatcher.forward(request, response);
+					return;
+				}
+				
 				request.setAttribute("mainUrl", url); //template에서 포워딩할 주소 세팅
 			
 				System.out.println("url : "+url+"\n"+"service : "+service);

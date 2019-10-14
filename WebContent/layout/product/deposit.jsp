@@ -174,6 +174,7 @@ function join(me) {
 		data:{	product : $(me).parent('[data-product-name]').data("product-name")},
 		dataType:'json',
 		success:function(qqq){
+			<% if(request.getSession().getAttribute("userID")!=null){ %>
 			$('.subTitle').text(qqq.product);
 			$(".infoBox").remove();
 			$(".infoMain").remove();
@@ -219,6 +220,9 @@ function join(me) {
 			box	+=	"<div class='AdminBot' data-product-name='"+qqq.product+"'><div class='join_Button' onclick='goMenu(this)' data-menu-name='product/Deposit'>이전</div>";
 			box +=	"<div class='join_Button' onclick='joinReg(this)'>다음</div></div>";
 			$("#mm").append(box);
+			<% } else { %>
+			alert('로그인이후 이용가능합니다.');
+			<% } %>
 			isRun = false;
 		},
 		error:function(qqq){

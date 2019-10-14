@@ -16,6 +16,7 @@ public class JungDTO {
 	
 	private	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 	private	SimpleDateFormat sdfy = new SimpleDateFormat("yyyy");
+	private	SimpleDateFormat sdfd = new SimpleDateFormat("yyyy-MM-dd");
 
 	public String getType() {
 		return type;
@@ -51,15 +52,19 @@ public class JungDTO {
 	
 	public void setDateStr(String date) {
 		try {
-			if(date.length() <5)
+			if(date.length() <5) {
 				this.date = sdfy.parse(date);
-			else 
+			}else if(date.length() < 8) {
 				this.date = sdf.parse(date);
+			}else {
+				this.date = sdfd.parse(date);
+			}
+			System.out.println(date.length());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void setType(String type) {
 		this.type = type;
 	}
