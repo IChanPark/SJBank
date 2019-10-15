@@ -61,10 +61,6 @@ public class Fund_JoinReg extends HttpServlet {
 
 		int mysum = myAccDTO.getSum();
 
-		myAccDTO.setSum(mysum-sum);
-
-		AccountDAO.getInstance().updateMoney(myAccDTO);
-
 		Transfer_logDTO transDTO = new Transfer_logDTO();
 		transDTO.setAccount_number(myAcc);
 		transDTO.setTarget(targe);
@@ -83,9 +79,9 @@ public class Fund_JoinReg extends HttpServlet {
 		transDTO.setStatus(status);
 		Transfer_logDAO.getInstance().insert(transDTO);
 			
-		if((mysum-sum)<0) {
-			transDTO.setStatus(status);
-			Transfer_logDAO.getInstance().insert(transDTO);
+		if((mysum-sum)>0) {
+			myAccDTO.setSum(mysum-sum);
+			AccountDAO.getInstance().updateMoney(myAccDTO);
 			
 			transDTO.setAccount_number(newAcc);
 			transDTO.setTarget(targe);
