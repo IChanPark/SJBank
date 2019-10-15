@@ -254,7 +254,14 @@ function joinReg(me) {
 		},
 		dataType:'json',
 		success:function(qqq){
-			gomyfund();
+			
+		$(".infoBox").remove();
+			box = "";
+			box += "상품 "+ qqq.product +"["+qqq.type+"]가입이 완료되었습니다.!<br>";
+			box += "신규 계좌번호 "+qqq.newAcc+"입니다.!";
+			box += "<div onclick='gomyfund()'>목록으로</div>"
+			
+			$("#mm").append(box);
 			isRun = false;
 		},
 		error:function(qqq){

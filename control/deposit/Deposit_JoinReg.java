@@ -102,29 +102,32 @@ public class Deposit_JoinReg extends HttpServlet {
 			accDTO.setId(userid);
 			accDTO.setPw(request.getParameter("newPW"));
 			
-			float Inte = 0.0F;
 			String Pref = "없음";
 			Deposits_infoDTO infoSet = new Deposits_infoDTO();
 			infoSet.setProduct(product);
 			Deposits_infoDTO infoDTO = Deposits_infoDAO.getInstance().selectPro(infoSet);
 			for (AccountDTO a : AccountDAO.getInstance().selectID(userid)) {
 				if(infoDTO.getPreferential().equals(a.getType())) {
-					Inte = infoDTO.getMax_interest();
+					infoDTO.setMin_interest(infoDTO.getMax_interest());
 					Pref = a.getType()+"가입자 우대";
 					break;
-				}else 
-					Inte = infoDTO.getMin_interest();
+				}
 			}
 			
 			depDTO.setAccount_number(newAcc);
 			depDTO.setId(userid);
 			depDTO.setPrduct(product);
 			depDTO.setPreferential(Pref);
-			depDTO.setInterest(Inte);
+			depDTO.setInterest(infoDTO.getMin_interest());
 			depDTO.setType(request.getParameter("type"));
 
 			AccountDAO.getInstance().insert(accDTO);
 			DepositsDAO.getInstance().insert(depDTO);
+			
+			map.put("product", product);
+			map.put("newAcc", newAcc);
+			map.put("Interest", depDTO.getInterest()+"");
+			map.put("type", request.getParameter("type"));
 			
 			String json = gson.toJson(map);
 			out.print(json);

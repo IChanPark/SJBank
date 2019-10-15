@@ -114,12 +114,16 @@ public class Fund_JoinReg extends HttpServlet {
 			depDTO.setRest(rest);
 			depDTO.setPrice_modify(price_modify);
 	
-	
 			AccountDAO.getInstance().insert(accDTO);
 			FundDAO.getInstance().insert(depDTO);
+
+			map.put("product", product);
+			map.put("newAcc", newAcc);
+			map.put("type", request.getParameter("type"));
+			
+			String json = gson.toJson(map);
+			out.print(json);
 		}
-		String json = gson.toJson(map);
-		out.print(json);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
