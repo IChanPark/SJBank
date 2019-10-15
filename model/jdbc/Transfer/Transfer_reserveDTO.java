@@ -1,24 +1,26 @@
 package jdbc.Transfer;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transfer_reserveDTO {
+public class Transfer_reserveDTO implements Serializable{
 	private Integer 	seq;				//로그번호
 					
 	
 	private	String 		account_number,		//계좌 번호
 						to_account_number,	//본인계좌 여부
 						sum,				//은행/증권사명
-						time,				//이체시간
+									//이체시간
 						memo,	
 						to_memo,	
 						cms,		
 						status,
 						scheduled_date;		//예약 이체 예정시간
 
-	private Date		register_date;		//예약 이체 등록일
+	private Date		time,	
+						register_date;		//예약 이체 등록일
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -54,13 +56,6 @@ public class Transfer_reserveDTO {
 		this.sum = sum;
 	}
 
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
 
 	public String getMemo() {
 		return memo;
@@ -119,6 +114,26 @@ public class Transfer_reserveDTO {
 			e.printStackTrace();
 		}
 	}
+	
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
+	
+	public String getTimeStr() {
+		return sdf.format(register_date);
+	}
+	public void setTimeStr(String time) {
+		try {
+			this.time = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 	@Override
 	public String toString() {

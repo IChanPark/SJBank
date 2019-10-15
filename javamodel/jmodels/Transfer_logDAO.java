@@ -1,5 +1,6 @@
 package jmodels;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import javax.sql.DataSource;
 import control.Data_Source;
 import jdbc.Transfer.Transfer_logDTO;
 
-public class Transfer_logDAO {
+public class Transfer_logDAO implements Serializable{
 
 	private Connection con;
 	private Statement stmt;

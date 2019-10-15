@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(document).ready(function(){
 
 	$('.check').click(function(){
-		alert("눌림")
 		/* alert("눌림");
 		var f=document.paging; 
 		f.method="post";
@@ -18,7 +17,7 @@ $(document).ready(function(){
 			data:{
 				start : $("input[name=start]").val(),
 				  end : $("input[name=end]").val(),
-				  sort : $("input[name=sort]").val()
+				  sort : $('input[name="sort"]:checked').val()
 			},
 			dataType:'json',
 			success:function(qqq){
@@ -40,21 +39,17 @@ $(document).ready(function(){
 			}
 		});
 	});
-	    
-	    
 });
 function cancel(qqq)
 {
-	alert(qqq);
+	document.paging.hid_t.value = "banking/check/Cancel";
+	document.paging.seq.value=qqq;
+	document.paging.submit();
 }
-
-
 </script>
-
+<input type="hidden" name ="seq" />
+<input type="hidden" name ="type" value="reserve" />
 <div class="subTitle">예약이체 </div>
-
-
-
 <table border="">
 	<tr>
 		<td>조회기간 선택</td>
@@ -65,16 +60,21 @@ function cancel(qqq)
 		<td><input type="radio" name="sort" value="desc"/>최근거래순 <input type="radio"  name="sort" value="asc"/>과거거래순</td>
 	</tr>
 	<tr>
+		<td>계좌 선택</td>
+		<td><select name="acc" id="acc">
+		<c:forEach items="${data }" var = "dto">
+		<option value="numbers">${dto.account_number }</option>
+		</c:forEach>
+		</select>
+		</td>
+	</tr>
+	<tr>
 		<td colspan="2" align="center"><div class="check" />조회</td>
 	</tr>
 </table>
-
-<br>
-<br>
+<br><br>
 <div class="subTitle">예약이체 조회결과</div>
-<br>
-<br>
-
+<br><br>
 <table border="" id="tot">
 		<td>선택</td>
 		<td>이체예정일시</td>
@@ -87,10 +87,6 @@ function cancel(qqq)
 		<td>CMS코드</td>
 	</tr>
 </table>
-
-
-<br>
-<br>
-
+<br><br>
 <div align="center"><button class="subTitle" >예약이체 취소</button>
 </div>

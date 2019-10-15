@@ -1,5 +1,6 @@
 package jmodels;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,14 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.sql.DataSource;
-
-import control.Data_Source;
 import jdbc.Menu.MenuDTO;
 import jdbc.Transfer.Transfer_delayDTO;
+import server.DBAccess_IP;
 
-public class Transfer_delayDAO {
+public class Transfer_delayDAO implements Serializable{
 
 
 	private Connection con;
@@ -25,7 +23,7 @@ public class Transfer_delayDAO {
 	private Transfer_delayDAO() {
 		
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 			
@@ -89,7 +87,7 @@ public class Transfer_delayDAO {
 	public ArrayList<Transfer_delayDTO> list(){
 		ArrayList<Transfer_delayDTO> res = new ArrayList<Transfer_delayDTO>();
 		
-		sql = "select * from transfer_delayDTO";
+		sql = "select * from transfer_delay";
 		try {
 			rs = stmt.executeQuery(sql);
 			

@@ -1,5 +1,6 @@
 package jmodels;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,8 +15,9 @@ import javax.sql.DataSource;
 import control.Data_Source;
 import jdbc.Menu.MenuDTO;
 import jdbc.Transfer.Transfer_reserveDTO;
+import server.DBAccess_IP;
 
-public class Transfer_reserveDAO {
+public class Transfer_reserveDAO implements Serializable{
 
 	private Connection con;
 	private Statement stmt;
@@ -24,7 +26,7 @@ public class Transfer_reserveDAO {
 
 	private Transfer_reserveDAO() {
 		try {
-			String url ="jdbc:mariadb://192.168.1.14:3306/bank";
+			String url ="jdbc:mariadb://"+DBAccess_IP.getInstance().getIP()+":3306/bank";
 			String id = "bank";
 			String pw = "1234";
 
@@ -53,7 +55,7 @@ public class Transfer_reserveDAO {
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setTo_account_number(rs.getString("to_account_number"));
 				dto.setSum(rs.getString("sum"));
-				dto.setTime(rs.getString("time"));
+				dto.setTime(rs.getDate("time"));
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
 				dto.setCms(rs.getString("cms"));
@@ -73,7 +75,7 @@ public class Transfer_reserveDAO {
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setTo_account_number(rs.getString("to_account_number"));
 				dto.setSum(rs.getString("sum"));
-				dto.setTime(rs.getString("time"));
+				dto.setTime(rs.getDate("time"));
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
 				dto.setCms(rs.getString("cms"));
@@ -110,7 +112,7 @@ public class Transfer_reserveDAO {
 	public Transfer_reserveDTO selectSeq(String seq){
 		Transfer_reserveDTO dto = null;
 
-		sql = 	"select * from transfer_reserve where seq = ?";
+		sql = 	"select * from transfer_reserve where seq = '"+seq+"'";
 		System.out.println(sql);
 		try {
 
@@ -204,7 +206,24 @@ public class Transfer_reserveDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
+	
+	
+	//////// 1015
+	
+	
+	public void updateStatusBySeq(String seq,String status){
+		sql = 	"update transfer_reserve set " +
+				"status = '"+status +"' where seq = "+ seq;
+		System.out.println(sql);
+		try {stmt.executeUpdate(sql); 
 
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
+	
+	
+	
+	///////
 
 	public ArrayList<Transfer_reserveDTO> SearchDate(String start,String end, String order){
 		ArrayList<Transfer_reserveDTO> res = new ArrayList<Transfer_reserveDTO>();

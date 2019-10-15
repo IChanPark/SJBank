@@ -6,22 +6,15 @@
 <script>
 $(document).ready(function(){
 	$(".accountNumber").click(function() {	//메뉴 이동용
-		
 		var t=$(this).val();
-		
-		alert(t);
-		
 		var f=document.paging; 
-		    
 		f.hid_t.value = "banking/Detail";
 		f.accountNumber.value = t;
 	    f.method="post";
 	    f.submit();
-		
 	});
 });
 </script>
-
 <input type="hidden" name="accountNumber" />
 <div class="subTitle">입/출금 계좌</div>
 <table class="AccInfo">
@@ -36,13 +29,12 @@ $(document).ready(function(){
 </tr>
 
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<c:if test="${dto.type=='deposit' }">
+	<c:if test="${dto.type=='예금' }">
 		<tr>
 			<td>${dto.type }</td>
 			<td>${dto.alias }</td>
 			<td>${dto.account_number }</td>
 			<td>${dto.register_date }</td>
-			
 			<td><fmt:formatNumber value="${dto.sum }" pattern="#,###원"/></td>
 			<td>${dto.status }</td>
 			<td><button type="button" class="accountNumber" value="${dto.account_number }">상세</button></td>
@@ -54,15 +46,12 @@ $(document).ready(function(){
 <tr>
 	<td colspan="6" align="center">개설된 계좌가 없습니다.</td>
 </tr>
-
 </c:if>
-
 </table>
 <br>
 <div align="right">
 <fmt:formatNumber value="${dsum }" pattern="예/적금 계좌 총액 #,###원"/>
 </div>
-
 <div class="subTitle">예금/적금/신탁 계좌</div>
 	<table class="AccInfo">
 	<tr>
@@ -74,7 +63,7 @@ $(document).ready(function(){
 		<td>업무</td>
 	</tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
-	<c:if test="${dto.type=='fund' }">
+	<c:if test="${dto.type=='펀드' }">
 		<tr>
 			<td>${dto.type }</td>
 			<td class="ddd">${dto.account_number }</td>
@@ -91,10 +80,8 @@ $(document).ready(function(){
 <tr>
 	<td colspan="6" align="center">개설된 계좌가 없습니다.</td>
 </tr>
-
 </c:if>
 </table>
-
 <br>
 <div align="right">
 <fmt:formatNumber value="${psum }" pattern="상품 계좌 총액  #,###원"/>

@@ -40,7 +40,7 @@ public class Transfer_reserveDAO {
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setTo_account_number(rs.getString("to_account_number"));
 				dto.setSum(rs.getString("sum"));
-				dto.setTime(rs.getString("time"));
+				dto.setTime(rs.getDate("time"));
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
 				dto.setCms(rs.getString("cms"));
@@ -60,7 +60,7 @@ public class Transfer_reserveDAO {
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setTo_account_number(rs.getString("to_account_number"));
 				dto.setSum(rs.getString("sum"));
-				dto.setTime(rs.getString("time"));
+				dto.setTime(rs.getDate("time"));
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
 				dto.setCms(rs.getString("cms"));
@@ -148,7 +148,7 @@ public class Transfer_reserveDAO {
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getTo_account_number());
 			pstmt.setString(3, dto.getSum());
-			pstmt.setString(4, dto.getTime());
+			pstmt.setString(4, dto.getTimeStr());
 			pstmt.setString(5, dto.getMemo());
 			pstmt.setString(6, dto.getTo_memo());
 			pstmt.setString(7, dto.getCms());
@@ -178,7 +178,7 @@ public class Transfer_reserveDAO {
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getTo_account_number());
 			pstmt.setString(3, dto.getSum());
-			pstmt.setString(4, dto.getTime());
+			pstmt.setString(4, dto.getTimeStr());
 			pstmt.setString(5, dto.getMemo());
 			pstmt.setString(6, dto.getTo_memo());
 			pstmt.setString(7, dto.getCms());
@@ -220,7 +220,7 @@ public class Transfer_reserveDAO {
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getTo_account_number());
 			pstmt.setString(3, dto.getSum());
-			pstmt.setString(4, dto.getTime());
+			pstmt.setString(4, dto.getTimeStr());
 			pstmt.setString(5, dto.getMemo());
 			pstmt.setString(6, dto.getTo_memo());
 			pstmt.setString(7, dto.getCms());

@@ -6,7 +6,6 @@
 $(document).ready(function(){
 
 	$('.check').click(function(){
-		alert("눌림")
 		/* alert("눌림");
 		var f=document.paging; 
 		f.method="post";
@@ -23,7 +22,7 @@ $(document).ready(function(){
 			success:function(qqq){
 				
 				$.each(qqq,function(i,e){
-					var row = $("<tr><td>"+e.account_number+"</td>");
+					var row = $("<tr><td onclick=cancel("+e.seq+")>"+e.account_number+"</td>");
 					row.append($("<td>"+e.register_date+"</td>"));
 					row.append($("<td>"+e.memo+"</td>"));
 					row.append($("<td>"+e.to_memo+"</td>"));
@@ -36,17 +35,21 @@ $(document).ready(function(){
 			}
 		});
 	});
-	    
-	    
 });
+
+function cancel(qqq)
+{
+	document.paging.hid_t.value = "banking/check/Cancel";
+	document.paging.seq.value=qqq;
+	document.paging.submit();
+}
 
 
 
 </script>
-
+<input type="hidden" name ="type" value="delay" />
+<input type="hidden" name ="seq" />
 <div class="subTitle">지연이체</div>
-
-
 <table border="">
 	<tr>
 		<td>계좌번호</td>
@@ -61,18 +64,11 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="4" align="center"><div class="check" />조회</td>
-
 	</tr>
 </table>
-<br>
-<br>
-
+<br><br>
 <div class="subTitle">지연이체 조회결과</div>
-<br>
-<br>
-
-
-
+<br><br>
 <table border="" id="tot">
 	<tr>
 		<td>선택</td>
@@ -87,10 +83,6 @@ $(document).ready(function(){
 		<td>CMS코드</td>
 	</tr>
 </table>
-
-
-<br>
-<br>
-
+<br><br>
 <div align="center"><button class="subTitle" >지연이체 취소</button>
 </div>

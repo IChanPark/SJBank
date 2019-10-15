@@ -9,8 +9,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-
 <%
 Map<String,String> map = new HashMap<String,String>();
 Gson gson = new Gson();
@@ -19,10 +17,6 @@ ArrayList<Transfer_autoDTO> dto =
 Transfer_autoDAO.getInstance().Search(
 		request.getParameter("account"), request.getParameter("division")
 		); 
-System.out.println(request.getParameter("account"));
-System.out.println(request.getParameter("division"));
-
-
 
 for (int i = 0; i < dto.size(); i++) {
 	map.put("seq", dto.get(i).getSeq()+"");
@@ -38,7 +32,6 @@ for (int i = 0; i < dto.size(); i++) {
 	map.put("status", dto.get(i).getStatus());
 	map.put("register_date", dto.get(i).getRegister_dateStr());
 	map.put("end_date", dto.get(i).getend_dateStr());
-	
 	
 	json += gson.toJson(map);
 	if(i < dto.size()-1)

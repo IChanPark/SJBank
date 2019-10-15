@@ -1,10 +1,11 @@
 package jdbc.Transfer;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transfer_autoDTO {
+public class Transfer_autoDTO implements Serializable{
 	private	Integer 	seq,
 						sum	;				//로그번호
 	

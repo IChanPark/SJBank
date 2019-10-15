@@ -1,10 +1,11 @@
 package jdbc.Transfer;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transfer_delayDTO {
+public class Transfer_delayDTO implements Serializable {
 	private	Integer 	seq,
 						sum	;				//로그번호
 	
@@ -102,6 +103,12 @@ public class Transfer_delayDTO {
 	}
 	public void setTrs_time(Date trs_time) {
 		this.trs_time = trs_time;
+	}
+	@Override
+	public String toString() {
+		return "Transfer_delayDTO [seq=" + seq + ", sum=" + sum + ", account_number=" + account_number
+				+ ", to_account_number=" + to_account_number + ", memo=" + memo + ", to_memo=" + to_memo + ", cms="
+				+ cms + ", status=" + status + ", register_date=" + register_date + ", trs_time=" + trs_time + "]";
 	}
 	
 	

@@ -33,10 +33,7 @@ $(document).ready(function(){
 }); 
 </script>
 
-
 <div class="subTitle">자동이체 </div>
-
-
 <table border="">
 	<tr>
 		<td>계좌번호</td>

@@ -46,13 +46,11 @@ function ttt(){
 function ajax_go() {
 	alert("????");
 	
-	
 	$.ajax({	
 		url:"OTPmail.jsp",
 		type:'get',
 		dataType:'json',
 		success:function(qqq){
-			alert("wow!!!!")
 			isRun = false;
 		},
 		error:function(qqq){
@@ -60,13 +58,7 @@ function ajax_go() {
 			isRun = false;
 		}	
 	});
-	
 };
-
-
-
-
-
 
  </script>
 
