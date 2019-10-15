@@ -20,7 +20,18 @@ $(document).ready(function(){
 		document.paging.submit();
 	});
 	
-	
+	$('#faq').click(function(){
+		document.paging.hid_t.value ="service/client/Faq";
+		document.paging.submit();
+	});
+	$('#qna').click(function(){
+		document.paging.hid_t.value ="service/client/Qna";
+		document.paging.submit();
+	});
+	$('#notice').click(function(){
+		document.paging.hid_t.value ="service/client/Notice";
+		document.paging.submit();
+	});
 	
 });
 </script>
@@ -52,9 +63,9 @@ $(document).ready(function(){
 <div  align ="top" style="  height: auto; min-height : 100px; 
 width :50%; background-color : #2EFEF7; float: left;"  align = "left"><h1>금융상품</h1></div>
 
-<div style="float: right; background-color: green; margin-left:10px; padding-right:10px; width: 15%;">qna</div>
-<div style="float: right; background-color: yellow; margin-left:10px; padding-right:10px; width: 15%;">faq</div>
-<div style="float: right; background-color: red; margin-left: 10%; padding-right:10px; width: 15%;" >공지사항</div>
+<div style="float: right; background-color: green; margin-left:10px; padding-right:10px; width: 15%;" id="qna">qna</div>
+<div style="float: right; background-color: yellow; margin-left:10px; padding-right:10px; width: 15%;" id="faq">faq</div>
+<div style="float: right; background-color: red; margin-left: 10%; padding-right:10px; width: 15%;" id="notice" >공지사항</div>
 
 </div>
 </div>
