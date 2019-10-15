@@ -3,7 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+$(document).ready(function(){
 
+	$('#LOGO').click(function(){
+		document.paging.hid_t.value ="";
+		document.paging.submit();
+	});
+});
+</script>
 <div id="top">
    <div id="info"><img id='LOGO' src="img/logo.png" height="40px" display="block" margin="0px auto"/>
    <c:choose>
