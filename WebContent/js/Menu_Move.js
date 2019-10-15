@@ -17,4 +17,8 @@ $(document).ready(function() {
 		document.paging.hid_t.value = me;
 		document.paging.submit();
 	};
+	$('#LOGO').click(function(){
+		document.paging.hid_t.value = "";
+		document.paging.submit();
+	});
 });

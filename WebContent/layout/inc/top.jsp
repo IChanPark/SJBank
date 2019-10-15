@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="top">
-   <div id="info"><img src="img/logo.png" height="40px" display="block" margin="0px auto"/>
+   <div id="info"><img id='LOGO' src="img/logo.png" height="40px" display="block" margin="0px auto"/>
    <c:choose>
       <c:when test="${userID !=null }">
          <a href="#" data-menu-name="service/LogOut" id="login">${userID  } 접속중입니다 로그아웃</a>
