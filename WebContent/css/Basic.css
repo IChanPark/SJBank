@@ -1,5 +1,5 @@
 @charset "UTF-8";
-* {margin: 0;padding: 0; color: white; font-size: 12pt; font-weight: normal; font-family: 'Nanum Gothic';}
+* {margin: 0;padding: 0; color: purple; font-size: 12pt; font-weight: normal; font-family: 'Nanum Gothic';}
 body {background: #363636}/*눈 피로로 인해 추가함 */
 li {list-style: none;}
 input{color: black;}

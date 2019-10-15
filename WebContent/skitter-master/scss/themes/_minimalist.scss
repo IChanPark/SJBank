@@ -1,0 +1,70 @@
+// Minimalist theme
+
+.skitter-minimalist {
+  .prev_button, .next_button, .play_pause_button, .focus_button {
+    display: block;
+    background: url('../images/skitter/sprite-minimalist.png') no-repeat;
+    background-size: 24px auto;
+  }
+  .prev_button {
+    background-position: -0px -0px;
+    width: 24px;
+    height: 28px;
+  }
+  .next_button {
+    background-position: -0px -28px;
+    width: 24px;
+    height: 28px;
+  }
+  .play_pause_button {
+    background-position: -0px -74px;
+    width: 18px;
+    height: 18px;
+    transform: none;
+    top: 35px;
+    left: 35px;
+    &.play_button {
+      background-position: -0px -56px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  .focus_button {
+    background-position: -0px -92px;
+    width: 18px;
+    height: 18px;
+    transform: none;
+    top: 35px;
+    left: 95px;
+  }
+  .info_slide {
+    background-color: transparent;
+    .image_number {
+      background-color: #000;
+      box-shadow: rgba(white, 0.2) 1px 1px 0;
+      font-size: 12px;
+      font-weight: normal;
+      background-color: #999;
+      &:hover {
+        background-color: #111;
+      }
+      &.image_number_select {
+        background-color: #ccc;
+      }
+    }
+  }
+  .info_slide_dots {
+    .image_number {
+      width: 14px;
+      height: 14px;
+      box-shadow: rgba(white, 0.2) 1px 1px 0;
+      background-color: #999;
+      &:hover {
+        background-color: #111;
+      }
+      &.image_number_select {
+        background-color: #ccc;
+      }
+    }
+  }
+}

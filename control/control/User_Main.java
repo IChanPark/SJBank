@@ -19,7 +19,6 @@ public class User_Main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("시작?");
 		try {
 			request.setCharacterEncoding("UTF-8");	//한글처리
 			HttpSession session = request.getSession();
@@ -48,19 +47,16 @@ public class User_Main extends HttpServlet {
 					M_Action action = (M_Action)(Class.forName(service).newInstance());
 					action.execute(request, response);
 				}
-				System.out.println("정상");
 			} else if(session.getAttribute("Previous_page") != null &&
 					session.getAttribute("userID")!=null) 
 				{
 					request.setAttribute("mainUrl", "main");
-					System.out.println("이전");
 				}
 				else {
 					request.setAttribute("mainUrl", "main");
-					System.out.println("비정상");
 				}
-		
-			System.out.println("최종");
+			
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("template.jsp"); //여기로 보내
 			dispatcher.forward(request, response);
 		} catch (Exception e) {

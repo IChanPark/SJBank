@@ -1,0 +1,95 @@
+// Square theme
+
+.skitter-square {
+  .play_pause_button, .next_button, .focus_button, .prev_button {
+    display: block;
+    background: url('../images/skitter/sprite-square.png') no-repeat;
+    background-size: 110px auto;
+  }
+  .play_pause_button {
+    background-position: -55px -0px;
+    width: 55px;
+    height: 55px;
+    top: 10px;
+    left: 10px;
+    bottom: auto;
+    right: auto;
+    margin-top: 0;
+    transform: none;
+    &.play_button {
+      background-position: -0px -0px;
+      width: 55px;
+      height: 55px;
+    }
+  }
+  .focus_button {
+    background-position: -55px -55px;
+    width: 55px;
+    height: 55px;
+    top: 10px;
+    left: 65px;
+    bottom: auto;
+    right: auto;
+    margin-top: 0;
+    transform: none;
+  }
+  .next_button {
+    background-position: -0px -55px;
+    width: 55px;
+    height: 55px;
+    top: 10px;
+    left: auto;
+    right: 10px;
+    margin: 0;
+    transform: none;
+  }
+  .prev_button {
+    background-position: -0px -110px;
+    width: 55px;
+    height: 55px;
+    top: 10px;
+    left: auto;
+    right: 65px;
+    margin: 0;
+    transform: none;
+  }
+  .info_slide {
+    background-color: transparent;
+    .image_number {
+      background-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0;
+      font-size: 12px;
+      font-weight: normal;
+      color: #333;
+      &:hover {
+        background-color: #ccc;
+      }
+      &.image_number_select {
+        background-color: #111;
+        color: #fff;
+      }
+    }
+  }
+  .info_slide_dots {
+    .image_number {
+      width: 14px;
+      height: 14px;
+      box-shadow: rgba(255, 255, 255, 0.2) 1px 1px 0;
+      background-color: #ccc;
+      &:hover {
+        background-color: #999;
+      }
+      &.image_number_select {
+        background-color: #555;
+      }
+    }
+  }
+  .progressbar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0;
+    height: 2px;
+  }
+}

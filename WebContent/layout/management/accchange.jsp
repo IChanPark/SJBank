@@ -2,4 +2,5 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
-슈퍼 냠냠파워
+
+<div><h1 class="subTitle">계좌 정보 수정이 완료 되었습니다.</h1></div>
