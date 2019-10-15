@@ -78,7 +78,7 @@
 	
 		
 			<td colspan="2" align="right">			
-				<div><div onclick="allChk()">가입</div><button>취소</button></div>			
+				<div><div onclick="allChk()">가입</div><input type="reset" value="취소"/></div>			
 			</td>
 		</tr>
 	</table>
@@ -135,13 +135,7 @@ function check3(re, what, message) {
  */
 
  function allChk() {	//메뉴 이동용
-	 
-	alert(ev() + "   ev 입니다");
-	alert(ev2()+ "   ev2 입니다");
-	alert(ev3()+ "   ev3 입니다");
-	alert(ev4()+ "   ev4 입니다");
-	alert(ev5()+ "   ev5 입니다");
-	alert(ev6()+ "   ev6 입니다");
+	
 	
 	if(idChk&&ev()&&ev2()&&ev3()&&ev4()&&ev5()&&ev6()){
 		alert("드뎌");

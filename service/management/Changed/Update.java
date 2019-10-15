@@ -2,6 +2,7 @@ package management.Changed;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import inf.M_Action;
 import jdbc.User.UserDAO;
@@ -12,9 +13,13 @@ public class Update  implements M_Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		UserDTO dto = new UserDTO();
+		HttpSession session = request.getSession();
 		
 		dto.setId((String)request.getSession().getAttribute("userID"));//1
+		System.out.println((String)request.getSession().getAttribute("userID"));
 		dto.setPw(request.getParameter("pw"));//2
+		System.out.println(request.getParameter("pw"));
+		
 		dto.setSimple_pw(Integer.parseInt(request.getParameter("simple_pw")));//3
 		dto.setTel(request.getParameter("tel"));//4
 		dto.setGen(request.getParameter("gen"));//5
@@ -26,7 +31,7 @@ public class Update  implements M_Action{
 		//계좌번호 넣어주세요
 		
 		//넣어주세요
-		
+		request.getParameter("여기");
 		UserDAO.getInstance().updateUser(dto);
 		request.setAttribute("mainUrl", "main");
 

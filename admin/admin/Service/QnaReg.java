@@ -23,6 +23,7 @@ public class QnaReg implements M_Action {
 		dto.setTitle(d+request.getParameter("title"));
 		dto.setId(request.getParameter("id"));
 		dto.setContent(request.getParameter("content"));
+		dto.setRseq(Integer);
 		dto.setStatus("활성");
 		System.out.println(request.getParameter("Register_dateStr"));
 		//dto.setRegister_dateStr(request.getParameter("Register_dateStr"));
