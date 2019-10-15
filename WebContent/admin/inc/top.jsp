@@ -16,16 +16,19 @@
 </div>
 <div class="TitleMenu">
    <ul class="MainUl">
-      <li><a href="#">사용자 조회</a>
+      <li style="width:20%;"><a href="#">사용자 관리</a>
       <div class="SubMenu">
           <ul class="SubUl">
               <div class="LowMenu">
                   <li><a href="#" data-menu-name="admin/User/UserList" >사용자 조회</a></li>
                </div>
+                <div class="LowMenu">
+                  <li><a href="#" data-menu-name="admin/Block/Block">사용자 관리</a></li>
+               </div>
            </ul>
       </div>
       </li>
-       <li><a href="#" >상품 관리</a>
+       <li style="width:20%;"><a href="#" >상품 관리</a>
          <div class="SubMenu">
             <ul class="SubUl">
                <div class="LowMenu">
@@ -48,21 +51,7 @@
            </ul> -->
          </div>
       </li>
-      
-       <li><a href="#" >사용자 관리</a>
-       <div class="SubMenu">
-            <ul class="SubUl">
-               <div class="LowMenu">
-                  <li><a href="#" data-menu-name="admin/Block/Block">거래제한목록</a></li>
-               </div>
-              <!--  <div class="LowMenu">
-                  <li><a href="#" data-menu-name="admin/Members/Members">멤버십등급</a></li>
-               </div> -->
-           </ul>
-         </div>
-      </li>
-      <li>
-       <li><a href="#">서버 관리</a>
+       <li style="width:20%;"><a href="#">서버 관리</a>
       <div class="SubMenu">
           <ul class="SubUl">
               <div class="LowMenu">
@@ -71,7 +60,7 @@
            </ul>
       </div>
       </li>
-       <li><a href="#" >고객센터</a>
+       <li style="width:20%;"><a href="#" >고객센터</a>
        <div class="SubMenu">
             <ul class="SubUl">
                <div class="LowMenu">
@@ -86,7 +75,7 @@
            </ul>
          </div>
       </li>
-      <li id ="cal">
+      <li style="width:20%;">
       <a href="#" data-menu-name="admin/Calc/Calc">정산</a>
       </li>
    </ul>

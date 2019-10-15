@@ -23,14 +23,28 @@ $(".search_Button").on("click", function() {
 });
 
 function add(aa) {
-	su = Number($(aa).val()) + Number(su);
-	$('#sum').val(su);
-	$('#view_money').val(number_Pattern(su)+"원");
+	var s1 = $(aa).val();
+	var s = 0;
+	for (var i = 0; i < $('#sum').val().split(',').length; i++) {
+		s +=  $('#sum').val().split(',')[i];
+	}
+	vSum = Number(s) + Number(s1);
+	$('#sum').val(number_Pattern(vSum));
+	
+};
+
+function moneyChange(aa) {
+	var s = 0;
+	for (var i = 0; i < $(aa).val().split(',').length; i++) {
+		s +=  $(aa).val().split(',')[i];
+	}
+	vSum = Number(s);
+	$('#sum').val(number_Pattern(vSum));
 	
 };
 function zero(aa){
-	sum = 0;
-	$('#money').val(sum);
+	vSum = 0;
+	$('#sum').val(number_Pattern(vSum));
 }
 
 function option(){
@@ -176,7 +190,7 @@ function join(me) {
 			box +=	"<input onfocusout='ev()' type='text' placeholder='숫자4자리' id='pw'></input></div></div>";
 			box +=	"<div class='join_Guide'>신규가입정보</div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규금액</div>";
-			box +=	"<div class='infoMain_Value'><input onfocusout='ev2()' type='text' placeholder='0' id=sum></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
+			box +=	"<div class='infoMain_Value'><input onfocusout='ev2()' onkeyup='moneyChange(this)' type='text' placeholder='0' id=sum></input></div><br>";
 			box	+=	"<div class='infoMain_Value'><button onclick='add(this)' value='5000000'>500만</button><button onclick='add(this)' value='1000000'>100만</button>";
 			box +=	"<button onclick='add(this)' value='500000'>50만</button><button onclick='add(this)' value='100000'>10만</button><button onclick='add(this)' value='50000'>5만</button>";
 			box	+=	"<button onclick='add(this)' value='10000'>1만</button><button onclick='add(this)' value='1000'>1천</button><button onclick='zero(this)'>정정</button></div></div>";	
@@ -214,7 +228,7 @@ function ev3(){if(!check2(/^[\d]{4}$/,$('#newPW'),$('#newPWchk'),'4자리 숫자
 function ev4(){if(!check(/^[a-zA-Z0-9가-힣\s]{0,10}[a-zA-Z0-9가-힣]$/,$('#alias'),'·선택사항·별명은 10자이내로 작성가능합니다.')){return false;}else{return true;}};
 
 function joinReg(me){
-	if(ev()&&ev2()&&ev3()&&ev4()&&true){
+	if(ev()&&ev2()&&ev3()&&(ev4()||$('#alias').val()=="")&&true){
 		goReg(me);
 	}
 };

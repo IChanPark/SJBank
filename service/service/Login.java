@@ -15,7 +15,7 @@ public class Login  implements M_Action{
       HttpSession session = request.getSession();
       String url = "layout/service/loginmain";
       
-      if(dto != null && dto.getPw().equals(request.getParameter("pw"))) {
+      if(dto != null && dto.getPw().equals(request.getParameter("pw")) && dto.getStatus().equals("활성")) {
          url = "main";
          session.setAttribute("userID", dto.getId());
          session.setMaxInactiveInterval(20*60);

@@ -17,6 +17,8 @@ import jdbc.Account.AccountDAO;
 import jdbc.Account.AccountDTO;
 import jdbc.Fund.FundDAO;
 import jdbc.Fund.FundDTO;
+import jdbc.Transfer.Transfer_logDAO;
+import jdbc.Transfer.Transfer_logDTO;
 import jdbc.User.UserDAO;
 import jdbc.User.UserDTO;
 import util.New_Account;
@@ -35,24 +37,27 @@ public class Fund_JoinReg extends HttpServlet {
 		AccountDTO accDTO = new AccountDTO();
 		FundDTO depDTO = new FundDTO();
 
-		String	userid = (String)request.getSession().getAttribute("userID"),
-				newAcc = New_Account.getInstance().getAccount(),
-				myAcc = request.getParameter("account_number"),
-				product=request.getParameter("product");
+		String	userid	= (String)request.getSession().getAttribute("userID"),
+				newAcc	= New_Account.getInstance().getAccount(),
+				myAcc	= request.getParameter("account_number"),
+				product	= request.getParameter("product");
 
-		int sum = Integer.parseInt(request.getParameter("sum"));
+		String 	targe	= "SJ은행",
+				cms		= "",
+				status	= "성공",
+				memo  	= "펀드가입";
+		
+		float	price_modify =Float.parseFloat(request.getParameter("price_modify"));
+		
+		int		sum = Integer.parseInt(request.getParameter("sum")),
+				buynum = (int)(sum/price_modify); //구매량		
 
-		System.out.println(request.getParameter("price_modify"));
-
-		float price_modify =Float.parseFloat(request.getParameter("price_modify"));
-		int buynum = (int)(sum/price_modify); //구매량
-
-		float exchange=	buynum*price_modify; //구매한량 * 현재가격(평가금액)
-		float rest = sum-exchange; //나머지돈
-		float nowmoney = exchange+rest; //출금가능돈(평가금액)
+		float 	exchange=	buynum*price_modify, //구매한량 * 현재가격(평가금액)
+				rest = sum-exchange, //나머지돈
+				nowmoney = exchange+rest; //출금가능돈(평가금액)
+		
 		AccountDTO myAccDTO = AccountDAO.getInstance().selectAccount(myAcc);
 		UserDTO userDTO = UserDAO.getInstance().selectId(userid);
-
 
 		int mysum = myAccDTO.getSum();
 
@@ -60,44 +65,63 @@ public class Fund_JoinReg extends HttpServlet {
 
 		AccountDAO.getInstance().updateMoney(myAccDTO);
 
-		/* Transfer_logDTO transDTO = new Transfer_logDTO();
+		Transfer_logDTO transDTO = new Transfer_logDTO();
 		transDTO.setAccount_number(myAcc);
-		transDTO.setSelf("본인");
-		transDTO.setTarget("SJ은행");
+		transDTO.setTarget(targe);
+		transDTO.setFeetype("송금");
 		transDTO.setTo_account_number(newAcc);
 		transDTO.setReceived(userDTO.getName());
 		transDTO.setSum((long)sum);
 		transDTO.setFee(500);
-		transDTO.setCms("");
-		transDTO.setMemo("예금");
+		transDTO.setCms(cms);
+		transDTO.setMemo(memo);
 		transDTO.setTo_memo("");
-		transDTO.setStatus("성공");
+		//--------------------------------------------------- 받는이 로그 
+		if((mysum-sum)<0) 
+			status ="실패";
+		
+		transDTO.setStatus(status);
+		Transfer_logDAO.getInstance().insert(transDTO);
+			
+		if((mysum-sum)<0) {
+			transDTO.setStatus(status);
+			Transfer_logDAO.getInstance().insert(transDTO);
+			
+			transDTO.setAccount_number(newAcc);
+			transDTO.setTarget(targe);
+			transDTO.setFeetype("입금");
+			transDTO.setTo_account_number(myAcc);
+			transDTO.setReceived(userDTO.getName());
+			transDTO.setSum((long)sum);
+			transDTO.setFee(0);
+			transDTO.setCms(cms);
+			transDTO.setMemo(memo);
+			transDTO.setTo_memo("");
+			transDTO.setStatus("성공");
+			Transfer_logDAO.getInstance().insert(transDTO);
 
-		Transfer_logDAO.getInstance().insert(transDTO); */
-
-		accDTO.setAccount_number(newAcc);
-		accDTO.setType(request.getParameter("accType"));//종류
-		accDTO.setSum(sum);
-		accDTO.setAlias(request.getParameter("alias"));
-		accDTO.setId(userid);
-		accDTO.setPw(request.getParameter("newPW"));
-
-		depDTO.setAccount_number(newAcc);
-		depDTO.setId(userid);
-		depDTO.setProduct(product);
-		depDTO.setFluctuation((float)0.5);
-		depDTO.setAmount((float)sum);
-		depDTO.setExchange(exchange);
-		depDTO.setNowmoney(nowmoney);
-		depDTO.setBuynum(buynum);
-		depDTO.setRest(rest);
-		depDTO.setPrice_modify(price_modify);
-
-		System.out.println("acc \t"+accDTO);
-		System.out.println("dep \t"+depDTO);
-
-		AccountDAO.getInstance().insert(accDTO);
-		FundDAO.getInstance().insert(depDTO);
+			accDTO.setAccount_number(newAcc);
+			accDTO.setType(request.getParameter("accType"));//종류
+			accDTO.setSum(sum);
+			accDTO.setAlias(request.getParameter("alias"));
+			accDTO.setId(userid);
+			accDTO.setPw(request.getParameter("newPW"));
+	
+			depDTO.setAccount_number(newAcc);
+			depDTO.setId(userid);
+			depDTO.setProduct(product);
+			depDTO.setFluctuation((float)0.5);
+			depDTO.setAmount((float)sum);
+			depDTO.setExchange(exchange);
+			depDTO.setNowmoney(nowmoney);
+			depDTO.setBuynum(buynum);
+			depDTO.setRest(rest);
+			depDTO.setPrice_modify(price_modify);
+	
+	
+			AccountDAO.getInstance().insert(accDTO);
+			FundDAO.getInstance().insert(depDTO);
+		}
 		String json = gson.toJson(map);
 		out.print(json);
 	}

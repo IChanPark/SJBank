@@ -33,7 +33,7 @@ public class Deposit_JoinReg extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Map<String,String> map = new HashMap<String,String>();
 		Gson gson = new Gson();
-
+		
 		AccountDTO accDTO = new AccountDTO();
 		DepositsDTO depDTO = new DepositsDTO();
 
@@ -48,11 +48,15 @@ public class Deposit_JoinReg extends HttpServlet {
 				memo  = "예금가입"; 
 				
 		int sum = Integer.parseInt(request.getParameter("sum"));
+		
 		AccountDTO myAccDTO = AccountDAO.getInstance().selectAccount(myAcc);
 		UserDTO userDTO = UserDAO.getInstance().selectId(userid);
 
 		int mysum = myAccDTO.getSum();
 
+		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
+		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);
+		
 		AccountDAO.getInstance().updateMoney(myAccDTO);
 
 		// --------------------------------------------------- 보내는이 로그 
@@ -62,17 +66,19 @@ public class Deposit_JoinReg extends HttpServlet {
 		transDTO.setFeetype("송금");
 		transDTO.setTo_account_number(newAcc);
 		transDTO.setReceived(userDTO.getName());
-		transDTO.setSum(-(long)sum);
+		transDTO.setSum((long)sum);
 		transDTO.setFee(500);
 		transDTO.setCms(cms);
 		transDTO.setMemo(memo);
 		transDTO.setTo_memo("");
+		//--------------------------------------------------- 받는이 로그 
+		if((mysum-sum)<0) 
+			status ="실패";
+		
 		transDTO.setStatus(status);
 		Transfer_logDAO.getInstance().insert(transDTO);
-		//--------------------------------------------------- 받는이 로그 
+			
 		if((mysum-sum)<0) {
-			status ="실패";
-		} else {
 			transDTO.setAccount_number(newAcc);
 			transDTO.setTarget(targe);
 			transDTO.setFeetype("입금");
@@ -85,29 +91,27 @@ public class Deposit_JoinReg extends HttpServlet {
 			transDTO.setTo_memo("");
 			transDTO.setStatus("성공");
 			Transfer_logDAO.getInstance().insert(transDTO);
+		
+			accDTO.setAccount_number(newAcc);
+			accDTO.setType("예금");//종류
+			accDTO.setSum(sum);
+			accDTO.setAlias(request.getParameter("alias"));
+			accDTO.setId(userid);
+			accDTO.setPw(request.getParameter("newPW"));
+
+			depDTO.setAccount_number(newAcc);
+			depDTO.setId(userid);
+			depDTO.setPrduct(product);
+			depDTO.setPreferential("임시");
+			depDTO.setInterest(2.2F);
+			depDTO.setType(request.getParameter("type"));
+
+			AccountDAO.getInstance().insert(accDTO);
+			DepositsDAO.getInstance().insert(depDTO);
+			
+			String json = gson.toJson(map);
+			out.print(json);
 		}
-
-		accDTO.setAccount_number(newAcc);
-		accDTO.setType("예금");//종류
-		accDTO.setSum(sum);
-		accDTO.setAlias(request.getParameter("alias"));
-		accDTO.setId(userid);
-		accDTO.setPw(request.getParameter("newPW"));
-
-		depDTO.setAccount_number(newAcc);
-		depDTO.setId(userid);
-		depDTO.setPrduct(product);
-		depDTO.setPreferential("임시");
-		depDTO.setInterest(2.2F);
-		depDTO.setType(request.getParameter("type"));
-
-		System.out.println("acc \t"+accDTO);
-		System.out.println("dep \t"+depDTO);
-		AccountDAO.getInstance().insert(accDTO);
-		DepositsDAO.getInstance().insert(depDTO);
-
-		String json = gson.toJson(map);
-		out.print(json);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

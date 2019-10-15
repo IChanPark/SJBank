@@ -3,7 +3,7 @@
 <script type="text/javascript">
 var isRun = false; 		//중복실행 방지
 var main = '';
-var sum = 0;
+var vSum = 0;
 main +="<div class='search_Box' >";
 main +="<input class='search_Word' type = 'text' value=''></input>";
 main +="<div class='search_Button' >검색</div>";
@@ -24,26 +24,29 @@ $(".type_Radio").on("click", function() {
 	ajax_go();
 });
 
-/* $("#money").on("propertychange change keyup paste input"), function(){	//모든 상태변경 감지
-	var currentVal = $(this).val();
-    if(currentVal == oldVal) {
-        return;
-    }
-	sum = sum + Number(sum);
-	$('#view_money').val(number_Pattern(sum)+"원");
-	oldVal == currentVal;
-}; */
-
 function add(aa) {
-	sum = Number($(aa).val()) + Number(sum);
-	$('#sum').val(sum);
-	$('#view_money').val(number_Pattern(sum)+"원");
+	var s1 = $(aa).val();
+	var s = 0;
+	for (var i = 0; i < $('#sum').val().split(',').length; i++) {
+		s +=  $('#sum').val().split(',')[i];
+	}
+	vSum = Number(s) + Number(s1);
+	$('#sum').val(number_Pattern(vSum));
+	
+};
+
+function moneyChange(aa) {
+	var s = 0;
+	for (var i = 0; i < $(aa).val().split(',').length; i++) {
+		s +=  $(aa).val().split(',')[i];
+	}
+	vSum = Number(s);
+	$('#sum').val(number_Pattern(vSum));
 	
 };
 function zero(aa){
-	sum = 0;
-	$('#sum').val(sum);
-	$('#view_money').val(number_Pattern(sum)+"원");
+	vSum = 0;
+	$('#sum').val(number_Pattern(vSum));
 }
 
 function option(){
@@ -205,7 +208,7 @@ function join(me) {
 			});
 			box	+=	"</select></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규금액</div>";
-			box +=	"<div class='infoMain_Value'><input onfocusout='ev2()' type='text' placeholder='0' id=sum></input><input type='text' id=view_money readonly='readonly'></input></div><br>";
+			box +=	"<div class='infoMain_Value'><input onfocusout='ev2()' onkeyup='moneyChange(this)' type='text' placeholder='0' id=sum></input></div><br>";
 			box	+=	"<div class='infoMain_Value'><button onclick='add(this)' value='5000000'>500만</button><button onclick='add(this)' value='1000000'>100만</button>";
 			box +=	"<button onclick='add(this)' value='500000'>50만</button><button onclick='add(this)' value='100000'>10만</button><button onclick='add(this)' value='50000'>5만</button>";
 			box	+=	"<button onclick='add(this)' value='10000'>1만</button><button onclick='add(this)' value='1000'>1천</button><button onclick='zero(this)'>정정</button></div></div>";	
@@ -240,7 +243,7 @@ function ev3(){if(!check2(/^[\d]{4}$/,$('#newPW'),$('#newPWchk'),'4자리 숫자
 function ev4(){if(!check(/^[a-zA-Z0-9가-힣\s]{0,10}[a-zA-Z0-9가-힣]$/,$('#alias'),'·선택사항·별명은 10자이내로 작성가능합니다.')){return false;}else{return true;}};
 
 function joinReg(me){
-	if(ev()&&ev2()&&ev3()&&ev4()&&true){
+	if(ev()&&ev2()&&ev3()&&(ev4()||$('#alias').val()=="")&&true){
 		goReg(me);
 	}
 };
@@ -260,7 +263,7 @@ function goReg(me) {
 				type			:	$('[data-join-type]').data("join-type"),
 				interest_type	:	$('[data-join-interest_type]').data("join-interest_type"),
 				month			:	$('#month').val(),
-				sum				:	$('#sum').val(),//여까지 작업 
+				sum				:	vSum, //$('#sum').val(),//여까지 작업 
 				newPW			:	$('#newPW').val(),
 				newPWchk		:	$('#newPWchk').val(),
 				alias			:	$('#alias').val()

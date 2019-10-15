@@ -45,13 +45,16 @@ public class Saving_JoinReg extends HttpServlet {
 		String 	targe = "SJ은행",
 				cms	  = "",
 				status= "성공",
-				memo  = "예금가입"; 
+				memo  = "적금가입";
 				
 		int sum = Integer.parseInt(request.getParameter("sum"));
 		AccountDTO myAccDTO = AccountDAO.getInstance().selectAccount(myAcc);
 		UserDTO userDTO = UserDAO.getInstance().selectId(userid);
 
 		int mysum = myAccDTO.getSum();
+		
+		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
+		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);
 
 		AccountDAO.getInstance().updateMoney(myAccDTO);
 
@@ -62,17 +65,22 @@ public class Saving_JoinReg extends HttpServlet {
 		transDTO.setFeetype("송금");
 		transDTO.setTo_account_number(newAcc);
 		transDTO.setReceived(userDTO.getName());
-		transDTO.setSum(-(long)sum);
+		transDTO.setSum((long)sum);
 		transDTO.setFee(500);
 		transDTO.setCms(cms);
 		transDTO.setMemo(memo);
 		transDTO.setTo_memo("");
+		//--------------------------------------------------- 받는이 로그 
+		if((mysum-sum)<0) 
+			status ="실패";
+		
 		transDTO.setStatus(status);
 		Transfer_logDAO.getInstance().insert(transDTO);
-		//--------------------------------------------------- 받는이 로그 
+			
 		if((mysum-sum)<0) {
-			status ="실패";
-		} else {
+			transDTO.setStatus(status);
+			Transfer_logDAO.getInstance().insert(transDTO);
+			
 			transDTO.setAccount_number(newAcc);
 			transDTO.setTarget(targe);
 			transDTO.setFeetype("입금");
@@ -85,29 +93,27 @@ public class Saving_JoinReg extends HttpServlet {
 			transDTO.setTo_memo("");
 			transDTO.setStatus("성공");
 			Transfer_logDAO.getInstance().insert(transDTO);
+			
+			accDTO.setAccount_number(newAcc);
+			accDTO.setType("적금");//종류
+			accDTO.setSum(sum);
+			accDTO.setAlias(request.getParameter("alias"));
+			accDTO.setId(userid);
+			accDTO.setPw(request.getParameter("newPW"));
+
+			svnDTO.setAccount_number(newAcc);
+			svnDTO.setId(userid);
+			svnDTO.setProduct(product);
+			svnDTO.setPreferential("임시");
+			svnDTO.setInterest(2.2F);
+			svnDTO.setType(request.getParameter("type"));
+
+			AccountDAO.getInstance().insert(accDTO);
+			SavingDAO.getInstance().insert(svnDTO);
+
+			String json = gson.toJson(map);
+			out.print(json);
 		}
-
-		accDTO.setAccount_number(newAcc);
-		accDTO.setType("적금");//종류
-		accDTO.setSum(sum);
-		accDTO.setAlias(request.getParameter("alias"));
-		accDTO.setId(userid);
-		accDTO.setPw(request.getParameter("newPW"));
-
-		svnDTO.setAccount_number(newAcc);
-		svnDTO.setId(userid);
-		svnDTO.setProduct(product);
-		svnDTO.setPreferential("임시");
-		svnDTO.setInterest(2.2F);
-		svnDTO.setType(request.getParameter("type"));
-
-		System.out.println("acc \t"+accDTO);
-		System.out.println("dep \t"+svnDTO);
-		AccountDAO.getInstance().insert(accDTO);
-		SavingDAO.getInstance().insert(svnDTO);
-
-		String json = gson.toJson(map);
-		out.print(json);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

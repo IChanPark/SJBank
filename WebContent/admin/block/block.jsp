@@ -173,9 +173,5 @@ function statuschange(me) {
 	});
 };
 </script>
-</head>
-<body>
-<table border="" id="tot">
-</table>
-</body>
-</html>
+<div class="subTitle">사용자 리스트</div>
+<table border="" id="tot" class="AccInfo"></table>
