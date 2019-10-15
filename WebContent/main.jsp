@@ -7,16 +7,20 @@
 
 $(document).ready(function(){
 	$('#check').click(function(){
-			alert("가즈아");
 			document.paging.hid_t.value ="banking/Check";
 			document.paging.submit();
 	});
+	$('#transfer').click(function(){
+		document.paging.hid_t.value ="banking/Transfer";
+		document.paging.submit();
+	});
+	
+	$('#reserve').click(function(){
+		document.paging.hid_t.value ="banking/transfer/Reservation";
+		document.paging.submit();
+	});
 	
 	
-	$('#abc').click(function(){
-		alert("우아아아아아앙");
-
-});
 	
 });
 </script>
@@ -35,9 +39,9 @@ $(document).ready(function(){
 <div  align ="top" style="font-size: 30px; height: auto;  min-height : 100px; width : 50%;  background-color:#64FE2E; float: left;"  align = "left" >
 주요서비스
 <div>
-<div style=" float: left; width: 33.3%; " id="check">즉시이체</div>
-<div style=" float: left; width: 33.3%; ">전체조회</div>
-<div style=" float: left; width: 33.3%; ">예약이체</div>
+<div style=" float: left; width: 33.3%; " id="transfer">즉시이체</div>
+<div style=" float: left; width: 33.3%; " id="check">전체조회</div>
+<div style=" float: left; width: 33.3%; " id="reserve">예약이체</div>
 </div></div>
 <div style=" width: 500px; height: 200px; float: left;">
 <jsp:include page="skitter-master/examples/index.html"  flush="false" />
