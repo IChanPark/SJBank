@@ -311,10 +311,14 @@ function goReg(me) {
 				$('#accPW').val('');
 			  	$('#accPW').next().remove();
 			  	$('#accPW').after("<div style='color: #d6bb50'>비밀번호 확인 부탁드립니다.</div>");
-			} else {
+			} else if(qqq.status == "금액부족"){
 				$('#sum').val('');
 				$('#sum').next().remove();
 			  	$('#sum').after("<div style='color: #d6bb50'>이체하시려는 금액이 이체가능금액보다 큽니다. 금액확인 부탁드립니다.</div>");
+			} else { //(qqq.status == "금액오류")
+				$('#sum').val('');
+				$('#sum').next().remove();
+				$('#sum').after("<div style='color: #d6bb50'>"+number_Pattern(qqq.min)+"원 이상 "+number_Pattern(qqq.max)+"원 이하까지만 입금이 가능합니다.</div>");
 			}
 			isRun = false;
 		},

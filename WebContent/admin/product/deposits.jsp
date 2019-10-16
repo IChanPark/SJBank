@@ -152,8 +152,8 @@ function detail(me) {
 
 function ev(){if(!check(/^[a-zA-Z0-9가-힣\W\w\s]{4,50}$/,$('#product'),'상품명은 4자 이상 50자 이내로 작성가능합니다.')){return false;}else{return true;}};
 function ev2(){if(!check(/^[\d,]{0,50}[\d]$/,$('#month'),'상품기간은 1자 이상 50자 이내로 숫자와 다중 등록시 ,로 구분하여 입력가능합니다.')){return false;}else{return true;}};
-function ev3(){if(!check(/^[\d]{4,8}[\d]$/,$('#min_sum'),'4자리 이상 8자리 이하 숫자만 입력가능합니다.')){return false;}else{ return true;}};
-function ev4(){if(!check(/^[\d]{4,13}$/,$('#max_sum'),'4자리 이상 13자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
+function ev3(){if(!check(/^[\d]{3,8}[\d]$/,$('#min_sum'),'4자리 이상 8자리 이하 숫자만 입력가능합니다.')){return false;}else{ return true;}};
+function ev4(){if(!check(/^[\d]{3,13}$/,$('#max_sum'),'4자리 이상 13자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
 function ev5(){if(!check(/^[\d.]{0,5}[\d]$/,$('#min_interest'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
 function ev6(){if(!check(/^[\d.]{0,5}[\d]$/,$('.prf_interest'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
 
@@ -227,13 +227,11 @@ function goReg(){
 		},
 		dataType:'json',
 		success:function(qqq){
-			if(qqq.product)
 			goProduct();
 			isRun = false;
 		},
 		error:function(qqq){
-			$("#ttt").empty();
-			var row = $("<div class='box'></div>");
+			goProduct();
 			isRun = false;
 		}	
 	});

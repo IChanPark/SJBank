@@ -191,8 +191,7 @@ function goReg(){
 			isRun = false;
 		},
 		error:function(qqq){
-			$("#ttt").empty();
-			var row = $("<div class='box'></div>");
+			goProduct();
 			isRun = false;
 		}	
 	});
