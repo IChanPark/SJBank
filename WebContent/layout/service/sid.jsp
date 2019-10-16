@@ -5,7 +5,14 @@
 <%@page import="jdbc.User.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+System.out.println("name :"+request.getParameter("name"));
+
+System.out.println("tel :"+request.getParameter("tel"));
+System.out.println("email1 :"+request.getParameter("email1"));
+System.out.println("email2 :"+request.getParameter("email2"));
+
+%>    
 
 <%
 Map<String,String> map = new HashMap<String,String>();
@@ -15,7 +22,7 @@ String json="";
 
 dto.setName(request.getParameter("name"));
 dto.setTel(request.getParameter("tel"));
-dto.setEmail(request.getParameter("email"));
+dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));
 dto=UserDAO.getInstance().searchId(dto); 
 
 
