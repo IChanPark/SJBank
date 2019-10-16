@@ -29,18 +29,16 @@ public class Trs implements M_Action{
 		
 		String memo = request.getParameter("memo");
 		String to_memo = request.getParameter("to_memo");
+		
+		int toMax;// 적금 상한치 계산용
+		
+		
 		if(!AccountDAO.getInstance().chkAccPw(acc, pw))
 		{
 			System.out.println("예외 발생?!!!!!");
-
 			request.setAttribute("msg", "패스워드가 일치하지 않습니다...ByServelet");
-			request.setAttribute("goUrl", "SJBank");
-			request.setAttribute("do", "banking/Transfer");
-
 			throw new Exception("패스워드 불일치!!!");
 		}
-
-
 		String  toName = AccountDAO.getInstance().chkOurBank(toAcc);
 		
 		AccountDTO fdto = AccountDAO.getInstance().selectAccount(acc);
@@ -69,31 +67,31 @@ public class Trs implements M_Action{
 		if(toName.equals("외부계좌") && ( dto.getTarget().toUpperCase().equals("SJBANK") 
 				||  dto.getTarget().toUpperCase().equals("SJ은행")    )   )
 		{
-
 			request.setAttribute("msg", "이체 대상 계좌가 존재 하지 않습니다.");
-			request.setAttribute("goUrl", "SJBank");
-			request.setAttribute("do", "banking/Transfer");
-
-			throw new Exception("패스워드 불일치!!!");
-			
+			throw new Exception("대상없음");
 		}
 		
 		//////////////////자행 없는거 처리
 		
 		
-		
-		
-		
-		
-		
-		
 		if(fdto.getSum()>dto.getSum()+dto.getFee()) {
 			dto.setStatus("성공");
-			AccountDAO.getInstance().updateMoney( (int)(-1 *dto.getSum()-1*dto.getFee() ) ,acc );
 			//계좌 잔액 변경
 			Transfer_logDTO trfDTO = new Transfer_logDTO();
 			if( dto.getTarget().toUpperCase().equals("SJBANK") ||  dto.getTarget().toUpperCase().equals("SJ은행")   )
 			{
+				
+				AccountDTO toDto = AccountDAO.getInstance().selectAccount(toAcc);
+				if(toDto.getType().equals("적금"))
+				{
+					toMax = AccountDAO.getInstance().getSavingMax(toAcc);
+					if( toMax < toDto.getSum()+dto.getSum())
+					{
+						request.setAttribute("msg", "이체 대상 계좌의 보유 금액을 초과 하게 되었습니다.");
+						throw new Exception("이체대상금액초과");
+					}
+				}///// 적금 최대 보유량 초과
+				
 				trfDTO.setAccount_number(toAcc);
 				trfDTO.setTo_account_number(acc);
 				trfDTO.setFee(0);
@@ -109,7 +107,8 @@ public class Trs implements M_Action{
 				AccountDAO.getInstance().updateMoney( (int)(dto.getSum()+0),toAcc );
 				Transfer_logDAO.getInstance().insert(trfDTO);
 			}
-	
+			AccountDAO.getInstance().updateMoney( (int)(-1 *dto.getSum()-1*dto.getFee() ) ,acc );
+			
 		}
 		else { 
 			dto.setStatus("잔액부족");

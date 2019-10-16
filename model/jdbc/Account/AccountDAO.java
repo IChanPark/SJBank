@@ -383,8 +383,24 @@ public class AccountDAO {
 		return "외부계좌";
 	}
 	
-	
-	
+	///
+	public int getSavingMax(String acc){
+
+		sql = "SELECT max_sum FROM saving_info WHERE product = (select product from saving where account_number = ? )";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, acc);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getInt("max_sum");
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return -1;
+	}
 	
 	
 	//////////////////////////////////////

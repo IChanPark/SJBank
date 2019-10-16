@@ -18,34 +18,42 @@ public class ReservationReg implements M_Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		
-		System.out.println(request.getParameter("scheduled_date"));
-		System.out.println(request.getParameter("time"));
-		System.out.println(request.getParameter("toAcc"));
-		System.out.println(request.getParameter("time")); 
-		System.out.println(request.getParameter("to_memo"));
-		System.out.println(request.getParameter("bank"));
+	
 		String acc = request.getParameter("acc");
 		String pw = request.getParameter("accpw");
 		String target = request.getParameter("bank");
+		
+		String toAcc = request.getParameter("toAcc");
+		String  toName = AccountDAO.getInstance().chkOurBank(toAcc);
 		
 		
 		if(!AccountDAO.getInstance().chkAccPw(acc, pw))
 		{
 		
 			request.setAttribute("msg", "패스워드가 일치하지 않습니다...ByServelet");
-			request.setAttribute("goUrl", "SJBank");
-			request.setAttribute("mainUrl", "main");
 			throw new Exception("패스워드 불일치!!!");
 		}
+		
+		
+		if(toName.equals("외부계좌") && ( target.toUpperCase().equals("SJBANK") 
+				||  target.toUpperCase().equals("SJ은행")    )   )
+		{
+			request.setAttribute("msg", "이체 대상 계좌가 존재 하지 않습니다.");
+			throw new Exception("대상없음");
+		}
 				
+		
+		
 		Transfer_reserveDTO dto= new Transfer_reserveDTO();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		dto.setAccount_number(request.getParameter("acc"));
-		dto.setTo_account_number(request.getParameter("toAcc"));
+		dto.setAccount_number(acc);
+		dto.setTo_account_number(toAcc);
 		dto.setSum(request.getParameter("sum"));
 		dto.setTarget(target);
 		dto.setRegister_date(new Date());
+		
+		
 		String trs_time=request.getParameter("time")+" "+ request.getParameter("scheduled_date");
 		dto.setTimeStr(trs_time);
 		dto.setScheduled_date(request.getParameter("scheduled_date"));
