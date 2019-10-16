@@ -39,7 +39,7 @@ function ajax_go() {
 		
 		$.each(qqq,function(i,e){
 		row	+=	"<div class='d1'><ul>";
-		row	+=	"<li class='ltt' onclick = 'lttClk(this)'><div class='m'>No."+Number(i+1)+" ["+e.type+"] "+e.title+" "+e.id+"</div>";
+		row	+=	"<li class='ltt' onclick = 'lttClk(this)'><div class='m'>No."+Number(i+1)+" ["+e.type+"] "+e.title+" 작성자"+e.name+"</div>";
 	    row	+=	"<ul class='ull'> <li class='lii'>"+e.content+"</li>";
 	    row	+=	"</ul>";
 	    row	+=	"</li>";

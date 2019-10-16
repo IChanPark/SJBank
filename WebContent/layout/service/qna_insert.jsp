@@ -9,7 +9,7 @@
 		<tr>
 			<td>제목</td><td><input type="text" name="title"></td>
 		</tr><tr>
-			<td>작성자</td><td><input type="text" name="id"></td>				
+			<td>작성자</td><td><input type="text"  name="name"></td>				
 		</tr><tr>
 			<td>내용</td><td><textarea  name="content" cols="30" rows="10"></textarea></td>
 		</tr><tr>

@@ -22,7 +22,7 @@ ArrayList<QnaDTO> dto = QnaDAO.getInstance().selectID((String)request.getSession
 for (int i = 0; i < dto.size(); i++) {
 	map.put("title", dto.get(i).getTitle());
 	map.put("type", dto.get(i).getType());
-	map.put("id", dto.get(i).getId());
+	map.put("name", dto.get(i).getName());
 	map.put("content", dto.get(i).getContent());
 	map.put("register_date",dto.get(i).getRegister_dateStr());
 	

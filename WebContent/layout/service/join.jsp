@@ -165,7 +165,7 @@ function idChk() {
 	}  */
 	
 	//if($('input[name=id]').val()!=null)
-		
+			
 	
 	gogo = "layout/service/idChk.jsp";
 	$.ajax({	

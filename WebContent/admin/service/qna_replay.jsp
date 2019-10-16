@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-
+<input type="hidden" name="gid" value="${dto.gid }">
 <input type="hidden" name="rseq" value="${dto.rseq }">
-
+<input type="hidden" name="lev" value="${dto.lev }">
 	<table border="" width="100%">
 		<tr>
 			<td>제목</td><td><input type="text" name="title" value="${dto.title }"></td>
 		</tr><tr>
-			<td>작성자</td><td><input type="text" name="id" value="${dto.id }"></td>	
+			<td>작성자</td><td><input type="text" name="name" value="${dto.seq }"></td>	
 		</tr><tr>
 			<td>내용</td><td><textarea  name="content" cols="30" rows="10">${dto.content }</textarea></td>
 		</tr><tr>

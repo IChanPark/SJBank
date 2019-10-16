@@ -8,12 +8,12 @@ public class QnaDTO {
 	
 	private String 	type,			//문의 종류
 					title,			//제목
-					id,				//작성자
+					name,				//작성자
 					content,       //문의내용								
 					status;			//답변 여부
 					
 	
-	private Integer seq,rseq;			//
+	private Integer seq,rseq,gid,lev;			//
 								
 	
 	private Date 	register_date;	//등록일
@@ -39,13 +39,13 @@ public class QnaDTO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}		
+	
+	public String getName() {
+		return name;
 	}
-		
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getContent() {
 		return content;
@@ -67,7 +67,19 @@ public class QnaDTO {
 	public void setSeq(Integer seq) {
 		this.seq = seq;
 	}	
-
+		
+	public Integer getGid() {
+		return gid;
+	}
+	public void setGid(Integer gid) {
+		this.gid = gid;
+	}
+	public Integer getLev() {
+		return lev;
+	}
+	public void setLev(Integer lev) {
+		this.lev = lev;
+	}
 	public Integer getRseq() {
 		return rseq;
 	}

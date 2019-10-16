@@ -49,7 +49,7 @@ display: grid;justify-content: center;align-items: center;}
 
 <div class="subTitle">공지사항</div>
 <div align="right">
-
+<div class="scrollB"> <!-- 스크롤바 -->
 
 	
 <div id = "ttt">

@@ -14,16 +14,22 @@ public class QnaReg implements M_Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-				
+		
+		request.setCharacterEncoding("utf-8");
+		
+		
 		QnaDTO dto = new QnaDTO();
-
+		System.out.println("gid:"+request.getParameter("gid"));
 		String d = "[답변]";
 		
+		dto.setGid(Integer.parseInt(request.getParameter("gid")));
+		dto.setLev(Integer.parseInt(request.getParameter("lev")));
+		dto.setSeq(Integer.parseInt(request.getParameter("rseq")));
 		dto.setType(request.getParameter("type"));
 		dto.setTitle(d+request.getParameter("title"));
-		dto.setId(request.getParameter("id"));
+		dto.setName(request.getParameter("name"));
 		dto.setContent(request.getParameter("content"));
-		dto.setRseq(Integer);
+	//	dto.setRseq(Integer);
 		dto.setStatus("활성");
 		System.out.println(request.getParameter("Register_dateStr"));
 		//dto.setRegister_dateStr(request.getParameter("Register_dateStr"));

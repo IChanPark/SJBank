@@ -14,16 +14,25 @@ public class QnaReg implements M_Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-				
+			
 		QnaDTO dto = new QnaDTO();
-	
-		
+				
 		dto.setType(request.getParameter("type"));
 		dto.setTitle(request.getParameter("title"));
-		dto.setId(request.getParameter("id"));
+		dto.setName(request.getParameter("name"));
 		dto.setContent(request.getParameter("content"));
 		dto.setStatus("활성");
-		System.out.println(request.getParameter("Register_dateStr"));
+		
+		System.out.println(request.getParameter("type"));
+		System.out.println(request.getParameter("title"));
+		
+		System.out.println(request.getParameter("name"));
+		
+		System.out.println(request.getParameter("content"));
+		
+		
+		System.out.println("qna 작성자다"+request.getParameter("name"));
+		//System.out.println(request.getParameter("Register_dateStr"));
 		//dto.setRegister_dateStr(request.getParameter("Register_dateStr"));
 		//계좌번호 넣어주세요
 		

@@ -8,9 +8,10 @@ public class Exception_Group {
 			"admin.Deposits.DepositsAdd","admin.Fund.FundAdd","admin.Saving.SavingAdd",
 			"admin.Loan.LoanAdd","admin.Block.Block","admin.Block.Userblock",
 			"admin.Server.Server","admin.service.noticeinsert","admin.service.mailform",
-			"admin.service.faq_insert", "admin.Calc.Calc", "admin.service.qna_replay",
+			"admin.service.faq_insert", "admin.Calc.Calc","admin.service.qna_replay",
 			"admin.Product.Deposits","admin.Product.Saving", "admin.Product.Fund",
 			"admin.Service.LoginMain"
+			//
 	};
 	//여짝에 추가해주세용
 	private Exception_Group() {
