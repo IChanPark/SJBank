@@ -30,20 +30,19 @@ public class Deposit_AddReg extends HttpServlet {
 				partialization = request.getParameter("partialization"),
 				preferential = request.getParameter("preferential"),
 				prf_content = request.getParameter("prf_content"),
-				prf_interest = request.getParameter("prf_interest"),
 				id = "god";
 		float	min_interest = Float.parseFloat(request.getParameter("min_interest")),
-				max_interest = Float.parseFloat(request.getParameter("max_interest"));
+				max_interest = Float.parseFloat(request.getParameter("min_interest")),
+				prf_interest = Float.parseFloat(request.getParameter("prf_interest"));
 		int		min_sum = Integer.parseInt(request.getParameter("min_sum")),
 				max_sum = Integer.parseInt(request.getParameter("max_sum"));
 		String chk = request.getParameter("chk");
-
+		
 		System.out.print("sel_type : "+type+" product : "+product+" deposits_info : "+deposits_info+" month : "+month+" interest_type : "+interest_type);
 		System.out.print(" tax : "+tax+" retention : "+retention+" partialization : "+partialization+" preferential : "+preferential+" prf_content : "+prf_content);
 		System.out.println(" prf_interest : "+prf_interest+" id : "+id);
-
+		max_interest += prf_interest;
 		Deposits_infoDTO dto = new Deposits_infoDTO();
-		System.out.println(chk);
 		dto.setType(type);
 		dto.setProduct(product);
 		dto.setDeposits_info(deposits_info);
@@ -58,7 +57,7 @@ public class Deposit_AddReg extends HttpServlet {
 		dto.setMax_sum(max_sum);
 		dto.setPreferential(preferential);
 		dto.setPrf_content(prf_content);
-		dto.setPrf_interest(prf_interest);
+		dto.setPrf_interest(prf_interest+"");
 		dto.setId(id);
 
 		Deposits_infoDAO.getInstance().insert(dto); 

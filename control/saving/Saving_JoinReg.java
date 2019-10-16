@@ -46,7 +46,7 @@ public class Saving_JoinReg extends HttpServlet {
 
 		String 	targe = "SJ은행",
 				cms	  = "",
-				status= "성공",
+				status= "",
 				memo  = "적금가입";
 				
 		int sum = Integer.parseInt(request.getParameter("sum"));
@@ -54,83 +54,89 @@ public class Saving_JoinReg extends HttpServlet {
 		UserDTO userDTO = UserDAO.getInstance().selectId(userid);
 
 		int mysum = myAccDTO.getSum();
-		
+
 		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
 		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);
-
-		// --------------------------------------------------- 보내는이 로그 
-		Transfer_logDTO transDTO = new Transfer_logDTO();
-		transDTO.setAccount_number(myAcc);
-		transDTO.setTarget(targe);
-		transDTO.setFeetype("송금");
-		transDTO.setTo_account_number(newAcc);
-		transDTO.setReceived(userDTO.getName());
-		transDTO.setSum((long)sum);
-		transDTO.setFee(500);
-		transDTO.setCms(cms);
-		transDTO.setMemo(memo);
-		transDTO.setTo_memo("");
-		//--------------------------------------------------- 받는이 로그 
-		if((mysum-sum)<0) 
-			status ="실패";
 		
-		transDTO.setStatus(status);
-		Transfer_logDAO.getInstance().insert(transDTO);
-			
-		if((mysum-sum)>0) {
-			myAccDTO.setSum(mysum-sum);
-			AccountDAO.getInstance().updateMoney(myAccDTO);
-			
-			transDTO.setAccount_number(newAcc);
+		if(myAccDTO.getPw().equals(request.getParameter("pw"))) {
+		// --------------------------------------------------- 보내는이 로그 
+			Transfer_logDTO transDTO = new Transfer_logDTO();
+			transDTO.setAccount_number(myAcc);
 			transDTO.setTarget(targe);
-			transDTO.setFeetype("입금");
-			transDTO.setTo_account_number(myAcc);
+			transDTO.setFeetype("송금");
+			transDTO.setTo_account_number(newAcc);
 			transDTO.setReceived(userDTO.getName());
 			transDTO.setSum((long)sum);
-			transDTO.setFee(0);
+			transDTO.setFee(500);
 			transDTO.setCms(cms);
 			transDTO.setMemo(memo);
 			transDTO.setTo_memo("");
-			transDTO.setStatus("성공");
-			Transfer_logDAO.getInstance().insert(transDTO);
-			
-			accDTO.setAccount_number(newAcc);
-			accDTO.setType("적금");//종류
-			accDTO.setSum(sum);
-			accDTO.setAlias(request.getParameter("alias"));
-			accDTO.setId(userid);
-			accDTO.setPw(request.getParameter("newPW"));
-
-			String Pref = "없음";
-			Saving_infoDTO infoSet = new Saving_infoDTO();
-			infoSet.setProduct(product);
-			Saving_infoDTO infoDTO = Saving_infoDAO.getInstance().selectPro(infoSet);
-			for (AccountDTO a : AccountDAO.getInstance().selectID(userid)) {
-				if(infoDTO.getPreferential().equals(a.getType())) {
-					infoDTO.setMin_interest(infoDTO.getMax_interest());
-					Pref = a.getType()+"가입자 우대";
-					break;
-				}
+			//--------------------------------------------------- 받는이 로그 
+			if((mysum-sum)<0) {
+				status ="실패";
+				map.put("status","금액부족");
 			}
 			
-			svnDTO.setAccount_number(newAcc);
-			svnDTO.setId(userid);
-			svnDTO.setProduct(product);
-			svnDTO.setPreferential(Pref);
-			svnDTO.setInterest(infoDTO.getMin_interest());
-			svnDTO.setType(request.getParameter("type"));
-
-			AccountDAO.getInstance().insert(accDTO);
-			SavingDAO.getInstance().insert(svnDTO);
-			
-			map.put("product", product);
-			map.put("newAcc", newAcc);
-			map.put("Interest", svnDTO.getInterest()+"");
-			map.put("type", request.getParameter("type"));
-
-			String json = gson.toJson(map);
-			out.print(json);
+			transDTO.setStatus(status);
+			Transfer_logDAO.getInstance().insert(transDTO);
+				
+			if((mysum-sum)>0) {
+				myAccDTO.setSum(mysum-sum);
+				AccountDAO.getInstance().updateMoney(myAccDTO);
+				
+				transDTO.setAccount_number(newAcc);
+				transDTO.setTarget(targe);
+				transDTO.setFeetype("입금");
+				transDTO.setTo_account_number(myAcc);
+				transDTO.setReceived(userDTO.getName());
+				transDTO.setSum((long)sum);
+				transDTO.setFee(0);
+				transDTO.setCms(cms);
+				transDTO.setMemo(memo);
+				transDTO.setTo_memo("");
+				transDTO.setStatus("성공");
+				Transfer_logDAO.getInstance().insert(transDTO);
+				
+				accDTO.setAccount_number(newAcc);
+				accDTO.setType("적금");//종류
+				accDTO.setSum(sum);
+				accDTO.setAlias(request.getParameter("alias"));
+				accDTO.setId(userid);
+				accDTO.setPw(request.getParameter("newPW"));
+	
+				String Pref = "없음";
+				Saving_infoDTO infoSet = new Saving_infoDTO();
+				infoSet.setProduct(product);
+				Saving_infoDTO infoDTO = Saving_infoDAO.getInstance().selectPro(infoSet);
+				for (AccountDTO a : AccountDAO.getInstance().selectID(userid)) {
+					if(infoDTO.getPreferential().equals(a.getType())) {
+						infoDTO.setMin_interest(infoDTO.getMax_interest());
+						Pref = a.getType()+"가입자 우대";
+						break;
+					}
+				}
+				
+				svnDTO.setAccount_number(newAcc);
+				svnDTO.setId(userid);
+				svnDTO.setProduct(product);
+				svnDTO.setPreferential(Pref);
+				svnDTO.setInterest(infoDTO.getMin_interest());
+				svnDTO.setType(request.getParameter("type"));
+	
+				AccountDAO.getInstance().insert(accDTO);
+				SavingDAO.getInstance().insert(svnDTO);
+				
+				map.put("status","성공");
+				map.put("product", product);
+				map.put("newAcc", newAcc);
+				map.put("Interest", svnDTO.getInterest()+"");
+				map.put("type", request.getParameter("type"));
+			}
+		} else {
+			map.put("status", "실패");
 		}
+		String json = gson.toJson(map);
+		out.print(json);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

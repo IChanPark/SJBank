@@ -31,7 +31,7 @@ public class Fund_Join extends HttpServlet {
 		Gson gson = new Gson();
 		AccountDTO DataDTO = new AccountDTO();
 		DataDTO.setId((String)request.getSession().getAttribute("userID"));
-		DataDTO.setType("펀드");
+		DataDTO.setType("예금");
 		ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectID_Type(DataDTO);
 
 		Fund_InfoDTO setDTO = new Fund_InfoDTO();

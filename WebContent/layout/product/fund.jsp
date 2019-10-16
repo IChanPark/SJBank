@@ -155,6 +155,34 @@ function detail(me) {
 	});
 };
 
+function chksum() {
+	if(isRun == true)
+		return;
+	isRun = true;
+	
+	$.ajax({	
+		url:"product/sumChk",
+		type:'post',
+		data:{	account_number	: $("#account_number").val(),
+				accPW 			: $('#accPW').val()},
+		dataType:'json',
+		success:function(qqq){
+			if(qqq.status == "성공"){
+				$('#userSum').val(number_Pattern(qqq.sum));
+			} else {
+				$('#userSum').val('');
+				$('#accPW').val('');
+			  	$('#accPW').next().remove();
+			  	$('#accPW').after("<div style='color: #d6bb50'>비밀번호 확인 부탁드립니다.</div>");
+			}
+			isRun = false;
+		},
+		error:function(qqq){
+			isRun = false;
+		}	
+	});	
+};
+
 function join(me) {
 	if(isRun == true)
 		return;
@@ -185,9 +213,11 @@ function join(me) {
 			$.each(qqq.account_number.split('#'),function(i,e){
 				box +=	"<option value='"+e+"'>"+e+"["+ali[i]+"]</option>";	//계좌번호
 			});
-			box +=	"</select><button>잔액조회</button></div></div>";
+			box +=	"</select></div></div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>";
-			box +=	"<input onfocusout='ev()' type='text' placeholder='숫자4자리' id='pw'></input></div></div>";
+			box +=	"<input onfocusout='ev()' type='text' placeholder='숫자4자리' id='accPW'></input></div></div>"; // <button>계좌 비밀번호 오류 횟수조회</button>
+			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>계좌잔액</div><div class='infoMain_Value'>";
+			box +=	"<input type='text' id='userSum' readonly='readonly'></input><button onclick='chksum()'>잔액조회</button></div></div>";
 			box +=	"<div class='join_Guide'>신규가입정보</div>";
 			box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>신규금액</div>";
 			box +=	"<div class='infoMain_Value'><input onfocusout='ev2()' onkeyup='moneyChange(this)' type='text' placeholder='0' id=sum></input></div><br>";
@@ -226,6 +256,7 @@ function ev(){if(!check(/^[\d]{4}$/,$('#accPW'),'4자리 숫자만 입력가능�
 function ev2(){if(!check(/^[\d,]{0,13}$/,$('#sum'),'13자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
 function ev3(){if(!check2(/^[\d]{4}$/,$('#newPW'),$('#newPWchk'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};
 function ev4(){if(!check(/^[a-zA-Z0-9가-힣\s]{0,10}[a-zA-Z0-9가-힣]$/,$('#alias'),'·선택사항·별명은 10자이내로 작성가능합니다.')){return false;}else{return true;}};
+function ev5(){if(!check(/^[\d]{4}$/,$('#accPW'),'비밀번호 확인 부탁드립니다.')){return false;}else{return true;}};
 
 function joinReg(me){
 	if(ev()&&ev2()&&ev3()&&(ev4()||$('#alias').val()=="")&&true){
@@ -242,11 +273,11 @@ function joinReg(me) {
 	$.ajax({	
 		url:gogo,
 		type:'post',
-		data:{	accType			:	selected_Product,
+		data:{	
 				product 		:	$(me).parent('[data-product-name]').data("product-name"),
 				account_number	:	$('#account_number').val(),
-				pw				:	$('#pw').val(),
-				sum				:	$('#sum').val(),//여까지 작업 
+				pw				:	$('#accPW').val(),
+				sum				:	vSum,//여까지 작업 
 				newPW			:	$('#newPW').val(),
 				newPWchk		:	$('#newPWchk').val(),
 				alias			:	$('#alias').val(),
@@ -254,18 +285,25 @@ function joinReg(me) {
 		},
 		dataType:'json',
 		success:function(qqq){
-			
-		$(".infoBox").remove();
-			box = "";
-			box += "상품 "+ qqq.product +"["+qqq.type+"]가입이 완료되었습니다.!<br>";
-			box += "신규 계좌번호 "+qqq.newAcc+"입니다.!";
-			box += "<div onclick='gomyfund()'>목록으로</div>"
-			
-			$("#mm").append(box);
+			if(qqq.status == "성공"){
+				$(".infoBox").remove();
+				box = "상품 "+ qqq.product +" 가입이 완료되었습니다.!<br>";
+				box += "신규 계좌번호 "+qqq.newAcc+"입니다.!";
+				box += "<div onclick='gomyfund()'>목록으로</div>"
+				
+				$("#mm").append(box);
+			} else if(qqq.status == "실패"){
+				$('#accPW').val('');
+			  	$('#accPW').next().remove();
+			  	$('#accPW').after("<div style='color: #d6bb50'>비밀번호 확인 부탁드립니다.</div>");
+			} else {
+				$('#sum').val('');
+				$('#sum').next().remove();
+			  	$('#sum').after("<div style='color: #d6bb50'>이체하시려는 금액이 이체가능금액보다 큽니다. 금액확인 부탁드립니다.</div>");
+			}
 			isRun = false;
 		},
 		error:function(qqq){
-			
 			isRun = false;
 		}	
 	});

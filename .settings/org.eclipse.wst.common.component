@@ -10,6 +10,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/admin"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/email"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/javamodel"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/ajax"/>
         <property name="java-output-path" value="/SJBank/build/classes"/>
         <property name="context-root" value="SJBank"/>
     </wb-module>

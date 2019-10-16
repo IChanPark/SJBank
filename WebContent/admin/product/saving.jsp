@@ -147,8 +147,7 @@ function ev2(){if(!check(/^[\d,]{0,50}[\d]$/,$('#month'),'상품기간은 1자 �
 function ev3(){if(!check(/^[\d]{4,8}[\d]$/,$('#min_sum'),'4자리 이상 8자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
 function ev4(){if(!check(/^[\d]{4,13}$/,$('#max_sum'),'4자리 이상 13자리 이하 숫자만 입력가능합니다.')){return false;}else{return true;}};
 function ev5(){if(!check(/^[\d.]{0,5}[\d]$/,$('#min_interest'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
-function ev6(){if(!check(/^[\d.]{0,5}[\d]$/,$('#max_interest'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
-function ev7(){if(!check(/^[\d.]{0,5}[\d]$/,$('.prf_content'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
+function ev6(){if(!check(/^[\d.]{0,5}[\d]$/,$('.prf_content'),'5자리 이하 숫자와 .만 입력가능합니다.')){return false;}else{return true;}};
 
 function add(){
    $(".scrollB").remove();
@@ -179,19 +178,17 @@ function add(){
    box +=	"<select id='partialization'><option value='가능'>가능</option><option value='불가'>불가</option></select> 일부해지 가능 여부를 선택해주세요.</div></div>";
    box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>기준금리</div><div class='infoMain_Value'>";
    box +=	"<input onfocusout='ev5()' type='text' placeholder='0.0' id='min_interest'> 기준 금리를 입력해주세요.</div></div>";
-   box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>최대금리</div><div class='infoMain_Value'>";
-   box +=	"<input onfocusout='ev6()' type='text' placeholder='0.0' id='max_interest'> 최대 금리를 입력해주세요.</div></div>";
    box +=	"<div class='infoMain_Info'><div class='infoMain_Type'>우대항목</div><div class='infoMain_Value'>";
    box +=	"<select class='preferential'>우대구분<option value='예금'>예금</option><option value='적금'>적금</option><option value='펀드'>펀드</option></select> ";
    box +=	"<select class='prf_content'>우대조건<option value='보유시'>보유시</option></select> ";
-   box +=	" 우대 추가금리를 입력해주세요. <input onfocusout='ev7()' type='text' placeholder='0.0' class='prf_interest'> </div></div>";
+   box +=	" 우대 추가금리를 입력해주세요. <input onfocusout='ev6()' type='text' placeholder='0.0' class='prf_interest'> </div></div>";
    box +=	"</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Product/Saving'>상품등록취소</div>";
    box +=	"<div class='AdminButton' onclick='addReg()'>상품등록</div></div></div>";
    $("#mm").append(box);
 };
 
 function addReg(){
-	if(ev()&&ev2()&&ev3()&&ev4()&&ev5()&&ev6()&&ev7()&&true){
+	if(ev()&&ev2()&&ev3()&&ev4()&&ev5()&&ev6()&&true){
 		goReg();
 	}
 };
@@ -217,7 +214,6 @@ function goReg(){
             retention      	:   $('#retention').val(),
             partialization 	:   $('#partialization').val(),
             min_interest   	:   $('#min_interest').val(),
-            max_interest   	:   $('#max_interest').val(),
             preferential   	:   $('.preferential').val(),
             prf_content  	:   $('.prf_content').val(),
             prf_interest    :   $('.prf_interest').val()

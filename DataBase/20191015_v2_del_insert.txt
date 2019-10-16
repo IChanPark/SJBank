@@ -1,0 +1,1728 @@
+-- --------------------------------------------------------
+-- 호스트:                          127.0.0.1
+-- 서버 버전:                        10.3.16-MariaDB - mariadb.org binary distribution
+-- 서버 OS:                        Win64
+-- HeidiSQL 버전:                  10.2.0.5599
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- bank 데이터베이스 구조 내보내기
+CREATE DATABASE IF NOT EXISTS `bank` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `bank`;
+
+-- 테이블 bank.account 구조 내보내기
+CREATE TABLE IF NOT EXISTS `account` (
+  `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
+  `type` varchar(50) NOT NULL COMMENT '타입 ex 예금, 펀드 등',
+  `sum` bigint(11) NOT NULL COMMENT '보유금',
+  `alias` varchar(50) NOT NULL COMMENT '사용자 지정이름',
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `pw` varchar(50) NOT NULL COMMENT '계좌비밀번호',
+  `status` varchar(50) NOT NULL COMMENT '상태 활성/비활성/휴먼',
+  `register_date` datetime NOT NULL COMMENT '개설일',
+  `end_date` datetime DEFAULT NULL COMMENT '만료일/폐쇄일',
+  PRIMARY KEY (`account_number`),
+  KEY `id` (`id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='계좌 정보';
+
+-- 테이블 데이터 bank.account:~44 rows (대략적) 내보내기
+DELETE FROM `account`;
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` (`account_number`, `type`, `sum`, `alias`, `id`, `pw`, `status`, `register_date`, `end_date`) VALUES
+	('010-1111-1111-121', '펀드', 54322, 'ㄴㄴ', 'day_0821', '1111', '활성', '2019-09-05 08:31:36', NULL),
+	('010-1111-1111-122', '예금', 5078465, 'ㅁㅁ', 'day_0821', '1111', '활성', '2019-10-07 22:07:53', NULL),
+	('010-1111-1111-161', '예금', 12345, '11111', 'day_0821', '1111', '활성', '2019-10-07 23:59:52', NULL),
+	('010-1111-1111-162', '예금', 876373764, '1', 'elliottjo', '1111', '활성', '2019-10-08 15:51:48', NULL),
+	('010-1111-1111-163', '펀드', 510000, '1111', 'day_0821', '1234', '활성', '2019-10-09 02:15:12', NULL),
+	('010-1111-1111-231', '예금', 50000, '별명', 'day_0821', '1234', '활성', '2019-10-09 02:58:40', NULL),
+	('010-1111-112-1212', '예금', 258375482, '월급', 'elliottjo', '1234', '비활성', '2019-09-18 01:00:46', NULL),
+	('010-1111-112-1213', '예금', 789000, '학자금', 'day_0821', '1111', '활성', '2010-10-10 10:10:10', '2222-02-22 22:22:22'),
+	('010-125-5803-0544', '예금', 0, '', 'ge23', '123456', '활성', '2019-10-14 03:35:17', NULL),
+	('010-1759-1843-8513', '적금', 296176, '55', 'day_0821', '1234', '활성', '2019-10-10 22:31:17', NULL),
+	('010-2079-0005-0004', '적금', 7025942, 'rrr', 'elliottjo', '1234', '활성', '2019-10-10 12:48:54', NULL),
+	('010-2355-6806-5881', '예금', 701000, '1234', 'day_0821', '1234', '활성', '2019-10-15 20:47:08', NULL),
+	('010-2559-7557-2240', '펀드', 100000, '', 'elliottjo', '1234', '활성', '2019-10-11 17:55:46', NULL),
+	('010-2706-1758-2423', '예금', 1000000, '123', 'day_0821', '1234', '활성', '2019-10-15 21:50:01', NULL),
+	('010-338-1031-6295', '예금', 0, '', 'god', '1111', '활성', '2019-10-14 17:48:20', NULL),
+	('010-3497-5881-4733', '예금', 0, '', 'god', '1111', '활성', '2019-10-14 17:50:14', NULL),
+	('010-3668-5593-9456', '펀드', 346678, '', 'elliottjo', '1234', '활성', '2019-10-11 17:47:15', NULL),
+	('010-3829-4359-8382', '예금', 27242855, '', 'elliottjo', '1234', '활성', '2019-10-11 12:12:30', NULL),
+	('010-3987-2359-1884', '펀드', 150000, '테스트계좌888', 'qwer1234', '1234', '활성', '2019-10-11 00:03:36', NULL),
+	('010-4103-6538-3221', '적금', 716503, '계좌테스트 777', 'qwer1234', '1234', '활성', '2019-10-11 00:00:08', NULL),
+	('010-4139-2283-1703', '예금', 322611224, '', 'qwer1234', '1234', '활성', '2019-10-10 23:31:38', NULL),
+	('010-4410-5372-8852', '예금', 1777777, 'ㅇㅇ', 'day_0821', '1234', '활성', '2019-10-10 22:30:49', NULL),
+	('010-4794-6870-6563', '펀드', 1500000, '', 'elliottjo', '1234', '활성', '2019-10-10 02:03:19', NULL),
+	('010-5441-7161-7382', '예금', 1234, '1234', 'day_0821', '1234', '활성', '2019-10-15 21:52:29', NULL),
+	('010-5610-4526-0503', '펀드', 500000, 'ㅇㅇ', 'day_0821', '1234', '활성', '2019-10-10 22:31:42', NULL),
+	('010-5804-4599-5264', '적금', 2357445, 'ffff', 'elliottjo', '1234', '활성', '2019-10-10 12:45:19', NULL),
+	('010-6197-2659-5877', '예금', 0, '', '자찬ㄴㅇ로ㅓㅏ', '3333', '활성', '2019-10-14 18:09:53', NULL),
+	('010-664-1754-6744', '예금', 600000, '', 'day_0821', '5555', '활성', '2019-10-15 20:42:16', NULL),
+	('010-6915-9118-0547', '예금', 100000, '1234', 'day_0821', '1234', '활성', '2019-10-15 21:53:30', NULL),
+	('010-6936-3946-1490', '펀드', 134312, '', 'elliottjo', '1234', '활성', '2019-10-11 17:46:00', NULL),
+	('010-6997-1206-7428', '예금', 50000, '1234', 'day_0821', '1234', '활성', '2019-10-15 21:50:46', NULL),
+	('010-7157-8656-4550', '예금', 106655, '테스트6666', 'qwer1234', '1234', '활성', '2019-10-10 23:59:16', NULL),
+	('010-7174-9569-5501', '예금', 0, '', '234', '', '활성', '2019-10-13 17:41:12', NULL),
+	('010-7459-3447-7540', '예금', 123123, '', 'day_0821', '1234', '활성', '2019-10-15 19:54:59', NULL),
+	('010-7484-2466-2468', '예금', 500000, '1234', 'day_0821', '1234', '활성', '2019-10-15 21:09:01', NULL),
+	('010-7587-5773-1049', '적금', 2234231, 'rrrr', 'elliottjo', '1234', '활성', '2019-10-10 12:46:36', NULL),
+	('010-7664-0660-7104', '예금', 0, '', 'asdasdasdasd', '123', '활성', '2019-10-14 02:40:37', NULL),
+	('010-7789-1463-0791', '펀드', 100000, '', 'elliottjo', '1234', '활성', '2019-10-11 17:50:57', NULL),
+	('010-8997-7894-0197', '예금', 0, '', 'aaa2', '123', '활성', '2019-10-14 02:56:21', NULL),
+	('010-927-6970-3090', '예금', 500000, '1234', 'day_0821', '1234', '활성', '2019-10-15 21:07:37', NULL),
+	('010-9780-1258-2794', '예금', 7777777, '', 'tester22', '1111', '활성', '2019-10-10 17:19:13', NULL),
+	('101-1112-112-1232', '펀드', 14629906, '오일펀드', 'elliottjo', '1234', '활성', '2019-09-18 01:01:33', NULL),
+	('110-1111-2222-121', '적금', 5870, '저축', 'ngt', '1234', '활성', '2019-10-11 11:13:51', NULL),
+	('110-346-555760', '예금', 12018890, 'ㅋㅋㅋㅋ', 'elliottjo', '1111', '비활성', '2019-10-02 22:18:26', NULL);
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+
+-- 테이블 bank.account_modify_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `account_modify_log` (
+  `seq` int(11) NOT NULL,
+  `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
+  `pw` varchar(50) NOT NULL COMMENT '변경전',
+  `modify_pw` varchar(50) NOT NULL COMMENT '변경후',
+  `register_date` datetime NOT NULL COMMENT '수정한날짜',
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  CONSTRAINT `FK_account_modify_log_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='계좌정보 수정 이력';
+
+-- 테이블 데이터 bank.account_modify_log:~0 rows (대략적) 내보내기
+DELETE FROM `account_modify_log`;
+/*!40000 ALTER TABLE `account_modify_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account_modify_log` ENABLE KEYS */;
+
+-- 테이블 bank.account_pw_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `account_pw_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `account_number` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL COMMENT '유효한 로그인지',
+  `register_date` datetime NOT NULL COMMENT '등록일시',
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_account_pw_log_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='계좌별 비밀번호 틀린 횟수 로그테이블\r\n해당 테이블에 동일한 계좌번호이며 status가 y인 로그가 3개 있을경우 해당\r\n계좌번호는 account테이블에 상태를 비활성화함';
+
+-- 테이블 데이터 bank.account_pw_log:~0 rows (대략적) 내보내기
+DELETE FROM `account_pw_log`;
+/*!40000 ALTER TABLE `account_pw_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account_pw_log` ENABLE KEYS */;
+
+-- 테이블 bank.account_type 구조 내보내기
+CREATE TABLE IF NOT EXISTS `account_type` (
+  `type` varchar(50) NOT NULL COMMENT '타입',
+  `name` varchar(50) NOT NULL COMMENT '타입이름',
+  PRIMARY KEY (`type`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='계좌 종류 데이터를 가진 테이블';
+
+-- 테이블 데이터 bank.account_type:~5 rows (대략적) 내보내기
+DELETE FROM `account_type`;
+/*!40000 ALTER TABLE `account_type` DISABLE KEYS */;
+INSERT INTO `account_type` (`type`, `name`) VALUES
+	('isa', 'ISA'),
+	('loan', '대출'),
+	('deposit', '예금'),
+	('saving', '적금'),
+	('fund', '펀드');
+/*!40000 ALTER TABLE `account_type` ENABLE KEYS */;
+
+-- 테이블 bank.analysis 구조 내보내기
+CREATE TABLE IF NOT EXISTS `analysis` (
+  `propensity` varchar(50) NOT NULL COMMENT '투자 성향',
+  `name` varchar(50) NOT NULL COMMENT '투자 성향 이름',
+  `scope` varchar(50) NOT NULL COMMENT '점수범위 0, 43(0이상 43이하)',
+  `status` varchar(50) NOT NULL COMMENT '사용여부',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`propensity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='투자 성향 분류';
+
+-- 테이블 데이터 bank.analysis:~5 rows (대략적) 내보내기
+DELETE FROM `analysis`;
+/*!40000 ALTER TABLE `analysis` DISABLE KEYS */;
+INSERT INTO `analysis` (`propensity`, `name`, `scope`, `status`, `register_date`) VALUES
+	('active', '공격적투자형', '', '', '0000-00-00 00:00:00'),
+	('neutral', '중립형', '', '', '0000-00-00 00:00:00'),
+	('neutral_active', '적극적투자형', '', '', '0000-00-00 00:00:00'),
+	('neutral_stability', '안정추구형', '', '', '0000-00-00 00:00:00'),
+	('stability', '안정형', '', '', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `analysis` ENABLE KEYS */;
+
+-- 테이블 bank.credit_rating 구조 내보내기
+CREATE TABLE IF NOT EXISTS `credit_rating` (
+  `id` varchar(50) NOT NULL,
+  `rating` int(11) NOT NULL DEFAULT 5 COMMENT '신용등급',
+  `status` varchar(50) NOT NULL COMMENT '상태 탈퇴시 변경',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_credit_rating_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='신용 등급 테이블';
+
+-- 테이블 데이터 bank.credit_rating:~0 rows (대략적) 내보내기
+DELETE FROM `credit_rating`;
+/*!40000 ALTER TABLE `credit_rating` DISABLE KEYS */;
+/*!40000 ALTER TABLE `credit_rating` ENABLE KEYS */;
+
+-- 테이블 bank.credit_rating_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `credit_rating_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그순서',
+  `id` varchar(50) NOT NULL,
+  `change` varchar(50) NOT NULL COMMENT '상승/하락',
+  `reason` varchar(50) NOT NULL COMMENT '상승/하락 이유',
+  `rating` int(11) NOT NULL COMMENT '변경된 등급',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`seq`),
+  KEY `id` (`id`),
+  CONSTRAINT `FK_credit_rating_log_credit_rating` FOREIGN KEY (`id`) REFERENCES `credit_rating` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 신용 등급 변동 이력';
+
+-- 테이블 데이터 bank.credit_rating_log:~0 rows (대략적) 내보내기
+DELETE FROM `credit_rating_log`;
+/*!40000 ALTER TABLE `credit_rating_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `credit_rating_log` ENABLE KEYS */;
+
+-- 테이블 bank.deposits 구조 내보내기
+CREATE TABLE IF NOT EXISTS `deposits` (
+  `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `preferential` varchar(50) NOT NULL COMMENT '적용된 우대조건',
+  `interest` float NOT NULL COMMENT '적용이자',
+  `type` varchar(50) NOT NULL COMMENT '예금타입',
+  PRIMARY KEY (`account_number`),
+  KEY `product` (`product`),
+  KEY `type` (`type`),
+  CONSTRAINT `FK_deposits_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`),
+  CONSTRAINT `FK_deposits_deposits_info` FOREIGN KEY (`product`) REFERENCES `deposits_info` (`product`),
+  CONSTRAINT `FK_deposits_deposits_type` FOREIGN KEY (`type`) REFERENCES `deposits_type` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='예금 가입자';
+
+-- 테이블 데이터 bank.deposits:~15 rows (대략적) 내보내기
+DELETE FROM `deposits`;
+/*!40000 ALTER TABLE `deposits` DISABLE KEYS */;
+INSERT INTO `deposits` (`account_number`, `id`, `product`, `preferential`, `interest`, `type`) VALUES
+	('010-1111-1111-122', 'day_0821', '두번째상품명', '임시', 2.2, '보통'),
+	('010-1111-1111-161', 'day_0821', '세번째상품명', '임시', 2.2, '정기'),
+	('010-1111-1111-231', 'day_0821', '첫번째상품명', '임시', 2.2, '보통'),
+	('010-2355-6806-5881', 'day_0821', '123123', '임시', 2.2, '보통'),
+	('010-2706-1758-2423', 'day_0821', '123123', '예금가입자 우대', 12, '보통'),
+	('010-3829-4359-8382', 'elliottjo', '세번째상품명', '임시', 2.2, '정기'),
+	('010-4410-5372-8852', 'day_0821', '첫번째상품명', '임시', 2.2, '보통'),
+	('010-5441-7161-7382', 'day_0821', 'asdf', '예금가입자 우대', 12, '보통'),
+	('010-664-1754-6744', 'day_0821', '123123', '임시', 2.2, '보통'),
+	('010-6915-9118-0547', 'day_0821', 'asdf', '예금가입자 우대', 12, '보통'),
+	('010-6997-1206-7428', 'day_0821', 'asdf', '예금가입자 우대', 12, '보통'),
+	('010-7157-8656-4550', 'qwer1234', '첫번째23132', '임시', 2.2, '정기'),
+	('010-7459-3447-7540', 'day_0821', '123123', '임시', 2.2, '보통'),
+	('010-7484-2466-2468', 'day_0821', 'asdf', '예금가입자 우대', 12, '보통'),
+	('010-927-6970-3090', 'day_0821', 'asdf', '없음', 1, '보통');
+/*!40000 ALTER TABLE `deposits` ENABLE KEYS */;
+
+-- 테이블 bank.deposits_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `deposits_info` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `deposits_info` varchar(200) NOT NULL COMMENT '상품설명',
+  `min_interest` float NOT NULL COMMENT '최저 연이자',
+  `max_interest` float NOT NULL COMMENT '최고 연이자',
+  `month` varchar(50) NOT NULL COMMENT '만기 개월',
+  `type` varchar(50) NOT NULL COMMENT '타입 보통, 정기',
+  `interest_type` varchar(50) NOT NULL COMMENT '이자지급방식',
+  `tax` varchar(50) NOT NULL COMMENT '과세여부 ',
+  `preferential` varchar(200) NOT NULL COMMENT '우대구분 ',
+  `prf_content` varchar(200) NOT NULL COMMENT '우대조건 내용',
+  `prf_interest` varchar(200) NOT NULL COMMENT '우대이자율',
+  `min_sum` int(11) NOT NULL COMMENT '최소금액',
+  `max_sum` int(11) NOT NULL COMMENT '월납입 최대금액',
+  `partialization` varchar(50) NOT NULL COMMENT '일부해지가능여부',
+  `retention` varchar(50) NOT NULL COMMENT '재예치가능여부',
+  `id` varchar(50) NOT NULL COMMENT '관리자아이디',
+  `status` varchar(50) NOT NULL COMMENT '상태',
+  `register_date` datetime NOT NULL COMMENT '상품등록일',
+  `modify_date` datetime DEFAULT NULL COMMENT '상품수정일',
+  `end_date` datetime DEFAULT NULL COMMENT '상품삭제일',
+  PRIMARY KEY (`product`),
+  KEY `type` (`type`),
+  KEY `seq` (`seq`),
+  CONSTRAINT `FK_deposits_info_deposits_type` FOREIGN KEY (`type`) REFERENCES `deposits_type` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='예금 상품 정보';
+
+-- 테이블 데이터 bank.deposits_info:~9 rows (대략적) 내보내기
+DELETE FROM `deposits_info`;
+/*!40000 ALTER TABLE `deposits_info` DISABLE KEYS */;
+INSERT INTO `deposits_info` (`seq`, `product`, `deposits_info`, `min_interest`, `max_interest`, `month`, `type`, `interest_type`, `tax`, `preferential`, `prf_content`, `prf_interest`, `min_sum`, `max_sum`, `partialization`, `retention`, `id`, `status`, `register_date`, `modify_date`, `end_date`) VALUES
+	(7, '123123', '1212', 12, 12, '12', '보통', '월이자지급', '과세', '예금', '보유시', '1221', 121212, 1212, '가능', '가능', 'god', '활성', '2019-10-14 11:40:49', NULL, NULL),
+	(10, 'asdf', 'asdfsadf', 1, 12, '12', '보통', '월이자지급', '과세', '예금', '보유시', '12', 121212, 121212, '가능', '가능', 'god', '활성', '2019-10-14 12:43:38', NULL, NULL),
+	(9, 'asdfsadfdf', '1212', 12, 12, '12', '보통', '월이자지급', '과세', '예금', '보유시', '', 121212, 1212, '가능', '가능', 'god', '활성', '2019-10-14 11:41:09', NULL, NULL),
+	(6, 'ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ', 'ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ', 1.1, 1.1, '12,36', '보통', '월이자지급', '과세', '예금', '보유시', '1.1', 11111, 111, '가능', '가능', 'god', '활성', '2019-10-13 23:41:00', NULL, NULL),
+	(2, '두번째상품명', 'dddddㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ\nwedsdds', 0.8, 0.9, '1,11,21', '보통', '만기일시', '과세', 'ㄱ', 'ㄱㄱ', '0.1', 10000, 1000000, '불가', '불가', 'god', '활성', '2019-10-01 12:55:29', '2019-10-13 23:40:26', NULL),
+	(3, '세번째상품명', '내용 비스무리한거', 0.7, 1.8, '12', '정기', '만기일시', '과세', '30세#프로그래머#기타', '30세라면누구나#프로그래머라면누구나#그냥줌', '0.3#0.7#0.1', 100000, 10000000, '불가', '불가', '', '활성', '2019-09-29 04:31:20', '0000-00-00 00:00:00', NULL),
+	(4, '첫번째23132', '', 0.7, 1.8, '12', '정기', '만기일시', '과세', '30세#프로그래머#기타', '30세라면누구나#프로그래머라면누구나#그냥줌', '0.3#0.7#0.1', 100000, 10000000, '불가', '불가', '', '활성', '2019-10-10 10:09:19', NULL, NULL),
+	(1, '첫번째상품명', '내용 비스무리한거', 0.8, 1.5, '12', '보통', '만기일시', '과세', '그냥#테스트', '고냥#테스트', '0.3#0.4', 100000, 10000000, '불가', '불가', '', '활성', '2019-10-01 11:00:08', '0000-00-00 00:00:00', NULL),
+	(5, '테스틍ㅇㅇ', 'ㅇㅇㅇ', 1.1, 1.2, '12,15,16', '보통', '월이자지급', '과세', '예금', '보유시', '1.1', 100000, 10000000, '가능', '가능', 'god', '활성', '2019-10-11 12:56:36', NULL, NULL);
+/*!40000 ALTER TABLE `deposits_info` ENABLE KEYS */;
+
+-- 테이블 bank.deposits_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `deposits_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
+  `account_number` varchar(50) NOT NULL COMMENT '계좌',
+  `interest` float NOT NULL COMMENT '이자',
+  `sum` int(11) NOT NULL COMMENT '이자금액',
+  `status` varchar(50) NOT NULL COMMENT '성공/실패(사유)',
+  `register_date` datetime NOT NULL COMMENT '날짜',
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_deposits_log_account` FOREIGN KEY (`account_number`) REFERENCES `deposits` (`account_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='월별 예금 계좌 이자 이력';
+
+-- 테이블 데이터 bank.deposits_log:~0 rows (대략적) 내보내기
+DELETE FROM `deposits_log`;
+/*!40000 ALTER TABLE `deposits_log` DISABLE KEYS */;
+INSERT INTO `deposits_log` (`seq`, `account_number`, `interest`, `sum`, `status`, `register_date`) VALUES
+	(1, '010-1111-1111-122', 1, 1, '성공', '2019-10-08 02:32:25');
+/*!40000 ALTER TABLE `deposits_log` ENABLE KEYS */;
+
+-- 테이블 bank.deposits_type 구조 내보내기
+CREATE TABLE IF NOT EXISTS `deposits_type` (
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 테이블 데이터 bank.deposits_type:~2 rows (대략적) 내보내기
+DELETE FROM `deposits_type`;
+/*!40000 ALTER TABLE `deposits_type` DISABLE KEYS */;
+INSERT INTO `deposits_type` (`name`) VALUES
+	('보통'),
+	('정기');
+/*!40000 ALTER TABLE `deposits_type` ENABLE KEYS */;
+
+-- 테이블 bank.email_sand 구조 내보내기
+CREATE TABLE IF NOT EXISTS `email_sand` (
+  `id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='이메일 알림 테이블';
+
+-- 테이블 데이터 bank.email_sand:~0 rows (대략적) 내보내기
+DELETE FROM `email_sand`;
+/*!40000 ALTER TABLE `email_sand` DISABLE KEYS */;
+/*!40000 ALTER TABLE `email_sand` ENABLE KEYS */;
+
+-- 테이블 bank.email_sand_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `email_sand_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) NOT NULL COMMENT '보내는 이메일 계정',
+  `to_email` varchar(50) NOT NULL COMMENT '사용자 이메일',
+  `content` varchar(50) NOT NULL COMMENT '내용',
+  `type` varchar(50) NOT NULL COMMENT '메일 발송종류 ? 알림, 문의 등',
+  `status` varchar(50) NOT NULL COMMENT '전송 완료 여부',
+  `register_date` datetime NOT NULL COMMENT '전송 일시',
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='이메일 전송 이력';
+
+-- 테이블 데이터 bank.email_sand_log:~0 rows (대략적) 내보내기
+DELETE FROM `email_sand_log`;
+/*!40000 ALTER TABLE `email_sand_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `email_sand_log` ENABLE KEYS */;
+
+-- 테이블 bank.faq 구조 내보내기
+CREATE TABLE IF NOT EXISTS `faq` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL COMMENT '운영자',
+  `title` varchar(50) NOT NULL COMMENT '제목',
+  `content` varchar(50) NOT NULL COMMENT '내용',
+  `type` varchar(50) DEFAULT NULL COMMENT '자주하는질문 타입 타입별 분류 및 검색을 위해',
+  `status` varchar(50) NOT NULL COMMENT '상태 비활성 시 안보임',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`seq`),
+  KEY `id` (`id`),
+  CONSTRAINT `FK_faq_management` FOREIGN KEY (`id`) REFERENCES `management` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='자주하는 질문';
+
+-- 테이블 데이터 bank.faq:~8 rows (대략적) 내보내기
+DELETE FROM `faq`;
+/*!40000 ALTER TABLE `faq` DISABLE KEYS */;
+INSERT INTO `faq` (`seq`, `id`, `title`, `content`, `type`, `status`, `register_date`) VALUES
+	(1, 'kim', '망했어요', '몰 해도 안되~ 집에가자!! 때려쳐!!', '이체', '활성', '2019-09-30 00:00:00'),
+	(2, 'god', '일해라 노예야', '참쉽죠 빨리 해주세요 5분 드립니다.', '명령', '활성', '2019-09-30 00:00:00'),
+	(10, 'kim', '테스트', '테스트\r\nTEST', '명령', '활성', '2019-10-08 23:52:27'),
+	(11, 'god', '테스트', 'ㅇㅇㅇㅁㅁㅁ', '명령', '활성', '2019-10-09 19:16:47'),
+	(12, 'god', '테스트', 'sxdfzfzxvcxzcv', '명령', '활성', '2019-10-10 01:18:38'),
+	(13, 'god', '테스트', 'sxdfzfzxvcxzcv', '명령', '활성', '2019-10-10 01:22:17'),
+	(14, 'god', '테스트2323', '로그인ㅇㅇ', '이체', '활성', '2019-10-10 05:13:42'),
+	(15, 'god', '테스트', '또 테스트!! 앞으로!!', '명령', '활성', '2019-10-10 12:42:37'),
+	(16, 'god', '10/10', '이젠 바로 되라고', '명령', '활성', '2019-10-10 12:44:18'),
+	(17, 'god', '10/10', '이젠 바로 되라고', '명령', '활성', '2019-10-10 12:46:23'),
+	(18, 'god', '테스트9991', '테스트 ㄱㄱㄱ ', '명령', '활성', '2019-10-11 00:23:49');
+/*!40000 ALTER TABLE `faq` ENABLE KEYS */;
+
+-- 테이블 bank.fund 구조 내보내기
+CREATE TABLE IF NOT EXISTS `fund` (
+  `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
+  `id` varchar(50) NOT NULL COMMENT 'id',
+  `price_modify` varchar(50) NOT NULL COMMENT '수정가',
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `fluctuation` float NOT NULL COMMENT '등락률',
+  `amount` float NOT NULL COMMENT '가입금액',
+  `nowmoney` float NOT NULL COMMENT '출금가능',
+  `buynum` float NOT NULL COMMENT '구매량',
+  `exchange` float NOT NULL COMMENT '환산금액(평가금액)',
+  `rest` float NOT NULL COMMENT '나머지돈',
+  PRIMARY KEY (`account_number`),
+  KEY `id` (`id`),
+  KEY `product` (`product`),
+  CONSTRAINT `fk_fund_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`),
+  CONSTRAINT `fk_fund_fund_info` FOREIGN KEY (`product`) REFERENCES `fund_info` (`product`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='펀드 가입자';
+
+-- 테이블 데이터 bank.fund:~8 rows (대략적) 내보내기
+DELETE FROM `fund`;
+/*!40000 ALTER TABLE `fund` DISABLE KEYS */;
+INSERT INTO `fund` (`account_number`, `id`, `price_modify`, `product`, `fluctuation`, `amount`, `nowmoney`, `buynum`, `exchange`, `rest`) VALUES
+	('010-1111-1111-163', 'day_0821', '1622.0', '테스트펀드', 0.5, 100000, 156736, 96, 155712, 1024),
+	('010-2559-7557-2240', 'elliottjo', '1463.0', '하나UBSPIMCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-E', 0.5, 100000, 141472, 96, 140448, 1024),
+	('010-3668-5593-9456', 'elliottjo', '1153.0', '하나UBSPIMCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-E', 0.5, 100000, 111712, 96, 110688, 1024),
+	('010-3987-2359-1884', 'qwer1234', '1159.0', '테스트펀드', 0.5, 150000, 164768, 142, 164578, 190),
+	('010-4794-6870-6563', 'elliottjo', '1053.0', '하나UBSPIMCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-E', 0.5, 500000, 510648, 484, 509652, 996),
+	('010-5610-4526-0503', 'day_0821', '1140.0', '테스트펀드', 0.5, 500000, 540205, 473, 539220, 985),
+	('010-6936-3946-1490', 'elliottjo', '1066.0', '하나UBSPIMCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-E', 0.5, 10000, 10315, 9, 9594, 721),
+	('010-7789-1463-0791', 'elliottjo', '1185.0', '하나UBSPIMCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-E', 0.5, 100000, 114784, 96, 113760, 1024);
+/*!40000 ALTER TABLE `fund` ENABLE KEYS */;
+
+-- 테이블 bank.fund_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `fund_info` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `product_info` varchar(200) NOT NULL COMMENT '상품설명',
+  `price` float NOT NULL COMMENT '초기기준가',
+  `price_modify` float NOT NULL COMMENT '수정기준가',
+  `type` varchar(50) NOT NULL COMMENT '유형 주식, 채권 등등',
+  `management` varchar(50) NOT NULL COMMENT '운용사',
+  `tax` varchar(50) NOT NULL COMMENT '과세여부',
+  `area` varchar(50) NOT NULL COMMENT '국내/해외',
+  `property` varchar(50) NOT NULL COMMENT '상품속성ex 인터넷..',
+  `first_fee` float NOT NULL COMMENT '선취수수료',
+  `fee` float NOT NULL COMMENT '년보수',
+  `sector` varchar(50) NOT NULL COMMENT '섹터',
+  `id` varchar(50) NOT NULL COMMENT '관리자아이디',
+  `status` varchar(50) NOT NULL COMMENT '상태',
+  `register_date` datetime NOT NULL COMMENT '펀드등록일',
+  `modify_date` datetime DEFAULT NULL COMMENT '펀드수정일',
+  `end_date` datetime DEFAULT NULL COMMENT '펀드폐지일',
+  PRIMARY KEY (`product`),
+  KEY `type` (`type`),
+  KEY `seq` (`seq`),
+  CONSTRAINT `FK_fund_info_fund_type` FOREIGN KEY (`type`) REFERENCES `fund_type` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='펀드 상품 정보';
+
+-- 테이블 데이터 bank.fund_info:~5 rows (대략적) 내보내기
+DELETE FROM `fund_info`;
+/*!40000 ALTER TABLE `fund_info` DISABLE KEYS */;
+INSERT INTO `fund_info` (`seq`, `product`, `product_info`, `price`, `price_modify`, `type`, `management`, `tax`, `area`, `property`, `first_fee`, `fee`, `sector`, `id`, `status`, `register_date`, `modify_date`, `end_date`) VALUES
+	(4, 'asdaaaaaa', 'aaaaaaaaaaaa', 1000, 1000, '혼합자산(재간접형)', 'asdas', '과세', '국내', '', 1.2, 1.1, '보통위험', 'god', '활성', '2019-10-13 23:26:30', '2019-10-13 23:26:51', NULL),
+	(5, 'ㅁㄴㅇㅁㄴㅇㅁㄴ', 'ㅁㄴㅇㅁㄴㅇㅁㅇ', 1000, 1000, '체권', '그기ㅡ긔', '과세', '국내', '', 1.1, 1.1, '보통위험', 'god', '활성', '2019-10-13 23:42:15', NULL, NULL),
+	(3, '테스ㅜ트 펀드 등록', '암튼등록ㅇㄴㅇㅇㅇㄴㅇㄴ', 1000, 1000, '체권', '암튼운용사', '과세', '해외', '', 1.1112, 1.123, '고위험', 'god', '활성', '2019-10-13 17:21:56', '2019-10-13 17:29:29', NULL),
+	(1, '테스트펀드', '테스트펀드입니다.\r\nㅎ\r\nㅎ\r\nㅎ\r\nㅎ\r\nㅎ\r\nㅎ\r\nㅎ\r\nㅎ\r\nㅎ\r\nㅎ', 1031, 1055, '혼합자산(재간접형)', '테스트운용사', '15.4%', '국내', '인터넷', 0.35, 0.56, '고위험', '', '활성', '2019-10-01 17:36:53', NULL, '2020-10-05 00:00:00'),
+	(2, '하나UBSPIMCO글로벌인컴혼합자산투자신탁(H)[재간접형]종류A-E', '글로벌 주식 투자', 1031, 1031, '체권', '하나UBS자산운용', '15.4%', '해외', '인터넷', 0.35, 0.56, '보통위험', '', '활성', '2019-10-01 11:09:33', NULL, '2020-10-05 00:00:00');
+/*!40000 ALTER TABLE `fund_info` ENABLE KEYS */;
+
+-- 테이블 bank.fund_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `fund_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
+  `account_number` varchar(50) NOT NULL COMMENT '계좌',
+  `fluctuation` float NOT NULL COMMENT '등락률',
+  `sum` int(11) NOT NULL COMMENT '등락금액',
+  `status` varchar(50) NOT NULL COMMENT '성공/실패(사유)',
+  `register_date` datetime NOT NULL COMMENT '날짜',
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk__fund` FOREIGN KEY (`account_number`) REFERENCES `fund` (`account_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COMMENT='일별 펀드 계좌 수익 적용 이력';
+
+-- 테이블 데이터 bank.fund_log:~72 rows (대략적) 내보내기
+DELETE FROM `fund_log`;
+/*!40000 ALTER TABLE `fund_log` DISABLE KEYS */;
+INSERT INTO `fund_log` (`seq`, `account_number`, `fluctuation`, `sum`, `status`, `register_date`) VALUES
+	(1, '010-2559-7557-2240', 0, 100000, '실패', '2019-10-11 17:55:47'),
+	(2, '010-2559-7557-2240', 0, 136672, '성공', '2019-10-13 22:16:41'),
+	(3, '010-2559-7557-2240', 0, 139840, '성공', '2019-10-13 22:16:42'),
+	(4, '010-2559-7557-2240', 0, 148096, '성공', '2019-10-13 22:16:44'),
+	(5, '010-1111-1111-163', 0, 155584, '성공', '2019-10-13 23:31:04'),
+	(6, '010-3668-5593-9456', 0, 104896, '성공', '2019-10-13 23:31:04'),
+	(7, '010-3987-2359-1884', 0, 162212, '성공', '2019-10-13 23:31:04'),
+	(8, '010-4794-6870-6563', 0, 531460, '성공', '2019-10-13 23:31:04'),
+	(9, '010-5610-4526-0503', 0, 545881, '성공', '2019-10-13 23:31:05'),
+	(10, '010-6936-3946-1490', 0, 10810, '성공', '2019-10-13 23:31:05'),
+	(11, '010-7789-1463-0791', 0, 107680, '성공', '2019-10-13 23:31:05'),
+	(12, '010-1111-1111-163', 0, 151360, '성공', '2019-10-13 23:31:06'),
+	(13, '010-3668-5593-9456', 0, 104992, '성공', '2019-10-13 23:31:06'),
+	(14, '010-3987-2359-1884', 0, 152414, '성공', '2019-10-13 23:31:06'),
+	(15, '010-4794-6870-6563', 0, 534848, '성공', '2019-10-13 23:31:07'),
+	(16, '010-5610-4526-0503', 0, 543516, '성공', '2019-10-13 23:31:07'),
+	(17, '010-6936-3946-1490', 0, 10468, '성공', '2019-10-13 23:31:07'),
+	(18, '010-7789-1463-0791', 0, 108832, '성공', '2019-10-13 23:31:08'),
+	(19, '010-1111-1111-163', 0, 152704, '성공', '2019-10-13 23:31:09'),
+	(20, '010-3668-5593-9456', 0, 108064, '성공', '2019-10-13 23:31:09'),
+	(21, '010-3987-2359-1884', 0, 153692, '성공', '2019-10-13 23:31:09'),
+	(22, '010-4794-6870-6563', 0, 524200, '성공', '2019-10-13 23:31:10'),
+	(23, '010-5610-4526-0503', 0, 510879, '성공', '2019-10-13 23:31:10'),
+	(24, '010-6936-3946-1490', 0, 10819, '성공', '2019-10-13 23:31:11'),
+	(25, '010-7789-1463-0791', 0, 100768, '성공', '2019-10-13 23:31:11'),
+	(26, '010-1111-1111-163', 0, 155680, '성공', '2019-10-13 23:31:12'),
+	(27, '010-3668-5593-9456', 0, 107872, '성공', '2019-10-13 23:31:12'),
+	(28, '010-3987-2359-1884', 0, 159514, '성공', '2019-10-13 23:31:13'),
+	(29, '010-4794-6870-6563', 0, 504356, '성공', '2019-10-13 23:31:13'),
+	(30, '010-5610-4526-0503', 0, 517028, '성공', '2019-10-13 23:31:13'),
+	(31, '010-6936-3946-1490', 0, 10423, '성공', '2019-10-13 23:31:13'),
+	(32, '010-7789-1463-0791', 0, 104800, '성공', '2019-10-13 23:31:13'),
+	(33, '010-1111-1111-163', 0, 152032, '성공', '2019-10-13 23:31:14'),
+	(34, '010-3668-5593-9456', 0, 107200, '성공', '2019-10-13 23:31:15'),
+	(35, '010-3987-2359-1884', 0, 154260, '성공', '2019-10-13 23:31:15'),
+	(36, '010-4794-6870-6563', 0, 505808, '성공', '2019-10-13 23:31:15'),
+	(37, '010-5610-4526-0503', 0, 522231, '성공', '2019-10-13 23:31:15'),
+	(38, '010-6936-3946-1490', 0, 10504, '성공', '2019-10-13 23:31:15'),
+	(39, '010-7789-1463-0791', 0, 108640, '성공', '2019-10-13 23:31:16'),
+	(40, '010-1111-1111-163', 0, 156640, '성공', '2019-10-13 23:31:17'),
+	(41, '010-1111-1111-163', 0, 162304, '성공', '2019-10-14 01:49:15'),
+	(42, '010-2559-7557-2240', 0, 153280, '성공', '2019-10-14 01:49:15'),
+	(43, '010-3668-5593-9456', 0, 101056, '성공', '2019-10-14 01:49:15'),
+	(44, '010-3987-2359-1884', 0, 165194, '성공', '2019-10-14 01:49:16'),
+	(45, '010-4794-6870-6563', 0, 502904, '성공', '2019-10-14 01:49:16'),
+	(46, '010-5610-4526-0503', 0, 516082, '성공', '2019-10-14 01:49:16'),
+	(47, '010-6936-3946-1490', 0, 10927, '성공', '2019-10-14 01:49:16'),
+	(48, '010-7789-1463-0791', 0, 105280, '성공', '2019-10-14 01:49:16'),
+	(49, '010-1111-1111-163', 0, 147808, '성공', '2019-10-14 01:49:18'),
+	(50, '010-2559-7557-2240', 0, 140224, '성공', '2019-10-14 01:49:18'),
+	(51, '010-3668-5593-9456', 0, 97888, '성공', '2019-10-14 01:49:18'),
+	(52, '010-3987-2359-1884', 0, 167466, '성공', '2019-10-14 01:49:18'),
+	(53, '010-4794-6870-6563', 0, 477736, '성공', '2019-10-14 01:49:18'),
+	(54, '010-5610-4526-0503', 0, 528853, '성공', '2019-10-14 01:49:18'),
+	(55, '010-6936-3946-1490', 0, 10459, '성공', '2019-10-14 01:49:18'),
+	(56, '010-7789-1463-0791', 0, 112096, '성공', '2019-10-14 01:49:19'),
+	(57, '010-1111-1111-163', 0, 159520, '성공', '2019-10-14 01:49:20'),
+	(58, '010-2559-7557-2240', 0, 149152, '성공', '2019-10-14 01:49:20'),
+	(59, '010-3668-5593-9456', 0, 112384, '성공', '2019-10-14 01:49:20'),
+	(60, '010-3987-2359-1884', 0, 143610, '성공', '2019-10-14 01:49:20'),
+	(61, '010-4794-6870-6563', 0, 532428, '성공', '2019-10-14 01:49:20'),
+	(62, '010-5610-4526-0503', 0, 552976, '성공', '2019-10-14 01:49:20'),
+	(63, '010-6936-3946-1490', 0, 10405, '성공', '2019-10-14 01:49:21'),
+	(64, '010-7789-1463-0791', 0, 101728, '성공', '2019-10-14 01:49:21'),
+	(65, '010-1111-1111-163', 0, 156736, '성공', '2019-10-14 01:49:22'),
+	(66, '010-2559-7557-2240', 0, 141472, '성공', '2019-10-14 01:49:22'),
+	(67, '010-3668-5593-9456', 0, 111712, '성공', '2019-10-14 01:49:22'),
+	(68, '010-3987-2359-1884', 0, 164768, '성공', '2019-10-14 01:49:22'),
+	(69, '010-4794-6870-6563', 0, 510648, '성공', '2019-10-14 01:49:22'),
+	(70, '010-5610-4526-0503', 0, 540205, '성공', '2019-10-14 01:49:23'),
+	(71, '010-6936-3946-1490', 0, 10315, '성공', '2019-10-14 01:49:23'),
+	(72, '010-7789-1463-0791', 0, 114784, '성공', '2019-10-14 01:49:23');
+/*!40000 ALTER TABLE `fund_log` ENABLE KEYS */;
+
+-- 테이블 bank.fund_type 구조 내보내기
+CREATE TABLE IF NOT EXISTS `fund_type` (
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='펀드 타입(유형) 검증용 테이블';
+
+-- 테이블 데이터 bank.fund_type:~0 rows (대략적) 내보내기
+DELETE FROM `fund_type`;
+/*!40000 ALTER TABLE `fund_type` DISABLE KEYS */;
+INSERT INTO `fund_type` (`name`) VALUES
+	('체권'),
+	('혼합자산(재간접형)');
+/*!40000 ALTER TABLE `fund_type` ENABLE KEYS */;
+
+-- 테이블 bank.loan 구조 내보내기
+CREATE TABLE IF NOT EXISTS `loan` (
+  `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `preferential` varchar(50) NOT NULL COMMENT '적용된 우대조건',
+  `interest` float NOT NULL COMMENT '적용이자',
+  `type` varchar(50) NOT NULL COMMENT '상환방식',
+  `sum` int(11) NOT NULL COMMENT '대출금액',
+  `period` varchar(50) NOT NULL COMMENT '대출기간ex 10,15,20...',
+  `end_date` datetime NOT NULL COMMENT '만기일',
+  PRIMARY KEY (`account_number`),
+  KEY `id` (`id`),
+  KEY `fk_loan_loaninfo` (`product`),
+  CONSTRAINT `fk_loan_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`),
+  CONSTRAINT `fk_loan_account_2` FOREIGN KEY (`id`) REFERENCES `account` (`id`),
+  CONSTRAINT `fk_loan_loaninfo` FOREIGN KEY (`product`) REFERENCES `loan_info` (`product`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='대출 가입자';
+
+-- 테이블 데이터 bank.loan:~0 rows (대략적) 내보내기
+DELETE FROM `loan`;
+/*!40000 ALTER TABLE `loan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loan` ENABLE KEYS */;
+
+-- 테이블 bank.loan_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `loan_info` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `product_info` varchar(50) DEFAULT NULL COMMENT '상품설명',
+  `min_interest` float NOT NULL COMMENT '최저 연이자',
+  `max_interest` float NOT NULL COMMENT '최고 연이자',
+  `month` int(11) NOT NULL COMMENT '만기 개월',
+  `type` varchar(50) NOT NULL COMMENT '대출 종류',
+  `loanlimit` bigint(20) NOT NULL COMMENT '대출한도',
+  `preferential` varchar(200) NOT NULL COMMENT '우대구분 ',
+  `prf_content` varchar(200) NOT NULL COMMENT '우대조건 내용',
+  `prf_interest` varchar(200) NOT NULL COMMENT '우대이자율',
+  `id` varchar(50) NOT NULL COMMENT '관리자아이디',
+  `status` varchar(10) NOT NULL COMMENT '상태',
+  `register_date` datetime NOT NULL COMMENT '상품등록일',
+  `modify_date` datetime DEFAULT NULL COMMENT '상품수정일',
+  `end_date` datetime DEFAULT NULL COMMENT '상품삭제일',
+  PRIMARY KEY (`seq`),
+  KEY `product` (`product`),
+  KEY `type` (`type`),
+  CONSTRAINT `FK_loan_info_loan_type` FOREIGN KEY (`type`) REFERENCES `loan_type` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='대출 상품 정보';
+
+-- 테이블 데이터 bank.loan_info:~1 rows (대략적) 내보내기
+DELETE FROM `loan_info`;
+/*!40000 ALTER TABLE `loan_info` DISABLE KEYS */;
+INSERT INTO `loan_info` (`seq`, `product`, `product_info`, `min_interest`, `max_interest`, `month`, `type`, `loanlimit`, `preferential`, `prf_content`, `prf_interest`, `id`, `status`, `register_date`, `modify_date`, `end_date`) VALUES
+	(1, 'java대출', '프로그래머를 위한 대출', 2, 3, 12, '신용대출', 200000000, '프로그래머#java기술자', '프로그래머들#java가능', '0.3#0.7', '', '활성', '2019-10-01 15:30:05', NULL, NULL);
+/*!40000 ALTER TABLE `loan_info` ENABLE KEYS */;
+
+-- 테이블 bank.loan_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `loan_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
+  `account_number` varchar(50) NOT NULL COMMENT '계좌',
+  `sum` int(11) NOT NULL COMMENT '납입금액',
+  `remain` int(11) NOT NULL COMMENT '남은상환액',
+  `status` varchar(50) NOT NULL COMMENT '성공/실패(사유)',
+  `register_date` datetime NOT NULL COMMENT '날짜',
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_loan_log_account` FOREIGN KEY (`account_number`) REFERENCES `loan` (`account_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='대출계좌 납부 이력';
+
+-- 테이블 데이터 bank.loan_log:~0 rows (대략적) 내보내기
+DELETE FROM `loan_log`;
+/*!40000 ALTER TABLE `loan_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loan_log` ENABLE KEYS */;
+
+-- 테이블 bank.loan_type 구조 내보내기
+CREATE TABLE IF NOT EXISTS `loan_type` (
+  `name` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 테이블 데이터 bank.loan_type:~0 rows (대략적) 내보내기
+DELETE FROM `loan_type`;
+/*!40000 ALTER TABLE `loan_type` DISABLE KEYS */;
+INSERT INTO `loan_type` (`name`) VALUES
+	('신용대출');
+/*!40000 ALTER TABLE `loan_type` ENABLE KEYS */;
+
+-- 테이블 bank.management 구조 내보내기
+CREATE TABLE IF NOT EXISTS `management` (
+  `name` varchar(50) NOT NULL COMMENT '이름',
+  `id` varchar(50) NOT NULL COMMENT '아이디',
+  `pw` varchar(50) NOT NULL COMMENT '패스워드',
+  `department` varchar(50) NOT NULL COMMENT '부서',
+  `tel` varchar(50) NOT NULL COMMENT '연락처',
+  `access_level` int(11) NOT NULL COMMENT '접근권한 1~',
+  `status` varchar(50) NOT NULL COMMENT '계정상태',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='관리자 정보 테이블';
+
+-- 테이블 데이터 bank.management:~3 rows (대략적) 내보내기
+DELETE FROM `management`;
+/*!40000 ALTER TABLE `management` DISABLE KEYS */;
+INSERT INTO `management` (`name`, `id`, `pw`, `department`, `tel`, `access_level`, `status`, `register_date`) VALUES
+	('갓이찬', 'god', '1111', '갓갓갓', '010-9999-9999', 9, 'y', '2019-09-28 21:36:37'),
+	('김담당자', 'kim', '2', '상담부', '010-5555-5555', 5, 'y', '2019-09-28 21:43:53'),
+	('김상담', 'sang1', '1', '상담부', '010-1111-1111', 1, 'y', '2019-09-28 21:37:25');
+/*!40000 ALTER TABLE `management` ENABLE KEYS */;
+
+-- 테이블 bank.membersheep 구조 내보내기
+CREATE TABLE IF NOT EXISTS `membersheep` (
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `membersheep` varchar(50) NOT NULL COMMENT '멤버쉽등급',
+  `point` int(11) NOT NULL COMMENT '누적포인트',
+  `status` varchar(10) NOT NULL COMMENT '멤버쉽상태 활성/비활성',
+  `register_date` date NOT NULL COMMENT '멤버쉽등록일',
+  PRIMARY KEY (`id`),
+  KEY `membersheep` (`membersheep`),
+  CONSTRAINT `FK_membersheep_membersheep_rating` FOREIGN KEY (`membersheep`) REFERENCES `membersheep_rating` (`name`),
+  CONSTRAINT `fk_membersheep_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='멤버쉽 사용자';
+
+-- 테이블 데이터 bank.membersheep:~0 rows (대략적) 내보내기
+DELETE FROM `membersheep`;
+/*!40000 ALTER TABLE `membersheep` DISABLE KEYS */;
+/*!40000 ALTER TABLE `membersheep` ENABLE KEYS */;
+
+-- 테이블 bank.membersheep_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `membersheep_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그 순서',
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `point` int(11) NOT NULL COMMENT '적립포인트',
+  `way` varchar(50) NOT NULL COMMENT '적립타입',
+  `status` varchar(50) NOT NULL COMMENT '로그 유효성',
+  `register_date` datetime NOT NULL COMMENT '적립일',
+  PRIMARY KEY (`seq`),
+  KEY `fk_membersheeplog_membersheep` (`id`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_membersheeplog_membersheep` FOREIGN KEY (`id`) REFERENCES `membersheep` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='멤버쉽 포인트에 관한 로그';
+
+-- 테이블 데이터 bank.membersheep_log:~0 rows (대략적) 내보내기
+DELETE FROM `membersheep_log`;
+/*!40000 ALTER TABLE `membersheep_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `membersheep_log` ENABLE KEYS */;
+
+-- 테이블 bank.membersheep_rating 구조 내보내기
+CREATE TABLE IF NOT EXISTS `membersheep_rating` (
+  `name` varchar(50) NOT NULL COMMENT '멤버쉽 등급이름',
+  `condition` int(11) NOT NULL COMMENT '등급 조건 포인트',
+  `status` varchar(50) NOT NULL COMMENT '사용여부',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='멤버쉽 등급 테이블';
+
+-- 테이블 데이터 bank.membersheep_rating:~5 rows (대략적) 내보내기
+DELETE FROM `membersheep_rating`;
+/*!40000 ALTER TABLE `membersheep_rating` DISABLE KEYS */;
+INSERT INTO `membersheep_rating` (`name`, `condition`, `status`, `register_date`) VALUES
+	('Ace', 2000, 'y', '2019-09-26 11:02:42'),
+	('Classic', 1000, 'y', '2019-09-26 11:00:25'),
+	('Femily', 500, 'y', '2019-09-26 10:59:53'),
+	('VIP', 10000, 'y', '2019-09-26 11:03:08'),
+	('Welcome', 0, 'y', '2019-09-26 10:57:35');
+/*!40000 ALTER TABLE `membersheep_rating` ENABLE KEYS */;
+
+-- 테이블 bank.menu 구조 내보내기
+CREATE TABLE IF NOT EXISTS `menu` (
+  `type` varchar(50) NOT NULL COMMENT '메뉴 분류',
+  `name` varchar(50) NOT NULL COMMENT '메뉴명',
+  `kor_name` varchar(100) NOT NULL COMMENT '메뉴한국어명',
+  `prnts_name` varchar(50) NOT NULL COMMENT '상위메뉴명',
+  `status` varchar(50) NOT NULL,
+  `depth` int(11) NOT NULL COMMENT '메뉴 깊이',
+  `sort` int(11) NOT NULL COMMENT '정렬 순서',
+  PRIMARY KEY (`name`,`prnts_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='메뉴';
+
+-- 테이블 데이터 bank.menu:~19 rows (대략적) 내보내기
+DELETE FROM `menu`;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` (`type`, `name`, `kor_name`, `prnts_name`, `status`, `depth`, `sort`) VALUES
+	('management', 'accmanag', '계좌관리', 'management', 'y', 1, 2),
+	('banking', 'banking', '조회 · 이체', '', 'y', 0, 0),
+	('banking', 'check', '조회', 'banking', 'y', 1, 0),
+	('service', 'client', '고객상담', 'service', 'y', 1, 0),
+	('product', 'deposit', '예금', 'product', 'y', 1, 0),
+	('service', 'faq', '자주하는 질문', 'client', 'y', 2, 1),
+	('product', 'fund', '펀드', 'product', 'y', 1, 2),
+	('management', 'management', '사용자관리', ' ', 'y', 0, 3),
+	('service', 'notice', '공지사항', 'client', 'y', 2, 0),
+	('product', 'product', '금융상품', '', 'y', 0, 1),
+	('service', 'qna', 'Q & A', 'client', 'y', 2, 2),
+	('banking', 'reservation', '예약이체 조회', 'check', 'y', 2, 0),
+	('banking', 'reservation', '예약이체', 'transfer', 'y', 2, 0),
+	('product', 'saving', '적금', 'product', 'y', 1, 1),
+	('service', 'service', '고객센터', '', 'y', 0, 4),
+	('banking', 'transfer', '이체', 'banking', 'y', 1, 1),
+	('management', 'user', '고객정보', 'management', 'y', 1, 0);
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+
+-- 테이블 bank.nation 구조 내보내기
+CREATE TABLE IF NOT EXISTS `nation` (
+  `code` varchar(50) NOT NULL DEFAULT '',
+  `name` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='국가코드';
+
+-- 테이블 데이터 bank.nation:~246 rows (대략적) 내보내기
+DELETE FROM `nation`;
+/*!40000 ALTER TABLE `nation` DISABLE KEYS */;
+INSERT INTO `nation` (`code`, `name`) VALUES
+	('AD\r', '안도라'),
+	('AE\r', '아랍에미리트'),
+	('AF\r', '아프가니스탄'),
+	('AG\r', '앤티가 바부다'),
+	('AI\r', '앵귈라'),
+	('AL\r', '알바니아'),
+	('AM\r', '아르메니아'),
+	('AN\r', '네덜란드령 안틸레스'),
+	('AO\r', '앙골라'),
+	('AQ\r', '남극'),
+	('AR\r', '아르헨티나'),
+	('AS\r', '아메리칸사모아'),
+	('AT\r', '오스트리아'),
+	('AU\r', '오스트레일리아'),
+	('AW\r', '아루바'),
+	('AX\r', '올란드 제도'),
+	('AZ\r', '아제르바이잔'),
+	('BA\r', '보스니아 헤르체고비나'),
+	('BB\r', '바베이도스'),
+	('BD\r', '방글라데시'),
+	('BE\r', '벨기에'),
+	('BF\r', '부르키나파소'),
+	('BG\r', '불가리아'),
+	('BH\r', '바레인'),
+	('BI\r', '부룬디'),
+	('BJ\r', '베냉'),
+	('BM\r', '버뮤다'),
+	('BN\r', '브루나이'),
+	('BO\r', '볼리비아'),
+	('BR\r', '브라질'),
+	('BS\r', '바하마'),
+	('BT\r', '부탄'),
+	('BV\r', '부베섬'),
+	('BW\r', '보츠와나'),
+	('BY\r', '벨라루스'),
+	('BZ\r', '벨리즈'),
+	('CA\r', '캐나다'),
+	('CC\r', '코코스 제도'),
+	('CD\r', '콩고 민주 공화국'),
+	('CF\r', '중앙아프리카 공화국'),
+	('CG\r', '콩고 공화국'),
+	('CH\r', '스위스'),
+	('CI\r', '코트디부아르'),
+	('CK\r', '쿡 제도'),
+	('CL\r', '칠레'),
+	('CM\r', '카메룬'),
+	('CN\r', '중국'),
+	('CO\r', '콜롬비아'),
+	('CR\r', '코스타리카'),
+	('CU\r', '쿠바'),
+	('CV\r', '카보베르데'),
+	('CX\r', '크리스마스 섬'),
+	('CY\r', '키프로스'),
+	('CZ\r', '체코'),
+	('DE\r', '독일'),
+	('DJ\r', '지부티'),
+	('DK\r', '덴마크'),
+	('DM\r', '도미니카 연방'),
+	('DO\r', '도미니카 공화국'),
+	('DZ\r', '알제리'),
+	('EC\r', '에콰도르'),
+	('EE\r', '에스토니아'),
+	('EG\r', '이집트'),
+	('EH\r', '서사하라'),
+	('ER\r', '에리트레아'),
+	('ES\r', '스페인'),
+	('ET\r', '에티오피아'),
+	('FI\r', '핀란드'),
+	('FJ\r', '피지'),
+	('FK\r', '포클랜드 제도'),
+	('FM\r', '미크로네시아 연방'),
+	('FO\r', '페로 제도'),
+	('FR\r', '프랑스'),
+	('GA\r', '가봉'),
+	('GB\r', '영국'),
+	('GD\r', '그레나다'),
+	('GE\r', '조지아 (국가)'),
+	('GF\r', '프랑스령 기아나'),
+	('GG\r', '건지섬'),
+	('GH\r', '﻿가나'),
+	('GI\r', '지브롤터'),
+	('GL\r', '그린란드'),
+	('GM\r', '감비아'),
+	('GN\r', '기니'),
+	('GP\r', '과들루프'),
+	('GQ\r', '적도 기니'),
+	('GR\r', '그리스'),
+	('GS\r', '사우스조지아 사우스샌드위치 제도'),
+	('GT\r', '과테말라'),
+	('GU\r', '괌'),
+	('GW\r', '기니비사우'),
+	('GY\r', '가이아나'),
+	('HK\r', '홍콩'),
+	('HM\r', '허드 맥도널드 제도'),
+	('HN\r', '온두라스'),
+	('HR\r', '크로아티아'),
+	('HT\r', '아이티'),
+	('HU\r', '헝가리'),
+	('ID\r', '인도네시아'),
+	('IE\r', '아일랜드'),
+	('IL\r', '이스라엘'),
+	('IM\r', '맨섬'),
+	('IN\r', '인도'),
+	('IO\r', '영국령 인도양 지역'),
+	('IQ\r', '이라크'),
+	('IR\r', '이란'),
+	('IS\r', '아이슬란드'),
+	('IT\r', '이탈리아'),
+	('JE\r', '저지섬'),
+	('JM\r', '자메이카'),
+	('JO\r', '요르단'),
+	('JP\r', '일본'),
+	('KE\r', '케냐'),
+	('KG\r', '키르기스스탄'),
+	('KH\r', '캄보디아'),
+	('KI\r', '키리바시'),
+	('KM\r', '코모로'),
+	('KN\r', '세인트키츠 네비스'),
+	('KP\r', '조선민주주'),
+	('KR\r', '대한민국'),
+	('KW\r', '쿠웨이트'),
+	('KY\r', '케이맨 제도'),
+	('KZ\r', '카자흐스탄'),
+	('LA\r', '라오스'),
+	('LB\r', '레바논'),
+	('LC\r', '세인트루시아'),
+	('LI\r', '리히텐슈타인'),
+	('LK\r', '스리랑카'),
+	('LR\r', '라이베리아'),
+	('LS\r', '레소토'),
+	('LT\r', '리투아니아'),
+	('LU\r', '룩셈부르크'),
+	('LV\r', '라트비아'),
+	('LY\r', '리비아'),
+	('MA\r', '모로코'),
+	('MC\r', '모나코'),
+	('MD\r', '몰도바'),
+	('ME\r', '몬테네그로'),
+	('MG\r', '마다가스카르'),
+	('MH\r', '마셜 제도'),
+	('MK\r', '북마케도니아'),
+	('ML\r', '말리'),
+	('MM\r', '미얀마'),
+	('MN\r', '몽골'),
+	('MO\r', '마카오'),
+	('MP\r', '북마리아나 제도'),
+	('MQ\r', '마르티니크'),
+	('MR\r', '모리타니'),
+	('MS\r', '몬트세랫'),
+	('MT\r', '몰타'),
+	('MU\r', '모리셔스'),
+	('MV\r', '몰디브'),
+	('MW\r', '말라위'),
+	('MX\r', '멕시코'),
+	('MY\r', '말레이시아'),
+	('MZ\r', '모잠비크'),
+	('NA\r', '나미비아'),
+	('NC\r', '누벨칼레도니'),
+	('NE\r', '니제르'),
+	('NF\r', '노퍽섬'),
+	('NG\r', '나이지리아'),
+	('NI\r', '니카라과'),
+	('NL\r', '네덜란드'),
+	('NO\r', '노르웨이'),
+	('NP\r', '네팔'),
+	('NR\r', '나우루'),
+	('NU\r', '니우에'),
+	('NZ\r', '뉴질랜드'),
+	('OM\r', '오만'),
+	('PA\r', '파나마'),
+	('PE\r', '페루'),
+	('PF\r', '프랑스령 폴리네시아'),
+	('PG\r', '파푸아뉴기니'),
+	('PH\r', '필리핀'),
+	('PK\r', '파키스탄'),
+	('PL\r', '폴란드'),
+	('PM\r', '생피에르 미클롱'),
+	('PN\r', '핏케언 제도'),
+	('PR\r', '푸에르토리코'),
+	('PS\r', '팔레스타인'),
+	('PT\r', '포르투갈'),
+	('PW\r', '팔라우'),
+	('PY\r', '파라과이'),
+	('QA\r', '카타르'),
+	('RE\r', '레위니옹'),
+	('RO\r', '루마니아'),
+	('RS\r', '세르비아'),
+	('RU\r', '러시아'),
+	('RW\r', '르완다'),
+	('SA\r', '사우디아라비아'),
+	('SB\r', '솔로몬 제도'),
+	('SC\r', '세이셸'),
+	('SD\r', '수단'),
+	('SE\r', '스웨덴'),
+	('SG\r', '싱가포르'),
+	('SH\r', '세인트헬레나'),
+	('SI\r', '슬로베니아'),
+	('SJ\r', '스발바르 얀마옌 제도'),
+	('SK\r', '슬로바키아'),
+	('SL\r', '시에라리온'),
+	('SM\r', '산마리노'),
+	('SN\r', '세네갈'),
+	('SO\r', '소말리아'),
+	('SR\r', '수리남'),
+	('SS\r', '남수단'),
+	('ST\r', '상투메 프린시페'),
+	('SV\r', '엘살바도르'),
+	('SX\r', '신트마르턴'),
+	('SY\r', '시리아'),
+	('SZ\r', '에스와티니'),
+	('TC\r', '터크스 케이커스 제도'),
+	('TD\r', '차드'),
+	('TF\r', '프랑스령 남방 및 남극'),
+	('TG\r', '토고'),
+	('TH\r', '태국'),
+	('TJ\r', '타지키스탄'),
+	('TK\r', '토켈라우'),
+	('TL\r', '동티모르'),
+	('TM\r', '투르크메니스탄'),
+	('TN\r', '튀니지'),
+	('TO\r', '통가'),
+	('TR\r', '터키'),
+	('TT\r', '트리니다드 토바고'),
+	('TV\r', '투발루'),
+	('TW\r', '타이완'),
+	('TZ\r', '탄자니아'),
+	('UA\r', '우크라이나'),
+	('UG\r', '우간다'),
+	('UM\r', '미국령 군소 제도'),
+	('US\r', '미국'),
+	('UY\r', '우루과이'),
+	('UZ\r', '우즈베키스탄'),
+	('VA\r', '바티칸 시국'),
+	('VC\r', '세인트빈센트 그레나딘'),
+	('VE\r', '베네수엘라'),
+	('VG\r', '영국령 버진아일랜드'),
+	('VI\r', '미국령 버진아일랜드'),
+	('VN\r', '베트남'),
+	('VU\r', '바누아투'),
+	('WF\r', '왈리스 퓌튀나'),
+	('WS\r', '사모아'),
+	('YE\r', '예멘'),
+	('YT\r', '마요트'),
+	('ZA\r', '남아프리카 공화국'),
+	('ZM\r', '잠비아'),
+	('ZW\r', '짐바브웨');
+/*!40000 ALTER TABLE `nation` ENABLE KEYS */;
+
+-- 테이블 bank.notice 구조 내보내기
+CREATE TABLE IF NOT EXISTS `notice` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL COMMENT '공지사항 제목',
+  `content` varchar(50) NOT NULL COMMENT '공지사항 내용',
+  `status` varchar(50) NOT NULL COMMENT '상태 비활성 시 안보임',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`seq`),
+  KEY `id` (`id`),
+  CONSTRAINT `FK_notice_management` FOREIGN KEY (`id`) REFERENCES `management` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='공지사항';
+
+-- 테이블 데이터 bank.notice:~17 rows (대략적) 내보내기
+DELETE FROM `notice`;
+/*!40000 ALTER TABLE `notice` DISABLE KEYS */;
+INSERT INTO `notice` (`seq`, `id`, `title`, `content`, `status`, `register_date`) VALUES
+	(1, 'kim', '괴롭다..ㅠㅠ', '이거 왜 안돼!.', '활성', '2019-10-02 00:00:00'),
+	(2, 'kim', '히믈내요 슈퍼파워', '1루수가 뉘신고', '활성', '2019-10-02 00:00:00'),
+	(3, 'kim', '1324135', '13531513252435', '활성', '2019-10-07 11:26:17'),
+	(4, 'god', '요 몇일 동안 신한은행 인터넷이 안되는데.. 저만 그런건가요?', '비가 많이 내리고 있습니다. \r\n고객님들의 수익도 내려 가고 있습니다. ㅠㅠ', '활성', '2019-10-07 12:31:04'),
+	(5, 'god', '회원탈퇴 안됨현상', '현 시간부로 회원 탈퇴가 안됨을 알려드립니다. 우헤헤헤', '활성', '2019-10-08 12:17:24'),
+	(12, 'god', '공지사항작성', '공지사항내용', '활성', '2019-10-09 03:27:55'),
+	(13, 'god', '공지224', '공지사항입니다', '활성', '2019-10-10 05:12:55'),
+	(16, 'god', '이체', 'sdsdfsd', '활성', '2019-10-10 12:23:26'),
+	(17, 'god', '이체', 'sdsdfsd', '활성', '2019-10-10 12:27:16'),
+	(18, 'god', '명령', '테스트 원투원투', '활성', '2019-10-10 12:27:46'),
+	(19, 'kim', '테스트23', '몇번쨰 테스트', '활성', '2019-10-10 12:28:44'),
+	(20, 'kim', '이체', '못 살겠다 테스트.......', '활성', '2019-10-10 12:31:17'),
+	(21, 'god', '이체', '못 살겠다', '활성', '2019-10-10 12:31:44'),
+	(22, 'kim', '명령', '죽겠다... 머리 아프다 ㅠㅠ', '활성', '2019-10-10 12:33:23'),
+	(23, 'kim', '이체', 'ㄴㅁ아ㅓㅎㄹ니ㅏ처ㅏㅊㅋㅇ', '활성', '2019-10-10 12:38:22'),
+	(24, 'kim', '이체', 'ㄴㅁ아ㅓㅎㄹ니ㅏ처ㅏㅊㅋㅇ', '활성', '2019-10-10 12:39:48'),
+	(25, 'kim', '명령', '쫌 되라고1!! ㅋ', '활성', '2019-10-10 12:40:15'),
+	(26, 'god', '777777', '테스트으ㅡ', '활성', '2019-10-11 00:23:26');
+/*!40000 ALTER TABLE `notice` ENABLE KEYS */;
+
+-- 테이블 bank.otp 구조 내보내기
+CREATE TABLE IF NOT EXISTS `otp` (
+  `serial` varchar(50) NOT NULL COMMENT '시리얼 번호',
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `type` varchar(50) NOT NULL COMMENT '장치타입',
+  `status` varchar(50) NOT NULL COMMENT '사용여부',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  `end_date` datetime NOT NULL COMMENT '제거일',
+  PRIMARY KEY (`serial`),
+  KEY `id` (`id`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_security_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 보안매체 OTP';
+
+-- 테이블 데이터 bank.otp:~30 rows (대략적) 내보내기
+DELETE FROM `otp`;
+/*!40000 ALTER TABLE `otp` DISABLE KEYS */;
+INSERT INTO `otp` (`serial`, `id`, `type`, `status`, `register_date`, `end_date`) VALUES
+	('122-55-3282', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 01:30:59', '2020-10-01 01:30:59'),
+	('123-1234-1234', 'elliottjo', '휴대폰OTP', '비활성', '2019-09-30 15:45:57', '2022-02-22 00:00:00'),
+	('127-7235-2525', 'elliottjo', '인터넷OTP', '비활성', '2019-10-02 17:47:39', '2020-10-02 17:47:39'),
+	('130-1473-692', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 01:27:38', '2020-10-01 01:27:38'),
+	('153-4388-9459', 'qwer', '인터넷OTP', '비활성', '2019-10-05 17:57:25', '2020-10-05 17:57:25'),
+	('175-1779-2049', 'elliottjo', '인터넷OTP', '비활성', '2019-10-11 11:58:18', '2020-10-11 11:58:18'),
+	('175-2874-3261', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 14:56:00', '2020-10-01 14:56:00'),
+	('193-8698-586', 'elliottjo', '인터넷OTP', '비활성', '2019-10-02 10:32:04', '2020-10-02 10:32:04'),
+	('27-1509-5930', 'qwer', '인터넷OTP', '비활성', '2019-10-05 17:58:53', '2020-10-05 17:58:53'),
+	('337-4031-9711', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 00:45:03', '2020-10-01 00:45:03'),
+	('39-7314-2143', 'elliottjo', '인터넷OTP', '비활성', '2019-10-11 11:47:27', '2020-10-11 11:47:27'),
+	('401-7197-8001', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 00:59:49', '2020-10-01 00:59:49'),
+	('413-1677-1439', 'aaa', '인터넷OTP', '비활성', '2019-10-01 00:50:11', '2020-10-01 00:50:11'),
+	('461-8145-3665', 'elliottjo', '인터넷OTP', '비활성', '2019-10-03 16:01:28', '2020-10-03 16:01:28'),
+	('466-1706-9300', 'elliottjo', '인터넷OTP', '비활성', '2019-10-04 02:35:06', '2020-10-04 02:35:06'),
+	('49-404-5194', 'qwer1234', '인터넷OTP', '비활성', '2019-10-11 00:16:21', '2020-10-11 00:16:21'),
+	('554-6034-6340', 'qwer', '인터넷OTP', '비활성', '2019-10-05 17:58:41', '2020-10-05 17:58:41'),
+	('643-4890-5349', 'ngt', '인터넷OTP', '비활성', '2019-10-08 15:51:04', '2020-10-08 15:51:04'),
+	('68-3481-9922', 'qwer', '인터넷OTP', '비활성', '2019-10-05 17:59:28', '2020-10-05 17:59:28'),
+	('693-1209-8161', 'aaa', '인터넷OTP', '비활성', '2019-10-01 00:51:10', '2020-10-01 00:51:10'),
+	('721-9420-5570', 'ngt', '인터넷OTP', '비활성', '2019-10-08 15:51:13', '2020-10-08 15:51:13'),
+	('739-7069-9812', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 00:57:57', '2020-10-01 00:57:57'),
+	('794-483-6773', 'aaa', '인터넷OTP', '비활성', '2019-10-04 07:41:21', '2020-10-04 07:41:21'),
+	('798-7007-410', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 01:02:19', '2020-10-01 01:02:19'),
+	('800-7634-6551', 'day_0821', '인터넷OTP', '비활성', '2019-10-10 22:32:09', '2020-10-10 22:32:09'),
+	('865-4310-5088', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 14:56:00', '2020-10-01 14:56:00'),
+	('885-9481-7004', 'elliottjo', '인터넷OTP', '비활성', '2019-10-10 16:50:13', '2020-10-10 16:50:13'),
+	('914-9525-1191', 'elliottjo', '인터넷OTP', '비활성', '2019-10-02 10:32:04', '2020-10-02 10:32:04'),
+	('950-3161-2292', 'qwer', '인터넷OTP', '비활성', '2019-10-05 17:59:11', '2020-10-05 17:59:11'),
+	('970-3643-4552', 'elliottjo', '인터넷OTP', '비활성', '2019-10-01 14:56:00', '2020-10-01 14:56:00'),
+	('974-845-3463', 'aaa', '인터넷OTP', '비활성', '2019-10-04 07:26:04', '2020-10-04 07:26:04'),
+	('982-1904-5613', 'qwer', '인터넷OTP', '비활성', '2019-10-05 17:57:31', '2020-10-05 17:57:31');
+/*!40000 ALTER TABLE `otp` ENABLE KEYS */;
+
+-- 테이블 bank.otp_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `otp_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `serial` varchar(50) NOT NULL,
+  `id` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `register_date` datetime NOT NULL,
+  PRIMARY KEY (`seq`),
+  KEY `serial` (`serial`),
+  KEY `id` (`id`),
+  CONSTRAINT `FK_otp_log_otp` FOREIGN KEY (`serial`) REFERENCES `otp` (`serial`),
+  CONSTRAINT `FK_otp_log_otp_2` FOREIGN KEY (`id`) REFERENCES `otp` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='otp 로그 용도로 만들려했음 ';
+
+-- 테이블 데이터 bank.otp_log:~0 rows (대략적) 내보내기
+DELETE FROM `otp_log`;
+/*!40000 ALTER TABLE `otp_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `otp_log` ENABLE KEYS */;
+
+-- 테이블 bank.qna 구조 내보내기
+CREATE TABLE IF NOT EXISTS `qna` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL COMMENT '문의 타입',
+  `title` varchar(50) NOT NULL COMMENT '문의 제목',
+  `id` varchar(50) NOT NULL COMMENT '작성자&관리자(답변)',
+  `content` varchar(50) NOT NULL COMMENT '문의 내용',
+  `status` varchar(50) NOT NULL COMMENT '답변여부',
+  `rseq` int(11) DEFAULT 0,
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='고객문의 테이블';
+
+-- 테이블 데이터 bank.qna:~21 rows (대략적) 내보내기
+DELETE FROM `qna`;
+/*!40000 ALTER TABLE `qna` DISABLE KEYS */;
+INSERT INTO `qna` (`seq`, `type`, `title`, `id`, `content`, `status`, `rseq`, `register_date`) VALUES
+	(1, '이체', '돈은 벌수 있을까요?', 'god', '돈 벌고 싶어요 돈 줘요', 'no', 0, '2019-10-08 00:00:00'),
+	(2, '명령', '바로 송금 할수 있나요?', 'sang1', '송금이 안돼요 왜그러죠', 'no', 0, '2019-10-01 00:00:00'),
+	(3, '명령', '테스트', 'kim', '현재 테스트 중입니다.', 'NO', 0, '2019-10-09 00:00:00'),
+	(4, '이체', '[답변]이체', '테스트 112번째', '', '활성', 0, '2019-10-09 19:22:56'),
+	(5, '이체', '[답변]테스트', '내용이 어디로 갈까요~?', '', '활성', 0, '2019-10-09 19:27:05'),
+	(6, '이체', '[답변]테스트2', '아놔 이거 왜이래... ㅠㅠ', 'god', '활성', 0, '2019-10-09 19:28:39'),
+	(7, '이체', '[답변]테스트', 'god', '우어ㅗ오오옹', '활성', 0, '2019-10-09 19:34:28'),
+	(8, '명령', '[답변]테스트', 'sang1', '라스트 테스트', '활성', 0, '2019-10-09 19:37:00'),
+	(9, '명령', '테스트', 'god', 'ㅌㅋㅍㅌㅊ', '활성', 0, '2019-10-10 01:29:05'),
+	(10, '명령', '테스트', 'god', '젭말!!', '활성', 0, '2019-10-10 01:29:20'),
+	(11, '명령', '테스트12', 'god', '으아아앙!', '활성', 0, '2019-10-10 01:38:53'),
+	(12, '명령', '[답변]테스트12', 'god', '답변하기 싫다고!!\r\n', '활성', 0, '2019-10-10 01:39:55'),
+	(13, '이체', '테슽', '작성', '내용용', '활성', 0, '2019-10-10 05:12:06'),
+	(14, '이체', '[답변]1111111111테스트', 'god', 'ㅇㅇ', '활성', 0, '2019-10-10 05:15:33'),
+	(15, '명령', '[답변]테스트', 'god', 'ㄴㄹㄴㅇㅍㅌㅍㅊ', '활성', 0, '2019-10-10 12:52:54'),
+	(16, '명령', '돈을 회수하는 방법?', '누구까?', '돈 벌고 싶어용', '활성', 0, '2019-10-10 12:58:02'),
+	(17, '명령', '테스트23', 'aaa', '테스트 중입니다.', '활성', 0, '2019-10-10 15:10:22'),
+	(18, '명령', '[답변]테스트111', 'god', '1234567', '활성', 0, '2019-10-10 15:54:24'),
+	(19, '명령', '222222222222', 'qwer1234', '문의드립니다 감사합니다.', '활성', 0, '2019-10-11 00:21:29'),
+	(20, '명령', '[답변]테슻트2233', 'god', '관리관리 ', '활성', 0, '2019-10-11 00:24:33'),
+	(21, 'ㅂㅈㅁㅋㅌqascxz', 'qwdfv', '12424', 'qwasx', '활성', 0, '2019-10-11 11:34:44');
+/*!40000 ALTER TABLE `qna` ENABLE KEYS */;
+
+-- 테이블 bank.saving 구조 내보내기
+CREATE TABLE IF NOT EXISTS `saving` (
+  `account_number` varchar(50) NOT NULL COMMENT '계좌번호',
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `preferential` varchar(50) NOT NULL COMMENT '적용된 우대조건',
+  `interest` float NOT NULL COMMENT '적용이자',
+  `type` varchar(50) NOT NULL COMMENT '적금 납입방식',
+  PRIMARY KEY (`account_number`),
+  KEY `id` (`id`),
+  KEY `fk_savings_savingsinfo` (`product`),
+  CONSTRAINT `fk_savings_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`),
+  CONSTRAINT `fk_savings_account_2` FOREIGN KEY (`id`) REFERENCES `account` (`id`),
+  CONSTRAINT `fk_savings_savingsinfo` FOREIGN KEY (`product`) REFERENCES `saving_info` (`product`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='적금 가입자';
+
+-- 테이블 데이터 bank.saving:~3 rows (대략적) 내보내기
+DELETE FROM `saving`;
+/*!40000 ALTER TABLE `saving` DISABLE KEYS */;
+INSERT INTO `saving` (`account_number`, `id`, `product`, `preferential`, `interest`, `type`) VALUES
+	('010-1759-1843-8513', 'day_0821', 'SJ스마트적금', 'java가능', 0.7, '자유'),
+	('010-2079-0005-0004', 'elliottjo', 'SJ스마트적금', 'java가능', 0.7, '자유'),
+	('010-4103-6538-3221', 'qwer1234', '첫번째23132', 'java가능', 0.7, '정기');
+/*!40000 ALTER TABLE `saving` ENABLE KEYS */;
+
+-- 테이블 bank.saving_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `saving_info` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `product` varchar(50) NOT NULL COMMENT '상품명',
+  `product_info` varchar(50) NOT NULL COMMENT '상품설명',
+  `min_interest` float NOT NULL COMMENT '최저 연이자',
+  `max_interest` float NOT NULL COMMENT '최고 연이자',
+  `month` varchar(50) NOT NULL COMMENT '만기 개월',
+  `type` varchar(50) NOT NULL COMMENT '가입타입 ex 인터넷, 모바일',
+  `interest_type` varchar(50) NOT NULL COMMENT '이자지급방식',
+  `tax` varchar(50) NOT NULL COMMENT '과세여부',
+  `preferential` varchar(200) NOT NULL COMMENT '우대구분 ',
+  `prf_content` varchar(200) NOT NULL COMMENT '우대조건 내용',
+  `prf_interest` varchar(200) NOT NULL COMMENT '우대이자율',
+  `min_sum` int(11) NOT NULL COMMENT '최소금액',
+  `max_sum` int(11) NOT NULL COMMENT '월납입 최대금액',
+  `partialization` varchar(50) NOT NULL COMMENT '일부해지가능여부',
+  `retention` varchar(50) NOT NULL COMMENT '재예치가능여부',
+  `id` varchar(50) NOT NULL COMMENT '관리자아이디',
+  `status` varchar(50) NOT NULL COMMENT '상태',
+  `register_date` datetime NOT NULL COMMENT '상품등록일',
+  `modify_date` datetime DEFAULT NULL COMMENT '상품수정일',
+  `end_date` datetime DEFAULT NULL COMMENT '상품삭제일',
+  PRIMARY KEY (`product`),
+  KEY `type` (`type`),
+  KEY `seq` (`seq`),
+  CONSTRAINT `FK_saving_info_saving_type` FOREIGN KEY (`type`) REFERENCES `saving_type` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='적금 상품 정보';
+
+-- 테이블 데이터 bank.saving_info:~4 rows (대략적) 내보내기
+DELETE FROM `saving_info`;
+/*!40000 ALTER TABLE `saving_info` DISABLE KEYS */;
+INSERT INTO `saving_info` (`seq`, `product`, `product_info`, `min_interest`, `max_interest`, `month`, `type`, `interest_type`, `tax`, `preferential`, `prf_content`, `prf_interest`, `min_sum`, `max_sum`, `partialization`, `retention`, `id`, `status`, `register_date`, `modify_date`, `end_date`) VALUES
+	(1, 'SJ스마트적금', 'ㅇㅇ', 2, 3, '12', '자유', '만기일시지급-단리식', '비과세', '프로그래머#java기술자', '프로그래머들#java가능', '0.3#0.7', 0, 1000000, '불가', '불가', 'god', '비활성', '2019-10-01 12:46:38', '2019-10-13 23:33:50', NULL),
+	(4, 'ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ1212', 'ㅁㅁㅁㅁ1212', 1.1, 1.1, '12,24,36', '정기/자유', '만기일시지급-단리식', '비과세', '예금', '보유시', '1.1', 100000, 1212, '가능', '가능', 'god', '활성', '2019-10-13 23:41:57', NULL, NULL),
+	(2, '첫번째23132', 'ㅁㄴㅇㄻㄴ', 0.7, 1.8, '12', '정기', '만기일시지급-단리식', '과세', '30세#프로그래머#기타', '30세라면누구나#프로그래머라면누구나#그냥줌', '0.3#0.7#0.1', 100000, 10000000, '불가', '불가', '', '활성', '2019-10-10 10:13:22', NULL, NULL),
+	(3, '테스트 정기적김', '정기적금이라는 내용\nㅇㅇ\nㅇㅇ\nㅇㅇ\nㅇㅇ\n줄바꿈 테스트', 1.1, 1.5, '6,7,8,9', '정기', '만기일시지급-단리식', '과세', '예금', '보유시', '0.4', 1000, 100000, '가능', '가능', 'god', '활성', '2019-10-11 15:57:29', NULL, NULL);
+/*!40000 ALTER TABLE `saving_info` ENABLE KEYS */;
+
+-- 테이블 bank.saving_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `saving_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그번호',
+  `account_number` varchar(50) NOT NULL COMMENT '계좌',
+  `interest` float NOT NULL COMMENT '이자',
+  `sum` int(11) NOT NULL COMMENT '이자금액',
+  `status` varchar(50) NOT NULL COMMENT '성공/실패(사유)',
+  `register_date` datetime NOT NULL COMMENT '날짜',
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_savings_log_account` FOREIGN KEY (`account_number`) REFERENCES `saving` (`account_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='월별 적금계좌 이자 이력';
+
+-- 테이블 데이터 bank.saving_log:~8 rows (대략적) 내보내기
+DELETE FROM `saving_log`;
+/*!40000 ALTER TABLE `saving_log` DISABLE KEYS */;
+INSERT INTO `saving_log` (`seq`, `account_number`, `interest`, `sum`, `status`, `register_date`) VALUES
+	(2, '010-2079-0005-0004', 0.7, 5927032, '성공', '2019-10-14 17:58:56'),
+	(3, '010-4103-6538-3221', 0.7, 604438, '성공', '2019-10-14 17:58:56'),
+	(5, '010-2079-0005-0004', 0.7, 6272775, '성공', '2019-10-14 17:58:58'),
+	(6, '010-4103-6538-3221', 0.7, 639696, '성공', '2019-10-14 17:58:58'),
+	(8, '010-2079-0005-0004', 0.7, 6638686, '성공', '2019-10-14 17:59:01'),
+	(9, '010-4103-6538-3221', 0.7, 677011, '성공', '2019-10-14 17:59:01'),
+	(11, '010-2079-0005-0004', 0.7, 7025942, '성공', '2019-10-14 17:59:02'),
+	(12, '010-4103-6538-3221', 0.7, 716503, '성공', '2019-10-14 17:59:02'),
+	(18, '010-1759-1843-8513', 0.7, 296176, '성공', '2019-10-14 18:19:37');
+/*!40000 ALTER TABLE `saving_log` ENABLE KEYS */;
+
+-- 테이블 bank.saving_type 구조 내보내기
+CREATE TABLE IF NOT EXISTS `saving_type` (
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='적금 타입 검증용';
+
+-- 테이블 데이터 bank.saving_type:~3 rows (대략적) 내보내기
+DELETE FROM `saving_type`;
+/*!40000 ALTER TABLE `saving_type` DISABLE KEYS */;
+INSERT INTO `saving_type` (`name`) VALUES
+	('자유'),
+	('정기'),
+	('정기/자유');
+/*!40000 ALTER TABLE `saving_type` ENABLE KEYS */;
+
+-- 테이블 bank.service 구조 내보내기
+CREATE TABLE IF NOT EXISTS `service` (
+  `id` varchar(50) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `option` varchar(50) DEFAULT NULL,
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `register_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- 테이블 데이터 bank.service:~0 rows (대략적) 내보내기
+DELETE FROM `service`;
+/*!40000 ALTER TABLE `service` DISABLE KEYS */;
+INSERT INTO `service` (`id`, `name`, `type`, `status`, `option`, `seq`, `register_date`) VALUES
+	('elliottjo', '조은환', 'delay', '활성', '5', 1, '2019-10-05 21:56:11');
+/*!40000 ALTER TABLE `service` ENABLE KEYS */;
+
+-- 테이블 bank.transfer_auto 구조 내보내기
+CREATE TABLE IF NOT EXISTS `transfer_auto` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `account_number` varchar(50) NOT NULL,
+  `to_account_number` varchar(50) NOT NULL COMMENT '상대계좌',
+  `sum` int(11) NOT NULL,
+  `period` varchar(50) NOT NULL COMMENT '이체주기',
+  `start_date` date NOT NULL COMMENT '이체시작일',
+  `finish_date` date NOT NULL COMMENT '이체종료일',
+  `last_day` varchar(50) NOT NULL COMMENT '말일이체여부',
+  `memo` varchar(50) NOT NULL DEFAULT '',
+  `to_memo` varchar(50) NOT NULL DEFAULT '',
+  `status` varchar(50) NOT NULL COMMENT '사용/사용안함',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  `end_date` datetime DEFAULT NULL COMMENT '삭제일',
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_auto_transfer_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='자동이체 등록 정보';
+
+-- 테이블 데이터 bank.transfer_auto:~4 rows (대략적) 내보내기
+DELETE FROM `transfer_auto`;
+/*!40000 ALTER TABLE `transfer_auto` DISABLE KEYS */;
+INSERT INTO `transfer_auto` (`seq`, `account_number`, `to_account_number`, `sum`, `period`, `start_date`, `finish_date`, `last_day`, `memo`, `to_memo`, `status`, `register_date`, `end_date`) VALUES
+	(1, '010-1111-112-1212', '010-1111-112-1213', 12345, '한달', '2019-10-10', '2022-02-22', '말일이체함', '아씨 예제 만들기 너무 길어', '내돈내놔', '활성', '2011-11-11 00:00:00', '2080-02-08 00:00:00'),
+	(2, '010-1111-1111-121', '010-1111-1111-122', 500000, '한달', '2019-10-07', '2019-10-23', '말일이체안함', '', '', '활성', '2019-10-07 22:34:37', NULL),
+	(3, '010-1111-112-1213', '010-1111-1111-123', 500000, '한달', '2019-10-07', '2020-04-07', '말일이체안함', '예금', '', '활성', '2019-10-07 23:21:29', NULL),
+	(4, '010-1111-112-1213', '010-1111-1111-155', 11000, '한달', '2019-10-09', '2019-10-22', '말일이체안함', '예금', '', '활성', '2019-10-07 23:32:54', NULL),
+	(5, '010-1111-1111-122', '010-1111-1111-161', 550000, '한달', '2019-10-09', '2019-12-26', '말일이체안함', '예금', '', 'y', '2019-10-09 02:48:04', NULL);
+/*!40000 ALTER TABLE `transfer_auto` ENABLE KEYS */;
+
+-- 테이블 bank.transfer_delay 구조 내보내기
+CREATE TABLE IF NOT EXISTS `transfer_delay` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `account_number` varchar(50) DEFAULT NULL,
+  `to_account_number` varchar(50) DEFAULT NULL,
+  `sum` int(11) DEFAULT NULL,
+  `memo` varchar(50) DEFAULT NULL,
+  `to_memo` varchar(50) DEFAULT NULL,
+  `cms` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `register_date` datetime DEFAULT NULL,
+  `trs_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- 테이블 데이터 bank.transfer_delay:~0 rows (대략적) 내보내기
+DELETE FROM `transfer_delay`;
+/*!40000 ALTER TABLE `transfer_delay` DISABLE KEYS */;
+INSERT INTO `transfer_delay` (`seq`, `account_number`, `to_account_number`, `sum`, `memo`, `to_memo`, `cms`, `status`, `register_date`, `trs_time`) VALUES
+	(1, '010-1111-112-1212', '101-1112-112-1232', 123451, 'ㅁㄴㅇㅋㅌㅊ', 'ㅂㅈㄷ', '8282', '활성', '2019-10-06 16:41:20', '2019-10-06 20:41:20');
+/*!40000 ALTER TABLE `transfer_delay` ENABLE KEYS */;
+
+-- 테이블 bank.transfer_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `transfer_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT COMMENT '로그 번호',
+  `account_number` varchar(50) NOT NULL COMMENT '보내는 계좌',
+  `feetype` varchar(50) NOT NULL COMMENT '수수료항목',
+  `target` varchar(50) NOT NULL COMMENT '은행/증권사명',
+  `to_account_number` varchar(50) NOT NULL COMMENT '받는 계좌',
+  `received` varchar(50) NOT NULL COMMENT '받는이',
+  `sum` bigint(20) NOT NULL COMMENT '금액',
+  `fee` int(11) NOT NULL COMMENT '수수료',
+  `cms` varchar(50) NOT NULL COMMENT 'cms코드',
+  `memo` varchar(50) NOT NULL COMMENT '내 통장메모',
+  `to_memo` varchar(50) NOT NULL COMMENT '받는 통장메모',
+  `status` varchar(50) NOT NULL COMMENT '성공/실패(사유)',
+  `register_date` datetime NOT NULL COMMENT '거래일시',
+  PRIMARY KEY (`seq`),
+  KEY `accountnumber` (`account_number`),
+  KEY `id` (`feetype`),
+  KEY `to_account_number` (`to_account_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8 COMMENT='계좌 이체 이력';
+
+-- 테이블 데이터 bank.transfer_log:~83 rows (대략적) 내보내기
+DELETE FROM `transfer_log`;
+/*!40000 ALTER TABLE `transfer_log` DISABLE KEYS */;
+INSERT INTO `transfer_log` (`seq`, `account_number`, `feetype`, `target`, `to_account_number`, `received`, `sum`, `fee`, `cms`, `memo`, `to_memo`, `status`, `register_date`) VALUES
+	(1, '010-1111-112-1212', '입금', '하나은행', '111-1234-5678', '갓이찬', 1234560, 5000, '', '팀플금액청구', '', '', '2019-09-08 20:19:02'),
+	(2, '010-1111-112-1212', '입금', '신한은행', '12314', '외부계좌', 124, 0, '', '124214', '124', '성공', '2019-10-04 16:01:04'),
+	(3, '010-1111-112-1212', '입금', 'SJ은행', '101-1112-112-1232', '조은환', 1248562, 0, '', 'asdfa', '123', '성공', '2019-10-04 16:23:52'),
+	(4, '110-346-555760', '입금', 'SJ은행', '101-1112-112-1232', '조은환', 1245676, 0, '', '2222', 'qqq', '성공', '2019-10-04 19:48:16'),
+	(5, '010-1111-1111-121', '입금', 'SJ은행', '010-1111-1111-158', '박이찬', 50000, 500, '', '예금', '', '성공', '2019-10-07 23:46:23'),
+	(6, '010-1111-1111-121', '입금', 'SJ은행', '010-1111-1111-159', '박이찬', 500000, 500, '', '예금', '', '성공', '2019-10-07 23:51:02'),
+	(7, '010-1111-1111-121', '입금', 'SJ은행', '010-1111-1111-160', '박이찬', 100000, 500, '', '예금', '', '성공', '2019-10-07 23:58:35'),
+	(8, '010-1111-1111-121', '입금', 'SJ은행', '010-1111-1111-161', '박이찬', 10000, 500, '', '예금', '', '성공', '2019-10-07 23:59:52'),
+	(9, '010-1111-1111-121', '입금', 'SJ은행', '1212', '외부계좌', 1212, 500, '', '기타', '', '성공', '2018-10-08 10:23:43'),
+	(10, '110-346-555760', '입금', 'SJ은행', '101-1112-112-1232', '펀드', 13431412, 0, '', '124', '123', '성공', '2019-10-08 16:38:29'),
+	(11, '110-346-555760', '입금', 'SJ은행', '101-1112-112-1232', '펀드', 123456, 0, '', '3252346463', '124135', '성공', '2019-10-08 16:43:26'),
+	(12, '010-1111-1111-122', '입금', 'SJ은행', '010-1111-1111-161', '미지정', 12345, 0, '112', '메메모', '메모', '성공', '2019-10-09 06:07:01'),
+	(13, '010-1111-1111-161', '입금', 'SJ은행', '010-1111-1111-163', '미지정', 10000, 0, '', '테스트', '테스트', '성공', '2019-10-09 03:02:43'),
+	(14, '010-1111-1111-162', '예약이체', '조은환', '010-1111-1111-162', '조은환', 1242141241, 500, '', '', '', '성공', '2019-10-09 19:29:22'),
+	(15, '010-1111-112-1212', '예약이체', '조은환', '010-1111-112-1212', '조은환', 2351235, 500, '', '', '', '성공', '2019-10-09 20:15:51'),
+	(16, '010-1111-112-1212', '예약이체', '외부계좌', '12415', '외부계좌', 122134626, 500, '', '', '', '성공', '2019-10-09 20:18:42'),
+	(17, '010-1111-112-1212', '예약이체', '조은환', '101-1112-112-1232', '조은환', 500000, 500, '3252341', '235235', '2355', '성공', '2019-10-09 21:21:49'),
+	(18, '101-1112-112-1232', '예약입금', 'SJBank', '010-1111-112-1212', '조은환', 500000, 0, '', '2355', '235235', '성공', '2019-10-09 21:21:50'),
+	(19, '010-1111-1111-121', '예약이체', '조은환', '010-1111-112-1212', '조은환', 300000000, 0, '', '', '', '잔액부족', '2019-10-09 23:13:36'),
+	(20, '010-1111-112-1212', '예약입금', 'SJBank', '010-1111-1111-121', '박이찬', 300000000, 0, '', '', '', '성공', '2019-10-09 23:13:36'),
+	(21, '010-1111-1111-121', '즉시이체', 'SJ은행', '496975699', '외부계좌', 2134689, 500, 'asd', 'asdasd', 'asd', '잔액부족', '2019-10-10 12:12:01'),
+	(22, '010-1111-1111-121', '즉시이체', 'SJ은행', '010-1111-112-1212', '1', 2134689, 0, 'asd', 'asdasd', 'asd', '성공', '2019-10-10 12:14:03'),
+	(23, '010-1111-112-1212', '즉시입금', 'SJBank', '010-1111-1111-121', '조은환', 2134689, 0, '', 'asd', 'asdasd', '성공', '2019-10-10 12:14:03'),
+	(24, '010-1111-112-1212', '예약이체', '조은환', '010-1111-1111-162', '조은환', 234567801, 0, '', '', '', '성공', '2019-10-10 15:00:30'),
+	(25, '010-1111-1111-162', '예약입금', 'SJBank', '010-1111-112-1212', '조은환', 234567801, 0, '', '', '', '성공', '2019-10-10 15:00:30'),
+	(26, '010-1111-112-1212', '즉시이체', 'SJ은행', '010-5804-4599-5264', '1', 1234231, 0, '47869', '345', '123', '성공', '2019-10-10 17:28:32'),
+	(27, '010-5804-4599-5264', '즉시입금', 'SJBank', '010-1111-112-1212', '조은환', 1234231, 0, '', '123', '345', '성공', '2019-10-10 17:28:32'),
+	(28, '010-1111-112-1212', '즉시이체', 'SJ은행', '010-7587-5773-1049', '1', 1234231, 0, '47869', '124124', '124', '성공', '2019-10-10 17:36:53'),
+	(29, '010-7587-5773-1049', '즉시입금', 'SJBank', '010-1111-112-1212', '조은환', 1234231, 0, '', '124', '124124', '성공', '2019-10-10 17:36:54'),
+	(30, '010-1111-1111-122', '송금', 'SJ은행', '010-4410-5372-8852', '박이찬', -500000, 500, '', '예금가입', '', '성공', '2019-10-10 22:30:49'),
+	(31, '010-4410-5372-8852', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 500000, 0, '', '예금가입', '', '성공', '2019-10-10 22:30:49'),
+	(32, '010-1111-112-1212', '예약이체', '조은환', '010-5804-4599-5264', '조은환', 123214, 0, '124', '214', '124', '성공', '2019-10-10 22:39:17'),
+	(33, '010-5804-4599-5264', '예약입금', 'SJBank', '010-1111-112-1212', '조은환', 123214, 0, '', '124', '214', '성공', '2019-10-10 22:39:17'),
+	(34, '010-1111-112-1212', '즉시이체', 'SJ은행', '010-1111-1111-121', '박이찬', 54321, 0, '3333', '2222', '11111', '성공', '2019-10-10 22:41:41'),
+	(35, '010-1111-1111-121', '즉시입금', 'SJBank', '010-1111-112-1212', '박이찬', 54321, 0, '', '11111', '2222', '성공', '2019-10-10 22:41:41'),
+	(36, '010-4139-2283-1703', '즉시이체', 'SJ은행', '010-4794-6870-6563', '조은환', 1000000, 0, '', '송금2', '송금', '성공', '2019-10-10 23:44:03'),
+	(37, '010-4794-6870-6563', '즉시입금', 'SJBank', '010-4139-2283-1703', '조은환', 1000000, 0, '', '송금', '송금2', '성공', '2019-10-10 23:44:03'),
+	(38, '010-4139-2283-1703', '즉시이체', 'SJ은행', '010-4410-5372-8852', '박이찬', 500000, 0, '', '테스트222', '테스트2', '성공', '2019-10-10 23:46:49'),
+	(39, '010-4410-5372-8852', '즉시입금', 'SJBank', '010-4139-2283-1703', '박이찬', 500000, 0, '', '테스트2', '테스트222', '성공', '2019-10-10 23:46:49'),
+	(40, '010-4139-2283-1703', '예약이체', '박이찬', '010-4410-5372-8852', '박이찬', 777777, 0, '', '테스트333', '테스트33', '성공', '2019-10-10 23:52:54'),
+	(41, '010-4410-5372-8852', '예약입금', 'SJBank', '010-4139-2283-1703', '테스트1234qwer', 777777, 0, '', '테스트33', '테스트333', '성공', '2019-10-10 23:52:54'),
+	(42, '010-4139-2283-1703', '예약이체', '텥', '010-9780-1258-2794', '텥', 7777777, 0, '', '테슽55', '테스트555', '성공', '2019-10-10 23:52:54'),
+	(43, '010-9780-1258-2794', '예약입금', 'SJBank', '010-4139-2283-1703', '테스트1234qwer', 7777777, 0, '', '테스트555', '테슽55', '성공', '2019-10-10 23:52:55'),
+	(44, '010-4139-2283-1703', '송금', 'SJ은행', '010-7157-8656-4550', '테스트1234qwer', -100000, 500, '', '예금가입', '', '성공', '2019-10-10 23:59:16'),
+	(45, '010-7157-8656-4550', '입금', 'SJ은행', '010-4139-2283-1703', '테스트1234qwer', 100000, 0, '', '예금가입', '', '성공', '2019-10-10 23:59:16'),
+	(46, '010-4139-2283-1703', '즉시이체', 'SJ은행', '010-7157-8656-4550', '테스트1234qwer', 6655, 0, '', '테스트0999222', '테스트0999', '성공', '2019-10-11 00:12:37'),
+	(47, '010-7157-8656-4550', '즉시입금', 'SJBank', '010-4139-2283-1703', '테스트1234qwer', 6655, 0, '', '테스트0999', '테스트0999222', '성공', '2019-10-11 00:12:37'),
+	(48, '010-4139-2283-1703', '즉시이체', 'SJ은행', '010-4103-6538-3221', '테스트1234qwer', 9900, 0, '', 'ㅎㅎ', 'ㅇㅇ', '성공', '2019-10-11 00:14:58'),
+	(49, '010-4103-6538-3221', '즉시입금', 'SJBank', '010-4139-2283-1703', '테스트1234qwer', 9900, 0, '', 'ㅇㅇ', 'ㅎㅎ', '성공', '2019-10-11 00:14:58'),
+	(50, '010-1111-1111-162', '송금', 'SJ은행', '010-3829-4359-8382', '조은환', -27502000, 500, '', '예금가입', '', '성공', '2019-10-11 12:12:30'),
+	(51, '010-3829-4359-8382', '입금', 'SJ은행', '010-1111-1111-162', '조은환', 27502000, 0, '', '예금가입', '', '성공', '2019-10-11 12:12:30'),
+	(52, '010-1111-1111-162', '예약이체', '조은환', '010-6936-3946-1490', '조은환', 124312, 0, '', '', '', '성공', '2019-10-13 18:28:24'),
+	(53, '010-6936-3946-1490', '예약입금', 'SJBank', '010-1111-1111-162', '조은환', 124312, 0, '', '', '', '성공', '2019-10-13 18:28:24'),
+	(54, '010-1111-1111-122', '송금', 'SJ은행', '010-7459-3447-7540', '박이찬', -123123, 500, '', '예금가입', '', '성공', '2019-10-15 19:54:59'),
+	(55, '010-7459-3447-7540', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 123123, 0, '', '예금가입', '', '성공', '2019-10-15 19:54:59'),
+	(56, '010-1111-1111-122', '송금', 'SJ은행', '010-2022-1444-5272', '박이찬', 1500000, 500, '', '예금가입', '', '성공', '2019-10-15 20:35:21'),
+	(57, '010-1111-1111-122', '송금', 'SJ은행', '010-9330-5240-3229', '박이찬', 600000, 500, '', '예금가입', '', '성공', '2019-10-15 20:40:43'),
+	(58, '010-1111-1111-122', '송금', 'SJ은행', '010-664-1754-6744', '박이찬', 600000, 500, '', '예금가입', '', '성공', '2019-10-15 20:42:16'),
+	(59, '010-664-1754-6744', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 600000, 0, '', '예금가입', '', '성공', '2019-10-15 20:42:16'),
+	(60, '010-1111-1111-122', '송금', 'SJ은행', '010-2355-6806-5881', '박이찬', 701000, 500, '', '예금가입', '', '성공', '2019-10-15 20:47:08'),
+	(61, '010-2355-6806-5881', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 701000, 0, '', '예금가입', '', '성공', '2019-10-15 20:47:08'),
+	(62, '010-1111-1111-122', '송금', 'SJ은행', '010-8865-1682-4267', '박이찬', 20000000, 500, '', '예금가입', '', '실패', '2019-10-15 20:47:36'),
+	(63, '010-1111-1111-162', '예약이체', 'null', '010-1111-112-1212', '조은환', 1234123, 0, '', '', '', '성공', '2019-10-15 20:57:43'),
+	(64, '010-1111-112-1212', '예약입금', 'SJBank', '010-1111-1111-162', '조은환', 1234123, 0, '', '', '', '성공', '2019-10-15 20:57:43'),
+	(65, '010-3829-4359-8382', '예약이체', 'null', '010-3668-5593-9456', '조은환', 123123, 0, '23', '', '1', '성공', '2019-10-15 20:57:43'),
+	(66, '010-3668-5593-9456', '예약입금', 'SJBank', '010-3829-4359-8382', '조은환', 123123, 0, '', '1', '', '성공', '2019-10-15 20:57:43'),
+	(67, '010-3829-4359-8382', '예약이체', 'SJ은행', '010-3668-5593-9456', '조은환', 123432, 0, '', '', '124', '성공', '2019-10-15 20:57:44'),
+	(68, '010-3668-5593-9456', '예약입금', 'SJBank', '010-3829-4359-8382', '조은환', 123432, 0, '', '124', '', '성공', '2019-10-15 20:57:44'),
+	(69, '010-3829-4359-8382', '예약이체', '신한은행', '110-346-555760', '조은환', 234, 0, '', '', '', '성공', '2019-10-15 20:57:44'),
+	(70, '110-346-555760', '예약입금', 'SJBank', '010-3829-4359-8382', '조은환', 234, 0, '', '', '', '성공', '2019-10-15 20:57:44'),
+	(71, '010-3829-4359-8382', '예약이체', '농협', '010-3829-4359-8382', '조은환', 5435788, 500, '', '', '', '성공', '2019-10-15 21:04:41'),
+	(72, '010-3829-4359-8382', '예약입금', 'SJBank', '010-3829-4359-8382', '조은환', 5435788, 0, '', '', '', '성공', '2019-10-15 21:04:41'),
+	(73, '010-1111-1111-122', '송금', 'SJ은행', '010-927-6970-3090', '박이찬', 500000, 500, '', '예금가입', '', '성공', '2019-10-15 21:07:37'),
+	(74, '010-927-6970-3090', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 500000, 0, '', '예금가입', '', '성공', '2019-10-15 21:07:37'),
+	(75, '010-1111-1111-122', '송금', 'SJ은행', '010-7484-2466-2468', '박이찬', 500000, 500, '', '예금가입', '', '성공', '2019-10-15 21:09:01'),
+	(76, '010-7484-2466-2468', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 500000, 0, '', '예금가입', '', '성공', '2019-10-15 21:09:01'),
+	(77, '010-3829-4359-8382', '예약이체', '새마을금고', '010-3668-5593-9456', '조은환', 11233, 500, '', '', '', '성공', '2019-10-15 21:10:46'),
+	(78, '010-3829-4359-8382', '즉시이체', '새마을금고', '010-3668-5593-9456', '조은환', 123, 0, '', '', '', '성공', '2019-10-15 21:28:11'),
+	(79, '010-3668-5593-9456', '즉시입금', 'SJBank', '010-3829-4359-8382', '조은환', 123, 0, '', '', '', '성공', '2019-10-15 21:28:11'),
+	(80, '010-1111-1111-122', '송금', 'SJ은행', '010-2706-1758-2423', '박이찬', 1000000, 500, '', '예금가입', '', '성공', '2019-10-15 21:50:01'),
+	(81, '010-2706-1758-2423', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 1000000, 0, '', '예금가입', '', '성공', '2019-10-15 21:50:01'),
+	(82, '010-1111-1111-122', '송금', 'SJ은행', '010-6997-1206-7428', '박이찬', 50000, 500, '', '예금가입', '', '성공', '2019-10-15 21:50:46'),
+	(83, '010-6997-1206-7428', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 50000, 0, '', '예금가입', '', '성공', '2019-10-15 21:50:46'),
+	(84, '010-1111-1111-122', '송금', 'SJ은행', '010-5441-7161-7382', '박이찬', 1234, 500, '', '예금가입', '', '성공', '2019-10-15 21:52:29'),
+	(85, '010-5441-7161-7382', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 1234, 0, '', '예금가입', '', '성공', '2019-10-15 21:52:29'),
+	(86, '010-1111-1111-122', '송금', 'SJ은행', '010-6915-9118-0547', '박이찬', 100000, 500, '', '예금가입', '', '성공', '2019-10-15 21:53:30'),
+	(87, '010-6915-9118-0547', '입금', 'SJ은행', '010-1111-1111-122', '박이찬', 100000, 0, '', '예금가입', '', '성공', '2019-10-15 21:53:30');
+/*!40000 ALTER TABLE `transfer_log` ENABLE KEYS */;
+
+-- 테이블 bank.transfer_reserve 구조 내보내기
+CREATE TABLE IF NOT EXISTS `transfer_reserve` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `account_number` varchar(50) NOT NULL COMMENT '계좌',
+  `to_account_number` varchar(50) NOT NULL COMMENT '받는 계좌',
+  `sum` varchar(50) NOT NULL COMMENT '이체 금액',
+  `time` datetime NOT NULL COMMENT '이체시간',
+  `memo` varchar(50) NOT NULL COMMENT '메모',
+  `to_memo` varchar(50) NOT NULL COMMENT '받는 메모',
+  `cms` varchar(50) NOT NULL COMMENT 'cms 코드 ',
+  `status` varchar(50) NOT NULL COMMENT '사용/사용안함',
+  `scheduled_date` varchar(50) NOT NULL COMMENT '이체 예정시간 n시~n+1시',
+  `register_date` datetime NOT NULL COMMENT '예약이체 등록일',
+  `target` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`seq`),
+  KEY `account_number` (`account_number`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk_reserve_transfer_account` FOREIGN KEY (`account_number`) REFERENCES `account` (`account_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COMMENT='예약이체 등록 정보';
+
+-- 테이블 데이터 bank.transfer_reserve:~86 rows (대략적) 내보내기
+DELETE FROM `transfer_reserve`;
+/*!40000 ALTER TABLE `transfer_reserve` DISABLE KEYS */;
+INSERT INTO `transfer_reserve` (`seq`, `account_number`, `to_account_number`, `sum`, `time`, `memo`, `to_memo`, `cms`, `status`, `scheduled_date`, `register_date`, `target`) VALUES
+	(1, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-03 00:02:24', NULL),
+	(2, '010-1111-112-1212', '110-346-555760', '1214525', '2019-11-15 09:00:00', '124124', '12', '12412', '이체완료', '2019-11-15 9:00', '2019-10-07 11:16:03', NULL),
+	(3, '010-1111-112-1212', '110-346-555760', '1214525', '2019-11-15 09:00:00', '124124', '12', '12412', '이체완료', '2019-11-15 9:00', '2019-10-07 11:44:55', NULL),
+	(4, '010-1111-112-1212', '010-1111-112-1213', '12414315', '2019-10-12 21:00:00', '12441', '124124', '12124', '이체완료', '21:00:00', '2019-10-08 11:11:28', NULL),
+	(5, '010-1111-112-1213', '101-1112-112-1232', '1536', '2019-10-12 11:00:00', '2646', '35236', '42642', '이체완료', '11:00:00', '2019-10-08 11:18:35', NULL),
+	(6, '101-1112-112-1232', '101-1112-112-1232', '12536262', '2019-10-26 19:00:00', '375', '124', '37357', '이체완료', '2019-10-26 19:00:00', '2019-10-08 11:25:11', NULL),
+	(7, '101-1112-112-1232', '101-1112-112-1232', 'agagad', '2019-10-12 21:00:00', 'asfa', 'asfa', 'asfg', '이체완료', '2019-10-12 21:00:00', '2019-10-08 11:27:59', NULL),
+	(8, '101-1112-112-1232', '101-1112-112-1232', 'agagad', '2019-10-12 21:00:00', 'asfa', 'asfa', 'asfg', '이체완료', '2019-10-12 21:00:00', '2019-10-08 11:29:27', NULL),
+	(9, '010-1111-112-1212', '010-1111-1111-122', '15637', '2019-10-15 11:50:16', '26', '24', '597', '이체완료', '19:00:00', '2019-10-08 11:50:18', NULL),
+	(10, '101-1112-112-1232', '110-346-555760', '124135', '2019-10-07 16:50:32', '', '', '', '이체완료', '19:00:00', '2019-10-08 16:50:35', NULL),
+	(11, '101-1112-112-1232', '110-346-555760', '124135', '2019-10-07 16:50:34', '', '', '', '이체완료', '19:00:00', '2019-10-08 16:50:36', NULL),
+	(12, '110-346-555760', '1412', '124124', '2019-10-07 16:52:39', '124', '14', '124', '이체완료', '11:00:00', '2019-10-08 16:52:41', NULL),
+	(13, '010-1111-1111-161', '12121212', '12121212', '2019-10-08 17:56:00', 'ㅇㅁㄴ', '메모 ', 'ㅁㅇㄴㅁㅇㄴ', '이체완료', '9:00:00', '2019-10-08 17:56:00', NULL),
+	(14, '010-1111-1111-161', '12121212', '12121212', '2019-10-08 17:57:44', 'ㅇㅁㄴ', '메모 ', 'ㅁㅇㄴㅁㅇㄴ', '이체완료', '9:00:00', '2019-10-08 17:57:44', NULL),
+	(15, '010-1111-1111-121', '010-1111-1111-121', '50000', '2019-10-08 18:18:45', '', '', '', '이체완료', '9:00:00', '2019-10-08 18:18:45', NULL),
+	(16, '010-1111-112-1212', '010-1111-1111-121', '112314112', '2019-10-08 23:03:46', '5347', '246', '568', '이체완료', '9:00:00', '2019-10-09 06:03:27', NULL),
+	(17, '010-1111-1111-162', '010-1111-1111-122', '124512', '2019-10-08 23:44:40', '3456', '356', '', '이체완료', '9:00:00', '2019-10-08 23:44:45', NULL),
+	(18, '010-1111-112-1212', '110-346-555760', '124515', '2019-10-09 00:11:48', '12521', '12421', '21512', '이체완료', '19:00:00', '2019-10-09 00:11:53', NULL),
+	(20, '010-1111-1111-162', '12525', '125151', '2019-10-09 01:27:36', '4124', '12412', '124214', '이체완료', '11:00:00', '2019-10-09 01:27:42', NULL),
+	(21, '010-1111-1111-162', '12525', '123124124', '2019-10-09 01:29:10', '4124', '12412', '124214', '이체완료', '21:00:00', '2019-10-09 01:29:16', NULL),
+	(22, '010-1111-1111-162', '12525', '123124124', '2019-10-09 01:38:41', '4124', '12412', '124214', '이체완료', '21:00:00', '2019-10-09 01:38:47', NULL),
+	(23, '010-1111-1111-162', '110-346-555760', '12345', '2019-10-09 01:57:02', '214214', '14124', '12412', '이체완료', '11:00:00', '2019-10-09 01:57:06', NULL),
+	(24, '010-1111-112-1212', '010-1111-1111-121', '124135', '2019-10-09 02:13:22', '325', '23523', '23523', '비활성', '11:00:00', '2019-10-09 02:13:27', NULL),
+	(25, '010-1111-112-1212', '101-1112-112-1232', '1234', '2019-10-09 02:20:28', '124', '12', '12412', '이체완료', '11:00:00', '2019-10-09 02:20:32', NULL),
+	(26, '010-1111-112-1212', '101-1112-112-1232', '1234', '2019-10-09 02:21:17', '124', '12', '12412', '이체완료', '11:00:00', '2019-10-09 02:21:22', NULL),
+	(27, '010-1111-112-1212', '110-346-555760', '1243413', '2019-10-09 02:26:31', '124', '123', '1241', '이체완료', '11:00:00', '2019-10-09 02:26:35', NULL),
+	(28, '010-1111-112-1212', '010-1111-112-1212', '1241324', '2019-10-09 02:30:32', '', '', '', '이체완료', '11:00:00', '2019-10-09 02:30:36', NULL),
+	(29, '010-1111-112-1212', '010-1111-112-1212', '12341', '2019-10-09 02:34:19', '', '', '', '이체완료', '11:00:00', '2019-10-09 02:34:24', NULL),
+	(30, '010-1111-112-1212', '010-1111-112-1212', '124134', '2019-10-09 02:38:20', '', '', '', '이체완료', '11:00:00', '2019-10-09 02:38:25', NULL),
+	(31, '101-1112-112-1232', '101-1112-112-1232', '12414', '2019-10-09 02:41:07', '', '', '', '이체완료', '11:00:00', '2019-10-09 02:41:11', NULL),
+	(32, '101-1112-112-1232', '101-1112-112-1232', '1234', '2019-10-09 02:43:43', '', '', '', '이체완료', '11:00:00', '2019-10-09 02:43:48', NULL),
+	(33, '101-1112-112-1232', '101-1112-112-1232', '12314', '2019-10-09 02:49:17', '', '', '', '이체완료', '11:00:00', '2019-10-09 02:49:22', NULL),
+	(34, '010-1111-1111-162', '010-1111-1111-162', '134134', '2019-10-09 02:58:40', '', '', '', '이체완료', '11:00:00', '2019-10-09 02:58:45', NULL),
+	(35, '010-1111-1111-162', '010-1111-1111-162', '12341', '2019-10-09 03:01:29', '', '', '', '이체완료', '11:00:00', '2019-10-09 03:01:34', NULL),
+	(36, '010-1111-112-1212', '010-1111-112-1212', '1242', '2019-10-09 03:07:51', '', '', '', '이체완료', '11:00:00', '2019-10-09 03:07:56', NULL),
+	(37, '010-1111-112-1212', '010-1111-112-1212', '1414', '3924-10-09 03:09:28', '', '', '', '활성', '19:00:00', '2019-10-09 03:09:33', NULL),
+	(38, '010-1111-112-1212', '010-1111-112-1212', '1234', '2022-10-09 03:11:44', '', '', '', '활성', '17:00:00', '2019-10-09 03:11:49', NULL),
+	(39, '010-1111-112-1212', '010-1111-112-1212', '1243124', '2019-10-09 03:14:37', '', '', '', '이체완료', '19:00:00', '2019-10-09 03:14:42', NULL),
+	(40, '010-1111-112-1212', '010-1111-112-1212', '1241', '2019-10-09 03:17:07', '134', '134', '134', '이체완료', '11:00:00', '2019-10-09 03:17:12', NULL),
+	(41, '010-1111-112-1212', '010-1111-112-1212', '12413', '2019-10-09 03:22:02', '', '', '', '이체완료', '11:00:00', '2019-10-09 03:22:07', NULL),
+	(42, '010-1111-112-1212', '010-1111-112-1212', '2541', '2019-10-09 03:24:21', '', '', '', '이체완료', '11:00:00', '2019-10-09 03:24:26', NULL),
+	(43, '010-1111-112-1212', '010-1111-112-1212', '123143', '2019-12-21 13:00:00', '', '', '', '이체완료', '13:00:00', '2019-10-09 03:27:28', NULL),
+	(44, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:40:34', NULL),
+	(45, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:45:28', NULL),
+	(46, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:46:40', NULL),
+	(47, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:46:59', NULL),
+	(48, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:47:02', NULL),
+	(49, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:47:14', NULL),
+	(50, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:47:17', NULL),
+	(51, '010-1111-1111-161', '101-1112-112-1232', '123456', '2019-11-15 16:00:00', '아 이런', '내돈 내돈 돌려줘 ', '', '이체완료', '2019-11-15 16:00', '2019-10-09 03:47:18', NULL),
+	(52, '010-1111-112-1212', '010-1111-112-1212', '3452341', '2020-01-04 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 16:59:29', NULL),
+	(53, '010-1111-112-1212', '010-1111-112-1212', '12415', '2020-01-04 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 17:06:44', NULL),
+	(54, '010-1111-112-1212', '010-1111-112-1212', '12415', '2020-01-04 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 17:10:47', NULL),
+	(55, '010-1111-112-1212', '010-1111-112-1212', '12415', '2020-01-04 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 17:10:58', NULL),
+	(56, '010-1111-112-1212', '010-1111-112-1212', '12415', '2020-01-04 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 17:11:09', NULL),
+	(57, '010-1111-112-1212', '010-1111-112-1212', '12415', '2020-01-04 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 17:11:30', NULL),
+	(58, '101-1112-112-1232', '101-1112-112-1232', '12341', '2020-03-07 17:00:00', '', '', '', '이체완료', '17:00:00', '2019-10-09 19:08:09', NULL),
+	(59, '010-1111-1111-162', '010-1111-1111-162', '1241324512', '2019-11-02 11:00:00', '1241', '3145', '12412', '이체완료', '11:00:00', '2019-10-09 19:20:05', NULL),
+	(60, '010-1111-1111-162', '010-1111-1111-162', '1242141241', '2020-02-01 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 19:27:50', NULL),
+	(61, '010-1111-112-1212', '010-1111-112-1212', '2351235', '2019-12-21 11:00:00', '', '', '', '이체완료', '11:00:00', '2019-10-09 20:15:06', NULL),
+	(62, '010-1111-112-1212', '12415', '122134626', '2020-01-04 19:00:00', '', '', '', '이체완료', '19:00:00', '2019-10-09 20:17:59', NULL),
+	(63, '010-1111-112-1212', '101-1112-112-1232', '500000', '2020-08-07 09:00:00', '235235', '2355', '3252341', '이체완료', '9:00:00', '2019-10-09 21:20:32', NULL),
+	(64, '010-1111-1111-121', '010-1111-112-1212', '300000000', '2020-01-04 11:00:00', '', '', '', '예약이체실패', '11:00:00', '2019-10-09 23:10:50', NULL),
+	(65, '010-1111-112-1212', '010-1111-1111-162', '234567801', '2019-12-13 11:00:00', '', '', '', '예약이체완료', '11:00:00', '2019-10-10 14:59:12', NULL),
+	(66, '010-1111-112-1212', '010-7587-5773-1049', '12332512', '2020-02-01 19:00:00', '234', '234', '24', '비활성', '19:00:00', '2019-10-10 15:04:27', NULL),
+	(67, '010-1111-112-1212', '010-5804-4599-5264', '123214', '2019-10-25 11:00:00', '214', '124', '124', '예약이체완료', '11:00:00', '2019-10-10 15:16:09', NULL),
+	(68, '010-1111-112-1212', '010-4794-6870-6563', '324121', '2019-10-19 11:00:00', '222', '333', '111', '비활성', '11:00:00', '2019-10-10 22:37:07', NULL),
+	(69, '010-4139-2283-1703', '010-4410-5372-8852', '777777', '2019-10-11 07:00:00', '테스트333', '테스트33', '', '예약이체완료', '7:00:00', '2019-10-10 23:49:43', NULL),
+	(70, '010-4139-2283-1703', '010-2079-0005-0004', '7777', '2019-10-11 21:00:00', '테스트444', '테스트444', '', '비활성', '21:00:00', '2019-10-10 23:50:25', NULL),
+	(71, '010-4139-2283-1703', '010-9780-1258-2794', '7777777', '2019-10-11 07:00:00', '테슽55', '테스트555', '', '예약이체완료', '7:00:00', '2019-10-10 23:51:08', NULL),
+	(72, '101-1112-112-1232', '010-1111-1111-122', '1248769', '2019-11-16 11:00:00', '124', '1236', '373', '활성', '11:00:00', '2019-10-11 11:46:23', NULL),
+	(73, '010-1111-1111-162', '010-6936-3946-1490', '124312', '2019-10-13 17:00:00', '', '', '', '예약이체완료', '17:00:00', '2019-10-13 18:28:21', NULL),
+	(74, '010-1111-1111-162', '010-1111-112-1212', '1234123', '2019-10-26 09:00:00', '', '', '', '예약이체완료', '9:00:00', '2019-10-13 18:30:19', NULL),
+	(75, '010-3829-4359-8382', '010-3668-5593-9456', '123123', '2019-10-19 09:00:00', '', '1', '23', '예약이체완료', '9:00:00', '2019-10-15 20:39:16', NULL),
+	(76, '010-3829-4359-8382', '010-3668-5593-9456', '123432', '2019-10-18 19:00:00', '', '124', '', '예약이체완료', '19:00:00', '2019-10-15 20:55:59', 'SJ은행'),
+	(77, '010-3829-4359-8382', '110-346-555760', '234', '2019-10-26 19:00:00', '', '', '', '예약이체완료', '19:00:00', '2019-10-15 20:57:18', '신한은행'),
+	(78, '010-3829-4359-8382', '010-3829-4359-8382', '5435788', '2019-11-02 19:00:00', '', '', '', '예약이체완료', '19:00:00', '2019-10-15 21:03:44', '농협'),
+	(79, '010-3829-4359-8382', '010-3668-5593-9456', '11233', '2019-11-05 21:00:00', '', '', '', '예약이체완료', '21:00:00', '2019-10-15 21:09:54', '새마을금고'),
+	(80, '010-3829-4359-8382', '110-346-555760', '10000', '2019-11-23 11:00:00', '12312', '124', '123', '활성', '11:00:00', '2019-10-15 21:35:06', '새마을금고'),
+	(81, '010-3829-4359-8382', '010-3668-5593-9456', '1234', '2019-11-23 19:00:00', '', '', '', '활성', '19:00:00', '2019-10-15 21:44:56', '새마을금고'),
+	(82, '010-3829-4359-8382', '010-3668-5593-9456', '1234', '2019-11-06 19:00:00', '', '', '', '활성', '19:00:00', '2019-10-15 21:45:07', '새마을금고'),
+	(83, '010-3829-4359-8382', '110-346-555760', '1234', '2019-11-06 21:00:00', '', '', '', '활성', '21:00:00', '2019-10-15 21:46:11', '새마을금고'),
+	(84, '010-3829-4359-8382', '110-346-555760', '123', '2019-11-06 07:00:00', '', '', '', '활성', '7:00:00', '2019-10-15 21:46:43', '새마을금고'),
+	(85, '010-3829-4359-8382', '010-3668-5593-9456', '4321', '2019-11-06 07:00:00', '', '', '', '활성', '7:00:00', '2019-10-15 21:47:27', '새마을금고'),
+	(86, '010-3829-4359-8382', '010-3668-5593-9456', '1423', '2019-11-06 19:00:00', '124', '123', '12', '활성', '19:00:00', '2019-10-15 21:48:53', '새마을금고'),
+	(87, '010-3829-4359-8382', '110-346-555760', '10000', '2019-11-06 09:00:00', '', '', '', '활성', '9:00:00', '2019-10-15 21:49:38', '새마을금고'),
+	(88, '010-3829-4359-8382', '110-346-555760', '10000', '2019-11-06 09:00:00', '', '', '', '활성', '9:00:00', '2019-10-15 21:50:58', '새마을금고'),
+	(89, '010-3829-4359-8382', '110-346-555760', '1234', '2019-11-06 09:00:00', '', '', '', '활성', '9:00:00', '2019-10-15 21:53:29', 'SJbank'),
+	(90, '010-3829-4359-8382', '110-346-555760', '1234', '2019-11-06 09:00:00', '', '', '', '활성', '9:00:00', '2019-10-15 21:54:36', 'SJbank');
+/*!40000 ALTER TABLE `transfer_reserve` ENABLE KEYS */;
+
+-- 테이블 bank.user 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` varchar(50) NOT NULL COMMENT '사용자 id',
+  `pw` varchar(50) NOT NULL COMMENT '사용자 pw',
+  `simple_pw` int(11) NOT NULL COMMENT '간편비밀번호',
+  `name` varchar(50) NOT NULL COMMENT '사용자 이름',
+  `tel` varchar(15) NOT NULL COMMENT '전화번호',
+  `gen` varchar(10) NOT NULL COMMENT '성별',
+  `email` varchar(50) NOT NULL COMMENT '이메일',
+  `job_group` varchar(50) NOT NULL COMMENT '직업군',
+  `addr` varchar(50) NOT NULL COMMENT '거주지',
+  `postal_code` int(11) NOT NULL COMMENT '우편번호',
+  `status` varchar(10) NOT NULL COMMENT '계정 상태',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  `end_date` datetime DEFAULT NULL COMMENT '탈퇴일',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 정보';
+
+-- 테이블 데이터 bank.user:~18 rows (대략적) 내보내기
+DELETE FROM `user`;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`id`, `pw`, `simple_pw`, `name`, `tel`, `gen`, `email`, `job_group`, `addr`, `postal_code`, `status`, `register_date`, `end_date`) VALUES
+	('aaa', '2233', 2233, '귀태씨는왜아직안만들어져있지', '010-3830-6039', '남', 'f312d@naver.com', '군인', '서울 종로구 평창길 2/', 3008, '비활성', '2019-09-30 15:03:47', NULL),
+	('aaa2', '1111', 1111, '쿠키몬스터', '345-456-1222', '여', 'reck123@nate.com', '학생', '서울 강남구 테헤란로 101/', 6134, '활성', '2019-10-14 02:56:21', NULL),
+	('asas', '2321', 2312, '아아아', '010-4454-4444', '남', 'fwasw2@naver.com', '회사원', '서울 구로구 항동로 42/', 8368, '활성', '2019-09-28 20:00:53', NULL),
+	('asd', '123', 123, 'asfd', '123', '남', 'asdf@naver.com', '학생', '서울 강남구 강남대로 238/', 6267, '활성', '2019-10-08 18:12:05', NULL),
+	('asdasdasdasd', '1234', 2134, '123', '123', '여', '123@naver.com', '학생', '서울 강서구 강서로 375/', 7803, '활성', '2019-10-14 02:40:37', NULL),
+	('day_0821', '1111', 1234, '박이찬', '010-####-#', '남', 'asdas@naver.com', '학생', '서울 강남구 강남대로 238/', 6267, '활성', '2019-09-05 08:31:36', NULL),
+	('elliottjo', '1234', 7777, '조은환', '010-####-#', '남자', '\r\njoh03333@naver.com', '프로그래머', '인천시', 0, '활성', '2019-09-18 00:56:13', NULL),
+	('exception', '123456', 921028, '황동규', '010-####-#', '남', 'ehdrb1992@naver.com', '학생', '경기도 안양시', 13531513, '활성', '2019-09-10 11:11:00', NULL),
+	('fff', '123', 123, '박이찬', '123', '남', 'day_0821@naver.com', '학생', '123', 123, '활성', '2019-09-28 19:47:44', NULL),
+	('ge23', '1111', 334256, 'Erica', '345-456-1222', '여', 'asddsf@gmail.com', '학생', '인천 연수구 랜드마크로 19/', 22020, '활성', '2019-10-14 03:35:17', NULL),
+	('god', '1111', 1111, '쿠키몬스터', '010-3333-3333', '여', 'asdas@naver.com', '회사원', '서울 관악구 남현길 6/', 8805, '활성', '2019-10-14 17:48:20', NULL),
+	('ngt', '3333', 1212, '나귀태', '010-2222-2222', '남', 'ngt1234@naver.com', '학생', '서울 은평구 수색로 지하 175/13', 3504, '활성', '2019-09-30 15:27:05', NULL),
+	('qwer', '1q2w3e4r', 123456, '황동규', '010-2516-6038', '남', 'ehdrb1992@naver.com', '학생', '경기 안양시 동안구 관평로212번길 21/308동 405호', 14051, '활성', '2019-10-05 17:54:45', NULL),
+	('qwer1234', '1111', 1234, '테스트1234qwer', '010-3333-4444', '여', 'ttt222@naver.com', '학생', '서울 강남구 강남대로 238/없음', 6267, '활성', '2019-10-10 23:31:38', NULL),
+	('reck', '1111', 334256, 'Erica', '345-456-1222', '남', 'reck12@naver.com', '주부', '서울 강서구 발산로 24/', 7644, '활성', '2019-09-30 23:39:35', NULL),
+	('tester22', '1111', 11111, '텥', '010-9999-9999', '남', '123@naver.com', '학생', '서울 강남구 강남대로 238/123', 6267, '활성', '2019-10-10 17:19:13', NULL),
+	('ttt212', '1111', 11111, '테스터', '010-0000-0001', '남', '123@naver.com', '백수', '서울 강남구 강남대로 238/5552', 6267, '활성', '2019-10-10 17:16:03', NULL),
+	('yada0', '1234', 334256, '노현천', '345-456-1222', '여', 'reck12@naver.com', '학생', '서울 성북구 혜화로 80/레미안 2단지 1330호', 2880, '활성', '2019-09-30 23:40:54', NULL),
+	('자찬ㄴㅇ로ㅓㅏ', '1234', 2222, '노현천', '010-3333-3333', '여', 'asddsf@naver.com', '학생', '경기 구리시 동구릉로431번길 7/', 11905, '활성', '2019-10-14 18:09:53', NULL);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+-- 테이블 bank.user_analysis_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_analysis_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL,
+  `category` varchar(50) NOT NULL COMMENT '항목명 ,으로 구분 사용자한테는 보여주지 않는 컬럼',
+  `score` varchar(50) NOT NULL COMMENT '항목당 점수 ,으로 구분',
+  `total` float NOT NULL COMMENT '총점',
+  `propensity` varchar(50) NOT NULL COMMENT '투자 성향',
+  `register_date` datetime NOT NULL,
+  PRIMARY KEY (`seq`),
+  KEY `id` (`id`),
+  KEY `propensity` (`propensity`),
+  CONSTRAINT `FK_user_analysis_log_analysis` FOREIGN KEY (`propensity`) REFERENCES `analysis` (`propensity`),
+  CONSTRAINT `FK_user_analysis_log_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 투자성향 분석 이력';
+
+-- 테이블 데이터 bank.user_analysis_log:~0 rows (대략적) 내보내기
+DELETE FROM `user_analysis_log`;
+/*!40000 ALTER TABLE `user_analysis_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_analysis_log` ENABLE KEYS */;
+
+-- 테이블 bank.user_login_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_login_log` (
+  `id` varchar(50) NOT NULL,
+  `ip` varchar(50) NOT NULL COMMENT '접속IP',
+  `register_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_user_login_history_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 로그인 이력';
+
+-- 테이블 데이터 bank.user_login_log:~0 rows (대략적) 내보내기
+DELETE FROM `user_login_log`;
+/*!40000 ALTER TABLE `user_login_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_login_log` ENABLE KEYS */;
+
+-- 테이블 bank.user_mymenu 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_mymenu` (
+  `id` varchar(50) DEFAULT NULL,
+  `mymenu1` varchar(50) DEFAULT NULL,
+  `mymenu2` varchar(50) DEFAULT NULL,
+  `mymenu3` varchar(50) DEFAULT NULL,
+  `mymenu4` varchar(50) DEFAULT NULL,
+  `mymenu5` varchar(50) DEFAULT NULL,
+  KEY `FK_user_mymenu_user` (`id`),
+  CONSTRAINT `FK_user_mymenu_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='my메뉴 리스트';
+
+-- 테이블 데이터 bank.user_mymenu:~6 rows (대략적) 내보내기
+DELETE FROM `user_mymenu`;
+/*!40000 ALTER TABLE `user_mymenu` DISABLE KEYS */;
+INSERT INTO `user_mymenu` (`id`, `mymenu1`, `mymenu2`, `mymenu3`, `mymenu4`, `mymenu5`) VALUES
+	('elliottjo', '자주하는 질문', '공지사항', 'Q & A', 'OTP관리', 'IP차단 관리'),
+	('ngt', '입금계좌관리', NULL, NULL, NULL, NULL),
+	('elliottjo', '자주하는 질문', '공지사항', 'Q & A', 'OTP관리', 'IP차단 관리'),
+	('elliottjo', '자주하는 질문', '공지사항', 'Q & A', 'OTP관리', 'IP차단 관리'),
+	('elliottjo', '자주하는 질문', '공지사항', 'Q & A', 'OTP관리', 'IP차단 관리'),
+	('elliottjo', 'Q & A', 'Q & A', 'Q & A', 'Q & A', 'Q & A');
+/*!40000 ALTER TABLE `user_mymenu` ENABLE KEYS */;
+
+-- 테이블 bank.user_pw_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_pw_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL COMMENT '사용자id',
+  `status` varchar(50) NOT NULL COMMENT '로그 유효성',
+  `register_date` datetime NOT NULL COMMENT '등록일',
+  PRIMARY KEY (`seq`),
+  KEY `id` (`id`),
+  KEY `status` (`status`),
+  CONSTRAINT `fk__user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='유저 비밀번호 틀린횟수 테이블\r\n해당 테이블에 동일한 아이디이며 status가 y인 로그가 5개 있을경우 해당\r\nid는 user테이블에 상태를 비활성화함';
+
+-- 테이블 데이터 bank.user_pw_log:~0 rows (대략적) 내보내기
+DELETE FROM `user_pw_log`;
+/*!40000 ALTER TABLE `user_pw_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_pw_log` ENABLE KEYS */;
+
+-- 테이블 bank.user_simple_pw_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_simple_pw_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL COMMENT '로그 유효성',
+  `register_date` datetime NOT NULL,
+  PRIMARY KEY (`seq`),
+  KEY `id` (`id`),
+  CONSTRAINT `fk_user_simple_pw_log_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='유저 간편 비밀번호 틀린횟수 테이블\r\n해당 테이블에 동일한 아이디이며 status가 y인 로그가 10개 있을경우 해당\r\nid는 user테이블에 상태를 비활성화함';
+
+-- 테이블 데이터 bank.user_simple_pw_log:~0 rows (대략적) 내보내기
+DELETE FROM `user_simple_pw_log`;
+/*!40000 ALTER TABLE `user_simple_pw_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_simple_pw_log` ENABLE KEYS */;
+
+-- 테이블 bank.user_status_log 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_status_log` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL COMMENT '변경된 상태',
+  `comment` varchar(50) NOT NULL COMMENT '상태 변경사유',
+  `register_date` datetime NOT NULL COMMENT '사용자 상태 금융거래제한 등록일시',
+  PRIMARY KEY (`seq`),
+  KEY `id` (`id`),
+  CONSTRAINT `FK_restriction_log_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 상태 변경 시 해당 테이블에 이력을 남긴다\r\n상태 변경 항목(금융거래제한/해지 시, 비활성화, 탈퇴 등)\r\nuser 테이블도 상태를 변경한다';
+
+-- 테이블 데이터 bank.user_status_log:~0 rows (대략적) 내보내기
+DELETE FROM `user_status_log`;
+/*!40000 ALTER TABLE `user_status_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_status_log` ENABLE KEYS */;
+
+-- 테이블 bank.user_transfer_limit 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user_transfer_limit` (
+  `id` varchar(50) NOT NULL,
+  `daily_limit` int(11) NOT NULL COMMENT '일일제한',
+  `number_limit` int(11) NOT NULL COMMENT '횟수제한',
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_user_transfer_limit_user` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='사용자 이체 한도\r\n일일 제한, 일회 제한\r\n보통 일일제한 금액은 일회가능 금액에 5배가 기본';
+
+-- 테이블 데이터 bank.user_transfer_limit:~0 rows (대략적) 내보내기
+DELETE FROM `user_transfer_limit`;
+/*!40000 ALTER TABLE `user_transfer_limit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_transfer_limit` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
