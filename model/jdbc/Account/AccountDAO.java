@@ -106,7 +106,14 @@ public class AccountDAO {
 	public ArrayList<AccountDTO> selectIDfromUsable(String id){
 		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
 
-		sql = "select * from account where id = ? and type = '예금' and status = '활성'";
+		sql =	"SELECT "+
+				"ac.account_number, ac.type, ac.sum, ac.alias, "+
+				"ac.id, ac.pw, ac.status, ac.register_date, ac.end_date "+
+				"from ACCOUNT ac "+
+				"inner join deposits dp "+
+				"ON ac.account_number = dp.account_number "+
+				"where ac.id = 'day_0821' and ac.type = '예금' and ac.status = '활성' "+
+				"AND dp.type='보통'";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
