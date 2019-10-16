@@ -37,7 +37,8 @@ public class Reservation extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		response.setContentType("text/html;charset=utf-8"); 
+		request.setCharacterEncoding("UTF-8");	
 		System.out.println("servelet Reservation");
 		PrintWriter out = response.getWriter();
 		Map<String,String> map = new HashMap<String,String>();

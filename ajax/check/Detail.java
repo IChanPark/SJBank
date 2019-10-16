@@ -35,7 +35,10 @@ public class Detail extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 System.out.println("Here servelet Detail");
+		response.setContentType("text/html;charset=utf-8"); 
+		request.setCharacterEncoding("UTF-8");	
+		
+		System.out.println("Here servelet Detail");
 		 PrintWriter out = response.getWriter();
 		 
 		 String acc =request.getParameter("acc");
@@ -61,14 +64,11 @@ public class Detail extends HttpServlet {
 		 	map.put("status", dto.get(i).getStatus() );
 		 	map.put("register_date", dto.get(i).getRegister_dateStr() );
 		 	
-		 	
 		 	json += gson.toJson(map);
 		 	if(i < dto.size()-1)
 		 		json +=",";
 		 }
 		 json+="]";
 		 out.print(json);
-		 
 	}
-
 }

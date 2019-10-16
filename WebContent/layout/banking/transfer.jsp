@@ -5,17 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script>
-
-
-
 $(document).ready(function(){
 
-
 	$('.ToConfirm').click(function(){
-		
 
 		var testAccpw = /^[0-9]{4}$/g;
-		var testMoney = /[0-9]{1,17}/g;
+		var testMoney = /^[0-9]{1,10}$/g;
 		var testToacc = /[0-9]{3,4}[-][0-9]{3,4}[-][0-9]{4,6}/g;
 		var testBank = /[0-9가-힣a-zA-Z]{1,8}/g
 		
@@ -25,6 +20,7 @@ $(document).ready(function(){
 			alert("계좌 비밀번호 오류");
 			return;
 		}
+		
 		if(!testToacc.test($("#toAcc").val() ) )
 		{
 			alert("보낼 계좌 오류");
