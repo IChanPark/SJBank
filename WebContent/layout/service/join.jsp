@@ -84,8 +84,8 @@
 	</table>
 
 <script>
-var idChk;
-
+var idChktf=false;
+var idChkdone=false;
 
 function addChk(){
 	if($('#sample4_postcode').val() == ""){
@@ -137,10 +137,12 @@ function check3(re, what, message) {
  function allChk() {	//메뉴 이동용
 	
 	
-	if(idChk&&ev()&&ev2()&&ev3()&&ev4()&&ev5()&&ev6()){
-		alert("드뎌");
+	if(idChktf&&ev()&&ev2()&&ev3()&&ev4()&&ev5()&&ev6()){
+		alert("가입이 완료되었습니다.");
 		document.paging.hid_t.value = "service/joinReg";
 		document.paging.submit();
+	}else if(idChkdone==false){
+		alert("ID 중복 체크해주세요");
 	}
 }; 
 
@@ -162,6 +164,8 @@ function idChk() {
 		return;
 	}  */
 	
+	//if($('input[name=id]').val()!=null)
+		
 	
 	gogo = "layout/service/idChk.jsp";
 	$.ajax({	
@@ -174,17 +178,20 @@ function idChk() {
 			alert(qqq.id + "이미 존재하는 아이디 입니다");
 			$('input[name=id]').val("");
 			$('input[name=id]').focus();
-			idChk=false;
-			return false;
+			idChktf=false;
+			idChkdone=true;
+			//return false;
 		}else if(qqq.id == "" || $('#id').val()!=""){		
 			alert("통과 입니다."); 
-			idChk=true;
-			return true; 
+			idChktf=true;
+			idChkdone=true;
+			//return true; 
 		}
 	},error:function(qqq){
 		alert("에러발생");
 	}	
 	});	
+
 };	
 	
 </script>
