@@ -99,14 +99,15 @@ public class Trs implements M_Action{
 						trfDTO.setSum(dto.getSum());
 						trfDTO.setTarget("SJBank");
 						AccountDAO.getInstance().updateMoney( (int)(dto.getSum()+0),toAcc );
-						Transfer_logDAO.getInstance().insert(dto);
 						Transfer_logDAO.getInstance().insert(trfDTO);
 					}
 				}
 				else {
 					dto.setStatus("잔액부족");
-					Transfer_logDAO.getInstance().insert(dto);
+					
 				}
+				Transfer_logDAO.getInstance().insert(dto);
+				request.setAttribute("data", dto);
 			}
 			else
 			{
