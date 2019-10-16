@@ -101,6 +101,7 @@ $(document).ready(function(){
 		<td><fmt:formatNumber value="${data.sum }" pattern="#,###원" /></td>
 	</tr>
 </table>
+<div class="scrollB">
 <table width="100%">
 	<tr>
 		<td><input type="date" name = "start"/>~ <input type="date" name="end"/> </td>
@@ -147,3 +148,4 @@ $(document).ready(function(){
 		</tr>
 	</c:if>
 </table>
+</div>

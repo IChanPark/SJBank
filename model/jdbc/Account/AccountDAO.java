@@ -145,6 +145,31 @@ public class AccountDAO {
 		return dto;
 	}
 	
+	
+	public boolean chkAccount(String acc){
+		boolean dto = false;
+
+		sql = "select * from account where account_number = ?";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, acc);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				dto=true;
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return dto;
+	}
+	
+	
+	
+	
+	
 	public ArrayList<AccountDTO> selectID_Type(AccountDTO DataDTO){
 		ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
 
