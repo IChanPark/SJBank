@@ -41,10 +41,11 @@ function aaa(){
 			success:function(qqq){
 // 					alert("성공");
 // 					 qqq.id+"<br><br><a href='#' data-menu-name=' '>돌아가기</a>";
-					$("#set1").remove();					//onKeyup='this.value=this.value.replace(/[^ㄱ-힣]/g,'');'  
+										//onKeyup='this.value=this.value.replace(/[^ㄱ-힣]/g,'');'  
 															//onKeyup='this.value=this.value.replace(/[^0-9a-zA-Z]/g,'');' 
 															//onKeyup='this.value=this.value.replace(/([^0-9-])/g,'');'
-					if(qqq.id == go){
+					if(qqq.id != null){
+						$("#set1").remove();
 				var row = "<tr><td>아이디</td><td> : <input type='text' id='uid' value="+qqq.id+" readOnly /></td></tr>"+
 						"<tr><td>이름</td><td> : <input type='text' name='name' id='name'  /></td></tr>"+
 						"<tr><td>이메일</td><td> : <input type='text' name='email1' id='email1' />@"+
@@ -63,12 +64,20 @@ function aaa(){
 					
 				$("#tot").append(row);
 					}else{
-					
+						alert("찾기에 실패했습니다.");
+						var row ="<br><a href='#' onclick='goMenu(this)' data-menu-name='service/SearchPW'>다시 찾기</a>";
+						
+						$("#tot").append(row);
 					}
 
 			},
 			error:function(qqq){
 // 				console.log("오류");
+// 				alert("찾기에 실패했습니다.");
+				var row ="<br><a href='#' onclick='goMenu(this)' data-menu-name='service/LoginMain'>돌아가기</a>";
+				
+				$("#tot").append(row);
+
 			}
 		});
 	 stop=true;
@@ -95,7 +104,11 @@ function bbb(){
 			},
 			dataType:'json',
 			success:function(qqq){
-// 					alert("성공");
+					alert("변경 성공");
+				var row ="<br><a href='#' onclick='goMenu(this)' data-menu-name='service/LoginMain'>로그인</a>";
+				
+				$("#tot").append(row);
+
 			},
 			error:function(qqq){
 				alert("변경 실패");

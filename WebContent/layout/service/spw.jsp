@@ -22,10 +22,10 @@ dto.setAccount_number(request.getParameter("account_number"));
 dto.setPw(request.getParameter("account_pw"));
 dto=AccountDAO.getInstance().searchAcc(dto);
 
-if(dto.getId() == null)
-	map.put("id", "error");
-else 
-	map.put("id","go");
+// if(dto.getId() == null){
+// 	map.put("id", "error");
+// }else{ 
+	map.put("id",dto.getId());
 // 	map.put("pw", request.getParameter("id"));
 	json += gson.toJson(map);
 
