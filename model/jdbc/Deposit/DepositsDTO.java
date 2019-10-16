@@ -8,7 +8,7 @@ public class DepositsDTO {
 	//예금가입자
 	private String  account_number,  //계좌번호
 					id,              //사용자 id
-					prduct,          //상품명
+					product,          //상품명
 					preferential,	 //적용된 우대조건
 					type;			//타입
 	
@@ -39,12 +39,12 @@ public class DepositsDTO {
 		this.id = id;
 	}
 
-	public String getPrduct() {
-		return prduct;
+	public String getProduct() {
+		return product;
 	}
 
-	public void setPrduct(String prduct) {
-		this.prduct = prduct;
+	public void setProduct(String prduct) {
+		this.product = prduct;
 	}
 
 	public String getPreferential() {
@@ -65,7 +65,7 @@ public class DepositsDTO {
 	
 	@Override
 	public String toString() {
-		return account_number + "," + id +","+ prduct + ","
+		return account_number + "," + id +","+ product + ","
 				+ preferential + "," + Interest +","+ type;
 	}
 	

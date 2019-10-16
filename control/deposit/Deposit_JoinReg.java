@@ -119,7 +119,7 @@ public class Deposit_JoinReg extends HttpServlet {
 					
 					depDTO.setAccount_number(newAcc);
 					depDTO.setId(userid);
-					depDTO.setPrduct(product);
+					depDTO.setProduct(product);
 					depDTO.setPreferential(Pref);
 					depDTO.setInterest(infoDTO.getMin_interest());
 					depDTO.setType(request.getParameter("type"));

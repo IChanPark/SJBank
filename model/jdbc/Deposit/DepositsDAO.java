@@ -36,7 +36,7 @@ public class DepositsDAO {
 				dto = new DepositsDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("product"));
+				dto.setProduct(rs.getString("product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));
@@ -53,7 +53,7 @@ public class DepositsDAO {
 				DepositsDTO dto = new DepositsDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("product"));
+				dto.setProduct(rs.getString("product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				dto.setType(rs.getString("type"));
@@ -90,7 +90,7 @@ public class DepositsDAO {
 			
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setString(2, dto.getId());
-			pstmt.setString(3, dto.getPrduct());
+			pstmt.setString(3, dto.getProduct());
 			pstmt.setString(4, dto.getPreferential());
 			pstmt.setFloat(5, dto.getInterest());
 			pstmt.setString(6, dto.getType());

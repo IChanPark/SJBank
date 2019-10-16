@@ -52,7 +52,7 @@ public class DepositsDAO {
 				dto = new DepositsDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("prduct"));
+				dto.setProduct(rs.getString("prduct"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				
@@ -67,7 +67,7 @@ public class DepositsDAO {
 				DepositsDTO dto = new DepositsDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setPrduct(rs.getString("prduct"));
+				dto.setProduct(rs.getString("prduct"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
 				res.add(dto);
@@ -115,7 +115,7 @@ public class DepositsDAO {
 		sql = 	"insert into deposits (" +
 				"account_number, id, prduct, preferential, interest) "
 				+ "values "
-				+ "('"+dto.getAccount_number()+"','"+dto.getId()+"','"+dto.getPrduct()
+				+ "('"+dto.getAccount_number()+"','"+dto.getId()+"','"+dto.getProduct()
 				+"','"+dto.getPreferential()+"',"+dto.getInterest() +")";
 		System.out.println(sql);
 		try {
