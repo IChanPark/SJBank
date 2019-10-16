@@ -7,8 +7,8 @@
     pageEncoding="UTF-8"%>
     
 <%
-System.out.println(request.getParameter("account_number"));
-System.out.println(request.getParameter("account_pw"));
+System.out.println("account_number : "+request.getParameter("account_number"));
+System.out.println("account_pw : "+request.getParameter("account_pw"));
 
 %>
     
@@ -22,10 +22,12 @@ dto.setAccount_number(request.getParameter("account_number"));
 dto.setPw(request.getParameter("account_pw"));
 dto=AccountDAO.getInstance().searchAcc(dto);
 
-
-	map.put("id", dto.getId());
+if(dto.getId() == null)
+	map.put("id", "error");
+else 
+	map.put("id","go");
 // 	map.put("pw", request.getParameter("id"));
 	json += gson.toJson(map);
-	
+
 out.print(json);
 %>
