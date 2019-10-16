@@ -11,25 +11,26 @@ $(document).ready(function(){
 		var searchAccnum = /[0-9]{3}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/;
 		var searchAccpw = /^[0-9]{4}$/;
 		
-		
 		if(!searchAccnum.test($("#account_number").val()) ){
 			alert("계좌번호를 다시 확인해주세요.");
 			return;
-		}
-		if(!searchAccpw.test($("#account_pw").val()) ){
+		}if(!searchAccpw.test($("#account_pw").val()) ){
 			alert("비밀번호가 틀렸습니다.\n다시 확인해주세요");
 			return;
 		}
 		
+		
 		aaa();
 		
 	});
+	
+	
 
 });
 
 function aaa(){
-	if(!stop){
-	
+
+		
 	$.ajax({
 			url:"layout/service/spw.jsp",
 			type:'post',
@@ -47,8 +48,8 @@ function aaa(){
 					if(qqq.id != null){
 						$("#set1").remove();
 				var row = "<tr><td>아이디</td><td> : <input type='text' id='uid' value="+qqq.id+" readOnly /></td></tr>"+
-						"<tr><td>이름</td><td> : <input type='text' name='name' id='name'  /></td></tr>"+
-						"<tr><td>이메일</td><td> : <input type='text' name='email1' id='email1' />@"+
+						"<tr><td>이름</td><td> : <input type='text' name='name' id='name' placeholder='한글만'  /></td></tr>"+
+						"<tr><td>이메일</td><td> : <input type='text' name='email1' id='email1' placeholder='영문, 숫자만'/>@"+
 							"<select name='email2' id='email2'>"+
 								"<option>naver.com</option>"+
 								"<option>daum.net</option>"+
@@ -57,17 +58,14 @@ function aaa(){
 								"<option>yahoo.com</option>"+
 							"</select></td></tr>"+
 						"<tr><td>전화번호</td>"+
-						"<td> : <input type='text' name='tel' id='tel'   /></td></tr>"+
-						"<tr><td>변경할 비밀번호</td><td> : <input type='text' id='pw' /></td></tr>"+
+						"<td> : <input type='text' name='tel' id='tel' placeholder='010-0000-0000' /></td></tr>"+
+						"<tr><td>변경할 비밀번호</td><td> : <input type='text' id='pw' placeholder='비밀번호 4자리' /></td></tr>"+
 						"<tr><td onclick='bbb()'>변경</td></tr>"+     
 						"<br><a href='#' onclick='goMenu(this)' data-menu-name='service/LoginMain'>로그인</a>";
 					
 				$("#tot").append(row);
 					}else{
 						alert("찾기에 실패했습니다.");
-						var row ="<br><a href='#' onclick='goMenu(this)' data-menu-name='service/SearchPW'>다시 찾기</a>";
-						
-						$("#tot").append(row);
 					}
 
 			},
@@ -80,20 +78,35 @@ function aaa(){
 
 			}
 		});
-	 stop=true;
-	}
+	 
 };    
 
-
-
 function bbb(){
+	
+	var searchName = /[ㄱ-힣]{2,10}/g;
+	var searchEmail = /[^0-9a-zA-Z]{0,50}/g;
+	var searchTel = /([0-9]{2,3}[-][0-9]{3,4}[-][0-9]{3,4})/g;
+	var searchPw = /^[0-9]{4}$/;
+	
+	if(!searchName.test($("#name").val()) ){
+		alert("이름을 다시 확인해주세요.");
+		return;
+	}if(!searchEmail.test($("#email1").val()+"@"+$("#email2").val()) ){
+		alert("이메일을 다시 확인해주세요.");
+		return;
+	}if(!searchTel.test($("#tel").val()) ){
+		alert("전화번호를 다시 확인해주세요");
+		return;
+	}if(!searchPw.test($("#pw").val()) ){
+		alert("비밀번호를 양식에 맞춰주세요.");
+		return;
+	}
+	
 	
 	$.ajax({
 			url:"layout/service/cpw.jsp",
 			type:'post',
 			data:{
-				'account_number' : $("#account_number").val(),
-				'account_pw' : $("#account_pw").val(),
 				
 				'uid' : $("#uid").val(),
 				'name' : $("#name").val(),
@@ -139,11 +152,11 @@ function goMenu(qq) {	//메뉴 이동용
 	
 		<tr>
 			<td>계좌 비밀번호</td>
-			<td> : <input type="text" id="account_pw" /></td>
+			<td> : <input type="password" id="account_pw" /></td>
 		</tr>
 			
 	</table>
-	<div id="search">찾기</div>
+	<div id="search" style=" height: 20px; width: 33px;">찾기</div>
 </div>
 
 <div id="tot"></div>

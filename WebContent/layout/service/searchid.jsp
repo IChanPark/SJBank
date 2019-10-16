@@ -13,13 +13,13 @@ $(document).ready(function(){
 	
 	
 	if(!searchName.test($("#name").val()) ){
-		alert("이름 오류");
+		alert("이름을 다시 확인해주세요.");
 		return;
 	}if(!searchEmail.test($("#email1").val()+"@"+$("#email2").val()) ){
-		alert("이메일 오류");
+		alert("이메일을 다시 확인해주세요.");
 		return;
 	}if(!searchTel.test($("#tel").val()) ){
-		alert("전화번호 오류");
+		alert("전화번호를 다시 확인해주세요");
 		return;
 	}
 	
