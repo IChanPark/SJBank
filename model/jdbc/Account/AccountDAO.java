@@ -112,8 +112,9 @@ public class AccountDAO {
 				"from ACCOUNT ac "+
 				"inner join deposits dp "+
 				"ON ac.account_number = dp.account_number "+
-				"where ac.id = 'day_0821' and ac.type = '예금' and ac.status = '활성' "+
+				"where ac.id = ? and ac.type = '예금' and ac.status = '활성' "+
 				"AND dp.type='보통'";
+		
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
