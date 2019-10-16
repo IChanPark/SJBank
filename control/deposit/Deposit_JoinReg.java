@@ -61,7 +61,7 @@ public class Deposit_JoinReg extends HttpServlet {
 
 		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
 		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);
-		if(infoDTO.getMin_sum()<= sum && sum <= infoDTO.getMax_sum()) {
+		if(infoDTO.getMin_sum()<= sum && sum <= infoDTO.getMax_sum() && infoDTO.getType().equals("정기")) {
 			if(myAccDTO.getPw().equals(request.getParameter("pw"))) {
 				// --------------------------------------------------- 보내는이 로그 
 				Transfer_logDTO transDTO = new Transfer_logDTO();

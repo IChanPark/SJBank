@@ -5,7 +5,7 @@ var path;	//경로용
 var layout;	//html 추가용
 var isRun = false;	//아작스 중복실행 방지용
 var month_data = {
-	closeText: '선택', prevText: '이전달', nextText: '다음달', currentText: '오늘', weekHeader: 'Wk',
+	dateFormat: 'yy-mm', closeText: '선택', prevText: '이전달', nextText: '다음달', currentText: '오늘', weekHeader: 'Wk',
 	firstDay: 0, isRTL: false, showMonthAfterYear: true, yearSuffix: '', yearRange: 'c-99:c+99',
 	onClose: function(dateText, inst) {
 	    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
@@ -23,6 +23,8 @@ layout +=	"모두<input type='radio' name= 'prod_radio' value='모두' checked='
 layout +=	"적금<input type='radio' name= 'prod_radio' value='적금'/>펀드<input type='radio' name= 'prod_radio' value='펀드'/></div></div>";
 layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>검색</div><div class='infoMain_Value'>";
 layout +=	"<button id='search_Button'>검색</button><button id='clean_Button'>초기화</button></div></div>";
+layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>수익</div><div class='infoMain_Value'>";
+layout +=	"<input type='text' id='sumAll' readonly='readonly' /></div></div>";
 layout += 	"</div><div class='infoAdmin'><table id='info_table'><tbody id='info_tbody'>";
 layout += 	"<tr><th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th></tr></tbody></table></div>";
 
@@ -34,7 +36,7 @@ $(document).ready(function() {
 
 $("#clean_Button").on("click", function(){//초기화
 	$("input:radio[name='date_radio']:radio[value='d']").prop("checked", true);
-	$("input:radio[name='prod_radio']:radio[value='all']").prop("checked", true);
+	$("input:radio[name='prod_radio']:radio[value='모두']").prop("checked", true);
 	$('#days').remove();
 	$("#info_tbody").empty();
 	setDay();
@@ -66,8 +68,8 @@ function setYear(){
 
     layout = "<div id='days'>시작년도<select id='start_year'>";
     for(var y = (get_year); y >= (get_year-10); y--){
-    	ss+="<option value='"+ y +"-01-01'>"+ y + " 년" +"</option>";
-    	ee+="<option value='"+ y +"-12-31'>"+ y + " 년" +"</option>";
+    	ss+="<option value='"+y+"'>"+ y + " 년" +"</option>";
+    	ee+="<option value='"+y+"'>"+ y + " 년" +"</option>";
     }
     layout += ss;
     layout += "</select> 끝나는년도 <select id='end_year'>"+ee;
@@ -102,7 +104,7 @@ function option(){
 	isRun = true;
 	
 	$.ajax({	
-		url:"admin/calc/product_type.jsp",
+		url:"calc/Product_type",
 		type:'post',
 		data:{	product	: $("input:radio[name='prod_radio']:checked").val() },
 		dataType:'json',
@@ -127,16 +129,16 @@ function option(){
 //console.log($("#start_day").val();
 
 function ajax_go() {
-	var gogo = "admin/calc/select.jsp";
-	
 	if(isRun == true)
 		return;
 	isRun = true;
 	
 	$.ajax({	
-	url:gogo,
+	url:"calc/select",
 	type:'post',
-	data:{	start_year	: $("#start_year").val(),
+	data:{	
+			product		: $("input:radio[name='prod_radio']:checked").val(),
+			start_year	: $("#start_year").val(),
 			end_year	: $("#end_year").val(),
 			start_month	: $("#start_month").val(),
 			end_month 	: $('#end_month').val(),
@@ -145,26 +147,22 @@ function ajax_go() {
 	},
 	dataType:'json',
 	success:function(qqq){
-		var ttt = $("input:radio[name='prod_radio']:checked").val();
 		var row ='<tr><th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th></tr>';
 		var total = 0;
+		var s = 0;
 		$.each(qqq,function(i,e){
-			
-			if(e.product == ttt || ttt == '모두'
-				){
-				
 			row +="<tr>";
 			row +="<td class='"+e.date+"'>"+e.date+"</td>";
 			row +="<td class='"+e.count+"'>"+e.count+"</td>";
-			row +="<td class='"+e.product+"'>"+ttt+"</td>";
+			row +="<td class='"+e.product+"'>"+e.product+"</td>";
 			row +="<td class='"+e.type+"'>"+e.type+"</td>";
 			row +="<td class='"+e.sum+"'>"+e.sum+"</td>";
 			row +="</tr>";
 			total += Number(e.sum);
-			}
 		});
-		row += "<tr><td colspan='5'>총금액 : "+total+"</td></tr>";
+		row += "<tr><td colspan='5'> 총금액 : "+number_Pattern(total)+"원</td></tr>";
 		$("#info_tbody").append(row);
+		$("#sumAll").val(number_Pattern(total)+'원');
 		isRun = false;
 	},
 	error:function(qqq){
@@ -178,17 +176,4 @@ function number_Pattern(num) {	//3자리마다 ,찍기
 };
 
 </script>
-<style>
-.infoMain_Value input[type=radio]{ margin-left: 5px; margin-right: 10px; }
-.infoMain_Value select[id=sel_type]{ margin-right: 10px; margin-right: 5px; }
-#info_table table { width:100%; margin:15px 0; border:0; margin-top: 20px; }
-#info_table th { font-weight:bold; background-color:#c6c6c6; color:#202020; }
-#info_table,.info_table th,.info_table td { font-size:14px; text-align:center; padding:4px; border-collapse:collapse; color: black;}
-#info_table th { border: 1px solid #c6c6c6; border-width:1px; }
-#info_table td { border: 1px solid #c6c6c6; border-width:1px; color: black;}
-#info_table tr { border: 1px solid #ffffff; align:center; text-align:center; }
-#info_table tr:nth-child(odd){ background-color:#f7f7f7; }
-#info_table tr:nth-child(even){ background-color:#ffffff; }
-button{margin-left: 10px}
-</style>
 <div class='subTitle'>정산</div><br>

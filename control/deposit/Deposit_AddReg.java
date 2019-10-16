@@ -19,7 +19,6 @@ public class Deposit_AddReg extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8"); 
 		request.setCharacterEncoding("UTF-8");	//한글처리
-		PrintWriter out = response.getWriter();
 		String	type = request.getParameter("sel_type"),
 				product = request.getParameter("product"),
 				deposits_info = request.getParameter("product_info"),

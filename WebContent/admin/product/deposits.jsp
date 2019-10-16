@@ -27,8 +27,14 @@ function setTax(){
 	console.log("gd");
 	if($('#sel_type').val()=='보통'){
 		$('#interest_type').val('월이자지급');
+		$('#min_sum').attr("readOnly" ,false);
+		$('#max_sum').attr("readOnly" ,false);
 	}else {
 		$('#interest_type').val('만기일시');
+		$('#min_sum').val('0000');
+		$('#min_sum').attr("readOnly" ,true);
+		$('#max_sum').val('0000');
+		$('#max_sum').attr("readOnly" ,true);
 	}
 };
 
@@ -189,7 +195,7 @@ function add(){
 	box +=  "<div class='infoMain_Info'><div class='infoMain_Type'>우대항목</div><div class='infoMain_Value'>";
 	box +=  "<select class='preferential'>우대구분<option value='예금'>예금</option><option value='적금'>적금</option><option value='펀드'>펀드</option></select> ";
 	box +=  "<select class='prf_content'>우대조건<option value='보유시'>보유시</option></select> ";
-	box +=  " 우대 추가금리를 입력해주세요. <input onfocusout='ev6()' type='text' placeholder='0.0' class='prf_interest'> </div></div>";
+	box +=  "<input onfocusout='ev6()' type='text' placeholder='0.0' class='prf_interest'> 우대 항목 선택과 우대 금리를 입력해주세요.</div></div>";
 	box +=  "</div><div class='AdminBot'><div class='AdminButton' onclick='goMenu(this)' data-menu-name='admin/Product/Deposits'>상품등록취소</div>";
 	box +=  "<div class='AdminButton' onclick='addReg()'>상품등록</div></div></div>";
 	$("#mm").append(box);

@@ -52,14 +52,13 @@ public class JungDTO {
 	
 	public void setDateStr(String date) {
 		try {
-			if(date.length() <5) {
+			if(date.length() == 4) 
 				this.date = sdfy.parse(date);
-			}else if(date.length() < 8) {
+			else if(date.length() == 7) 
 				this.date = sdf.parse(date);
-			}else {
+			else if(date.length() == 10)
 				this.date = sdfd.parse(date);
-			}
-			System.out.println(date.length());
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
