@@ -8,7 +8,7 @@ public class Exception_Group {
 			"service.LoginMain", "service.Join","banking.Confirm",
 			"security.Otp","security.otp.Register","security.Accaign",
 			"security.Delaytrs","security.Blockalarm","management.user.check",
-			"management.User","security.otp.Apply","Security","Banking",
+			"security.otp.Apply","Security","Banking",
 			"service.SearchID","service.SearchPW","service.client.Faq","management.intbank.Edit",
 			"product.Deposit","product.Saving","product.Fund","product.Loan"," admin.Service.LoginMain",
 			"service.client.Qna","service.qna_insert","service.Client"

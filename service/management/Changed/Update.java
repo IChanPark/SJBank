@@ -34,6 +34,5 @@ public class Update  implements M_Action{
 		request.getParameter("여기");
 		UserDAO.getInstance().updateUser(dto);
 		request.setAttribute("mainUrl", "main");
-
 	}
 }
