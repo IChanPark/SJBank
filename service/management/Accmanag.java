@@ -9,8 +9,6 @@ import javax.servlet.http.HttpSession;
 import inf.M_Action;
 import jdbc.Account.AccountDAO;
 import jdbc.Account.AccountDTO;
-import jdbc.User.UserDAO;
-import jdbc.User.UserDTO;
 
 public class Accmanag  implements M_Action{
 

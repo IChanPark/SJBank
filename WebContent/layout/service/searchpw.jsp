@@ -4,9 +4,9 @@
 <br>
 <div id="set1">
 <div class='infoMain_Info'><div class='infoMain_Type'>계좌 번호</div><div class='infoMain_Value'>
-<input type="text" id="account_number" maxlength="18" onKeyup="this.value=this.value.replace(/([^0-9-])/g,'');"/></div></div>
+<input type="text" id="account_number" placeholder="###-####-####-####" maxlength="18" onKeyup="this.value=this.value.replace(/([^0-9-])/g,'');"/></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>계좌 비밀번호</div><div class='infoMain_Value'>
-<input type="password" id="account_pw" maxlength="4"/></div></div>
+<input type="password" id="account_pw" placeholder="숫자4자리를 입력해주세요" maxlength="4"/></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'></div><div class='infoMain_Value'>
 <button id='search'>찾기</button><button data-menu-name="service/LoginMain" >돌아가기</button></div></div>
 </div>

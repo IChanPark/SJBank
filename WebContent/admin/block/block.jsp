@@ -27,29 +27,6 @@ $(document).ready(function(){
 		});
 	}
 });
-/* function userblockGo(qqq){
-	alert(" 블록들어옴");
-	tot.html("");
-	tot.append($("<tr><td>id</td><td>이름</td><td>상태 변경사유</td><td>변경할 상태</td></tr>"));
-	var row = $("<tr></tr>");
-	$.each(qqq,function(i,e){
-		var row = $("<tr></tr>");
-		row.append($("<td>"+i+"</td>"));
-		row.append($("<td>"+e.id+"</td>"));
-		row.append($("<td>"+e.name+"</td>"));
-		
-		tot.append(row);
-	});
-	
-
-	var col = $("<td colspan=2 align='right' ></td>");
-	col.append($("<button onclick='ajaxGo(\"userlist\",{})' >리스트로</button>"));
-	row.append(col);
-	
-	
-	
-	tot.append(row);
-} */
 
 function listGo(qqq){
 	$("#tot").empty();
@@ -74,33 +51,6 @@ function listGo(qqq){
 		//$("#tttt").append($("<td><a href=\"#\" data-menu-name=\"admin/Userblock\">상태변경</a></td>"));
 	});
 }
-
-/* $(".change").on("click", function() {
-	alert("?????");
-	
-	$.ajax({
-		url:"admin/userblock.jsp",
-		type:'get',
-		data:{ddd : $('#det').val()},
-		dataType:'json',
-		success:function(qqq){
-			alert(" 블록들어옴");
-			$("#tot").empty();
-			tot.append($("<tr><td>id</td><td>이름</td><td>상태 변경사유</td><td>변경할 상태</td></tr>"));
-			$.each(qqq,function(i,e){
-				var row = $("<tr></tr>");
-					row.append($("<td>"+e.id+"</td>"));
-					row.append($("<td>"+e.name+"</td>"));
-				$("#tot").append(row);
-			});
-		},
-		error:function(qqq){
-			console.log("오류오류");
-			console.log(qqq);
-		}
-	});
-}); */
-
 
 function detail(me) {
 	gogo =  "admin/block/userblock.jsp";
