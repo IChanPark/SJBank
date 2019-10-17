@@ -15,7 +15,7 @@ $(document).ready(function(){
 			alert("계좌번호를 다시 확인해주세요.");
 			return;
 		}if(!searchAccpw.test($("#account_pw").val()) ){
-			alert("비밀번호가 틀렸습니다.\n다시 확인해주세요");
+			alert("비밀번호를 다시 확인해주세요");
 			return;
 		}
 		
@@ -48,19 +48,19 @@ function aaa(){
 					if(qqq.id != null){
 						$("#set1").remove();
 				var row = "<tr><td>아이디</td><td> : <input type='text' id='uid' value="+qqq.id+" readOnly /></td></tr>"+
-						"<tr><td>이름</td><td> : <input type='text' name='name' id='name' placeholder='한글만'  /></td></tr>"+
-						"<tr><td>이메일</td><td> : <input type='text' name='email1' id='email1' placeholder='영문, 숫자만'/>@"+
-							"<select name='email2' id='email2'>"+
-								"<option>naver.com</option>"+
-								"<option>daum.net</option>"+
-								"<option>gmail.com</option>"+
-								"<option>nate.com</option>"+
-								"<option>yahoo.com</option>"+
-							"</select></td></tr>"+
-						"<tr><td>전화번호</td>"+
-						"<td> : <input type='text' name='tel' id='tel' placeholder='010-0000-0000' /></td></tr>"+
-						"<tr><td>변경할 비밀번호</td><td> : <input type='text' id='pw' placeholder='비밀번호 4자리' /></td></tr>"+
-						"<tr><td onclick='bbb()'>변경</td></tr>"+     
+// 						"<tr><td>이름</td><td> : <input type='text' name='name' id='name' placeholder='한글만 최대6자리'  /></td></tr>"+
+// 						"<tr><td>이메일</td><td> : <input type='text' name='email1' id='email1' placeholder='영문, 숫자만'/>@"+
+// 							"<select name='email2' id='email2'>"+
+// 								"<option>naver.com</option>"+
+// 								"<option>daum.net</option>"+
+// 								"<option>gmail.com</option>"+
+// 								"<option>nate.com</option>"+
+// 								"<option>yahoo.com</option>"+
+// 							"</select></td></tr>"+
+// 						"<tr><td>전화번호</td>"+
+// 						"<td> : <input type='text' name='tel' id='tel' placeholder='010-xxxx-xxxx' /></td></tr>"+
+						"<tr><td>변경할 비밀번호</td><td> : <input type='password' id='pw' maxlength='4'/></td></tr>"+
+						"<tr><td onclick='bbb()'>변경</td></tr>"+
 						"<br><a href='#' onclick='goMenu(this)' data-menu-name='service/LoginMain'>로그인</a>";
 					
 				$("#tot").append(row);
@@ -83,24 +83,21 @@ function aaa(){
 
 function bbb(){
 	
-	var searchName = /[ㄱ-힣]{2,10}/g;
-	var searchEmail = /[^0-9a-zA-Z]{0,50}/g;
-	var searchTel = /([0-9]{2,3}[-][0-9]{3,4}[-][0-9]{3,4})/g;
-	var searchPw = /^[0-9]{4}$/;
+// 	var searchName = /[가-힣]{1,6}/g;
+// 	var searchEmail = /[^0-9a-zA-Z]{0,50}/g;
+// 	var searchTel = /([0-9]{2,3}[-][0-9]{3,4}[-][0-9]{3,4})/g;
 	
-	if(!searchName.test($("#name").val()) ){
-		alert("이름을 다시 확인해주세요.");
-		return;
-	}if(!searchEmail.test($("#email1").val()+"@"+$("#email2").val()) ){
-		alert("이메일을 다시 확인해주세요.");
-		return;
-	}if(!searchTel.test($("#tel").val()) ){
-		alert("전화번호를 다시 확인해주세요");
-		return;
-	}if(!searchPw.test($("#pw").val()) ){
-		alert("비밀번호를 양식에 맞춰주세요.");
-		return;
-	}
+// 	if(!searchName.test($("#name").val()) ){
+// 		alert("이름을 다시 확인해주세요.");
+// 		return;
+// 	}
+// 	if(!searchEmail.test($("#email1").val()+"@"+$("#email2").val()) ){
+// 		alert("이메일을 다시 확인해주세요.");
+// 		return;
+// 	}if(!searchTel.test($("#tel").val()) ){
+// 		alert("전화번호를 다시 확인해주세요");
+// 		return;
+// 	}
 	
 	
 	$.ajax({
@@ -109,10 +106,10 @@ function bbb(){
 			data:{
 				
 				'uid' : $("#uid").val(),
-				'name' : $("#name").val(),
-				'tel' : $("#tel").val(),
-				'email1' : $("#email1").val(),
-				'email2' : $("#email2").val(),
+// 				'name' : $("#name").val(),
+// 				'tel' : $("#tel").val(),
+// 				'email1' : $("#email1").val(),
+// 				'email2' : $("#email2").val(),
 				'pw' : $("#pw").val()
 			},
 			dataType:'json',
@@ -141,22 +138,30 @@ function goMenu(qq) {	//메뉴 이동용
 };
 
 
+$(document).ready(function(){
+	$('#main').click(function(){
+		document.paging.hid_t.value ="";
+		document.paging.submit();
+	});
+});
+
 </script>
 <div id="set1">
 	<table>
 	
 		<tr>
 			<td>계좌 번호</td>
-			<td> : <input type="text" id="account_number" /></td>
+			<td> : <input type="text" id="account_number" maxlength="18" onKeyup="this.value=this.value.replace(/([^0-9-])/g,'');"/></td>
 		</tr>
 	
 		<tr>
 			<td>계좌 비밀번호</td>
-			<td> : <input type="password" id="account_pw" /></td>
+			<td> : <input type="password" id="account_pw" maxlength="4"/></td>
 		</tr>
 			
 	</table>
 	<div id="search" style=" height: 20px; width: 33px;">찾기</div>
 </div>
-
 <div id="tot"></div>
+<br>
+<div id="main" style=" height: 20px; width: 64px;">메인화면</div>
