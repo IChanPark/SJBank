@@ -20,7 +20,7 @@ layout +=	"일 별<input type='radio' name= 'date_radio' value='d' checked='chec
 layout +=	"년도 별<input type='radio' name= 'date_radio' value='y'/> </div></div>";
 layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>상품 선택</div><div class='infoMain_Value'>";
 layout +=	"모두<input type='radio' name= 'prod_radio' value='모두' checked='checked'/>예금<input type='radio' name= 'prod_radio' value='예금'/>";
-layout +=	"적금<input type='radio' name= 'prod_radio' value='적금'/>펀드<input type='radio' name= 'prod_radio' value='펀드'/></div></div>";
+layout +=	"펀드<input type='radio' name= 'prod_radio' value='펀드'/></div></div>";
 layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>검색</div><div class='infoMain_Value'>";
 layout +=	"<button id='search_Button'>검색</button><button id='clean_Button'>초기화</button></div></div>";
 layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>수익</div><div class='infoMain_Value'>";

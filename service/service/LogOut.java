@@ -10,7 +10,8 @@ public class LogOut  implements M_Action{
    
    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
       HttpSession session = request.getSession();
-      session.invalidate();
+      //session.invalidate();
+      session.removeAttribute("userID");
       request.setAttribute("mainUrl", "main");
    }
 }

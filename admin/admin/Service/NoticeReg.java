@@ -17,7 +17,7 @@ public class NoticeReg implements M_Action {
 				
 		NoticeDTO dto = new NoticeDTO();
 
-		dto.setId(request.getParameter("id"));
+		dto.setId((String)request.getSession().getAttribute("adminID"));
 		dto.setTitle(request.getParameter("title"));		
 		dto.setContent(request.getParameter("content"));
 		dto.setStatus("활성");
