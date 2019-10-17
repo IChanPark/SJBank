@@ -1,5 +1,7 @@
 package management;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,10 +13,8 @@ public class Accupdate  implements M_Action{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			
 		AccountDTO  dto = AccountDAO.getInstance().selectAccount(request.getParameter("acc"));
 		
 		request.setAttribute("data", dto);
-		
 	}
 }

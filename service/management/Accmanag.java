@@ -21,5 +21,6 @@ public class Accmanag  implements M_Action{
 		
 		ArrayList<AccountDTO>  dto = AccountDAO.getInstance().selectID((String)session.getAttribute("userID"));
 
+		request.setAttribute("data", dto);
 	}
 }

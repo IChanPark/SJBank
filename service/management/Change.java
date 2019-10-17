@@ -13,7 +13,6 @@ public class Change  implements M_Action{
 
 		UserDTO dto = UserDAO.getInstance().selectId((String)request.getSession().getAttribute("userID"));
 
-	
 		request.setAttribute("data", dto);
 	}
 }
