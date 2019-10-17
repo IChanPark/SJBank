@@ -33,6 +33,7 @@ public class joinReg  implements M_Action{
 		dto.setPostal_code(request.getParameter("zipcode"));
 		
 		//계좌번호 넣어주세요
+		UserDAO.getInstance().insert(dto); 
 		
 		AccountDTO dt = new AccountDTO();
 		dt.setAccount_number(New_Account.getInstance().getAccount());
@@ -57,7 +58,7 @@ public class joinReg  implements M_Action{
 		
 		//넣어주세요
 		
-		UserDAO.getInstance().insert(dto); 
+		
 		request.setAttribute("mainUrl", "main");
 
 	}
