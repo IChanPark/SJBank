@@ -59,7 +59,7 @@ public class Fund_JoinReg extends HttpServlet {
 		AccountDTO myAccDTO = AccountDAO.getInstance().selectAccount(myAcc);
 		UserDTO userDTO = UserDAO.getInstance().selectId(userid);
 
-		int mysum = myAccDTO.getSum();
+		long mysum = myAccDTO.getSum();
 		
 		if(myAccDTO.getPw().equals(request.getParameter("pw"))) {
 		

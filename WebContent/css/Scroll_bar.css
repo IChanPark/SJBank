@@ -1,42 +1,15 @@
 @charset "UTF-8";
-.scrollB {
-	height: 850px;
-	width : 1000px;
-	overflow-y: scroll;
-	word-break:break-all; /* 가로는 자동 줄바꿈 */
-}
+.scrollB {height: 850px;width : 1000px;overflow-y: scroll;word-break:break-all; /* 가로는 자동 줄바꿈 */}
+.scrollB::-webkit-scrollbar {width: 8px;}
+.scrollB::-webkit-scrollbar-track {box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);border-radius: 10px;}
+.scrollB::-webkit-scrollbar-thumb {border-radius: 10px;box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);}
 
-.scrollB::-webkit-scrollbar {
-	width: 8px;
-}
+.scrollC {height: 380px;width : 1000px;overflow-y: scroll;word-break:break-all; /* 가로는 자동 줄바꿈 */}
+.scrollC::-webkit-scrollbar {width: 8px;}
+.scrollC::-webkit-scrollbar-track {box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);border-radius: 10px;}
+.scrollC::-webkit-scrollbar-thumb {border-radius: 10px;box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);}
 
-.scrollB::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-}
-
-.scrollB::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
-
-.scrollC {
-	height: 380px;
-	width : 1000px;
-	overflow-y: scroll;
-	word-break:break-all; /* 가로는 자동 줄바꿈 */
-}
-
-.scrollC::-webkit-scrollbar {
-	width: 8px;
-}
-
-.scrollC::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-}
-
-.scrollC::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
+.scrollD {height: 650px;width : 1000px;overflow-y: scroll;word-break:break-all; /* 가로는 자동 줄바꿈 */}
+.scrollD::-webkit-scrollbar {width: 8px;}
+.scrollD::-webkit-scrollbar-track {box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);border-radius: 10px;}
+.scrollD::-webkit-scrollbar-thumb {border-radius: 10px;box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);}

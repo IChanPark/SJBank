@@ -57,7 +57,7 @@ public class Deposit_JoinReg extends HttpServlet {
 		infoSet.setProduct(product);
 		Deposits_infoDTO infoDTO = Deposits_infoDAO.getInstance().selectPro(infoSet);
 		
-		int mysum = myAccDTO.getSum();
+		long mysum = myAccDTO.getSum();
 
 		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
 		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);

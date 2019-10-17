@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import inf.M_Action;
 import jdbc.Account.AccountDAO;
 import jdbc.Account.AccountDTO;
+import jdbc.Deposit.DepositsDAO;
+import jdbc.Deposit.DepositsDTO;
 import jdbc.User.UserDAO;
 import jdbc.User.UserDTO;
 import util.New_Account;
@@ -41,6 +43,17 @@ public class joinReg  implements M_Action{
 		dt.setPw(request.getParameter("acc_pw"));
 		
 		AccountDAO.getInstance().insert(dt);
+		
+		DepositsDTO ddto = new DepositsDTO();
+		
+		ddto.setAccount_number(dt.getAccount_number());
+		ddto.setId(dto.getId());
+		ddto.setProduct("기본");
+		ddto.setPreferential("");
+		ddto.setInterest(0.9f);
+		ddto.setType("보통");
+		
+		DepositsDAO.getInstance().insert(ddto);
 		
 		//넣어주세요
 		

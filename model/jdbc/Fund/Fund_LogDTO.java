@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class Fund_LogDTO {
 	
-	private	Integer seq,				//로그번호
-					sum;				//등락금액
+	private	Integer seq;				//로그번호
+	private	Long	sum;				//등락금액
 	
 	
 	private	Float 	fluctuation;		//등락률
@@ -42,11 +42,11 @@ public class Fund_LogDTO {
 		this.seq = seq;
 	}
 
-	public Integer getSum() {
+	public Long getSum() {
 		return sum;
 	}
 
-	public void setSum(Integer sum) {
+	public void setSum(Long sum) {
 		this.sum = sum;
 	}
 

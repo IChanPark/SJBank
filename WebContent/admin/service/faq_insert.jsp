@@ -11,6 +11,6 @@
 <div class='infoMain_Info'><div class='infoMain_Type'>제목</div><div class='infoMain_Value'>
 <input name="title" type='text' placeholder='제목을 입력해주세요.'></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>내용</div><div class='infoMain_Value'>
-<textarea placeholder='상품내용을 입력해주세요. &#13;&#10;①... &#13;&#10;②...' id='product_info' name="content"></textarea></div></div>
+<textarea placeholder='FAQ내용을 입력해주세요. &#13;&#10;①... &#13;&#10;②...' id='product_info' name="content"></textarea></div></div>
 <a href="#" data-menu-name="admin/Service/FaqReg" >작성</a><a href="#" data-menu-name="admin/Service/FAQ" >목록으로</a>
 </div>

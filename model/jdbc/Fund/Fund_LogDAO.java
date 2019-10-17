@@ -37,7 +37,7 @@ public class Fund_LogDAO {
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setFluctuation(rs.getFloat("fluctuation"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				
@@ -53,7 +53,7 @@ public class Fund_LogDAO {
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setFluctuation(rs.getFloat("fluctuation"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				res.add(dto);
@@ -108,7 +108,7 @@ public class Fund_LogDAO {
 			pstmt.setInt(1, dto.getSeq());
 			pstmt.setString(2, dto.getAccount_number());
 			pstmt.setFloat(3, dto.getFluctuation());
-			pstmt.setInt(4, dto.getSum());
+			pstmt.setLong(4, dto.getSum());
 			pstmt.setString(5, dto.getStatus());
 		
 			pstmt.executeUpdate(); 

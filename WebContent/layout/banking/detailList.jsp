@@ -2,8 +2,6 @@
 <%@page import="jdbc.Transfer.Transfer_logDTO"%>
 <%@page import="jdbc.Account.AccountDTO"%>
 <%@page import="jdbc.Account.AccountDAO"%>
-<%@page import="jdbc.Transfer.Transfer_autoDTO"%>
-<%@page import="jdbc.Transfer.Transfer_autoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.HashMap"%>

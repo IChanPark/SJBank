@@ -36,7 +36,7 @@ public class Saving_logDAO {
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setInterest(rs.getFloat("interest"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
 		
@@ -53,7 +53,7 @@ public class Saving_logDAO {
 				dto.setSeq(rs.getInt("seq"));
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setInterest(rs.getFloat("interest"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setStatus(rs.getString("status"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				
@@ -88,7 +88,7 @@ public class Saving_logDAO {
 			
 			pstmt.setString(1, dto.getAccount_number());
 			pstmt.setFloat(2, dto.getInterest());
-			pstmt.setInt(3, dto.getSum());
+			pstmt.setLong(3, dto.getSum());
 			pstmt.setString(4, dto.getStatus());
 			
 			pstmt.executeUpdate(); 

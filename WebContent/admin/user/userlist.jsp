@@ -4,31 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
-
-$(document).ready(function() {
-	$(".uid").on("click", function() {
-		
-		console.log($(this).text());
-		/* $.ajax({
-			url:"admin/list.jsp",
-			type:'get',
-			data:{nn : $(this).text()},
-			 ////json을 안하면 문자열로 , json 처리하면 object로 묶어서 받음
-			success:function(qqq){
-				console.log(qqq);
-			},
-			error:function(qqq){
-				$("#tot").html(qqq.responseText);
-			}
-			
-		}); */
-	});
-});
-
-
-</script>
-
 <div class="subTitle">사용자 리스트</div>
 <div class='scrollB'>
 <table class="info_table">

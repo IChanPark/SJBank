@@ -173,7 +173,7 @@ public class Product_Server {
 							  float new_nowmoney = new_exchange + ff.getRest();
 				
 							 fdloginsert.setFluctuation((float)0.0);
-							 fdloginsert.setSum((int)new_nowmoney);
+							 fdloginsert.setSum((long)(int)new_nowmoney);
 							 String string_changde_price_modify= ff.getPrice_modify() + random+"";
 							 
 							new FundDAO().updatetoday((float) 0.5, new_nowmoney,new_exchange, string_changde_price_modify,

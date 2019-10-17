@@ -13,7 +13,7 @@ public class Saving_logDTO {
 	
 	private Integer seq;
 
-	long sum;
+	private long sum;
 	
 	private Date  	register_date;		//날짜
 	

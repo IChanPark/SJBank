@@ -56,7 +56,7 @@ public class Saving_JoinReg extends HttpServlet {
 		Saving_infoDTO infoSet = new Saving_infoDTO();
 		infoSet.setProduct(product);
 		Saving_infoDTO infoDTO = Saving_infoDAO.getInstance().selectPro(infoSet);
-		int mysum = myAccDTO.getSum();
+		long mysum = myAccDTO.getSum();
 
 		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
 		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);
