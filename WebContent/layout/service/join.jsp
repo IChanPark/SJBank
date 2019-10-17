@@ -5,31 +5,31 @@
 	<table border="">
 		<tr>
 			<td>ID</td>							
-			<td><input type="text" name="id" maxlength="50"/><input type="button" value="중복확인" onclick="idChk()"></td>
+			<td><input type="text" name="id" maxlength="50" placeholder="영문+숫자 조합6자리"/><input type="button"  value="중복확인" onclick="idChk()"></td>
 			
 		</tr>
 		<tr>	
 			<td>비밀번호</td>
-			<td><input type="password" name="pw" id="pw"/></td>		
+			<td><input type="password" name="pw" id="pw" placeholder="숫자4자리입력하세요"/></td>		
 		</tr>	
 		<tr>	
 			<td>비밀번호 중복확인</td>
-			<td><input type="password" name="pw1" id="pw1" onfocusout='ev()'/>		
+			<td><input type="password" name="pw1" id="pw1" placeholder="숫자4자리입력하세요" onfocusout='ev()'/>		
 		</tr>		
 		<tr>	
 			<td>간편 비밀 번호</td>
-			<td><input type="password" name="simple_pw" onfocusout='ev3()' /></td>
+			<td><input type="password" name="simple_pw" placeholder="숫자4자리입력하세요" onfocusout='ev3()' /></td>
 		<tr>	
 			<td>계좌비밀번호</td>
-			<td><input type="password" name="acc_pw" onfocusout='ev4()' /></td>			
+			<td><input type="password" name="acc_pw" placeholder="숫자4자리입력하세요" onfocusout='ev4()' /></td>			
 		</tr>	
 		<tr>
 		<td>이름</td>							
-			<td><input type="text" name="name" maxlength="50" onfocusout='ev2()'  id="name" />		
+			<td><input type="text" name="name" maxlength="50" placeholder="한글6까지만입력" onfocusout='ev2()'  id="name" />		
 		</tr>
 		<tr>	
 			<td>전화번호</td>
-			<td><input type="text" name="tel" onfocusout='ev5()' /></td>
+			<td><input type="text" name="tel" placeholder="ex)010-xxxx-xxxx" onfocusout='ev5()' /></td>
 		</tr>
 		<tr>
 		<td>성별</td>
@@ -41,7 +41,7 @@
 		<tr>	
 			<td>이메일</td>
 			<td>
-				<input type="text" name="email1" maxlength="50" onfocusout='ev6()'/>@
+				<input type="text" name="email1" maxlength="50" placeholder="영문+숫자 조합7자리" onfocusout='ev6()'/>@
 				<select name="email2">
 					<option>naver.com</option>
 					<option>daum.net</option>
@@ -78,7 +78,7 @@
 	
 		
 			<td colspan="2" align="right">			
-				<div><div onclick="allChk()">가입</div><input type="reset" value="취소"/></div>			
+				<div><div onclick="allChk()">가입</div><div><input type="reset" value="취소"/></div>			
 			</td>
 		</tr>
 	</table>
@@ -88,6 +88,8 @@ var idChktf=false;
 var idChkdone=false;
 
 function addChk(){
+	
+	//alert($('#sample4_postcode').val());
 	if($('#sample4_postcode').val() == ""){
 		alert("주소미입력");
 		return false;
@@ -107,7 +109,7 @@ function check3(re, what, message) {
 };
 
 
-/* $(document).ready(function(){
+  $(document).ready(function(){
 
 	$('#pwChk').click(function(){
 		
@@ -132,12 +134,12 @@ function check3(re, what, message) {
 	    // 입력값이 있을경우에만 실행
 	});	
 });
- */
+ 
 
  function allChk() {	//메뉴 이동용
+	 
 	
-	
-	if(idChktf&&ev()&&ev2()&&ev3()&&ev4()&&ev5()&&ev6()){
+	if(idChktf && addChk() && ev() && ev2() && ev3() && ev4() && ev5() && ev6()){
 		alert("가입이 완료되었습니다.");
 		document.paging.hid_t.value = "service/joinReg";
 		document.paging.submit();
@@ -148,23 +150,23 @@ function check3(re, what, message) {
 
 
 function ev(){if(!check2(/^[\d]{4}$/,$('#pw'),$('#pw1'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};
-function ev2(){if(!check(/^[가-힣]{1,6}$/,$('#name'),'6자리 한글만 입력가능합니다.')){return false;}else{return true;}};
+function ev2(){if(!check(/^[가-힣]{1,6}$/,$('#name'),'양식에맞게입력해주세요.')){return false;}else{return true;}};
 function ev3(){if(!check(/^[\d]{4}$/,$('input[name=simple_pw]'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};	
 function ev4(){if(!check(/^[\d]{4}$/,$('input[name=acc_pw]'),'4자리 숫자만 입력가능합니다.')){return false;}else{return true;}};	
-function ev5(){if(!check(/^(010)-([0-9]{3,4})-([0-9]{4})$/,$('input[name=tel]'),'10자리 숫자만 입력가능합니다.')){return false;}else{return true;}};	
-function ev6(){if(!check3(/^[A-Za-z0-9_-]{4,7}$/,$('input[name=email1]'),'형식에 맞게 입력해주세요.')){return false;}else{return true;}};
+function ev5(){if(!check(/^(010)-([0-9]{3,4})-([0-9]{4})$/,$('input[name=tel]'),'형식에 맞게 입력해주세요.')){return false;}else{return true;}};	
+function ev6(){if(!check3(/^[A-Za-z0-9_]{4,7}$/,$('input[name=email1]'),'형식에 맞게 입력해주세요.')){return false;}else{return true;}};
 		
 function idChk() {
 	
-/* 	var zzz = /^[a-z0-9A-Z가-힣]{3,6}$/;
+ 	var zzz = /^[a-z0-9A-Z가-힣]{3,6}$/;
 	alert("ID를 확인 하겠습니다.");
 	if(!zzz.test($('input[name=id]').val()))
 	{
 		alert("id 오류");
 		return;
-	}  */
+	}  
 	
-	//if($('input[name=id]').val()!=null)
+	if($('input[name=id]').val()!=null)
 			
 	
 	gogo = "layout/service/idChk.jsp";
