@@ -59,15 +59,15 @@ public class QnaDAO {
 			if(rs.next()) {
 				dto = new QnaDTO();
 				
-				dto.setLev(rs.getInt("lev"));
-				dto.setRseq(rs.getInt("rseq"));
-				dto.setGid(rs.getInt("gid"));
+
 				dto.setSeq(rs.getInt("seq"));
 				dto.setType(rs.getString("type"));
 				dto.setTitle(rs.getString("title"));
 				dto.setName(rs.getString("name"));
 				dto.setContent(rs.getString("content"));				
-				dto.setStatus(rs.getString("status"));				
+				dto.setStatus(rs.getString("status"));
+				dto.setRseq(rs.getInt("rseq"));
+				dto.setLev(rs.getInt("lev"));
 				dto.setRegister_date(rs.getDate("register_date"));
 			
 			}			
@@ -80,15 +80,14 @@ public class QnaDAO {
 			while (rs.next()) {
 				QnaDTO dto = new QnaDTO();
 				
-				dto.setLev(rs.getInt("lev"));
-				dto.setRseq(rs.getInt("rseq"));
-				dto.setGid(rs.getInt("gid"));
 				dto.setSeq(rs.getInt("seq"));
 				dto.setType(rs.getString("type"));
 				dto.setTitle(rs.getString("title"));
 				dto.setName(rs.getString("name"));
 				dto.setContent(rs.getString("content"));				
-				dto.setStatus(rs.getString("status"));				
+				dto.setStatus(rs.getString("status"));
+				dto.setRseq(rs.getInt("rseq"));
+				dto.setLev(rs.getInt("lev"));
 				dto.setRegister_date(rs.getDate("register_date"));
 				
 				res.add(dto);
@@ -182,20 +181,19 @@ public class QnaDAO {
 		
 		// 저장
 		sql = 	"insert into qna (" +
-				"seq, gid, lev, rseq, type, title, name, content,  status, register_date) "+
-		"values ("+	"?, ? , 0,   0  ,   ?   , ?  ,  ?   ,    ?,      ?    ,    now() )";
+				"type, title, name, content,  status, rseq, lev, register_date) "+
+		"values (  ? , 	?	, 	? ,   ?    ,   '활성',  ?  ,  ? ,     now() )";
 		System.out.println(sql);
 		con = ds.getConnection();
 		pstmt = con.prepareStatement(sql);
 		
-			pstmt.setInt(1, dto.getSeq());
-			pstmt.setInt(2, dto.getSeq());
 			
-			pstmt.setString(3, dto.getType());
-			pstmt.setString(4, dto.getTitle());
-			pstmt.setString(5, dto.getName());
-			pstmt.setString(6, dto.getContent());
-			pstmt.setString(7, dto.getStatus());			
+			pstmt.setString(1, dto.getType());
+			pstmt.setString(2, dto.getTitle());
+			pstmt.setString(3, dto.getName());
+			pstmt.setString(4, dto.getContent());
+			pstmt.setInt(5,  dto.getRseq());			
+			pstmt.setInt(6,  dto.getLev());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
@@ -204,7 +202,7 @@ public class QnaDAO {
 		}
 	}
 	
-public void reply(QnaDTO dto){
+	public void reply(QnaDTO dto){
 		 
 		
 		try {
@@ -221,8 +219,10 @@ public void reply(QnaDTO dto){
 			
 			
 			///새글
-			sql = "insert into center (gid,lev,rseq,  pname,  content, title, regdate  , cate) "
-					         + "values(?    ,?  ,? ,    ?  ,     ? ,    ?,    sysdate(),'notice' ) ";
+			sql =	"insert into center ("+
+					"rseq,status) "+
+					"values("+
+					"?   , ?) ";
 			pstmt = con.prepareStatement(sql);
 			
 			

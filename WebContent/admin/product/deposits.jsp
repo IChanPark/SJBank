@@ -70,8 +70,8 @@ function ajax_go() {
 		var row = '';
 		$.each(qqq,function(i,e){
 			row +="<div class='box' data-product-name='"+e.product+"' data-product-type='"+e.type+"'>";
-			row +="<div class='l'>가입자수<br>XX명</div>";
-			row +="<div class='m'>["+e.type+"] "+e.product+" 등록일:"+e.register_date+"</div>";
+			row +="<div class='l'>["+e.type+"]</div>";
+			row +="<div class='m'>"+e.product+" 등록일:"+e.register_date+"</div>";
 			row +="<div class='rl' onclick='detail(this)'><div>상세보기</div></div>";
 			row +="<div class='rr' onclick='modify(this)'><div>수정하기</div></div>";
 			row +="</div>"; 

@@ -16,7 +16,7 @@
 </div>
 <div class="TitleMenu">
    <ul class="MainUl">
-      <li style="width:20%;"><a href="#">사용자 관리</a>
+      <li style="width:25%;"><a href="#">사용자 관리</a>
       <div class="SubMenu">
           <ul class="SubUl">
               <div class="LowMenu">
@@ -28,7 +28,7 @@
            </ul>
       </div>
       </li>
-       <li style="width:20%;"><a href="#" >상품 관리</a>
+       <li style="width:25%;"><a href="#" >상품 관리</a>
          <div class="SubMenu">
             <ul class="SubUl">
                <div class="LowMenu">
@@ -44,14 +44,9 @@
                   <li><a href="#" data-menu-name="admin/Product/Fund">펀드</a></li>
                </div>
            </ul>
-           <!-- <ul class="SubUl">
-            <div class="LowMenu">
-                 <li><a hrefhref="#" data-menu-name="admin/ISA/ISA">ISA</a></li>
-           </div>
-           </ul> -->
          </div>
       </li>
-       <li style="width:20%;"><a href="#">서버 관리</a>
+     <!--  <li style="width:25%;"><a href="#">서버 관리</a>
       <div class="SubMenu">
           <ul class="SubUl">
               <div class="LowMenu">
@@ -59,8 +54,8 @@
                </div>
            </ul>
       </div>
-      </li>
-       <li style="width:20%;"><a href="#" >고객센터</a>
+      </li> -->
+       <li style="width:25%;"><a href="#" >고객센터</a>
        <div class="SubMenu">
             <ul class="SubUl">
                <div class="LowMenu">
@@ -68,9 +63,6 @@
                </div>
                <div class="LowMenu">
                   <li><a href="#" data-menu-name="admin/Service/FAQ">FAQ</a></li>
-               </div>
-               <div class="LowMenu">
-                  <li><a href="#" data-menu-name="admin/Service/QNA">문의사항</a></li>
                </div>
            </ul>
          </div>

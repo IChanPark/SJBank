@@ -2,5 +2,5 @@
 .subTitle {margin-top:30px; border-bottom:1px solid #363636; font-size: 20pt;}
 .AccInfo {margin-top:20px; border:1px solid #363636; width:100%}/* 보더 상하 좌우 */ 
 .AccInfo tr {align:center; text-align:center;}
-.AccInfo tr:nth-child(1) {background: #d6bb50;}
+.AccInfo tr:nth-child(1) {background: #4375DB;}
 

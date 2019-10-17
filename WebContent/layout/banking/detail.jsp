@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 
 <div class="subTitle">상세</div>
-<table class="AccInfo">
+<table class="info_table">
 	<tr>
 		<td>계좌명</td>
 		<td colspan="3">${data.alias }</td>
@@ -114,19 +114,19 @@ $(document).ready(function(){
 	</tr>
 </table>
 <div class="subTitle">내역</div>
-<table class="AccInfo" id="list">
+<table class="info_table" id="list">
 	<tr>
-		<td>No</td>
-		<td>거래처</td>
-		<td>거래대상계좌번호</td>
-		<td>받는이</td>
-		<td>거래액</td>
-		<td>수수료</td>
-		<td>메모</td>
-		<td>보낸메모</td>
-		<td>거래일</td>
-		<td>거래종류</td>
-		<td>거래상태</td>
+		<th>No</th>
+		<th>거래처</th>
+		<th>거래대상계좌번호</th>
+		<th>받는이</th>
+		<th>거래액</th>
+		<th>수수료</th>
+		<th>메모</th>
+		<th>보낸메모</th>
+		<th>거래일</th>
+		<th>거래종류</th>
+		<th>거래상태</th>
 	</tr>
 	
 	<c:forEach var="lo" items="${IO }" varStatus="no" begin="1" step="1">

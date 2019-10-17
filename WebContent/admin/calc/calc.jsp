@@ -25,7 +25,7 @@ layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>검색</div><di
 layout +=	"<button id='search_Button'>검색</button><button id='clean_Button'>초기화</button></div></div>";
 layout +=	"<div class='infoMain_Info'><div class='infoMain_Type'>수익</div><div class='infoMain_Value'>";
 layout +=	"<input type='text' id='sumAll' readonly='readonly' /></div></div>";
-layout += 	"</div><div class='infoAdmin'><table id='info_table'><tbody id='info_tbody'>";
+layout += 	"</div><div class='infoAdmin'><table class='info_table'><tbody id='info_tbody'>";
 layout += 	"<tr><th>날짜</th><th>건수</th><th>상품종류</th><th>상세분류</th><th>수익</th></tr></tbody></table></div>";
 
 $('#mid').append(layout);
@@ -152,11 +152,11 @@ function ajax_go() {
 		var s = 0;
 		$.each(qqq,function(i,e){
 			row +="<tr>";
-			row +="<td class='"+e.date+"'>"+e.date+"</td>";
-			row +="<td class='"+e.count+"'>"+e.count+"</td>";
-			row +="<td class='"+e.product+"'>"+e.product+"</td>";
-			row +="<td class='"+e.type+"'>"+e.type+"</td>";
-			row +="<td class='"+e.sum+"'>"+e.sum+"</td>";
+			row +="<td >"+e.date+"</td>";
+			row +="<td >"+number_Pattern(e.count)+"</td>";
+			row +="<td >"+e.product+"</td>";
+			row +="<td >"+e.type+"</td>";
+			row +="<td >"+number_Pattern(e.sum)+"</td>";
 			row +="</tr>";
 			total += Number(e.sum);
 		});

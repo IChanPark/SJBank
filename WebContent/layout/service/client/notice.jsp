@@ -28,22 +28,12 @@ $(document).ready(function() {
 </script>
 
 <style media="screen">
-.ltt {
-    width: 100%;
-    text-align: center;
-  }
-.ull{
-	
-    display: none;
-}
-.lii {
-	
-  	display: block;
-}
+.ltt {width: 100%;text-align: center;}
+.ull{display: none;}
+.lii {display: block;}
 .d1 {padding-top: 10px;  height: 30px; margin: auto; }
-.m {background-color: #3C0; float: left; height: 30px;  width: 100%;
+.m {background-color: #c6c6c6; float: left; height: 30px;  width: 100%;
 display: grid;justify-content: center;align-items: center;}
-
 </style>
 
 
@@ -54,7 +44,6 @@ display: grid;justify-content: center;align-items: center;}
 	
 <div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">
-<tr>
 
 	<div class="d1"  data-faq-seq="${dto.seq}">
     <ul>
@@ -69,5 +58,6 @@ display: grid;justify-content: center;align-items: center;}
  
   
 </c:forEach>
+</div>
 </div>
 </div>

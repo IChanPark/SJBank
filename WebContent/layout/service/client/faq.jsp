@@ -103,7 +103,7 @@ function lttClk(me){
   	display: block;
 }
 .d1 {padding-top: 10px;  height: 30px; margin: auto; }
-.m {background-color: #3C0; float: left; height: 30px;  width: 100%;
+.m {background-color: #c6c6c6; float: left; height: 30px;  width: 100%;
 display: grid;justify-content: center;align-items: center;}
 
 </style>

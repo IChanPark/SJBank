@@ -220,6 +220,33 @@ public class Transfer_logDAO {
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
 	}
+	
+	public void insert(String account_number, String feetype, String target, String to_account_number
+			, String receive, long sum, int fee, String register_date){
+		sql = 	"insert into transfer_log (" +
+				"account_number,feetype,target,to_account_number,received,"+ 
+				"sum,fee,cms,memo,to_memo,status,register_date) "+ 
+				"values ( "+
+				"		?	   ,  ? ,	?  ,		?		,	?	  ,"+ 
+				" ? , ? , '' , ''  ,  ''	,    '활성'  , 	?	  )";
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, account_number);
+			pstmt.setString(2, feetype);
+			pstmt.setString(3, target);
+			pstmt.setString(4, to_account_number);
+			pstmt.setString(5, receive);
+			pstmt.setLong(6, sum);
+			pstmt.setInt(7, fee);
+			pstmt.setString(8, register_date);
+
+			rs = pstmt.executeQuery();
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+	}
 
 
 	void close() {

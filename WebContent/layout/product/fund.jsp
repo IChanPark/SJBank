@@ -173,7 +173,7 @@ function chksum() {
 				$('#userSum').val('');
 				$('#accPW').val('');
 			  	$('#accPW').next().remove();
-			  	$('#accPW').after("<div style='color: #d6bb50'>비밀번호 확인 부탁드립니다.</div>");
+			  	$('#accPW').after("<div style='color: #4375DB'>비밀번호 확인 부탁드립니다.</div>");
 			}
 			isRun = false;
 		},
@@ -295,11 +295,11 @@ function joinReg(me) {
 			} else if(qqq.status == "실패"){
 				$('#accPW').val('');
 			  	$('#accPW').next().remove();
-			  	$('#accPW').after("<div style='color: #d6bb50'>비밀번호 확인 부탁드립니다.</div>");
+			  	$('#accPW').after("<div style='color: #4375DB'>비밀번호 확인 부탁드립니다.</div>");
 			} else {
 				$('#sum').val('');
 				$('#sum').next().remove();
-			  	$('#sum').after("<div style='color: #d6bb50'>이체하시려는 금액이 이체가능금액보다 큽니다. 금액확인 부탁드립니다.</div>");
+			  	$('#sum').after("<div style='color: #4375DB'>이체하시려는 금액이 이체가능금액보다 큽니다. 금액확인 부탁드립니다.</div>");
 			}
 			isRun = false;
 		},

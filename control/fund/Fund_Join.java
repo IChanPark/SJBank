@@ -29,10 +29,8 @@ public class Fund_Join extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Map<String,String> map = new HashMap<String,String>();
 		Gson gson = new Gson();
-		AccountDTO DataDTO = new AccountDTO();
-		DataDTO.setId((String)request.getSession().getAttribute("userID"));
-		DataDTO.setType("예금");
-		ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectID_Type(DataDTO);
+		
+		ArrayList<AccountDTO> accDTO = AccountDAO.getInstance().selectIDfromUsable((String)request.getSession().getAttribute("userID"));
 
 		Fund_InfoDTO setDTO = new Fund_InfoDTO();
 		setDTO.setProduct(request.getParameter("product"));

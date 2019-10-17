@@ -17,15 +17,15 @@ $(document).ready(function(){
 </script>
 <input type="hidden" name="accountNumber" />
 <div class="subTitle">입/출금 계좌</div>
-<table class="AccInfo">
+<table class="info_table">
 <tr >
-	<td>계좌명</td>
-	<td>별명</td>
-	<td>계좌번호</td>
-	<td>신규일</td>
-	<td>잔액</td>
-	<td>상태</td>
-	<td>업무</td>
+	<th>계좌명</th>
+	<th>별명</th>
+	<th>계좌번호</th>
+	<th>신규일</th>
+	<th>잔액</th>
+	<th>상태</th>
+	<th>업무</th>
 </tr>
 
 <c:forEach var="dto" items="${data }" varStatus="no">
@@ -53,14 +53,14 @@ $(document).ready(function(){
 입/출금계좌 총액<fmt:formatNumber value="${dsum }" pattern=" #,###원"/>
 </div>
 <div class="subTitle">상품 계좌</div>
-	<table class="AccInfo">
+	<table class="info_table">
 	<tr>
-		<td>계좌명</td>
-		<td>계좌번호</td>
-		<td>신규일</td>
-		<td>최근거래일</td>
-		<td>잔액</td>
-		<td>업무</td>
+		<th>계좌명</th>
+		<th>계좌번호</th>
+		<th>신규일</th>
+		<th>최근거래일</th>
+		<th>잔액</th>
+		<th>업무</th>
 	</tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
 	<c:if test="${dto.type!='예금' }">

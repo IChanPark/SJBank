@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>거래제한</title>
 <script>
     
 	
@@ -58,9 +53,9 @@ $(document).ready(function(){
 
 function listGo(qqq){
 	$("#tot").empty();
-	
-	$("#tot").append($("<tr><td>번호</td><td>id</td>"+
-			"<td>이름</td><td>전화번호</td><td>이메일</td><td>계정상태</td><td>상태변경</td></tr>"));
+
+	$("#tot").append($("<tr><th>번호</th><th>id</th>"+
+	"<th>이름</th><th>전화번호</th><th>이메일</th><th>계정상태</th><th>상태변경</th></tr>"));
 	
 	$.each(qqq,function(i,e){
 		var row = $("<tr data-product-name='"+e.id+"'></tr>");
@@ -173,5 +168,7 @@ function statuschange(me) {
 	});
 };
 </script>
-<div class="subTitle">사용자 리스트</div>
-<table border="" id="tot" class="AccInfo"></table>
+<div class="subTitle">사용자 관리</div>
+<div class='scrollB'>
+<table border="" id="tot" class="info_table"></table>
+</div>

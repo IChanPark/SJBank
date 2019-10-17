@@ -30,18 +30,19 @@ $(document).ready(function() {
 </script>
 
 <div class="subTitle">사용자 리스트</div>
-<table class="AccInfo">
+<div class='scrollB'>
+<table class="info_table">
 <tr >
-	<td>아이디</td>
-	<td>이름</td>
-	<td>전화번호</td>
-	<td>이메일</td>
-	<td>직업군</td>
-	<td>주소</td>
-	<td>우편번호</td>
-	<td>계정상태</td>
-	<td>가입일</td>
-	<td>탈퇴일</td>
+	<th>아이디</th>
+	<th>이름</th>
+	<th>전화번호</th>
+	<th>이메일</th>
+	<th>직업군</th>
+	<th>주소</th>
+	<th>우편번호</th>
+	<th>상태</th>
+	<th>가입일</th>
+	<th>탈퇴</th>
 </tr>
 <c:forEach var="dto" items="${data }" varStatus="no">
 	<tr>
@@ -58,3 +59,4 @@ $(document).ready(function() {
 	</tr>
 </c:forEach>
 </table>
+</div>

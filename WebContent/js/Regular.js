@@ -6,7 +6,7 @@ function check(re, what, message) {
     what.val('');
   	//what.focus();
   	what.next().remove();
-    what.after("<div style='color: #d6bb50'>"+message+"</div>");
+    what.after("<div style='color: #4375DB'>"+message+"</div>");
 };
 
 function check2(re, what1, what2, message) {
@@ -22,5 +22,5 @@ function check2(re, what1, what2, message) {
     what2.val('');
   	//what.focus();
   	what1.next().remove();
-    what1.after("<div style='color: #d6bb50'>"+message+"</div>");
+    what1.after("<div style='color: #4375DB'>"+message+"</div>");
 };

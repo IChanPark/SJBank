@@ -31,7 +31,7 @@ $(document).ready(function() {
 $(document).ready(function(){
 	ajax_go();
 	
-	$(".ser").on("click", function() {
+	$("#ser").on("click", function() {
 		ajax_go();
 	});
 });
@@ -41,7 +41,7 @@ function ajax_go() {
 	$.ajax({	
 	url:gogo,
 	type:'post',
-	data:{	 type 	: $('.sertext').val()},
+	data:{	 type 	: $('#sertext').val()},
 	dataType:'json',
 	success:function(qqq){
 		$("#ttt").empty();
@@ -89,30 +89,23 @@ function lttClk(me){
 </script>
 
 <style media="screen">
-.ltt {
-    width: 100%;
-    text-align: center;
-  }
-.ull{
-	
-    display: none;
-}
-.lii {
-	
-  	display: block;
-}
+.ltt { width: 100%; text-align: center; }
+.ull{display: none;}
+.lii {display: block;}
 .d1 {padding-top: 10px;  height: 30px; margin: auto; }
-.m {background-color: #3C0; float: left; height: 30px;  width: 100%;
+.m {background-color: #c6c6c6; float: left; height: 30px;  width: 100%;
 display: grid;justify-content: center;align-items: center;}
-
+a{ text-decoration:none;}
 </style>
-
 
 <div class="subTitle">FAQ</div>
 
-<div align="right"><input class="sertext" type = "text" style="width: 450px"/>
-<a href="#" data-menu-name="admin/service/faq_insert" id="notice">작성하기</a>
-<div class="ser" >검색하기</div></div>
+<div class='search_Box' >
+<input class='search_Word' type = 'text' id='sertext' value=''/>
+<div class='search_Button' id='ser' >검색</div>
+<div class='add_Button'><a href="#" data-menu-name="admin/service/faq_insert" id="notice">작성하기</a></div>
+</div>
+
 <div class="scrollB"> <!-- 스크롤바 -->
 <div id = "ttt">
 <c:forEach var="dto" items="${data }" varStatus="no">

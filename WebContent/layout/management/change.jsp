@@ -82,7 +82,7 @@
     what.val('');
   	//what.focus();
   	$('select[name=email2]').next().remove();
-  	$('select[name=email2]').after("<div style='color: #d6bb50'>"+message+"</div>");
+  	$('select[name=email2]').after("<div style='color: #4375DB'>"+message+"</div>");
 };
  
 function addChk(){
