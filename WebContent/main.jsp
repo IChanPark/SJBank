@@ -24,10 +24,6 @@ $(document).ready(function(){
 		document.paging.hid_t.value ="service/client/Faq";
 		document.paging.submit();
 	});
-	$('#qna').click(function(){
-		document.paging.hid_t.value ="service/client/Qna";
-		document.paging.submit();
-	});
 	$('#notice').click(function(){
 		document.paging.hid_t.value ="service/client/Notice";
 		document.paging.submit();
@@ -88,7 +84,6 @@ $(document).ready(function(){
 고객서비스
 
 <div>
-<div style=" float: left; width: 33.3%; color: #F6F6F6;" id="qna" >Q&A</div>
 <div style=" float: left; width: 33.3%; color: #F6F6F6;" id="faq">FAQ</div>
 <div style=" float: left; width: 33.3%; color: #F6F6F6;" id="notice">공지사항</div>
 </div> 

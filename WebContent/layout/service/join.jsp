@@ -13,7 +13,7 @@
 			<td><input type="password" name="pw" id="pw" placeholder="숫자4자리입력하세요"/></td>		
 		</tr>	
 		<tr>	
-			<td>비밀번호 중복확인</td>
+			<td>비밀번호 재입력</td>
 			<td><input type="password" name="pw1" id="pw1" placeholder="숫자4자리입력하세요" onfocusout='ev()'/>		
 		</tr>		
 		<tr>	

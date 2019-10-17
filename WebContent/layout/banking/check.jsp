@@ -17,6 +17,7 @@ $(document).ready(function(){
 </script>
 <input type="hidden" name="accountNumber" />
 <div class="subTitle">입/출금 계좌</div>
+<div class = 'scrollC'>
 <table class="info_table">
 <tr >
 	<th>계좌명</th>
@@ -48,11 +49,13 @@ $(document).ready(function(){
 </tr>
 </c:if>
 </table>
+</div>
 <br>
 <div align="right">
 입/출금계좌 총액<fmt:formatNumber value="${dsum }" pattern=" #,###원"/>
 </div>
 <div class="subTitle">상품 계좌</div>
+<div class = 'scrollC'>
 	<table class="info_table">
 	<tr>
 		<th>계좌명</th>
@@ -82,6 +85,7 @@ $(document).ready(function(){
 </tr>
 </c:if>
 </table>
+</div>
 <br>
 <div align="right">
 상품 계좌 총액 <fmt:formatNumber value="${psum }" pattern="  #,###원"/>
