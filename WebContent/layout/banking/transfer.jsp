@@ -71,66 +71,42 @@ function fff(){
  </script>
 
 <div class="subTitle">출금정보</div>
-<table border="2">
-	<tr>
-		<td>출금계좌정보</td>
-		<td><select name="acc">
-			<c:forEach var="dto" items="${data }" varStatus="no">
-				<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
-			</c:forEach>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>계좌비밀번호</td>
-		<td><input placeholder="계좌 비밀번호 4자리를 입력해 주십시오" type="password" name="accpw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="accpw"/></td>
-	</tr>
-</table>
-<br>
-<br>
-<div class="subTitle">입금정보</div>
-<table border="">
-	<tr>
-		<td>입금은행 :</td>
-		<td><input type="text" name="transfer_receive" id="transfer_receive" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" class = "indata" placeholder="직접입력"/>
-		 <select id="target">
-				<option>SJ은행</option>
-				<option>하나은행</option>
-				<option>신한은행</option>
-				<option>새마을금고</option>
-				<option>농협</option>
-				<option>국민은행</option>
-		</select></td>
-	</tr>
-	<tr>
-		<td>입금계좌정보 :</td>
-		<td><input type="text" placeholder="-를 포함하여 정확히 입력해 주세요" name="toAcc" onKeyup="this.value=this.value.replace(/[^0-9-]/g,'');" class = "indata" id="toAcc"/></td>
-	</tr>
-	<tr>
-		<td>이체금액 :</td>
-		<td><input type="text" placeholder="이체한도는 10억미만입니다." name="money" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="money"/></td>
-	</tr>
-	<tr>
-		<td>받는통장 메모 :</td>
-		<td><input type="text" name="to_memo" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"  /></td>
-	</tr>
-	<tr>
-		<td>내 통장 메모 :</td>
-		<td><input type="text" name="memo" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" /></td>
-	</tr>
-</table>
-<br>
-<br>
-<div class="subTitle">부가정보</div>
-<table>
-	<tr>
-		<td>CMS코드 :</td>
-		<td><input type="text" name="cms" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
-	</tr>
-</table>
 
-<table>
-	<tr>
-		<td><input type="button" value="다음" class="ToConfirm" /></td>
-	</tr>
-</table>
+<div class= 'infoBox'>
+<div class='infoMain_Info'><div class='infoMain_Type'>출금계좌정보</div><div class='infoMain_Value'>
+<select name="acc">
+	<c:forEach var="dto" items="${data }" varStatus="no">
+		<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
+	</c:forEach>
+</select></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>
+<input placeholder="계좌 비밀번호 4자리를 입력해 주십시오" type="password" name="accpw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="accpw"/>
+</div></div></div>
+
+<div class="subTitle">입금정보</div>
+
+<div class= 'infoBox'>
+<div class='infoMain_Info'><div class='infoMain_Type'>입금은행</div><div class='infoMain_Value'>
+<input type="text" name="transfer_receive" id="transfer_receive" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" class = "indata" placeholder="직접입력" value='SJ은행' />
+<select id="target"><option>SJ은행</option><option>하나은행</option><option>신한은행</option>
+<option>새마을금고</option><option>농협</option><option>국민은행</option></select></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>입금계좌정보</div><div class='infoMain_Value'>
+<input type="text" placeholder="-를 포함해서 입력해 주세요" name="toAcc" onKeyup="this.value=this.value.replace(/[^0-9-]/g,'');" class = "indata" id="toAcc"/>
+</div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>이체금액</div><div class='infoMain_Value'>
+<input type="text" placeholder="이체한도는 10억미만입니다." name="money" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="money"/>
+</div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>받는통장 메모</div><div class='infoMain_Value'>
+<input type="text" name="to_memo" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"  /></td>
+</div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>내 통장 메모</div><div class='infoMain_Value'>
+<input type="text" name="memo" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" /></td>
+</div></div></div>
+<div class="subTitle">부가정보</div>
+<div class= 'infoBox'>
+<div class='infoMain_Info'><div class='infoMain_Type'>CMS코드</div><div class='infoMain_Value'>
+<input type="text" name="cms" class = "indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
+</div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>이체</div><div class='infoMain_Value'>
+<button class="ToConfirm">이체하기</button></div></div> </td>
+</div></div></div>

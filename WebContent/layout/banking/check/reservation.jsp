@@ -91,7 +91,6 @@ function cancel(qqq)
 <div class="subTitle">예약이체 조회결과</div>
 <div class = 'scrollD'>
 <table border=""  id="tot" class='info_table'>
-
 	<tr>
 		<th>No</th>
 		<th>출금계좌</th>
