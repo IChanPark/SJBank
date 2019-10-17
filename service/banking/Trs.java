@@ -12,6 +12,8 @@ import jdbc.Account.AccountDAO;
 import jdbc.Account.AccountDTO;
 import jdbc.Transfer.Transfer_logDAO;
 import jdbc.Transfer.Transfer_logDTO;
+import jdbc.User.UserDAO;
+import jdbc.User.UserDTO;
 import jmodels.Transfer_reserveDAO;
 
 public class Trs implements M_Action{
@@ -23,6 +25,9 @@ public class Trs implements M_Action{
 
 		Transfer_logDTO dto = new Transfer_logDTO();
 
+		
+		String id = (String)session.getAttribute("userID");
+		
 		String acc = request.getParameter("acc");
 		String toAcc = request.getParameter("toAcc");
 		String pw = request.getParameter("accpw");
@@ -93,37 +98,37 @@ public class Trs implements M_Action{
 					}
 				}///// 적금 최대 보유량 초과
 				
+				UserDTO user = UserDAO.getInstance().getDataId(id);
+				
+				
 				trfDTO.setAccount_number(toAcc);
 				trfDTO.setTo_account_number(acc);
 				trfDTO.setFee(0);
 				trfDTO.setCms("");
 				trfDTO.setFeetype("즉시입금");
 				trfDTO.setMemo(to_memo);
-				trfDTO.setTo_memo(memo);
-				trfDTO.setReceived(toName);
+				trfDTO.setTo_memo("");
+				trfDTO.setReceived(user.getName());
 				trfDTO.setRegister_date(new Date());
 				trfDTO.setStatus("성공");
 				trfDTO.setSum(dto.getSum());
 				trfDTO.setTarget("SJBank");
 				AccountDAO.getInstance().updateMoney( (int)(dto.getSum()+0),toAcc );
+				System.out.println("상대 넣기 직전.");
 				Transfer_logDAO.getInstance().insert(trfDTO);
-
-			
-				
 			}
 			AccountDAO.getInstance().updateMoney( (int)(-1 *dto.getSum()-1*dto.getFee() ) ,acc );
-			
 		}
 		else { 
 			dto.setStatus("잔액부족");
-
 		}
-		if(!(dto.getTarget().toUpperCase().equals("SJBANK")|| dto.getTarget().toUpperCase().equals("SJ은행")))
+		if(dto.getTarget().toUpperCase().equals("SJBANK")|| dto.getTarget().toUpperCase().equals("SJ은행"))
 		{
 			dto.setReceived(toName);
 		}
+		else
+			dto.setReceived("외부계좌");
 		
-			
 		Transfer_logDAO.getInstance().insert(dto);
 		request.setAttribute("data", dto);
 

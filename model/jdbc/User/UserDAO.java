@@ -275,6 +275,25 @@ public class UserDAO {
 		} finally { close(); }
 	}
 	
+	//////아이디로 정보빼오기 10 17 ㅎㄷㄱ
+	public UserDTO getDataId(String id){
+		UserDTO dto = new UserDTO();
+		sql = 	"select * from user " + 
+				"where id = '"+id+"'";	
+		
+		System.out.println(sql);
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+		
+			rs = pstmt.executeQuery();
+			dto = User(rs, dto);
+		} catch (Exception e) { e.printStackTrace(); 
+		} finally { close(); }
+		return dto;
+	}
+	
+	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(pstmt!=null) try {pstmt.close();} catch (SQLException e) {}

@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$('.ToConfirm').click(function(){
 
 		var testAccpw = /^[0-9]{4}$/g;
-		var testMoney = /^[0-9]{1,10}$/g;
+		var testMoney = /^[0-9]{1,9}$/g;
 		var testToacc = /^[0-9]{3,4}[-][0-9]{3,4}[-][0-9]{3,7}[-][0-9]{3,7}$/g;
 		var testBank = /^[0-9가-힣a-zA-Z]{1,8}$/g
 		
@@ -83,7 +83,7 @@ function fff(){
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>
-		<td><input type="password" name="accpw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="accpw"/></td>
+		<td><input placeholder="계좌 비밀번호 4자리를 입력해 주십시오" type="password" name="accpw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="accpw"/></td>
 	</tr>
 </table>
 <br>
@@ -92,8 +92,8 @@ function fff(){
 <table border="">
 	<tr>
 		<td>입금은행 :</td>
-		<td><input type="text" name="transfer_receive" id="transfer_receive" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" class = "indata"
-			/ placeholder="직접입력"> <select id="target">
+		<td><input type="text" name="transfer_receive" id="transfer_receive" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" class = "indata" placeholder="직접입력"/>
+		 <select id="target">
 				<option>SJ은행</option>
 				<option>하나은행</option>
 				<option>신한은행</option>
@@ -104,11 +104,11 @@ function fff(){
 	</tr>
 	<tr>
 		<td>입금계좌정보 :</td>
-		<td><input type="text" name="toAcc" onKeyup="this.value=this.value.replace(/[^0-9-]/g,'');" class = "indata" id="toAcc"/></td>
+		<td><input type="text" placeholder="-를 포함하여 정확히 입력해 주세요" name="toAcc" onKeyup="this.value=this.value.replace(/[^0-9-]/g,'');" class = "indata" id="toAcc"/></td>
 	</tr>
 	<tr>
 		<td>이체금액 :</td>
-		<td><input type="text" name="money" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="money"/></td>
+		<td><input type="text" placeholder="이체한도는 10억미만입니다." name="money" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="money"/></td>
 	</tr>
 	<tr>
 		<td>받는통장 메모 :</td>
