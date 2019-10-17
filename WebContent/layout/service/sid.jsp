@@ -7,10 +7,7 @@
     pageEncoding="UTF-8"%>
 <%
 System.out.println("name :"+request.getParameter("name"));
-
 System.out.println("tel :"+request.getParameter("tel"));
-System.out.println("email1 :"+request.getParameter("email1"));
-System.out.println("email2 :"+request.getParameter("email2"));
 
 %>    
 
@@ -22,9 +19,7 @@ String json="";
 
 dto.setName(request.getParameter("name"));
 dto.setTel(request.getParameter("tel"));
-dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));
 dto=UserDAO.getInstance().searchId(dto); 
-
 
 	map.put("id", dto.getId());
 	json += gson.toJson(map);

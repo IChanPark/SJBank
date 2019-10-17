@@ -20,10 +20,8 @@ public class Update  implements M_Action{
 		dto.setPw(request.getParameter("pw"));//2
 		System.out.println(request.getParameter("pw"));
 		
-		dto.setSimple_pw(Integer.parseInt(request.getParameter("simple_pw")));//3
 		dto.setTel(request.getParameter("tel"));//4
-		dto.setGen(request.getParameter("gen"));//5
-		dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));//6		
+		dto.setGen(request.getParameter("gen"));//5		
 		dto.setJob_group(request.getParameter("position"));//7
 		dto.setAddr(request.getParameter("addr")+"/"+request.getParameter("datail"));//8		
 		dto.setPostal_code(request.getParameter("zipcode"));//9

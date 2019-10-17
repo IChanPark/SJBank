@@ -11,11 +11,6 @@
 			<td>비밀번호</td>
 			<td><input type="text" name="pw" value="${data.pw } " onfocusout='ev()'/></td>			
 		</tr>
-		<tr>
-			<td>간편 비밀 번호</td>
-			<td><input type="text" name="simple_pw" value="${data.simple_pw } " onfocusout='ev1()' /></td>
-		</tr>
-
 		<tr>	
 			<td>전화번호</td>
 			<td><input type="text" name="tel" value="${data.tel }" onfocusout='ev2()'/></td>

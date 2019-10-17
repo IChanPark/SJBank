@@ -55,7 +55,7 @@ function listGo(qqq){
 	$("#tot").empty();
 
 	$("#tot").append($("<tr><th>번호</th><th>id</th>"+
-	"<th>이름</th><th>전화번호</th><th>이메일</th><th>계정상태</th><th>상태변경</th></tr>"));
+	"<th>이름</th><th>전화번호</th><th>계정상태</th><th>상태변경</th></tr>"));
 	
 	$.each(qqq,function(i,e){
 		var row = $("<tr data-product-name='"+e.id+"'></tr>");
@@ -63,7 +63,6 @@ function listGo(qqq){
 		row.append($("<td id='det'>"+e.id+"</td>"));
 		row.append($("<td>"+e.name+"</td>"));
 		row.append($("<td>"+e.tel+"</td>"));
-		row.append($("<td>"+e.email+"</td>"));
 		row.append($("<td>"+e.status+"</td>"));
 	 	//<a href="#" class="ser" >검색하기</a>onclick='ajaxGo(\"userblock\",{id:"+e.id+"}) 
 		//var btn = $("<td  onclick='ajaxGo(\"userblock\",{id:"+e.id+"})' >상태변경</td>");

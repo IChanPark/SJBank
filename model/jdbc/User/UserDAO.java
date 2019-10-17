@@ -35,12 +35,10 @@ public class UserDAO {
 			if(rs.next()) {
 				dto = new UserDTO();
 				dto.setId(rs.getString("id"));
-				dto.setPw(rs.getString("pw"));
-				dto.setSimple_pw(rs.getInt("simple_pw"));			
+				dto.setPw(rs.getString("pw"));		
 				dto.setName(rs.getString("name"));
 				dto.setTel(rs.getString("tel"));
 				dto.setGen(rs.getString("gen"));
-				dto.setEmail(rs.getString("email"));
 				dto.setJob_group(rs.getString("job_group"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setPostal_code(rs.getString("postal_code"));
@@ -57,12 +55,10 @@ public class UserDAO {
 			while (rs.next()) {
 				UserDTO dto = new UserDTO();
 				dto.setId(rs.getString("id"));
-				dto.setPw(rs.getString("pw"));
-				dto.setSimple_pw(rs.getInt("simple_pw"));				
+				dto.setPw(rs.getString("pw"));			
 				dto.setName(rs.getString("name"));
 				dto.setTel(rs.getString("tel"));
 				dto.setGen(rs.getString("gen"));
-				dto.setEmail(rs.getString("email"));
 				dto.setJob_group(rs.getString("job_group"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setPostal_code(rs.getString("postal_code"));
@@ -110,10 +106,10 @@ public class UserDAO {
 	
 	public void insert(UserDTO dto){
 		sql = 	"insert into user (" +
-				"id, pw, simple_pw, name, tel, gen, email, job_group,"+ 
+				"id, pw, name, tel, gen, job_group,"+ 
 				"addr, postal_code, status,register_date,end_date) "+
 				"values "+
-			    "(? ,? ,	?	 ,	  ?	, ? ,	 ?,	  ?	 , 	?	,"+
+			    "(? ,? , ?	, ? ,	 ?,	   	?	,"+
 			    "  ? ,    ?  	  ,   '활성'  ,  	now()   ,null )";
 		System.out.println(sql);
 		try {
@@ -121,15 +117,13 @@ public class UserDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getPw());
-			pstmt.setInt(3, dto.getSimple_pw());			
-			pstmt.setString(4, dto.getName());
-			pstmt.setString(5, dto.getTel());
-			pstmt.setString(6, dto.getGen());
-			pstmt.setString(7, dto.getEmail());
-			pstmt.setString(8, dto.getJob_group());
-			pstmt.setString(9, dto.getAddr());
-			pstmt.setString(10, dto.getPostal_code());
+			pstmt.setString(2, dto.getPw());			
+			pstmt.setString(3, dto.getName());
+			pstmt.setString(4, dto.getTel());
+			pstmt.setString(5, dto.getGen());
+			pstmt.setString(6, dto.getJob_group());
+			pstmt.setString(7, dto.getAddr());
+			pstmt.setString(8, dto.getPostal_code());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
@@ -138,7 +132,7 @@ public class UserDAO {
 	
 	public void updateUser(UserDTO dto){
 		sql = 	"update user set " +
-				"pw = ? , simple_pw= ?, tel = ?, gen = ?, email = ? ,"+ 
+				"pw = ? , tel = ?, gen = ?, "+ 
 				"job_group = ? , addr = ?, postal_code = ? " +
 				"where id = ?";
 		System.out.println(sql);
@@ -146,15 +140,13 @@ public class UserDAO {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getPw());
-			pstmt.setInt(2, dto.getSimple_pw());		
-			pstmt.setString(3, dto.getTel());
-			pstmt.setString(4, dto.getGen());
-			pstmt.setString(5, dto.getEmail());
-			pstmt.setString(6, dto.getJob_group());
-			pstmt.setString(7, dto.getAddr());
-			pstmt.setString(8, dto.getPostal_code());
-			pstmt.setString(9, dto.getId());
+			pstmt.setString(1, dto.getPw());		
+			pstmt.setString(2, dto.getTel());
+			pstmt.setString(3, dto.getGen());
+			pstmt.setString(4, dto.getJob_group());
+			pstmt.setString(5, dto.getAddr());
+			pstmt.setString(6, dto.getPostal_code());
+			pstmt.setString(7, dto.getId());
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();
 		} finally { close(); }
@@ -191,7 +183,7 @@ public class UserDAO {
 	public boolean chkSimplePw(String id,String pw){
 		boolean res = false;
 		
-		sql = 	"select simple_pw from user where id = ?";
+		sql = 	"select pw from user where id = ?";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -202,7 +194,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next())
 			{
-				if(rs.getString("simple_pw").equals(pw))
+				if(rs.getString("pw").equals(pw))
 					res=true;
 			}
 				
@@ -237,7 +229,7 @@ public class UserDAO {
 	public UserDTO searchId(UserDTO dto){
 		
 		sql = 	"select * from user " + 
-				"where name = ? and tel = ? and email = ?";	
+				"where name = ? and tel = ?";	
 		
 		System.out.println(sql);
 		try {
@@ -246,7 +238,6 @@ public class UserDAO {
 			
 			pstmt.setString(1 ,dto.getName());
 			pstmt.setString(2 ,dto.getTel());
-			pstmt.setString(3 ,dto.getEmail());
 			
 			rs = pstmt.executeQuery();
 			dto = User(rs, dto);
@@ -258,7 +249,7 @@ public class UserDAO {
 	public void updatePw(UserDTO dto){
 		sql = 	"update user set " +
 				"pw = ? "+
-				"where id = ? and name = ? and tel = ? and email = ?";
+				"where id = ? and name = ? and tel = ? ";
 		System.out.println(sql);
 		try {
 			con = ds.getConnection();
@@ -268,7 +259,6 @@ public class UserDAO {
 			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getTel());
-			pstmt.setString(5, dto.getEmail());
 			
 			pstmt.executeUpdate(); 
 		} catch (Exception e) { e.printStackTrace();

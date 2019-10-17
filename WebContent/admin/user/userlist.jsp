@@ -11,7 +11,6 @@
 	<th>아이디</th>
 	<th>이름</th>
 	<th>전화번호</th>
-	<th>이메일</th>
 	<th>직업군</th>
 	<th>주소</th>
 	<th>우편번호</th>
@@ -24,7 +23,6 @@
 		<td class = "uid">${dto.id }</td>
 		<td>${dto.name }</td>
 		<td>${dto.tel }</td>
-		<td>${dto.email }</td>
 		<td>${dto.job_group }</td>
 		<td>${dto.addr }</td>
 		<td>${dto.postal_code }</td>

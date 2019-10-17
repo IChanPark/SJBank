@@ -10,14 +10,13 @@ public class UserDTO {
 					pw,				//PW					
 					name,			//이름
 					gen,			//성별
-					email,			//이메일
 					job_group,		//직업군
 					addr,			//주소
 					tel,			//전화번호
 					status,			//계정 상태 활성/정지/탈퇴
 					postal_code; 	//우편번호
 	
-	private Integer simple_pw; 			//간편비밀번호
+	//private Integer simple_pw; 			//간편비밀번호
 					
 					
 
@@ -57,14 +56,7 @@ public class UserDTO {
 	public void setGen(String gen) {
 		this.gen = gen;
 	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	
 	public String getJob_group() {
 		return job_group;
@@ -106,13 +98,13 @@ public class UserDTO {
 		this.status = status;
 	}
 	
-	public Integer getSimple_pw() {
-		return simple_pw;
-	}
-	
-	public void setSimple_pw(Integer simple_pw) {
-		this.simple_pw = simple_pw;
-	}
+//	public Integer getSimple_pw() {
+//		return simple_pw;
+//	}
+//	
+//	public void setSimple_pw(Integer simple_pw) {
+//		this.simple_pw = simple_pw;
+//	}
 	
 	public Date getRegister_date() {
 		return register_date;
@@ -158,8 +150,8 @@ public class UserDTO {
 	
 	@Override
 	public String toString() {
-		return "{"+id + "," + pw + "," + simple_pw + "," + name + ", " + tel
-				+ "," + gen + "," + email + "," + job_group + "," + addr
+		return "{"+id + "," + pw + "," + name + ", " + tel
+				+ "," + gen + "," + job_group + "," + addr
 				+ "," + postal_code + "," + status + "," + register_date
 				+ "," + end_date + "}";
 	}

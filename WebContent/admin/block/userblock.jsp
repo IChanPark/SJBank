@@ -1,4 +1,3 @@
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="jdbc.User.UserDAO"%>
 <%@page import="jdbc.User.UserDTO"%>
@@ -15,7 +14,6 @@ String json;
 UserDTO dto = 
 
 UserDAO.getInstance().selectId(request.getParameter("product"));
-
 	
 	map.put("id", dto.getId()+"");
 	map.put("name", dto.getName());

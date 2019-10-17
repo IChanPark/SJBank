@@ -23,11 +23,9 @@ public class joinReg  implements M_Action{
 		System.out.println("pw \t"+request.getParameter("pw"));
 		dto.setId(request.getParameter("id"));
 		dto.setPw(request.getParameter("pw"));
-		dto.setSimple_pw(Integer.parseInt(request.getParameter("simple_pw")));	
 		dto.setName(request.getParameter("name"));
 		dto.setTel(request.getParameter("tel"));
-		dto.setGen(request.getParameter("gen"));
-		dto.setEmail(request.getParameter("email1")+"@"+request.getParameter("email2"));		
+		dto.setGen(request.getParameter("gen"));		
 		dto.setJob_group(request.getParameter("position"));
 		dto.setAddr(request.getParameter("addr")+"/"+request.getParameter("datail"));		
 		dto.setPostal_code(request.getParameter("zipcode"));
