@@ -100,6 +100,14 @@ function bbb(){
 // 	}
 	
 	
+	var searchPw = /[0-9]{4}/g;
+	
+	
+	if(!searchPw.test($("#pw").val()) ){
+		alert("변경할 비밀번호를 다시 확인해주세요.");
+		return;
+	}
+	
 	$.ajax({
 			url:"layout/service/cpw.jsp",
 			type:'post',
