@@ -64,12 +64,15 @@ public class DepositsDAO {
 	private void Deposit(ResultSet rs, ArrayList<DepositsDTO> res) {
 		try {
 			while (rs.next()) {
+				
 				DepositsDTO dto = new DepositsDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setId(rs.getString("id"));
-				dto.setProduct(rs.getString("prduct"));
+				dto.setProduct(rs.getString("product"));
 				dto.setPreferential(rs.getString("preferential"));
 				dto.setInterest(rs.getFloat("interest"));
+				System.out.println(dto);
+				System.out.println("fdhdfhe");
 				res.add(dto);
 			} 
 		} catch (Exception e) {}
@@ -101,6 +104,7 @@ public class DepositsDAO {
 				"(select account_number from deposits_log where "+
 				"date_format(now(), '%Y-%m') = date_format(register_date, '%Y-%m') and "+
 				"status = '성공') ";
+		System.out.println(sql);
 		try {
 		
 			rs = stmt.executeQuery(sql);

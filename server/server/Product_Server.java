@@ -34,7 +34,7 @@ public class Product_Server {
 	private	ArrayList<FundDTO>  fdlog = new  FundDAO().uplist();
 	private Fund_LogDTO fdloginsert = new Fund_LogDTO();
 	
-	private	ArrayList<DepositsDTO>  deplog = new  DepositsDAO().uplist();
+	private	ArrayList<DepositsDTO>  deplog = new DepositsDAO().uplist();
 	private Deposits_logDTO deploginsert = new Deposits_logDTO();
 	
 	
@@ -114,36 +114,45 @@ public class Product_Server {
 						 System.out.println("적금 성공~~!!!");
 						savlog.remove(ss);
 					}
+					
+					
 					System.out.println("디포짓정보:"+deplog);
 					for (DepositsDTO dd : deplog) {
 						System.out.println("디포짓 시작~~!!!");
 						System.out.println("depsit "+dd);
 						deploginsert.setAccount_number(dd.getAccount_number());
 						deploginsert.setStatus("성공");
-						 AccountDTO acr = new AccountDAO().selectAccount(dd.getAccount_number());
-						
-						 int  add_preferential= (int) ((acr.getSum()*dd.getInterest())/12);
-						 	System.out.println(add_preferential);
-						deploginsert.setSum(acr.getSum()+add_preferential);
+						 AccountDTO dacr = new AccountDAO().selectAccount(dd.getAccount_number());
+						System.out.println("dacr: "+dacr);
+						 System.out.println(dacr.getSum());
+						 int  add_preferential= (int)((dacr.getSum()*dd.getInterest())/12);
+						 
+						 	
+						deploginsert.setSum(dacr.getSum()+add_preferential);
+						deploginsert.setInterest(dd.getInterest());
 						
 						new  AccountDAO().updateMoney(deploginsert);
 						
 						new Deposits_logDAO().insert(deploginsert);
 						
-						new  Transfer_logDAO().insert(transloginsert);
-						
-						transloginsert.setAccount_number("777-77777-7777");
-						transloginsert.setFeetype("이자입금");
-						transloginsert.setTarget("sj은행");
-						transloginsert.setTo_account_number(dd.getAccount_number());
-						transloginsert.setReceived(dd.getId());
-						transloginsert.setSum((long)add_preferential);
-						transloginsert.setFee(0);
-						transloginsert.setStatus("성공");
-						
-						new  Transfer_logDAO().insert(transloginsert);
-						 System.out.println("디포짓 성공~~!!!");
 						deplog.remove(dd);
+						System.out.println(dd);
+						System.out.println(deplog);
+						
+						
+//						transloginsert.setAccount_number("777-77777-7777");
+//						transloginsert.setFeetype("이자입금");
+//						transloginsert.setTarget("sj은행");
+//						transloginsert.setTo_account_number(dd.getAccount_number());
+//						transloginsert.setReceived(dd.getId());
+//						transloginsert.setSum((long)add_preferential);
+//						transloginsert.setFee(0);
+//						transloginsert.setStatus("성공");
+//						
+//						new  Transfer_logDAO().insert(transloginsert);
+						
+						 System.out.println("디포짓 성공~~!!!");
+						
 						
 					}
 					

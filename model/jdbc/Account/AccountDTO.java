@@ -14,7 +14,7 @@ public class AccountDTO {
 					pw,				//계좌 비밀번호
 					status;			//계좌 상태 ex 사용 정지 만료?
 	
-	private Integer sum;			//계좌 잔액
+	private long sum;			//계좌 잔액
 	
 	private Date 	register_date,	//계좌 등록일
 					end_date;		//계좌 정지일
@@ -71,12 +71,12 @@ public class AccountDTO {
 		this.status = status;
 	}
 
-	public Integer getSum() {
+	public long getSum() {
 		return sum;
 	}
 
-	public void setSum(Integer sum) {
-		this.sum = sum;
+	public void setSum(long l) {
+		this.sum = l;
 	}
 //-------------------------------------------------
 	public Date getRegister_date() {

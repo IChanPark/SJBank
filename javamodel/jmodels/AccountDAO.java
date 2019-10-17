@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import jdbc.Account.AccountDTO;
+import jdbc.Deposit.DepositsDTO;
 import jdbc.Deposit.Deposits_logDTO;
 import jdbc.Saving.Saving_logDTO;
 import server.DBAccess_IP;
@@ -44,16 +45,18 @@ public class AccountDAO {
 	private AccountDTO Account(ResultSet rs, AccountDTO dto) {
 		try {
 			if(rs.next()) {
+				
 				dto = new AccountDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setType(rs.getString("type"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setAlias(rs.getString("alias"));
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
 				dto.setStatus(rs.getString("status"));
-				dto.setRegister_date(rs.getDate("register_date"));
-				dto.setEnd_date(rs.getDate("end_date"));
+//				dto.setRegister_date(rs.getDate("register_date"));
+//				dto.setEnd_date(rs.getDate("end_date"));
+				System.out.println("daodao"+dto);
 			} 
 		} catch (Exception e) {}
 		return dto;
@@ -105,10 +108,11 @@ public class AccountDAO {
 
 	public AccountDTO selectAccount(String acc){
 		AccountDTO dto = null;
-
+		
 		sql = "select * from account where account_number = '"+acc+"'";
 		System.out.println(sql);
 		try {
+			
 			rs = stmt.executeQuery(sql);
 
 			dto = Account(rs, dto);

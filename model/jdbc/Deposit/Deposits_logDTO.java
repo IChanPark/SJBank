@@ -11,8 +11,9 @@ public class Deposits_logDTO {
 	
 	private Float	Interest;
 	
-	private Integer seq,				//로그번호
-					sum;
+	private Integer seq;
+
+	long sum;
 	
 	private Date  	register_date;		//날짜
 	
@@ -50,12 +51,12 @@ public class Deposits_logDTO {
 		Interest = interest;
 	}
 
-	public Integer getSum() {
+	public long getSum() {
 		return sum;
 	}
 
-	public void setSum(Integer sum) {
-		this.sum = sum;
+	public void setSum(long l) {
+		this.sum = l;
 	}
 	
 	
