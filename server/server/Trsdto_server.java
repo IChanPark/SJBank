@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jdbc.Account.AccountDTO;
-import jdbc.Transfer.Transfer_autoDTO;
-import jdbc.Transfer.Transfer_delayDTO;
 import jdbc.Transfer.Transfer_logDTO;
 import jdbc.Transfer.Transfer_reserveDTO;
 import jmodels.AccountDAO;
@@ -23,25 +21,19 @@ import jmodels.Transfer_reserveDAO;
 
 public class Trsdto_server {
 	private HashMap<String, ObjectOutputStream>list  = null;
-	private HashMap<Integer, Transfer_delayDTO> delayList  = null;
 	private HashMap<Integer, Transfer_reserveDTO> reserveList  = null;
 	private HashMap<Integer, ArrayList<String>>auto = null;
-	private HashMap<Integer, Transfer_autoDTO> autoList  = null;
 
 
 	private Trsdto_server() {
 		try {
 
 			list = new HashMap<String, ObjectOutputStream>();
-			delayList= new HashMap<Integer, Transfer_delayDTO>();
 			reserveList= new HashMap<Integer, Transfer_reserveDTO>();
 			auto = new  HashMap<Integer, ArrayList<String>>();
-			autoList= new HashMap<Integer, Transfer_autoDTO>();
 			Collections.synchronizedMap(list);
-			Collections.synchronizedMap(delayList);
 			Collections.synchronizedMap(reserveList);
 			Collections.synchronizedMap(auto);
-			Collections.synchronizedMap(autoList);
 
 			for (Transfer_reserveDTO trd  : new Transfer_reserveDAO().list() ) {
 				reserveList.put(trd.getSeq(), trd);
@@ -193,19 +185,7 @@ public class Trsdto_server {
 				System.out.println(def.msg +"받은 메세지");
 				if(def.msg.equals("delay") ) {
 
-					Transfer_delayDTO dto=(Transfer_delayDTO)def.data;
-
-					if(def.name.equals("추가")) 
-					{
-						System.out.println("delay 데이터를 추가합니다.");
-						delayList.put(dto.getSeq(), dto);
-					}
-					else
-					{
-						System.out.println("delay 데이터를 비활성화합니다.");
-						delayList.get(dto.getSeq()).setStatus("비활성");
-						//Transfer_reserveDAO.getInstance().updateStatusBySeq(dto.getSeq(), "비활성");
-					}
+					
 				}
 				else if( def.msg.equals("reserve") ){
 
