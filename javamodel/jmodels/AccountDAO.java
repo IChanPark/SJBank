@@ -249,6 +249,28 @@ public class AccountDAO {
 	}
 
 	
+	public int getSavingMax(String acc){
+
+		sql = "SELECT max_sum FROM saving_info WHERE product = (select product from saving where account_number = '"+acc+"' )";
+		System.out.println(sql);
+		try {
+			rs = stmt.executeQuery(sql);
+			if(rs.next())
+				return rs.getInt("max_sum");
+		} catch (Exception e) { e.printStackTrace();
+		} finally { close(); }
+		return -1;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	void close() {
 		if(rs!=null) try {rs.close();} catch (SQLException e) {}
 		if(stmt!=null) try {stmt.close();} catch (SQLException e) {}

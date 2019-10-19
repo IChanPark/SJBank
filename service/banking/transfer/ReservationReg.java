@@ -24,8 +24,10 @@ public class ReservationReg implements M_Action{
 		String target = request.getParameter("bank");
 		
 		String toAcc = request.getParameter("toAcc");
-		String  toName = AccountDAO.getInstance().chkOurBank(toAcc);
+		String toName = AccountDAO.getInstance().chkOurBank(toAcc);
 		
+		if(target.toUpperCase().equals("SJ은행") || target.toUpperCase().equals("SJBANK"))
+		 target = "SJBank";
 		
 		if(!AccountDAO.getInstance().chkAccPw(acc, pw))
 		{
