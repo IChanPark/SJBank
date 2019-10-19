@@ -11,8 +11,8 @@ $(document).ready(function(){
 
 		var testAccpw = /^[0-9]{4}$/g;
 		var testMoney = /^[0-9]{1,10}$/g;
-		var testToacc = /[0-9]{3,4}[-][0-9]{3,4}[-][0-9]{4,6}/g;
-		var testBank = /[0-9가-힣a-zA-Z]{1,8}/g
+		var testToacc = /^[0-9]{3,4}[-][0-9]{3,4}[-][0-9]{4,6}/g;
+		var testBank = /^[0-9가-힣a-zA-Z]{1,8}$/g
 		
 		
 		if(!testAccpw.test($("#accpw").val()) )
