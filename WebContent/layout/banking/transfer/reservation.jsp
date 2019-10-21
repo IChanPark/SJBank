@@ -20,7 +20,7 @@ $(function() {
 });
 
 $(document).ready(function() {
-		alert("????? ")
+	
 	$("#target").change(function(){
 		$("#bank").val($(this).val());
 	});

@@ -88,7 +88,7 @@ public class Trs implements M_Action{
 			{
 				
 				AccountDTO toDto = AccountDAO.getInstance().selectAccount(toAcc);
-				if(toDto.getType().equals("적금"))
+				if(toDto.getType().equals("적금")  )
 				{
 					toMax = AccountDAO.getInstance().getSavingMax(toAcc);
 					if( toMax < toDto.getSum()+dto.getSum())
