@@ -16,15 +16,10 @@ public class Accmanag  implements M_Action{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("들어왔어요");
 		
 		HttpSession session = request.getSession();
 		
 		ArrayList<AccountDTO>  dto = AccountDAO.getInstance().selectID((String)session.getAttribute("userID"));
 
-		System.out.println(dto.toString());
-		request.setAttribute("dd", "abc");
-
-		request.setAttribute("data", dto);
 	}
 }
