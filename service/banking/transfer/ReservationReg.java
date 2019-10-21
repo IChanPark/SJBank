@@ -34,8 +34,7 @@ public class ReservationReg implements M_Action{
 		
 			request.setAttribute("msg", "패스워드가 일치하지 않습니다...ByServelet");
 			throw new Exception("패스워드 불일치!!!");
-		}
-		
+		}		
 		
 		if(toName.equals("외부계좌") && ( target.toUpperCase().equals("SJBANK") 
 				||  target.toUpperCase().equals("SJ은행")    )   )
@@ -43,18 +42,14 @@ public class ReservationReg implements M_Action{
 			request.setAttribute("msg", "이체 대상 계좌가 존재 하지 않습니다.");
 			throw new Exception("대상없음");
 		}
-				
-		
 		
 		Transfer_reserveDTO dto= new Transfer_reserveDTO();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");		
 		dto.setAccount_number(acc);
 		dto.setTo_account_number(toAcc);
 		dto.setSum(request.getParameter("sum"));
 		dto.setTarget(target);
 		dto.setRegister_date(new Date());
-		
 		
 		String trs_time=request.getParameter("time")+" "+ request.getParameter("scheduled_date");
 		dto.setTimeStr(trs_time);
@@ -63,8 +58,6 @@ public class ReservationReg implements M_Action{
 		dto.setMemo(request.getParameter("memo"));
 		dto.setTo_memo(request.getParameter("to_memo"));
 		dto.setStatus("활성");
-		
-		System.out.println(dto.getTimeStr()+"dto시간");
 		
 		new send("추가", "reserve", dto);
 		

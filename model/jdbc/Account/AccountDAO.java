@@ -36,7 +36,7 @@ public class AccountDAO {
 				dto = new AccountDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setType(rs.getString("type"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setAlias(rs.getString("alias"));
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
@@ -54,7 +54,7 @@ public class AccountDAO {
 				AccountDTO dto = new AccountDTO();
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setType(rs.getString("type"));
-				dto.setSum(rs.getInt("sum"));
+				dto.setSum(rs.getLong("sum"));
 				dto.setAlias(rs.getString("alias"));
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
@@ -229,7 +229,7 @@ public class AccountDAO {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setInt(1, dto.getSum());
+			pstmt.setLong(1, dto.getSum());
 			pstmt.setString(2, dto.getAccount_number());
 
 			pstmt.executeUpdate(); 

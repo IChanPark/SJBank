@@ -11,8 +11,8 @@ $(document).ready(function(){
 
 		var testAccpw = /^[0-9]{4}$/g;
 		var testMoney = /^[0-9]{1,10}$/g;
-		var testToacc = /[0-9]{3,4}[-][0-9]{3,4}[-][0-9]{4,6}/g;
-		var testBank = /[0-9가-힣a-zA-Z]{1,8}/g
+		var testToacc = /^[0-9]{3,4}[-][0-9]{3,4}[-][0-9]{3,7}[-][0-9]{3,7}$/g;
+		var testBank = /^[0-9가-힣a-zA-Z]{1,8}$/g
 		
 		
 		if(!testAccpw.test($("#accpw").val()) )
@@ -83,7 +83,7 @@ function fff(){
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>
-		<td><input type="text" name="accpw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="accpw"/></td>
+		<td><input type="password" name="accpw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="accpw"/></td>
 	</tr>
 </table>
 <br>

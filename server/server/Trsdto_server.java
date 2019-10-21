@@ -5,14 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +18,6 @@ import jdbc.Transfer.Transfer_delayDTO;
 import jdbc.Transfer.Transfer_logDTO;
 import jdbc.Transfer.Transfer_reserveDTO;
 import jmodels.AccountDAO;
-import jmodels.Transfer_delayDAO;
 import jmodels.Transfer_logDAO;
 import jmodels.Transfer_reserveDAO; 
 
@@ -34,7 +27,6 @@ public class Trsdto_server {
 	private HashMap<Integer, Transfer_reserveDTO> reserveList  = null;
 	private HashMap<Integer, ArrayList<String>>auto = null;
 	private HashMap<Integer, Transfer_autoDTO> autoList  = null;
-	private Date today = new Date();
 
 
 	private Trsdto_server() {
@@ -51,24 +43,15 @@ public class Trsdto_server {
 			Collections.synchronizedMap(auto);
 			Collections.synchronizedMap(autoList);
 
-
-
-			//			for (Transfer_delayDTO tdd  : Transfer_delayDAO.getInstance().list() ) {
-			//				delayList.put(tdd.getSeq(), tdd);
-			//			}
-
 			for (Transfer_reserveDTO trd  : new Transfer_reserveDAO().list() ) {
 				reserveList.put(trd.getSeq(), trd);
 			}
-
-
 
 			ServerSocket server = new ServerSocket(7777);
 			System.out.println("기동 서버시작");
 			SelectDB s = new SelectDB();
 			s.setDaemon(true);
 			s.start();
-
 			while(true) {
 				Socket client = server.accept();
 				new TCPMulServerReciever(client).start();
@@ -86,23 +69,12 @@ public class Trsdto_server {
 
 	class SelectDB extends Thread{
 
-
 		@Override
 		public void run() {
-			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 			while(true) {
 				try {
-
 					sleep(10000);
-					//					for (Map.Entry<Integer,Transfer_delayDTO> dd: delayList.entrySet()) {
-					//						if(dd.getValue().getTrs_time().before(new Date()) && dd.getValue().getStatus().equals("활성") )
-					//						{
-					//							System.out.println(dd.getValue() +"지연 이체 가즈아에요");
-					//							dd.getValue().setStatus("비활성");
-					//						}					
-					//					};
 
 					for (Map.Entry<Integer, Transfer_reserveDTO> dd: reserveList.entrySet()) {
 						if(dd.getValue().getTime().before(new Date()) && dd.getValue().getStatus().equals("활성") )
@@ -115,21 +87,22 @@ public class Trsdto_server {
 							Transfer_logDTO dto = new Transfer_logDTO();
 							dto.setAccount_number(dd.getValue().getAccount_number());
 							dto.setTo_account_number(dd.getValue().getTo_account_number());
-							dto.setFeetype("예약이체");
+							dto.setFeetype("예약이체송금");
 							dto.setTarget(dd.getValue().getTarget());
 							dto.setSum((long)Integer.parseInt(dd.getValue().getSum()) );
 							dto.setCms(dd.getValue().getCms());
 							dto.setMemo(dd.getValue().getMemo());
 							dto.setTo_memo(dd.getValue().getTo_memo());
 
-
-
 							if(dd.getValue().getTarget().equals("SJBank"))
 								dto.setFee(0);
 							else
 								dto.setFee(500);
-							dto.setReceived( new AccountDAO().chkOurBank(dd.getValue().getTo_account_number()) );
 
+							if(dto.getTarget().toUpperCase().equals("SJBANK") ||dto.getTarget().toUpperCase().equals("SJ은행")  )
+								dto.setReceived( new AccountDAO().chkOurBank(dd.getValue().getTo_account_number()) );
+							else
+								dto.setReceived("외부계좌");
 
 							AccountDTO adto = new AccountDAO().selectAccount(dd.getValue().getAccount_number());
 
@@ -148,6 +121,8 @@ public class Trsdto_server {
 									}
 									else {
 										dto.setStatus("성공");
+										new AccountDAO().updateMoney(-1 * Integer.parseInt( dd.getValue().getSum())-1*dto.getFee() , dd.getValue().getAccount_number());
+										new Transfer_reserveDAO().updateStatusBySeq(dd.getValue().getSeq(), "예약이체완료");
 										dd.getValue().setStatus("이체완료");
 									}
 								}
@@ -155,17 +130,16 @@ public class Trsdto_server {
 								{
 									new AccountDAO().updateMoney(-1 * Integer.parseInt( dd.getValue().getSum())-1*dto.getFee() , dd.getValue().getAccount_number());
 									new Transfer_reserveDAO().updateStatusBySeq(dd.getValue().getSeq(), "예약이체완료");
-
 									dd.getValue().setStatus("이체완료");
 								}
 							}
 							else {
 								dto.setStatus("실패");
-								new Transfer_reserveDAO().updateStatusBySeq(dd.getValue().getSeq(), "예약이체실패");
+								new Transfer_reserveDAO().updateStatusBySeq(dd.getValue().getSeq(), "금액부족");
+								dd.getValue().setStatus("금액부족");
 							}
 							new Transfer_logDAO().insert(dto);
-
-
+							////////////////////////////////////////자기꺼
 
 							///자행 이체 상대방 로그 넣기
 
@@ -174,7 +148,7 @@ public class Trsdto_server {
 								Transfer_logDTO ddto = new Transfer_logDTO();
 								ddto.setAccount_number(dd.getValue().getTo_account_number());
 								ddto.setTo_account_number(dd.getValue().getAccount_number());
-								ddto.setFeetype("예약입금");
+								ddto.setFeetype("예약이체입금");
 								ddto.setTarget("SJBank");
 								ddto.setSum((long)Integer.parseInt(dd.getValue().getSum()) );
 								ddto.setCms("");
@@ -183,32 +157,11 @@ public class Trsdto_server {
 								ddto.setFee(0);
 								ddto.setReceived( new AccountDAO().chkOurBank(dd.getValue().getAccount_number()) );
 								ddto.setStatus("성공");
-
 								new Transfer_logDAO().insert(ddto);
-
 								new AccountDAO().updateMoney( Integer.parseInt( dd.getValue().getSum()) , dd.getValue().getTo_account_number());
 							}
-
 						}
 					};
-					//					if(!sdf.format(today).equals(sdf.format(new Date() ) )  ) {
-					//						for (Map.Entry<Integer, ArrayList<String>> dd: auto.entrySet()) {
-					//							if(dd.getValue().contains(sdf.format(new Date()) ) && autoList.get(dd.getKey()).getStatus().equals("활성") )
-					//							{
-					//								System.out.println("오늘자 자동이체 되었습니다."); 
-					//							}
-					//						};
-					//						today = new Date();
-					//					}
-					//DB를 여기서 돌리시오 
-
-					//					for (Transfer_delayDTO dto  : delayList.values()) {
-					//						System.out.println(dto +" delay 들입니다.");
-					//					}
-					//					for (Transfer_reserveDTO dto  : reserveList.values()) {
-					//						if(dto.getStatus().equals("활성"))
-					//						System.out.println(dto +" 진행중인 예약 입니다.");
-					//					}
 				} catch (Exception e) {}
 			}
 		}
@@ -270,55 +223,6 @@ public class Trsdto_server {
 						new Transfer_reserveDAO().updateStatusBySeq(dto.getSeq(), "비활성");
 					}
 				}
-				//				else if(def.msg.equals("auto") ){
-				//					
-				//					Transfer_autoDTO dto =(Transfer_autoDTO)def.data;
-				//					
-				//					if(def.name.equals("추가")){
-				//					
-				//						autoList.put(dto.getSeq(), dto);
-				//						
-				//						int syear =  dto.getStart_date().getYear()+1900;
-				//						int smonth = dto.getStart_date().getMonth();
-				//						int sdate = dto.getStart_date().getDate();
-				//						
-				//						Calendar cd = Calendar.getInstance();
-				//
-				//						cd.set(syear , smonth, sdate);
-				//					
-				//						int fyear = dto.getFinish_date().getYear()+1900;
-				//						int fmonth = dto.getFinish_date().getMonth();
-				//						int fdate = dto.getFinish_date().getDate();
-				//	
-				//						Calendar cd2 = Calendar.getInstance();
-				//						
-				//						cd2.set(fyear , fmonth, fdate);
-				//						
-				//						ArrayList<String> ad     = new ArrayList<String>();
-				//					
-				//						
-				//						while(cd.before(cd2))
-				//						{
-				//							ad.add(sdf.format(cd.getTime() ) );
-				//							cd.add(Calendar.MONTH, 1);
-				//							System.out.println(ad);
-				//						}
-				//						auto.put(dto.getSeq(), ad);
-				//					}
-				//					else
-				//					{
-				//						autoList.get(dto.getSeq()).setStatus("비활성");;
-				//					}
-				//				}
-
-				//				sendToOne(def);
-				//
-				//				while(dis!=null) {
-				//					Acc_Member_Data data = (Acc_Member_Data)dis.readObject();
-				//					if(data.target != "DB"){
-				//						sendToOne(data);
-				//					}
-				//				}
 			}catch (Exception e) {
 				System.out.println("에러에요"+e.getMessage());
 

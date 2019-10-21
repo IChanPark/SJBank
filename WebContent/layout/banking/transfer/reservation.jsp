@@ -20,17 +20,17 @@ $(function() {
 });
 
 $(document).ready(function() {
-		
+		alert("????? ")
 	$("#target").change(function(){
 		$("#bank").val($(this).val());
 	});
 	
 		$('#ToConfirm').click(function() {
 		
-			var testAccpw = /[0-9]{4}$/g;
-			var testMoney = /[0-9]{2,10}/g;
-			var testToacc = /[0-9]{2,4}-[0-9]{3,4}-[0-9]{3,4}/g;
-			var testBank = /[0-9가-힣a-zA-Z]{1,6}/g
+			var testAccpw = /^[0-9]{4}$/g;
+			var testMoney = /^[0-9]{2,10}$/g;
+			var testToacc = /^[0-9]{2,4}[-][0-9]{3,4}[-][0-9]{3,7}[-][0-9]{3,7}$/g;
+			var testBank = /^[0-9가-힣a-zA-Z]{1,6}$/g
 			if(!testAccpw.test($("#accpw").val() ) )
 			{
 				alert("계좌 비밀번호 오류");
@@ -81,7 +81,6 @@ function goReg() {
 		f.hid_t.value = "banking/transfer/ReservationReg";
 		f.method = "post";
 		f.submit();
-		
 };
 
 </script>
@@ -102,7 +101,7 @@ function goReg() {
 	</tr>
 	<tr>
 		<td>계좌비밀번호</td>
-		<td><input type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="accpw" id="accpw" class="indata"/></td>
+		<td><input type="password" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="accpw" id="accpw" class="indata"/></td>
 	</tr>
 </table>
 
