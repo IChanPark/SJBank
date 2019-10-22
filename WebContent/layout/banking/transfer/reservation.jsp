@@ -110,7 +110,7 @@ function goReg() {
 	</select></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>입금계좌번호</div><div class='infoMain_Value'>
 <input type="text" placeholder="숫자 및 -로 구성된 번호를 입력해 주세요" name="toAcc" id="toAcc" class="indata"  onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" /></div></div>
-<div class='infoMain_Info'><div class='infoMain_Type'>입금계좌번호</div><div class='infoMain_Value'>
+<div class='infoMain_Info'><div class='infoMain_Type'>이체금액</div><div class='infoMain_Value'>
 <input type="text" placeholder="계좌에 잔액이 없을시 취소 될 수 있습니다." onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="sum" id="sum" class="indata"/></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>이체예정일</div><div class='infoMain_Value'>
 <input type="text" name="time" id= "time" class="indata"></div></div>
