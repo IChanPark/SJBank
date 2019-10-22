@@ -99,7 +99,7 @@ function goReg() {
 <div class="subTitle">입금정보</div>
 <br>
 <div class='infoMain_Info'><div class='infoMain_Type'>입금은행</div><div class='infoMain_Value'>
-<input type="text" placeholder="숫자,영문,한글로 구성된 은행명을 적어 주세요" onkeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'')" name="bank" id="bank" class="indata"/>
+<input type="hidden" value="SJ은행" name="bank" id="bank" class="indata"/>
 	<select id="target">
 		<option>SJ은행</option>
 		<option>하나은행</option>

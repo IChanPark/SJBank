@@ -87,7 +87,7 @@ function fff(){
 
 <div class= 'infoBox'>
 <div class='infoMain_Info'><div class='infoMain_Type'>입금은행</div><div class='infoMain_Value'>
-<input type="text" name="transfer_receive" id="transfer_receive" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');" class = "indata" placeholder="직접입력" value='SJ은행' />
+<input type="hidden" name="transfer_receive" id="transfer_receive" class = "indata"  value='SJ은행' />
 <select id="target"><option>SJ은행</option><option>하나은행</option><option>신한은행</option>
 <option>새마을금고</option><option>농협</option><option>국민은행</option></select></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>입금계좌정보</div><div class='infoMain_Value'>
