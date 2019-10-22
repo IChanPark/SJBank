@@ -76,9 +76,9 @@ function fff(){
 <div class='infoMain_Info'><div class='infoMain_Type'>출금계좌정보</div><div class='infoMain_Value'>
 <select name="acc">
 	<c:forEach var="dto" items="${data }" varStatus="no">
-		<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
+		<option value=${dto.account_number }>${dto.account_number } [${dto.alias }] (사용가능금액 : ${dto.sum} 원)</option>
 	</c:forEach>
-</select></div></div>
+</select>  </div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>
 <input placeholder="계좌 비밀번호 4자리를 입력해 주십시오" type="password" name="accpw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class = "indata" id="accpw"/>
 </div></div></div>

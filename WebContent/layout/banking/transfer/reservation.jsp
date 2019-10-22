@@ -90,7 +90,7 @@ function goReg() {
 <div class='infoMain_Info'><div class='infoMain_Type'>출금계좌번호</div><div class='infoMain_Value'>
 <select name="acc" id="acc" class="indata">
 	<c:forEach var="dto" items="${data }" varStatus="no">
-		<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
+		<option value=${dto.account_number }>${dto.account_number } [${dto.alias }](사용가능금액 : ${dto.sum} 원)</option>
 	</c:forEach>
 </select></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>
