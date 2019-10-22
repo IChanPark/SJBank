@@ -6,7 +6,7 @@ public class DBAccess_IP implements Serializable{
 	private String ip;
 
 	private DBAccess_IP() {
-		ip = "192.168.1.14";
+		ip = "127.0.0.1";
 	}
 
 	private static class Holder {

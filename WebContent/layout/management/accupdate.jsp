@@ -48,5 +48,5 @@ $(document).ready(function(){
 </select></div></div>
 <div class='infoMain_Info'><div class='infoMain_Type'>사용자 비밀번호</div><div class='infoMain_Value'>
 <input type="password" name ="user_pw" id="user_pw" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/></div></div>
-<div class='infoMain_Info'><div class='infoMain_Type'>변경하기</div><div class='infoMain_Value'>
+<div class='infoMain_Info'><div class='infoMain_Type'></div><div class='infoMain_Value'>
 <button id="goChange">변경</button></div></div>

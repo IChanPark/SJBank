@@ -6,7 +6,7 @@ public class Access_IP implements Serializable{
 	private String ip;
 
 	private Access_IP() {
-		ip = "192.168.219.100";
+		ip = "127.0.0.1";
 	}
 
 	private static class Holder {

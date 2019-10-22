@@ -20,7 +20,7 @@
 <div class='infoMain_Info'><div class='infoMain_Type'>우편번호</div><div class='infoMain_Value'>
 <input type="text" id="sample4_roadAddress" name="addr" placeholder="도로명주소" readonly="readonly" value="${fn:split(data.addr,'/')[0]}">
 <input type="text" id="sample4_detailAddress" name="datail" placeholder="상세주소" value="${fn:split(data.addr,'/')[1]}"></div></div>
-<div class='infoMain_Info'><div class='infoMain_Type'>변경</div><div class='infoMain_Value'>
+<div class='infoMain_Info'><div class='infoMain_Type'></div><div class='infoMain_Value'>
 <button onclick="allChk()">변경</button></div></div>
 
 <script>

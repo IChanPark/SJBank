@@ -86,80 +86,48 @@ function goReg() {
 </script>
 
 <div class="subTitle">예약이체 등록</div>
-<div clsss="subTitle">출금정보</div>
-<table border="" class="indata">
-	<tr>
-		<td>출금계좌번호</td>
-		<td>
-			<select name="acc" id="acc" class="indata">
-				<c:forEach var="dto" items="${data }" varStatus="no">
-					<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
-				</c:forEach>
-			</select>
-		
-		</td>
-	</tr>
-	<tr>
-		<td>계좌비밀번호</td>
-		<td><input type="password" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="accpw" id="accpw" class="indata"/></td>
-	</tr>
-</table>
-
-<br>
+<div class= 'infoBox'>
+<div class='infoMain_Info'><div class='infoMain_Type'>출금계좌번호</div><div class='infoMain_Value'>
+<select name="acc" id="acc" class="indata">
+	<c:forEach var="dto" items="${data }" varStatus="no">
+		<option value=${dto.account_number }>${dto.account_number } [${dto.alias }]</option>
+	</c:forEach>
+</select></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>계좌비밀번호</div><div class='infoMain_Value'>
+<input type="password" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="accpw" id="accpw" class="indata"/></div></div>
 <br>
 <div class="subTitle">입금정보</div>
-<table border="" class="indata">
-	<tr>
-		<td>입금은행</td>
-		<td><input type="text" placeholder="숫자,영문,한글로 구성된 은행명을 적어 주세요" onkeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'')" name="bank" id="bank" class="indata"/>
-		 <select id="target">
-				<option>SJ은행</option>
-				<option>하나은행</option>
-				<option>신한은행</option>
-				<option>새마을금고</option>
-				<option>농협</option>
-				<option>국민은행</option>
-		</select>
-		</td>
-	</tr>
-	<tr>
-		<td>입금계좌번호</td>
-		<td><input type="text" placeholder="숫자 및 -로 구성된 번호를 입력해 주세요" name="toAcc" id="toAcc" class="indata"  onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" /></td>
-	</tr>
-	<tr>
-		<td>이체금액</td>
-		<td><input type="text" placeholder="계좌에 잔액이 없을시 취소 될 수 있습니다." onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="sum" id="sum" class="indata"/></td>
-	</tr>
-	<tr>
-		<td>이체예정일</td>
-		<td><input type="text" name="time" id= "time" class="indata"></td>
-	</tr>
-	<tr>
-		<td>이체시각설정</td>
-		<td><input type="radio" name="scheduled_date" value="7:00:00" id="scheduled_date" class="indata" checked="checked">오전7~8시
-			이체 <input type="radio" name="scheduled_date" value="9:00:00" id="scheduled_date" class="indata">오전9~10시
-			이체 <input type="radio" name="scheduled_date" value="11:00:00" id="scheduled_date" class="indata">오전11~12시
-			이체 <input type="radio" name="scheduled_date" value="13:00:00" id="scheduled_date" class="indata">오후1시~2시
-			이체 <br> <input type="radio" name="scheduled_date" value="15:00:00" id="scheduled_date" class="indata">오후3시~4시
-			이체 <input type="radio" name="scheduled_date" value="17:00:00" id="scheduled_date" class="indata">오후5시~6시
-			이체 <input type="radio" name="scheduled_date" value="19:00:00" id="scheduled_date" class="indata">오후7시~8시
-			이체 <input type="radio" name="scheduled_date" value="21:00:00" id="scheduled_date" class="indata">오후9시~10시
-			이체</td>
-	</tr>
-	<tr>
-		<td>받는통장 메모</td>
-		<td><input type="text" name="to_memo" id="to_memo" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
-	</tr>
-	<tr>
-		<td>내통장 메모</td>
-		<td><input type="text" name="memo" id = "memo" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
-	</tr>
-	<tr>
-		<td>CMS코드</td>
-		<td><input type="text" placeholder="필수사항이 아닙니다." name="cms" id ="cms" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></td>
-	</tr>
-</table>
-<br><br>
-<div align="center">
-	<input type="button" class="subTitle" id="ToConfirm" value="다음" />
+<br>
+<div class='infoMain_Info'><div class='infoMain_Type'>입금은행</div><div class='infoMain_Value'>
+<input type="text" placeholder="숫자,영문,한글로 구성된 은행명을 적어 주세요" onkeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'')" name="bank" id="bank" class="indata"/>
+	<select id="target">
+		<option>SJ은행</option>
+		<option>하나은행</option>
+		<option>신한은행</option>
+		<option>새마을금고</option>
+		<option>농협</option>
+		<option>국민은행</option>
+	</select></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>입금계좌번호</div><div class='infoMain_Value'>
+<input type="text" placeholder="숫자 및 -로 구성된 번호를 입력해 주세요" name="toAcc" id="toAcc" class="indata"  onkeyup="this.value=this.value.replace(/[^0-9-]/g,'')" /></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>입금계좌번호</div><div class='infoMain_Value'>
+<input type="text" placeholder="계좌에 잔액이 없을시 취소 될 수 있습니다." onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" name="sum" id="sum" class="indata"/></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>이체예정일</div><div class='infoMain_Value'>
+<input type="text" name="time" id= "time" class="indata"></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>이체시각설정</div><div class='infoMain_Value'>
+<input type="radio" name="scheduled_date" value="7:00:00" id="scheduled_date" class="indata" checked="checked">오전7~8시 이체
+<input type="radio" name="scheduled_date" value="9:00:00" id="scheduled_date" class="indata">오전9~10시 이체
+<input type="radio" name="scheduled_date" value="11:00:00" id="scheduled_date" class="indata">오전11~12시 이체
+<input type="radio" name="scheduled_date" value="13:00:00" id="scheduled_date" class="indata">오후1시~2시 이체
+<br><input type="radio" name="scheduled_date" value="15:00:00" id="scheduled_date" class="indata">오후3시~4시 이체
+<input type="radio" name="scheduled_date" value="17:00:00" id="scheduled_date" class="indata">오후5시~6시 이체
+<input type="radio" name="scheduled_date" value="19:00:00" id="scheduled_date" class="indata">오후7시~8시 이체
+<input type="radio" name="scheduled_date" value="21:00:00" id="scheduled_date" class="indata">오후9시~10시 이체</div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>통장 메모</div><div class='infoMain_Value'>
+<input type="text" name="memo" id = "memo" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>받는통장 메모</div><div class='infoMain_Value'>
+<input type="text" name="to_memo" id="to_memo" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'>CMS</div><div class='infoMain_Value'>
+<input type="text" placeholder="필수사항이 아닙니다." name="cms" id ="cms" class="indata" onKeyup="this.value=this.value.replace(/[^0-9ㄱ-힣a-zA-Z]/g,'');"/></div></div>
+<div class='infoMain_Info'><div class='infoMain_Type'></div><div class='infoMain_Value'><button id="ToConfirm">다음</button></div></div>
 </div>

@@ -8,6 +8,7 @@
   height: 600px;
   width: 1000px;
 }
+a{text-decoration: none;}
 </style>
 
 <div class="flexbox-centering">

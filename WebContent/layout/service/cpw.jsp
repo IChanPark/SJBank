@@ -41,7 +41,6 @@ adto = UserDAO.getInstance().selectId(request.getParameter("uid"));
 
 dto.setName(adto.getName());
 dto.setTel(adto.getTel());
-dto.setEmail(adto.getEmail());
 dto.setPw(request.getParameter("pw"));
 
  	UserDAO.getInstance().updatePw(dto);
