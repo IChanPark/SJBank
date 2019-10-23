@@ -70,6 +70,8 @@ public class ReservationReg implements M_Action{
 		
 		System.out.println("Reg서비스들어온다");
 		//리스트 정보를 키는 "data"로 어트리뷰트로 넘긴다
+		
+		request.setAttribute("data", dto);
 	}
 
 }

@@ -47,7 +47,6 @@ public class Trs implements M_Action{
 		dto.setTarget(request.getParameter("transfer_receive"));
 		dto.setTo_account_number(toAcc);
 		dto.setFeetype("즉시이체");
-		dto.setReceived(toName);
 		dto.setSum( (long)Integer.parseInt(request.getParameter("money") ) );
 
 		if(dto.getTarget().toUpperCase().equals("SJBANK") ||  dto.getTarget().toUpperCase().equals("SJ은행") )
@@ -63,10 +62,12 @@ public class Trs implements M_Action{
 		dto.setTo_memo(to_memo);
 		dto.setRegister_date(new Date());
 		
+		System.out.println(toName);
 		
 		if(toName.equals("외부계좌") && ( dto.getTarget().toUpperCase().equals("SJBANK") 
 				||  dto.getTarget().toUpperCase().equals("SJ은행")    )   )
 		{
+			dto.setReceived("대상없음");
 			request.setAttribute("msg", "이체 대상 계좌가 존재 하지 않습니다.");
 			throw new Exception("대상없음");
 		}
@@ -106,6 +107,9 @@ public class Trs implements M_Action{
 				trfDTO.setTarget("SJBank");
 				AccountDAO.getInstance().updateMoney( (int)(dto.getSum()+0),toAcc );
 				Transfer_logDAO.getInstance().insert(trfDTO);
+
+			
+				
 			}
 			AccountDAO.getInstance().updateMoney( (int)(-1 *dto.getSum()-1*dto.getFee() ) ,acc );
 			
@@ -114,6 +118,12 @@ public class Trs implements M_Action{
 			dto.setStatus("잔액부족");
 
 		}
+		if(!(dto.getTarget().toUpperCase().equals("SJBANK")|| dto.getTarget().toUpperCase().equals("SJ은행")))
+		{
+			dto.setReceived(toName);
+		}
+		
+			
 		Transfer_logDAO.getInstance().insert(dto);
 		request.setAttribute("data", dto);
 

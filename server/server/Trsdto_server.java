@@ -136,7 +136,7 @@ public class Trsdto_server {
 							if(adto.getSum()>dto.getSum()+dto.getFee()) {
 								dto.setStatus("성공");
 								//계좌 잔액 변경
-								AccountDTO toDto = AccountDAO.getInstance().selectAccount(dd.getValue().getTo_account_number());
+								AccountDTO toDto = new AccountDAO().selectAccount(dd.getValue().getTo_account_number());
 								if(dto.getTarget().equals("SJBank") && toDto.getType().equals("적금")  )
 								{
 									int toMax = new AccountDAO().getSavingMax( dd.getValue().getTo_account_number()  );

@@ -42,7 +42,10 @@ $(document).ready(function(){
 					$("#list").append(title);
 					var len=0;
 					$.each(qqq,function(i,e){
+						
+						
 						var row =$("<tr><td>"+(i+1)+"</td>");
+						
 						row.append(	$("<td>"+e.target+"</td>"));
 						row.append(	$("<td>"+e.to_account_number+"</td>"));
 						row.append($("<td>"+e.received+"</td>"));
@@ -62,9 +65,10 @@ $(document).ready(function(){
 					{
 						$("#list").append("<tr><td colspan='11' align='center'>거래내역이 없습니다.</td></tr>");
 					}
-					
 				},
 				error:function(qqq){
+
+					alert("!!!!!!");
 					console.log("오류오류");
 				}
 			});
@@ -101,7 +105,6 @@ $(document).ready(function(){
 		<td><fmt:formatNumber value="${data.sum }" pattern="#,###원" /></td>
 	</tr>
 </table>
-<div class="scrollB">
 <table width="100%">
 	<tr>
 		<td><input type="date" name = "start"/>~ <input type="date" name="end"/> </td>
@@ -148,4 +151,3 @@ $(document).ready(function(){
 		</tr>
 	</c:if>
 </table>
-</div>

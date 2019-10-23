@@ -4,10 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%request.setCharacterEncoding("UTF-8"); %>
-<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-Date dd = new Date();
-String tod = sdf.format(dd);
-%>
+
 <style>
 input[type=text]{
 width: 300px;
@@ -30,9 +27,9 @@ $(document).ready(function() {
 	
 		$('#ToConfirm').click(function() {
 		
-			var testAccpw = /[0-9]{4}/g;
-			var testMoney = /[0-9]/g;
-			var testToacc = /[0-9]{3,4}-[0-9]{3,4}-[0-9]{4,6}/g;
+			var testAccpw = /[0-9]{4}$/g;
+			var testMoney = /[0-9]{2,10}/g;
+			var testToacc = /[0-9]{2,4}-[0-9]{3,4}-[0-9]{3,4}/g;
 			var testBank = /[0-9가-힣a-zA-Z]{1,6}/g
 			if(!testAccpw.test($("#accpw").val() ) )
 			{

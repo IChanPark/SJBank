@@ -19,28 +19,9 @@ public class Transfer  implements M_Action{
 		HttpSession session = request.getSession();
 		String id= (String)session.getAttribute("userID");
 		
-		HashMap<String,AccountDTO> MapAd = new HashMap<String, AccountDTO>();
+		ArrayList<AccountDTO>  dto=  AccountDAO.getInstance().selectIDfromUsable(id);
 		
-		ArrayList<AccountDTO> alad = AccountDAO.getInstance().selectIDfromUsable(id);
-		
-		for (AccountDTO dto : alad) {
-			MapAd.put(dto.getAccount_number(), dto);
-		}
-		
-		ArrayList<DepositsDTO> untrs = DepositsDAO.getInstance().UnTrsAccount(id);
-		System.out.println(id +"id에요");
-		System.out.println(untrs +"어레이에요");
-		for (DepositsDTO dto : untrs) {
-			System.out.println(dto.getAccount_number() + " 제거대상");
-			MapAd.remove(dto.getAccount_number());
-		}
-		
-		alad.clear();
-		
-		for (AccountDTO dto : MapAd.values()) {
-			alad.add(dto);
-		}
-		
-		request.setAttribute("data", alad);
+		request.setAttribute("data", dto);
+		System.out.println(dto);
 	}
 }
