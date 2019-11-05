@@ -17,6 +17,8 @@ import jdbc.Account.AccountDAO;
 import jdbc.Account.AccountDTO;
 import jdbc.Deposit.DepositsDAO;
 import jdbc.Deposit.DepositsDTO;
+import jdbc.Deposit.Deposits_infoDAO;
+import jdbc.Deposit.Deposits_infoDTO;
 import jdbc.Transfer.Transfer_logDAO;
 import jdbc.Transfer.Transfer_logDTO;
 import jdbc.User.UserDAO;
@@ -57,8 +59,6 @@ public class Deposit_JoinReg extends HttpServlet {
 		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
 		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);
 		
-		AccountDAO.getInstance().updateMoney(myAccDTO);
-
 		// --------------------------------------------------- 보내는이 로그 
 		Transfer_logDTO transDTO = new Transfer_logDTO();
 		transDTO.setAccount_number(myAcc);
@@ -78,7 +78,10 @@ public class Deposit_JoinReg extends HttpServlet {
 		transDTO.setStatus(status);
 		Transfer_logDAO.getInstance().insert(transDTO);
 			
-		if((mysum-sum)<0) {
+		if((mysum-sum)>0) {
+			myAccDTO.setSum(mysum-sum);
+			AccountDAO.getInstance().updateMoney(myAccDTO);
+			
 			transDTO.setAccount_number(newAcc);
 			transDTO.setTarget(targe);
 			transDTO.setFeetype("입금");
@@ -98,12 +101,26 @@ public class Deposit_JoinReg extends HttpServlet {
 			accDTO.setAlias(request.getParameter("alias"));
 			accDTO.setId(userid);
 			accDTO.setPw(request.getParameter("newPW"));
-
+			
+			float Inte = 0.0F;
+			String Pref = "없음";
+			Deposits_infoDTO infoSet = new Deposits_infoDTO();
+			infoSet.setProduct(product);
+			Deposits_infoDTO infoDTO = Deposits_infoDAO.getInstance().selectPro(infoSet);
+			for (AccountDTO a : AccountDAO.getInstance().selectID(userid)) {
+				if(infoDTO.getPreferential().equals(a.getType())) {
+					Inte = infoDTO.getMax_interest();
+					Pref = a.getType()+"가입자 우대";
+					break;
+				}else 
+					Inte = infoDTO.getMin_interest();
+			}
+			
 			depDTO.setAccount_number(newAcc);
 			depDTO.setId(userid);
 			depDTO.setPrduct(product);
-			depDTO.setPreferential("임시");
-			depDTO.setInterest(2.2F);
+			depDTO.setPreferential(Pref);
+			depDTO.setInterest(Inte);
 			depDTO.setType(request.getParameter("type"));
 
 			AccountDAO.getInstance().insert(accDTO);

@@ -15,6 +15,8 @@ import com.google.gson.Gson;
 
 import jdbc.Account.AccountDAO;
 import jdbc.Account.AccountDTO;
+import jdbc.Deposit.Deposits_infoDAO;
+import jdbc.Deposit.Deposits_infoDTO;
 import jdbc.Saving.SavingDAO;
 import jdbc.Saving.SavingDTO;
 import jdbc.Transfer.Transfer_logDAO;
@@ -56,8 +58,6 @@ public class Saving_JoinReg extends HttpServlet {
 		System.out.print("userid "+userid+" newAcc "+newAcc+" myAcc "+myAcc+" product "+product);
 		System.out.println(" targe "+targe+" cms "+cms+" status "+status+" memo "+memo+" sum "+sum+" mysum "+mysum);
 
-		AccountDAO.getInstance().updateMoney(myAccDTO);
-
 		// --------------------------------------------------- 보내는이 로그 
 		Transfer_logDTO transDTO = new Transfer_logDTO();
 		transDTO.setAccount_number(myAcc);
@@ -77,9 +77,9 @@ public class Saving_JoinReg extends HttpServlet {
 		transDTO.setStatus(status);
 		Transfer_logDAO.getInstance().insert(transDTO);
 			
-		if((mysum-sum)<0) {
-			transDTO.setStatus(status);
-			Transfer_logDAO.getInstance().insert(transDTO);
+		if((mysum-sum)>0) {
+			myAccDTO.setSum(mysum-sum);
+			AccountDAO.getInstance().updateMoney(myAccDTO);
 			
 			transDTO.setAccount_number(newAcc);
 			transDTO.setTarget(targe);
@@ -101,11 +101,25 @@ public class Saving_JoinReg extends HttpServlet {
 			accDTO.setId(userid);
 			accDTO.setPw(request.getParameter("newPW"));
 
+			float Inte = 0.0F;
+			String Pref = "없음";
+			Deposits_infoDTO infoSet = new Deposits_infoDTO();
+			infoSet.setProduct(product);
+			Deposits_infoDTO infoDTO = Deposits_infoDAO.getInstance().selectPro(infoSet);
+			for (AccountDTO a : AccountDAO.getInstance().selectID(userid)) {
+				if(infoDTO.getPreferential().equals(a.getType())) {
+					Inte = infoDTO.getMax_interest();
+					Pref = a.getType()+"가입자 우대";
+					break;
+				}else 
+					Inte = infoDTO.getMin_interest();
+			}
+			
 			svnDTO.setAccount_number(newAcc);
 			svnDTO.setId(userid);
 			svnDTO.setProduct(product);
-			svnDTO.setPreferential("임시");
-			svnDTO.setInterest(2.2F);
+			svnDTO.setPreferential(Pref);
+			svnDTO.setInterest(Inte);
 			svnDTO.setType(request.getParameter("type"));
 
 			AccountDAO.getInstance().insert(accDTO);
