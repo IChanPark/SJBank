@@ -12,12 +12,22 @@ public class Transfer_reserveDTO implements Serializable{
 	private	String 		account_number,		//계좌 번호
 						to_account_number,	//본인계좌 여부
 						sum,				//은행/증권사명
-									//이체시간
+						target,			//이체시간
 						memo,	
 						to_memo,	
 						cms,		
 						status,
 						scheduled_date;		//예약 이체 예정시간
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
+	}
+
+
 
 	private Date		time,	
 						register_date;		//예약 이체 등록일
@@ -138,7 +148,7 @@ public class Transfer_reserveDTO implements Serializable{
 	@Override
 	public String toString() {
 		return seq + "," + account_number + "," + to_account_number + "," + sum + "," +
-				time + "," + memo + "," + to_memo + "," + cms + "," + status + "," +
+				target+","+time + "," + memo + "," + to_memo + "," + cms + "," + status + "," +
 				scheduled_date + "," + register_date;
 	}
 }

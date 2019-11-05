@@ -55,6 +55,7 @@ public class Transfer_reserveDAO {
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setTo_account_number(rs.getString("to_account_number"));
 				dto.setSum(rs.getString("sum"));
+				dto.setTarget(rs.getString("target"));
 				dto.setTime(rs.getDate("time"));
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
@@ -75,6 +76,7 @@ public class Transfer_reserveDAO {
 				dto.setAccount_number(rs.getString("account_number"));
 				dto.setTo_account_number(rs.getString("to_account_number"));
 				dto.setSum(rs.getString("sum"));
+				dto.setTarget(rs.getString("target"));
 				dto.setTime(rs.getDate("time"));
 				dto.setMemo(rs.getString("memo"));
 				dto.setTo_memo(rs.getString("to_memo"));
@@ -142,11 +144,11 @@ public class Transfer_reserveDAO {
 		sql = 	"insert into transfer_reserve (" +
 				"account_number, to_account_number, sum,"
 				+ " time, memo, to_memo, "+ 
-				"cms,status,scheduled_date, register_date) "+
+				"cms,status,scheduled_date, register_date,target) "+
 				"values ('"+dto.getAccount_number()+"','"+dto.getTo_account_number()+
 				"',"+dto.getSum()+",'"+dto.getTimeStr()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+
 				"','"+dto.getCms()+"','"+dto.getStatus()+"','"+dto.getScheduled_date()+
-				"', now() )";
+				"', now() ,'"+dto.getTarget()+"')";
 
 		System.out.println(sql);
 		try {
@@ -161,13 +163,13 @@ public class Transfer_reserveDAO {
 		int res = -1;
 
 		sql = 	"insert into transfer_reserve (" +
-				"account_number, to_account_number, sum,"
+				"account_number, to_account_number, sum, "
 				+ " time, memo, to_memo, "+ 
-				"cms,status,scheduled_date, register_date) "+
+				"cms,status,scheduled_date, register_date,target) "+
 				"values ('"+dto.getAccount_number()+"','"+dto.getTo_account_number()+
 				"',"+dto.getSum()+",'"+dto.getTimeStr()+"','"+dto.getMemo()+"','"+dto.getTo_memo()+
 				"','"+dto.getCms()+"','"+dto.getStatus()+"','"+dto.getScheduled_date()+
-				"', now() )";
+				"', now() ,'"+dto.getTarget()+"')";
 
 		System.out.println(sql);
 		try {

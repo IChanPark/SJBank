@@ -117,15 +117,15 @@ public class Trsdto_server {
 							dto.setAccount_number(dd.getValue().getAccount_number());
 							dto.setTo_account_number(dd.getValue().getTo_account_number());
 							dto.setFeetype("예약이체");
+							dto.setTarget(dd.getValue().getTarget());
 							dto.setSum((long)Integer.parseInt(dd.getValue().getSum()) );
 							dto.setCms(dd.getValue().getCms());
 							dto.setMemo(dd.getValue().getMemo());
 							dto.setTo_memo(dd.getValue().getTo_memo());
-							if(!toName.equals("외부계좌"))
+							if(dd.getValue().getTarget().equals("SJBank"))
 								dto.setFee(0);
 							else
 								dto.setFee(500);
-							dto.setTarget(new AccountDAO().chkOurBank(dd.getValue().getTo_account_number()));
 							dto.setReceived( new AccountDAO().chkOurBank(dd.getValue().getTo_account_number()) );
 							
 							
@@ -147,18 +147,18 @@ public class Trsdto_server {
 							
 							///자행 이체 상대방 로그 넣기
 							
-							if( ( !toName.equals("외부계좌") ) && ( adto.getSum()>dto.getSum()+dto.getFee()  )  )
+							if( ( dd.getValue().getTarget().equals("SJBank") ) && ( adto.getSum()>dto.getSum()+dto.getFee()  )  )
 							{
 								Transfer_logDTO ddto = new Transfer_logDTO();
 								ddto.setAccount_number(dd.getValue().getTo_account_number());
 								ddto.setTo_account_number(dd.getValue().getAccount_number());
 								ddto.setFeetype("예약입금");
+								ddto.setTarget("SJBank");
 								ddto.setSum((long)Integer.parseInt(dd.getValue().getSum()) );
 								ddto.setCms("");
 								ddto.setMemo(dd.getValue().getTo_memo());
 								ddto.setTo_memo(dd.getValue().getMemo());
 								ddto.setFee(0);
-								ddto.setTarget("SJBank");
 								ddto.setReceived( new AccountDAO().chkOurBank(dd.getValue().getAccount_number()) );
 								ddto.setStatus("성공");
 								

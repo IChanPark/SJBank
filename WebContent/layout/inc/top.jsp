@@ -5,7 +5,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(document).ready(function(){
-
 	$('#LOGO').click(function(){
 		document.paging.hid_t.value ="";
 		document.paging.submit();
