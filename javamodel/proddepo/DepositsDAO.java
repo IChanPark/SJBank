@@ -92,9 +92,9 @@ public class DepositsDAO {
 	public ArrayList<DepositsDTO> uplist(){
 		ArrayList<DepositsDTO> res = new ArrayList<DepositsDTO>();
 		
-		sql = "select da.account_number, da.type, da.sum, da.id, "+ 
-				" da.status "+
-				"FROM account da "+
+		sql = "select da.account_number, da.id, da.product,  "+ 
+				" da.preferential,da.interest,da.type "+
+				"FROM deposits da "+
 				"INNER JOIN account a ON da.account_number = a.account_number "+
 				"where a.status ='활성' "+ 
 				"and da.account_number not in "+
