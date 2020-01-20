@@ -17,7 +17,9 @@ import jdbc.Fund.Fund_InfoDTO;
 import jdbc.Fund.Fund_LogDTO;
 import jdbc.Saving.SavingDTO;
 import jdbc.Saving.Saving_logDTO;
+import jdbc.Transfer.Transfer_logDTO;
 import jmodels.AccountDAO;
+import jmodels.Transfer_logDAO;
 import proddepo.DepositsDAO;
 import proddepo.Deposits_logDAO;
 import prodfund.FundDAO;
@@ -28,7 +30,7 @@ import prodsaving.Saving_logDAO;
 
 public class Product_Server {
 	private HashMap<String, ObjectOutputStream> list = null;
-	private HashMap<Integer, Fund_InfoDTO> fundinfoList = null;
+
 	private	ArrayList<FundDTO>  fdlog = new  FundDAO().uplist();
 	private Fund_LogDTO fdloginsert = new Fund_LogDTO();
 	
@@ -39,18 +41,17 @@ public class Product_Server {
 	private	ArrayList<SavingDTO>  savlog = new  SavingDAO().uplist();
 	private Saving_logDTO savloginsert = new Saving_logDTO();
 	
+	private	Transfer_logDTO transloginsert = new Transfer_logDTO();
 	
 	private Date today = new Date();
 
 
 	private Product_Server() {
 		try {
-			fundinfoList = new HashMap<Integer, Fund_InfoDTO>();
-			Collections.synchronizedMap(fundinfoList);
+			
 
-			for (Fund_InfoDTO trd : new Fund_InfoDAO().list()) {
-				fundinfoList.put(trd.getSeq(), trd);
-			}
+			 //fdlog = new  FundDAO().uplist();
+			//System.out.println("here");
 
 			list = new HashMap<String, ObjectOutputStream>();
 			Collections.synchronizedMap(list);
@@ -85,10 +86,12 @@ public class Product_Server {
 					System.out.println("돈다");
 					
 					for (SavingDTO ss : savlog) {
-			
+						System.out.println("적금 시작~~!!!");
 						savloginsert.setAccount_number(ss.getAccount_number());
 						savloginsert.setStatus("성공");
 						 AccountDTO acr = new AccountDAO().selectAccount(ss.getAccount_number());
+						 
+						
 						
 						 int  add_preferential= (int) ((acr.getSum()* ss.getInterest())/12);
 		
@@ -97,10 +100,23 @@ public class Product_Server {
 						new  AccountDAO().updateMoney(savloginsert);
 						
 						new Saving_logDAO().insert(savloginsert);
+						
+						transloginsert.setAccount_number("777-77777-7777");
+						transloginsert.setFeetype("입금");
+						transloginsert.setTarget("sj은행");
+						transloginsert.setTo_account_number(ss.getAccount_number());
+						transloginsert.setReceived(ss.getId());
+						transloginsert.setSum((long)add_preferential);
+						transloginsert.setFee(0);
+						transloginsert.setStatus("성공");
+						
+						new  Transfer_logDAO().insert(transloginsert);
+						 System.out.println("적금 성공~~!!!");
 						savlog.remove(ss);
 					}
-					
+					System.out.println("디포짓정보:"+deplog);
 					for (DepositsDTO dd : deplog) {
+						System.out.println("디포짓 시작~~!!!");
 						System.out.println("depsit "+dd);
 						deploginsert.setAccount_number(dd.getAccount_number());
 						deploginsert.setStatus("성공");
@@ -114,12 +130,26 @@ public class Product_Server {
 						
 						new Deposits_logDAO().insert(deploginsert);
 						
+						new  Transfer_logDAO().insert(transloginsert);
+						
+						transloginsert.setAccount_number("777-77777-7777");
+						transloginsert.setFeetype("이자입금");
+						transloginsert.setTarget("sj은행");
+						transloginsert.setTo_account_number(dd.getAccount_number());
+						transloginsert.setReceived(dd.getId());
+						transloginsert.setSum((long)add_preferential);
+						transloginsert.setFee(0);
+						transloginsert.setStatus("성공");
+						
+						new  Transfer_logDAO().insert(transloginsert);
+						 System.out.println("디포짓 성공~~!!!");
 						deplog.remove(dd);
+						
 					}
 					
-					
+					System.out.println(fdlog +" array what");
 					for (FundDTO ff : fdlog) {
-	
+							System.out.println(ff+"     ff what");
 							fdloginsert.setAccount_number(ff.getAccount_number());
 							fdloginsert.setStatus("성공");
 				

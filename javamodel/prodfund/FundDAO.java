@@ -145,7 +145,7 @@ public class FundDAO {
 		ArrayList<FundDTO> res = new ArrayList<FundDTO>();
 		
 		sql = "select f.account_number, f.id, f.price_modify, f.product, f.fluctuation, "+ 
-				"f.amount, f.nowmoney, f.buynum, f.exchange, f.rest, a.status "+
+				"f.amount, f.nowmoney, f.buynum, f.exchange, f.rest "+
 				"FROM fund f "+
 				"INNER JOIN account a ON f.account_number = a.account_number "+
 				"where a.status ='활성' "+ 
