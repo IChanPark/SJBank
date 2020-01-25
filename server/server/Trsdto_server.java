@@ -95,7 +95,8 @@ public class Trsdto_server {
 					for (Map.Entry<Integer, Transfer_reserveDTO> dd: reserveList.entrySet()) {
 						if(dd.getValue().getTime().before(new Date()) && dd.getValue().getStatus().equals("활성") )
 						{
-							System.out.println(dd.getValue() +"이체의 시간이 왔다"); 
+							System.out.println(dd.getValue() );
+							System.out.println(dd.getValue().getTimeStr() +"자 예약 이체가 실행 되었습니다.");
 							dd.getValue().setStatus("이체완료");
 						}
 					};
